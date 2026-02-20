@@ -1,50 +1,61 @@
-const userId = localStorage.getItem("userId");
+document.addEventListener("DOMContentLoaded", async () => {
 
-async function loadTransactions() {
+  const container = document.getElementById("transactionList");
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    container.innerHTML = "<p>Please login first.</p>";
+    window.location.href = "../auth/index.html";
+    return;
+  }
+
   try {
     const response = await fetch(
-      "https://https://philips-backend.onrender.com/api/wallet/transactions/" + userId
+      "https://philips-backend.onrender.com/api/wallet/transactions",
+      {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + token
+        }
+      }
     );
 
-    const data = await response.json();
-    const container = document.getElementById("transactionList");
-    container.innerHTML = "";
+    if (!response.ok) {
+      throw new Error("Failed to load transactions");
+    }
 
-    if (!data.length) {
-      container.innerHTML = "<p class='empty'>No transactions found</p>";
+    const transactions = await response.json();
+
+    if (transactions.length === 0) {
+      container.innerHTML = "<p>No transactions found.</p>";
       return;
     }
 
-    data.forEach(txn => {
-      const card = document.createElement("div");
-      card.className = "transaction-card";
+    container.innerHTML = "";
 
-      const typeClass = txn.type === "recharge" ? "recharge" : "withdraw";
-      const statusClass = txn.status;
+    transactions.forEach(tx => {
 
-      card.innerHTML = `
-        <div class="txn-left">
-          <p><strong>Type:</strong> ${txn.type.toUpperCase()}</p>
-          <p><strong>Date:</strong> ${new Date(txn.createdAt).toLocaleString()}</p>
-          <span class="status ${statusClass}">
-            ${txn.status.toUpperCase()}
-          </span>
+      const item = document.createElement("div");
+      item.className = "transaction-item";
+
+      item.innerHTML = `
+        <div>
+          <strong>${tx.type.toUpperCase()}</strong>
+          <p>Status: ${tx.status}</p>
+          <p>Date: ${new Date(tx.createdAt).toLocaleString()}</p>
         </div>
-
-        <div class="txn-right">
-          <div class="amount ${typeClass}">
-            ₹${txn.amount}
-          </div>
+        <div>
+          ₹${tx.amount}
         </div>
       `;
 
-      container.appendChild(card);
+      container.appendChild(item);
     });
 
   } catch (error) {
-    document.getElementById("transactionList").innerHTML =
-      "<p class='empty'>Failed to load transactions</p>";
+    console.error(error);
+    container.innerHTML = "<p>Failed to load transactions</p>";
   }
-}
 
-loadTransactions();
+});
