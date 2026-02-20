@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Bind Bank Card</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bind Bank</title>
   <link rel="stylesheet" href="bind-card.css">
 </head>
 <body>
 
 <div class="container">
-  <div class="card-box">
+  <div class="card">
     <h2>Bind Bank Account</h2>
 
-    <input type="text" id="accountNumber" placeholder="Account Number">
-    <input type="text" id="ifsc" placeholder="IFSC Code">
-    <input type="text" id="holderName" placeholder="Account Holder Name">
-    <input type="text" id="bankName" placeholder="Bank Name">
+    <input id="accountNumber" placeholder="Account Number">
+    <input id="ifsc" placeholder="IFSC Code">
+    <input id="holderName" placeholder="Account Holder Name">
+    <input id="bankName" placeholder="Bank Name">
 
     <button onclick="bindBank()">Submit</button>
   </div>
