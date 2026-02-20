@@ -1,104 +1,90 @@
 body {
     margin: 0;
-    padding: 30px;
-    font-family: "Poppins", sans-serif;
-    background: #0f172a;
-    color: #ffffff;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #031d33, #052c4a);
+    color: white;
   }
   
-  h2 {
+  .page-title {
     text-align: center;
-    margin-bottom: 30px;
-    color: #00c6ff;
+    margin-top: 40px;
+    font-size: 28px;
+    color: #00d4ff;
   }
   
-  .transactions-container {
-    max-width: 900px;
-    margin: auto;
+  .transactions-wrapper {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 40px;
+    flex-wrap: wrap;
   }
   
-  .transaction-card {
-    background: #1e293b;
-    padding: 20px;
+  .transactions-column {
+    flex: 1;
+    min-width: 350px;
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
     border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+  
+  .column-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  
+  .recharge-title {
+    color: #00ff88;
+  }
+  
+  .withdraw-title {
+    color: #ff4d4d;
+  }
+  
+  .transaction-item {
+    background: rgba(255,255,255,0.08);
+    padding: 15px;
     margin-bottom: 15px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    border: 1px solid rgba(255,255,255,0.05);
     transition: 0.3s ease;
   }
   
-  .transaction-card:hover {
+  .transaction-item:hover {
+    background: rgba(255,255,255,0.15);
     transform: translateY(-3px);
-    border: 1px solid #0072ff;
   }
   
-  .txn-left {
-    flex: 1;
+  .transaction-details {
+    font-size: 14px;
   }
   
-  .txn-left p {
-    margin: 5px 0;
-    font-size: 0.9rem;
-    color: #cbd5e1;
-  }
-  
-  .txn-right {
-    text-align: right;
-  }
-  
-  .amount {
-    font-size: 1.2rem;
+  .transaction-amount {
     font-weight: bold;
+    font-size: 16px;
   }
   
   .recharge {
-    color: #00ffae;
+    border-left: 4px solid #00ff88;
   }
   
   .withdraw {
+    border-left: 4px solid #ff4d4d;
+  }
+  
+  .status-success {
+    color: #00ff88;
+  }
+  
+  .status-pending {
+    color: orange;
+  }
+  
+  .status-failed {
     color: #ff4d4d;
-  }
-  
-  .status {
-    margin-top: 8px;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    display: inline-block;
-  }
-  
-  .success {
-    background: rgba(0, 255, 170, 0.2);
-    color: #00ffae;
-  }
-  
-  .pending {
-    background: rgba(255, 193, 7, 0.2);
-    color: #ffc107;
-  }
-  
-  .failed {
-    background: rgba(255, 77, 77, 0.2);
-    color: #ff4d4d;
-  }
-  
-  .empty {
-    text-align: center;
-    margin-top: 50px;
-    color: #94a3b8;
-  }
-  
-  @media (max-width: 600px) {
-    .transaction-card {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .txn-right {
-      text-align: left;
-      margin-top: 10px;
-    }
   }
