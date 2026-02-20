@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdraw | Philips India</title>
+
+  <link rel="stylesheet" href="/home/style.css">
+  <link rel="stylesheet" href="/wallet/wallet.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo-wrapper">
+      <a href="/home/index.html">
+        <img src="/assets/philips-logo-png-transparent.png" alt="Philips Logo">
+      </a>
+    </div>
+  </nav>
+
+  <section class="wallet-container">
+
+    <h2>💸 Withdraw Funds</h2>
+
+    <div class="withdraw-info">
+      <p>⚠ Minimum Withdrawal: <strong>₹120</strong></p>
+      <p>💰 Processing Fee: <strong>10%</strong></p>
+      <p>⏰ Timing: <strong>Monday – Saturday (9 AM – 6 PM)</strong></p>
+    </div>
+
+    <div class="wallet-card">
+      <label>Enter Amount</label>
+      <input type="number" id="withdrawAmount" placeholder="Enter amount">
+
+      <button id="withdrawBtn" class="wallet-btn withdraw-style">
+        Withdraw Now
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ===== CONFIRM MODAL ===== -->
+  <div id="withdrawModal" class="custom-modal">
+    <div class="modal-content">
+      <h3>Confirm Withdrawal</h3>
+      <p id="modalDetails"></p>
+
+      <div class="modal-actions">
+        <button id="cancelWithdraw" class="modal-btn cancel">
+          Cancel
+        </button>
+        <button id="confirmWithdraw" class="modal-btn confirm">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div id="customToast" class="custom-toast"></div>
+
+  <script src="/wallet/withdraw.js"></script>
+</body>
+</html>

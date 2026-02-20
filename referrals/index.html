@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/home/style.css" />
+    <link rel="stylesheet" href="/referrals/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philips - India</title>
+</head>
+<body>
+    
+<!-- ===== NAVBAR (LOGO ONLY) ===== -->
+<nav class="navbar">
+  <div class="logo-wrapper">
+    <a href="/home/index.html">
+      <img
+        src="/assets/philips-logo-png-transparent.png"
+        alt="Philips Logo"
+      />
+    </a>
+
+    <div class="led-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+  <!-- HERO SECTION -->
+  <section class="referral-hero">
+    <h1>💡 Bright Rewards Referral Program</h1>
+    <p>Refer friends & earn exclusive lighting rewards!</p>
+  </section>
+
+  <!-- REFERRAL CODE CARD -->
+  <section class="referral-code-section">
+    <div class="link-box"></div>
+<button class="copy-link-btn" onclick="copyReferralLink()">
+  Copy Referral Link
+</button>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="referral-stats">
+    <div class="stat-card">
+      <h3>12</h3>
+      <p>Total Referrals</p>
+    </div>
+    <div class="stat-card">
+      <h3>₹2,400</h3>
+      <p>Total Earnings</p>
+    </div>
+    <div class="stat-card">
+      <h3>5</h3>
+      <p>Pending Rewards</p>
+    </div>
+  </section>
+
+  <!-- REFERRAL FORM -->
+  <section class="referral-form-section">
+    <h2>Refer a Friend</h2>
+    <form class="referral-form">
+      <input type="text" placeholder="Friend Name" required>
+      <input type="email" placeholder="Friend Email" required>
+      <button type="submit">Send Invite</button>
+    </form>
+  </section>
+
+  <!-- ===== BOTTOM MOBILE NAVIGATION ===== -->
+  <nav class="bottom-nav">
+    <a href="/home/index.html" class="nav-btn active">Home</a>
+    <a href="/products/index.html" class="nav-btn">Products</a>
+    <a href="/referrals/index.html" class="nav-btn">Referrals</a>
+    <a href="/profile/index.html" class="nav-btn">Profile</a>
+  </nav>
+
+  <script>
+    function copyCode() {
+      navigator.clipboard.writeText("PHILIPS2026");
+      alert("Referral Code Copied!");
+    }
+    </script>
+
+<script src="/referrals/script.js"></script>
+</body>
+</html>

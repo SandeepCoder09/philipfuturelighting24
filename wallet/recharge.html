@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recharge | Philips India</title>
+
+  <link rel="stylesheet" href="/home/style.css">
+  <link rel="stylesheet" href="/wallet/wallet.css">
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo-wrapper">
+      <a href="/home/index.html">
+        <img src="/assets/philips-logo-png-transparent.png" alt="Philips Logo">
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== RECHARGE SECTION ===== -->
+  <section class="wallet-container recharge-page">
+
+    <h2>💡 Recharge Wallet</h2>
+
+    <div class="wallet-card">
+
+      <!-- Selected Amount Input -->
+      <label>Selected Amount</label>
+      <input 
+        type="text" 
+        id="selectedAmount" 
+        placeholder="Select amount" 
+        readonly 
+      />
+
+      <!-- Amount Options -->
+      <div class="amount-options">
+        <button type="button" class="amount-btn" data-amount="99">₹99</button>
+        <button type="button" class="amount-btn" data-amount="499">₹499</button>
+        <button type="button" class="amount-btn" data-amount="999">₹999</button>
+        <button type="button" class="amount-btn" data-amount="4999">₹4999</button>
+      </div>
+
+      <!-- Recharge Button -->
+      <button id="rechargeBtn" class="wallet-btn recharge-style">
+        Recharge Now
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+  <script src="/wallet/recharge.js"></script>
+
+</body>
+</html>

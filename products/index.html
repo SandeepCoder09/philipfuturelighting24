@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/home/style.css" />
+    <link rel="stylesheet" href="/products/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | Philips</title>
+  </head>
+  <body>
+    <!-- ===== NAVBAR (LOGO ONLY) ===== -->
+    <nav class="navbar">
+      <div class="logo-wrapper">
+        <a href="/home/index.html">
+          <img
+            src="/assets/philips-logo-png-transparent.png"
+            alt="Philips Logo"
+          />
+        </a>
+
+        <div class="led-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="pricing-header">
+      <h1>Our Premium Lighting</h1>
+      <p>Choose the perfect lighting solution for your space</p>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="pricing-container">
+      <div class="card">
+        <div class="card-image">
+          <img src="/assets/bulb0.5watts.jpg" alt="Bulb" />
+        </div>
+        <div class="card-content">
+          <h2>0.5W LED Bulb</h2>
+          <p class="price">₹99</p>
+          <p class="daily-earning">Daily Earning: ₹5</p>
+          <button class="subscribe-btn">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="/assets/bulb5watts.jpg" alt="Bulb" />
+        </div>
+        <div class="card-content">
+          <h2>5W Smart Bulb</h2>
+          <p class="price">₹499</p>
+          <p class="daily-earning">Daily Earning: ₹20</p>
+          <button class="subscribe-btn">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="/assets/bulb10watts.webp" alt="Bulb" />
+        </div>
+        <div class="card-content">
+          <h2>10W LED Bulb</h2>
+          <p class="price">₹999</p>
+          <p class="daily-earning">Daily Earning: ₹50</p>
+          <button class="subscribe-btn">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="/assets/philips-health.jpg" alt="Light" />
+        </div>
+        <div class="card-content">
+          <h2>Decorative Light</h2>
+          <p class="price">₹4999</p>
+          <p class="daily-earning">Daily Earning: ₹250</p>
+          <button class="subscribe-btn">Buy Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FULL SCREEN LOADING -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loader-circle"></div>
+      <p>Processing Payment...</p>
+    </div>
+
+    <!-- SUCCESS POPUP -->
+    <div class="success-overlay" id="successPopup">
+      <div class="success-box">
+        <div class="checkmark-wrapper">
+          <div class="checkmark"></div>
+        </div>
+        <h2>Congrats!</h2>
+        <p>
+          Your Earning Started.<br />You can access products in
+          <b>My Products</b>.
+        </p>
+        <button onclick="closePopup()">OK</button>
+      </div>
+    </div>
+
+    <!-- ===== BOTTOM MOBILE NAVIGATION ===== -->
+    <nav class="bottom-nav">
+      <a href="/home/index.html" class="nav-btn active">Home</a>
+      <a href="/products/index.html" class="nav-btn">Products</a>
+      <a href="/referrals/index.html" class="nav-btn">Referrals</a>
+      <a href="/profile/index.html" class="nav-btn">Profile</a>
+    </nav>
+
+    <script src="/products/script.js"></script>
+  </body>
+</html>
