@@ -1,36 +1,23 @@
 async function bindBank() {
 
+  const token = localStorage.getItem("token");
+
   const data = {
     accountNumber: document.getElementById("accountNumber").value,
     ifsc: document.getElementById("ifsc").value,
     holderName: document.getElementById("holderName").value,
-    bankName: document.getElementById("bankName").value,
-    userId: localStorage.getItem("userId") // store during login
+    bankName: document.getElementById("bankName").value
   };
 
-  if (!data.accountNumber || !data.ifsc || !data.holderName) {
-    alert("Fill all required fields");
-    return;
-  }
+  const response = await fetch("https://YOUR_BACKEND_URL/api/wallet/bind-bank", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
 
-  try {
-    const response = await fetch("https://YOUR_BACKEND_URL/bind-bank", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      alert("Bank details submitted. Waiting for admin approval.");
-    } else {
-      alert(result.message);
-    }
-
-  } catch (error) {
-    alert("Server error");
-  }
+  const result = await response.json();
+  alert(result.message);
 }
