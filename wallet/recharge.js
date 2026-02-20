@@ -37,11 +37,30 @@ rechargeBtn.addEventListener("click", async () => {
     return;
   }
 
-  // 🔥 Get userId from localStorage (IMPORTANT)
-  const user = JSON.parse(localStorage.getItem("user"));
+  // 🔥 Get user from localStorage safely
+  let storedUser = localStorage.getItem("user");
 
-  if (!user || !user._id) {
+  if (!storedUser) {
     alert("User not logged in");
+    return;
+  }
+
+  let user;
+
+  try {
+    user = JSON.parse(storedUser);
+  } catch (err) {
+    console.error("Invalid user in localStorage");
+    alert("Session error. Please login again.");
+    return;
+  }
+
+  // Support both _id and id
+  const userId = user._id || user.id;
+
+  if (!userId) {
+    console.error("User ID missing:", user);
+    alert("User ID not found. Please login again.");
     return;
   }
 
@@ -58,21 +77,30 @@ rechargeBtn.addEventListener("click", async () => {
         },
         body: JSON.stringify({
           amount: Number(selectedAmount),
-          userId: user._id
+          userId: userId
         })
       }
     );
 
     const data = await response.json();
 
+    console.log("Create Order Response:", data);
+
     if (!response.ok) {
-      console.error("Backend error:", data);
       alert(data.message || "Order creation failed");
       rechargeBtn.innerText = "Recharge Now";
       rechargeBtn.disabled = false;
       return;
     }
 
+    if (!data.payment_session_id) {
+      alert("Payment session not received");
+      rechargeBtn.innerText = "Recharge Now";
+      rechargeBtn.disabled = false;
+      return;
+    }
+
+    // Initialize Cashfree (Production)
     const cashfree = Cashfree({
       mode: "production"
     });
