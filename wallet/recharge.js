@@ -11,23 +11,16 @@ let selectedAmount = null;
 // Disable recharge button initially
 rechargeBtn.disabled = true;
 
-// Handle amount button click
 amountButtons.forEach(button => {
   button.addEventListener("click", () => {
 
-    // Remove active class from all buttons
     amountButtons.forEach(btn => btn.classList.remove("active"));
-
-    // Add active class to clicked button
     button.classList.add("active");
 
-    // Get amount from data attribute
     selectedAmount = button.dataset.amount;
 
-    // Fill readonly input field
     selectedAmountInput.value = "₹" + selectedAmount;
 
-    // Enable recharge button
     rechargeBtn.disabled = false;
   });
 });
@@ -48,7 +41,7 @@ rechargeBtn.addEventListener("click", async () => {
     rechargeBtn.innerText = "Processing...";
     rechargeBtn.disabled = true;
 
-    // Call backend to create order
+    // 🔥 Call backend
     const response = await fetch(
       "https://philips-backend.onrender.com/api/wallet/create-order",
       {
@@ -56,40 +49,64 @@ rechargeBtn.addEventListener("click", async () => {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ amount: Number(selectedAmount) })
+        body: JSON.stringify({
+          amount: Number(selectedAmount)
+        })
       }
     );
 
-    const data = await response.json();
-
-    if (!response.ok || !data.payment_session_id) {
-      console.error("Order creation failed:", data);
-      alert("Order creation failed");
-      rechargeBtn.innerText = "Recharge Now";
-      rechargeBtn.disabled = false;
+    // Check if server responded properly
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Backend Error:", errorText);
+      alert("Order creation failed (server error)");
+      resetButton();
       return;
     }
 
-    // Initialize Cashfree (Production Mode)
+    const data = await response.json();
+
+    if (!data.payment_session_id) {
+      console.error("Invalid response:", data);
+      alert("Order creation failed");
+      resetButton();
+      return;
+    }
+
+    // ===============================
+    // Cashfree Checkout
+    // ===============================
+
+    if (typeof Cashfree === "undefined") {
+      alert("Cashfree SDK not loaded");
+      resetButton();
+      return;
+    }
+
     const cashfree = Cashfree({
       mode: "production"
     });
 
-    // Open Checkout Popup
     await cashfree.checkout({
       paymentSessionId: data.payment_session_id,
       redirectTarget: "_modal"
     });
 
-    // Reset button after popup
-    rechargeBtn.innerText = "Recharge Now";
-    rechargeBtn.disabled = false;
+    resetButton();
 
   } catch (error) {
     console.error("Recharge error:", error);
     alert("Something went wrong");
-
-    rechargeBtn.innerText = "Recharge Now";
-    rechargeBtn.disabled = false;
+    resetButton();
   }
 });
+
+
+// ===============================
+// Helper Function
+// ===============================
+
+function resetButton() {
+  rechargeBtn.innerText = "Recharge Now";
+  rechargeBtn.disabled = false;
+}
