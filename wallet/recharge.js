@@ -8,13 +8,13 @@ const rechargeBtn = document.getElementById("rechargeBtn");
 
 let selectedAmount = null;
 
-// Disable recharge button initially
 rechargeBtn.disabled = true;
 
 amountButtons.forEach(button => {
   button.addEventListener("click", () => {
 
     amountButtons.forEach(btn => btn.classList.remove("active"));
+
     button.classList.add("active");
 
     selectedAmount = button.dataset.amount;
@@ -37,11 +37,18 @@ rechargeBtn.addEventListener("click", async () => {
     return;
   }
 
+  // 🔥 Get userId from localStorage (IMPORTANT)
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user || !user._id) {
+    alert("User not logged in");
+    return;
+  }
+
   try {
     rechargeBtn.innerText = "Processing...";
     rechargeBtn.disabled = true;
 
-    // 🔥 Call backend
     const response = await fetch(
       "https://philips-backend.onrender.com/api/wallet/create-order",
       {
@@ -50,36 +57,19 @@ rechargeBtn.addEventListener("click", async () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          amount: Number(selectedAmount)
+          amount: Number(selectedAmount),
+          userId: user._id
         })
       }
     );
 
-    // Check if server responded properly
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Backend Error:", errorText);
-      alert("Order creation failed (server error)");
-      resetButton();
-      return;
-    }
-
     const data = await response.json();
 
-    if (!data.payment_session_id) {
-      console.error("Invalid response:", data);
-      alert("Order creation failed");
-      resetButton();
-      return;
-    }
-
-    // ===============================
-    // Cashfree Checkout
-    // ===============================
-
-    if (typeof Cashfree === "undefined") {
-      alert("Cashfree SDK not loaded");
-      resetButton();
+    if (!response.ok) {
+      console.error("Backend error:", data);
+      alert(data.message || "Order creation failed");
+      rechargeBtn.innerText = "Recharge Now";
+      rechargeBtn.disabled = false;
       return;
     }
 
@@ -92,21 +82,13 @@ rechargeBtn.addEventListener("click", async () => {
       redirectTarget: "_modal"
     });
 
-    resetButton();
+    rechargeBtn.innerText = "Recharge Now";
+    rechargeBtn.disabled = false;
 
   } catch (error) {
     console.error("Recharge error:", error);
-    alert("Something went wrong");
-    resetButton();
+    alert("Server error");
+    rechargeBtn.innerText = "Recharge Now";
+    rechargeBtn.disabled = false;
   }
 });
-
-
-// ===============================
-// Helper Function
-// ===============================
-
-function resetButton() {
-  rechargeBtn.innerText = "Recharge Now";
-  rechargeBtn.disabled = false;
-}
