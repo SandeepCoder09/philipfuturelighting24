@@ -25,7 +25,10 @@ function renderTransactions(type) {
 
     table.innerHTML += `
       <tr>
-        <td>${t.userId}</td>
+        <td>
+  ${t.userId?.name || "N/A"} <br>
+  <small>${t.userId?._id || ""}</small>
+</td>
         <td>${t.orderId}</td>
         <td>${t.type}</td>
         <td>₹${t.amount}</td>
