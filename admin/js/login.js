@@ -3,10 +3,9 @@ const API = "https://philips-backend.onrender.com/api";
 
 // 🔐 If already logged in → go to dashboard
 if (localStorage.getItem("adminToken")) {
-  window.location.href = "dashboard.html";
+  window.location.href = "index.html"; // ✅ fixed redirect
 }
 
-// 🎯 Attach submit event properly (no inline onclick needed)
 document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.getElementById("adminLoginForm");
@@ -14,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (form) {
     form.addEventListener("submit", adminLogin);
   }
+
 });
 
 // 🔑 Admin Login Function
 async function adminLogin(event) {
 
-  event.preventDefault(); // 🚨 Stop page reload
+  if (event) event.preventDefault(); // ✅ safe check
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -42,15 +42,7 @@ async function adminLogin(event) {
       body: JSON.stringify({ email, password })
     });
 
-    const text = await response.text();
-
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch {
-      errorBox.innerText = "Invalid server response";
-      return;
-    }
+    const data = await response.json();
 
     if (!response.ok) {
       errorBox.innerText = data.message || "Login failed";
@@ -61,7 +53,7 @@ async function adminLogin(event) {
     localStorage.setItem("adminToken", data.token);
 
     // 🚀 Redirect
-    window.location.href = "index.html";
+    window.location.href = "index.html"; // ✅ correct file
 
   } catch (error) {
     errorBox.innerText = "Network error. Please try again.";
