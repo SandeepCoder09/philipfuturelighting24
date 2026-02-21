@@ -1,12 +1,25 @@
-// 🔹 Replace with your real backend API base URL
+// 🔹 Backend API Base URL
 const API = "https://philips-backend.onrender.com/api";
 
-// If already logged in, redirect to dashboard
+// 🔐 If already logged in → go to dashboard
 if (localStorage.getItem("adminToken")) {
   window.location.href = "dashboard.html";
 }
 
-async function adminLogin() {
+// 🎯 Attach submit event properly (no inline onclick needed)
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("adminLoginForm");
+
+  if (form) {
+    form.addEventListener("submit", adminLogin);
+  }
+});
+
+// 🔑 Admin Login Function
+async function adminLogin(event) {
+
+  event.preventDefault(); // 🚨 Stop page reload
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -29,20 +42,28 @@ async function adminLogin() {
       body: JSON.stringify({ email, password })
     });
 
-    const data = await response.json();
+    const text = await response.text();
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      errorBox.innerText = "Invalid server response";
+      return;
+    }
 
     if (!response.ok) {
       errorBox.innerText = data.message || "Login failed";
       return;
     }
 
-    // Save token
+    // ✅ Save token
     localStorage.setItem("adminToken", data.token);
 
-    // Redirect to dashboard
+    // 🚀 Redirect
     window.location.href = "dashboard.html";
 
   } catch (error) {
-    errorBox.innerText = "Server error. Please try again.";
+    errorBox.innerText = "Network error. Please try again.";
   }
 }
