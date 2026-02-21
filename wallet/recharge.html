@@ -3,59 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recharge | Philips India</title>
+  <title>Recharge | Philips</title>
 
   <link rel="stylesheet" href="../home/style.css">
   <link rel="stylesheet" href="../wallet/wallet.css">
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="logo-wrapper">
-      <a href="../home/index.html">
-        <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo">
-      </a>
-    </div>
-  </nav>
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+  <button class="back-btn" onclick="history.back()">
+    <i class='bx bx-arrow-back'></i>
+  </button>
+  <h2 class="page-title">
+    <i class='bx bx-bolt-circle'></i>
+    Recharge Wallet
+  </h2>
+</div>
 
-  <!-- ===== RECHARGE SECTION ===== -->
-  <section class="wallet-container recharge-page">
+<section class="wallet-container recharge-page">
 
-    <h2>💡 Recharge Wallet</h2>
+  <div class="wallet-card">
 
-    <div class="wallet-card">
+    <label>
+      <i class='bx bx-wallet'></i>
+      Selected Amount
+    </label>
 
-      <!-- Selected Amount Input -->
-      <label>Selected Amount</label>
-      <input 
-        type="text" 
-        id="selectedAmount" 
-        placeholder="Select amount" 
-        readonly 
-      />
+    <input type="text" id="selectedAmount" placeholder="Select amount" readonly />
 
-      <!-- Amount Options -->
-      <div class="amount-options">
-        <button type="button" class="amount-btn" data-amount="99">₹99</button>
-        <button type="button" class="amount-btn" data-amount="499">₹499</button>
-        <button type="button" class="amount-btn" data-amount="999">₹999</button>
-        <button type="button" class="amount-btn" data-amount="4999">₹4999</button>
-      </div>
-
-      <!-- Recharge Button -->
-      <button id="rechargeBtn" class="wallet-btn recharge-style">
-        Recharge Now
+    <div class="amount-options">
+      <button type="button" class="amount-btn" data-amount="99">
+        ₹99
       </button>
-
+      <button type="button" class="amount-btn" data-amount="499">
+        ₹499
+      </button>
+      <button type="button" class="amount-btn" data-amount="999">
+        ₹999
+      </button>
+      <button type="button" class="amount-btn" data-amount="4999">
+        ₹4999
+      </button>
     </div>
 
-  </section>
+    <button id="rechargeBtn" class="wallet-btn recharge-style">
+      <i class='bx bx-bolt'></i>
+      Recharge Now
+    </button>
 
-  <!-- ===== SCRIPTS ===== -->
-  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
-  <script src="../wallet/recharge.js"></script>
+  </div>
 
+</section>
+
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+<script src="../wallet/recharge.js"></script>
 </body>
 </html>
