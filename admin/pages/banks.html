@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bank Accounts | Admin</title>
+
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
@@ -14,38 +16,74 @@
   <aside class="sidebar">
     <h2>PHILIPS ADMIN</h2>
     <nav>
-      <a href="../index.html">Dashboard</a>
-      <a href="users.html">Users</a>
-      <a href="withdraws.html">Withdraws</a>
-      <a href="transactions.html">Transactions</a>
-      <a href="banks.html" class="active">Banks</a>
+      <a href="../index.html">
+        <i class="fa-solid fa-gauge"></i> Dashboard
+      </a>
+      <a href="users.html">
+        <i class="fa-solid fa-users"></i> Users
+      </a>
+      <a href="withdraws.html">
+        <i class="fa-solid fa-money-bill-transfer"></i> Withdraws
+      </a>
+      <a href="transactions.html">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i> Transactions
+      </a>
+      <a href="banks.html" class="active">
+        <i class="fa-solid fa-building-columns"></i> Banks
+      </a>
     </nav>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
+
+    <!-- TOPBAR -->
     <header class="topbar">
-      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-      <h1>All Linked Bank Accounts</h1>
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1>
+          <i class="fa-solid fa-building-columns"></i>
+          All Linked Bank Accounts
+        </h1>
+      </div>
+
+      <div class="topbar-right">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
     </header>
 
-    <!-- Search -->
-    <div style="margin-top:20px;">
-      <input type="text" id="searchBank" placeholder="Search by User ID or Bank Name"
-        style="padding:10px; width:300px; border-radius:6px; border:none;">
-      <button onclick="searchBanks()">Search</button>
+    <!-- SEARCH -->
+    <div class="search-section">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input 
+          type="text" 
+          id="searchBank" 
+          placeholder="Search by User ID or Bank Name"
+        >
+      </div>
+
+      <button class="search-btn" onclick="searchBanks()">
+        <i class="fa-solid fa-search"></i> Search
+      </button>
     </div>
 
+    <!-- TABLE -->
     <div class="table-container">
       <table>
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>Holder Name</th>
-            <th>Bank</th>
-            <th>Account Number</th>
-            <th>IFSC</th>
-            <th>Created</th>
+            <th><i class="fa-solid fa-id-card"></i> User ID</th>
+            <th><i class="fa-solid fa-user"></i> Holder Name</th>
+            <th><i class="fa-solid fa-building"></i> Bank</th>
+            <th><i class="fa-solid fa-credit-card"></i> Account Number</th>
+            <th><i class="fa-solid fa-code"></i> IFSC</th>
+            <th><i class="fa-solid fa-calendar"></i> Created</th>
           </tr>
         </thead>
         <tbody id="bankTable"></tbody>
