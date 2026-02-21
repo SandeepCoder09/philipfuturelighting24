@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | Philips</title>
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -11,50 +12,81 @@
 
 <div class="layout">
 
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <h2>PHILIPS ADMIN</h2>
     <nav>
-      <a href="index.html" class="active">Dashboard</a>
-      <a href="pages/users.html">Users</a>
-      <a href="pages/withdraws.html">Withdraws</a>
-      <a href="pages/transactions.html">Transactions</a>
-      <a href="pages/banks.html">Banks</a>
+      <a href="index.html" class="active">
+        <i class="fa-solid fa-gauge"></i> Dashboard
+      </a>
+      <a href="pages/users.html">
+        <i class="fa-solid fa-users"></i> Users
+      </a>
+      <a href="pages/withdraws.html">
+        <i class="fa-solid fa-money-bill-transfer"></i> Withdraws
+      </a>
+      <a href="pages/transactions.html">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i> Transactions
+      </a>
+      <a href="pages/banks.html">
+        <i class="fa-solid fa-building-columns"></i> Banks
+      </a>
     </nav>
   </aside>
 
+  <!-- MAIN CONTENT -->
   <main class="main">
+
+    <!-- TOPBAR -->
     <header class="topbar">
-      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-      <h1>Dashboard Overview</h1>
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1>Dashboard Overview</h1>
+      </div>
+
+      <div class="topbar-right">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
     </header>
 
+    <!-- DASHBOARD CARDS -->
     <section class="cards">
+
       <div class="card">
-        <h3>Total Users</h3>
+        <h3><i class="fa-solid fa-users"></i> Total Users</h3>
         <p id="totalUsers">0</p>
       </div>
 
       <div class="card">
-        <h3>Total Recharge</h3>
+        <h3><i class="fa-solid fa-wallet"></i> Total Recharge</h3>
         <p id="totalRecharge">₹0</p>
       </div>
 
       <div class="card">
-        <h3>Total Withdraw</h3>
+        <h3><i class="fa-solid fa-money-bill-wave"></i> Total Withdraw</h3>
         <p id="totalWithdraw">₹0</p>
       </div>
 
       <div class="card">
-        <h3>Pending Withdraw</h3>
+        <h3><i class="fa-solid fa-clock"></i> Pending Withdraw</h3>
         <p id="pendingWithdraw">0</p>
       </div>
+
     </section>
+
   </main>
 
 </div>
 
+<!-- SCRIPTS -->
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script src="js/dashboard.js"></script>
+
 </body>
 </html>
