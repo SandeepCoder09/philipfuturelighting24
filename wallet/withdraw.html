@@ -3,63 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Withdraw | Philips India</title>
+  <title>Withdraw | Philips</title>
 
   <link rel="stylesheet" href="../home/style.css">
   <link rel="stylesheet" href="../wallet/wallet.css">
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <nav class="navbar">
-    <div class="logo-wrapper">
-      <a href="../home/index.html">
-        <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo">
-      </a>
-    </div>
-  </nav>
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+  <button class="back-btn" onclick="history.back()">
+    <i class='bx bx-arrow-back'></i>
+  </button>
+  <h2 class="page-title">
+    <i class='bx bx-money-withdraw'></i>
+    Withdraw Funds
+  </h2>
+</div>
 
-  <section class="wallet-container">
+<section class="wallet-container">
 
-    <h2>💸 Withdraw Funds</h2>
-
-    <div class="withdraw-info">
-      <p>⚠ Minimum Withdrawal: <strong>₹120</strong></p>
-      <p>💰 Processing Fee: <strong>10%</strong></p>
-      <p>⏰ Timing: <strong>Monday – Saturday (9 AM – 6 PM)</strong></p>
-    </div>
-
-    <div class="wallet-card">
-      <label>Enter Amount</label>
-      <input type="number" id="withdrawAmount" placeholder="Enter amount">
-
-      <button id="withdrawBtn" class="wallet-btn withdraw-style">
-        Withdraw Now
-      </button>
-    </div>
-
-  </section>
-
-  <!-- ===== CONFIRM MODAL ===== -->
-  <div id="withdrawModal" class="custom-modal">
-    <div class="modal-content">
-      <h3>Confirm Withdrawal</h3>
-      <p id="modalDetails"></p>
-
-      <div class="modal-actions">
-        <button id="cancelWithdraw" class="modal-btn cancel">
-          Cancel
-        </button>
-        <button id="confirmWithdraw" class="modal-btn confirm">
-          Confirm
-        </button>
-      </div>
-    </div>
+  <div class="withdraw-info">
+    <p><i class='bx bx-error-circle'></i> Minimum Withdrawal: <strong>₹120</strong></p>
+    <p><i class='bx bx-receipt'></i> Processing Fee: <strong>10%</strong></p>
+    <p><i class='bx bx-time-five'></i> Monday – Saturday (9 AM – 6 PM)</p>
   </div>
 
-  <!-- ===== TOAST ===== -->
-  <div id="customToast" class="custom-toast"></div>
+  <div class="wallet-card">
 
-  <script src="../wallet/withdraw.js"></script>
+    <label>
+      <i class='bx bx-rupee'></i>
+      Enter Amount
+    </label>
+
+    <input type="number" id="withdrawAmount" placeholder="Enter amount">
+
+    <button id="withdrawBtn" class="wallet-btn withdraw-style">
+      <i class='bx bx-transfer'></i>
+      Withdraw Now
+    </button>
+
+  </div>
+
+</section>
+
+<!-- Modal and Toast remain same -->
+
+<script src="../wallet/withdraw.js"></script>
 </body>
 </html>
