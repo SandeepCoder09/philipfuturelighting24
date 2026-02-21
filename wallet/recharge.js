@@ -12,13 +12,10 @@ rechargeBtn.disabled = true;
 
 amountButtons.forEach(button => {
   button.addEventListener("click", () => {
-
     amountButtons.forEach(btn => btn.classList.remove("active"));
-
     button.classList.add("active");
 
     selectedAmount = button.dataset.amount;
-
     selectedAmountInput.value = "₹" + selectedAmount;
 
     rechargeBtn.disabled = false;
@@ -27,7 +24,7 @@ amountButtons.forEach(button => {
 
 
 // ===============================
-// Recharge Button Logic
+// Recharge Button Logic (JWT)
 // ===============================
 
 rechargeBtn.addEventListener("click", async () => {
@@ -37,30 +34,12 @@ rechargeBtn.addEventListener("click", async () => {
     return;
   }
 
-  // 🔥 Get user from localStorage safely
-  let storedUser = localStorage.getItem("user");
+  // ✅ Get JWT token
+  const token = localStorage.getItem("token");
 
-  if (!storedUser) {
+  if (!token) {
     alert("User not logged in");
-    return;
-  }
-
-  let user;
-
-  try {
-    user = JSON.parse(storedUser);
-  } catch (err) {
-    console.error("Invalid user in localStorage");
-    alert("Session error. Please login again.");
-    return;
-  }
-
-  // Support both _id and id
-  const userId = user._id || user.id;
-
-  if (!userId) {
-    console.error("User ID missing:", user);
-    alert("User ID not found. Please login again.");
+    window.location.href = "../auth/index.html";
     return;
   }
 
@@ -73,11 +52,11 @@ rechargeBtn.addEventListener("click", async () => {
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
         },
         body: JSON.stringify({
-          amount: Number(selectedAmount),
-          userId: userId
+          amount: Number(selectedAmount)
         })
       }
     );
@@ -100,7 +79,6 @@ rechargeBtn.addEventListener("click", async () => {
       return;
     }
 
-    // Initialize Cashfree (Production)
     const cashfree = Cashfree({
       mode: "production"
     });
