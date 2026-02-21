@@ -1,68 +1,64 @@
-const token = localStorage.getItem("adminToken");
+document.addEventListener("DOMContentLoaded", async () => {
 
-if (!token) {
-  window.location.href = "/admin/login.html";
-}
+  const rechargeContainer = document.getElementById("rechargeList");
+  const withdrawContainer = document.getElementById("withdrawList");
 
-let allBanks = [];
+  const token = localStorage.getItem("adminToken");
 
-async function loadBanks() {
-
-  const response = await fetch(`${API}/admin/banks`, {
-    headers: {
-      Authorization: "Bearer " + token
-    }
-  });
-
-  if (response.status === 401 || response.status === 403) {
-    localStorage.removeItem("adminToken");
-    window.location.href = "/admin/login.html";
+  if (!token) {
+    window.location.href = "../login.html";
     return;
   }
 
-  allBanks = await response.json();
-  renderBanks(allBanks);
-}
+  try {
+    const response = await fetch(
+      "https://philips-backend.onrender.com/api/admin/transactions",
+      {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer " + token
+        }
+      }
+    );
 
-function maskAccount(account) {
-  return account ? "****" + account.slice(-4) : "";
-}
+    if (!response.ok) throw new Error("Failed to fetch");
 
-function renderBanks(banks) {
+    const transactions = await response.json();
 
-  const table = document.getElementById("bankTable");
-  table.innerHTML = "";
+    rechargeContainer.innerHTML = "";
+    withdrawContainer.innerHTML = "";
 
-  banks.forEach(bank => {
+    if (!transactions.length) {
+      rechargeContainer.innerHTML = "<p>No recharge history</p>";
+      withdrawContainer.innerHTML = "<p>No withdrawal history</p>";
+      return;
+    }
 
-    const created = new Date(bank.createdAt).toLocaleDateString();
+    transactions.forEach(tx => {
 
-    table.innerHTML += `
-      <tr>
-        <td>
-          ${bank.userId?.name || "N/A"} <br>
-          <small>${bank.userId?._id || ""}</small>
-        </td>
-        <td>${bank.holderName}</td>
-        <td>${bank.bankName}</td>
-        <td>${maskAccount(bank.accountNumber)}</td>
-        <td>${bank.ifsc}</td>
-        <td>${created}</td>
-      </tr>
-    `;
-  });
-}
+      const item = document.createElement("div");
+      item.className = "transaction-item";
 
-function searchBanks() {
+      item.innerHTML = `
+        <div>
+          <strong>User:</strong> ${tx.userId?.name || "N/A"}<br>
+          <strong>Status:</strong> ${tx.status}<br>
+          <small>${new Date(tx.createdAt).toLocaleString()}</small>
+        </div>
+        <div>₹${tx.amount}</div>
+      `;
 
-  const keyword = document.getElementById("searchBank").value.toLowerCase();
+      if (tx.type === "recharge") {
+        rechargeContainer.appendChild(item);
+      } else {
+        withdrawContainer.appendChild(item);
+      }
 
-  const filtered = allBanks.filter(bank =>
-    bank.userId?._id?.toLowerCase().includes(keyword) ||
-    bank.bankName?.toLowerCase().includes(keyword)
-  );
+    });
 
-  renderBanks(filtered);
-}
+  } catch (error) {
+    rechargeContainer.innerHTML = "<p>Failed to load</p>";
+    withdrawContainer.innerHTML = "<p>Failed to load</p>";
+  }
 
-loadBanks();
+});
