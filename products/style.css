@@ -218,19 +218,19 @@ body {
   cursor: pointer;
 }
 
-/* ===== PREMIUM BOTTOM NAV FIX ===== */
+/* ===== PREMIUM BOTTOM NAV ===== */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #000814;
+  background: #0f172a;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 10px 0;
   border-top: 1px solid rgba(255,255,255,0.05);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   z-index: 1000;
 }
 
@@ -251,13 +251,17 @@ body {
 }
 
 .nav-btn:hover {
-  color: #00aaff;
+  color: #ffffff;
+}
+
+.nav-btn:hover i {
+  transform: translateY(-3px);
 }
 
 .nav-btn.active {
-  color: #00ffcc;
+  color: #00c6ff;
 }
 
 .nav-btn.active i {
-  text-shadow: 0 0 8px rgba(0,255,200,0.6);
+  text-shadow: 0 0 8px rgba(0,198,255,0.6);
 }
