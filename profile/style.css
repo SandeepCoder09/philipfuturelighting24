@@ -185,3 +185,37 @@ body {
   font-size: 26px;
   font-weight: bold;
 }
+
+/* ICON SPACING */
+.menu-item i:first-child {
+  margin-right: 10px;
+  color: #00c3ff;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-item div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* MOBILE TEXT STYLE */
+.mobile-top i {
+  margin-right: 6px;
+  color: #00c3ff;
+}
+
+/* WALLET ICON */
+.wallet-title i {
+  margin-right: 6px;
+}
+
+/* ACTION BUTTON ICON */
+.action-btn i {
+  margin-right: 6px;
+}
