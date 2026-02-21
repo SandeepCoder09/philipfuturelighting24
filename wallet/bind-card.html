@@ -3,21 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bind Bank Card</title>
+  <title>Bind Bank Card | Philips</title>
 
+  <link rel="stylesheet" href="../home/style.css">
   <link rel="stylesheet" href="bind-card.css">
 
-  <!-- Boxicons CDN for real icons -->
+  <!-- Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
+
 <body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+  <button class="back-btn" onclick="history.back()">
+    <i class='bx bx-arrow-back'></i>
+  </button>
+  <h2 class="page-title">
+    <i class='bx bx-credit-card'></i>
+    Bind Bank Card
+  </h2>
+</div>
 
 <div class="page">
 
   <!-- ===== FORM CARD ===== -->
   <div class="card">
 
-    <h2>Bind Bank Card</h2>
     <p class="subtitle">Securely link your bank for withdrawals</p>
 
     <div class="input-group">
@@ -41,6 +53,7 @@
     </div>
 
     <button id="bindBtn" onclick="bindBank()">
+      <i class='bx bx-link'></i>
       <span id="btnText">Bind Bank Card</span>
       <div class="loader hidden"></div>
     </button>
@@ -51,7 +64,10 @@
 
   <!-- ===== BANK LIST ===== -->
   <div class="card bank-list-card">
-    <h3>Your Linked Banks</h3>
+    <h3>
+      <i class='bx bx-wallet'></i>
+      Your Linked Banks
+    </h3>
     <div id="bankContainer"></div>
   </div>
 
