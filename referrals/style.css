@@ -107,3 +107,42 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
+/* ===== ICON STYLING ===== */
+.stat-icon {
+  font-size: 24px;
+  color: #00ff99;
+  margin-bottom: 10px;
+}
+
+/* ===== INPUT GROUP ===== */
+.input-group {
+  position: relative;
+}
+
+.input-group i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00ff99;
+}
+
+.input-group input {
+  padding-left: 40px;
+}
+
+/* ===== BUTTON ICON SPACING ===== */
+.referral-card button,
+.referral-form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ===== BUTTON HOVER ENHANCE ===== */
+.referral-card button:hover,
+.referral-form button:hover {
+  box-shadow: 0 0 15px #00ff99;
+}
