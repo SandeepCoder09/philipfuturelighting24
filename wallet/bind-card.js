@@ -1,20 +1,23 @@
+const API = "https://philips-backend.onrender.com/api/wallet";
+
 async function bindBank() {
 
   const token = localStorage.getItem("token");
-  const messageBox = document.getElementById("messageBox");
   const btnText = document.getElementById("btnText");
   const loader = document.querySelector(".loader");
+  const messageBox = document.getElementById("messageBox");
 
-  const accountNumber = document.getElementById("accountNumber").value.trim();
-  const ifsc = document.getElementById("ifsc").value.trim();
-  const holderName = document.getElementById("holderName").value.trim();
-  const bankName = document.getElementById("bankName").value.trim();
+  const data = {
+    accountNumber: accountNumber.value.trim(),
+    ifsc: ifsc.value.trim().toUpperCase(),
+    holderName: holderName.value.trim(),
+    bankName: bankName.value.trim()
+  };
 
-  messageBox.classList.add("hidden");
-  messageBox.classList.remove("success", "error");
+  messageBox.className = "message hidden";
 
-  if (!accountNumber || !ifsc || !holderName || !bankName) {
-    showMessage("Please fill all fields", "error");
+  if (!data.accountNumber || !data.ifsc || !data.holderName || !data.bankName) {
+    showMessage("All fields are required", "error");
     return;
   }
 
@@ -22,27 +25,21 @@ async function bindBank() {
   loader.classList.remove("hidden");
 
   try {
-    const response = await fetch(
-      "https://philips-backend.onrender.com/api/wallet/bind-bank",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          accountNumber,
-          ifsc,
-          holderName,
-          bankName
-        })
-      }
-    );
+    const response = await fetch(`${API}/bind-bank`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    });
 
     const result = await response.json();
 
     if (response.ok) {
-      showMessage(result.message || "Bank submitted successfully", "success");
+      showMessage("Bank linked successfully", "success");
+      clearInputs();
+      loadBanks();
     } else {
       showMessage(result.message || "Failed to bind bank", "error");
     }
@@ -58,6 +55,43 @@ async function bindBank() {
 function showMessage(text, type) {
   const messageBox = document.getElementById("messageBox");
   messageBox.innerText = text;
-  messageBox.classList.remove("hidden");
-  messageBox.classList.add(type);
+  messageBox.className = "message " + type;
 }
+
+function clearInputs() {
+  accountNumber.value = "";
+  ifsc.value = "";
+  holderName.value = "";
+  bankName.value = "";
+}
+
+async function loadBanks() {
+
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await fetch(`${API}/banks`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const banks = await response.json();
+
+    const container = document.getElementById("bankContainer");
+    container.innerHTML = "";
+
+    banks.forEach(bank => {
+      container.innerHTML += `
+        <div class="bank-item">
+          <strong>${bank.bankName}</strong><br>
+          A/C: ****${bank.accountNumber.slice(-4)}<br>
+          IFSC: ${bank.ifsc}
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Load banks error:", error);
+  }
+}
+
+loadBanks();
