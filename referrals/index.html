@@ -1,138 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="../home/style.css" />
-  <link rel="stylesheet" href="../referrals/style.css" />
   <meta charset="UTF-8">
+  <title>My Team | Philips</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Philips - Referrals</title>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar">
-  <div class="logo-wrapper">
-    <a href="../home/index.html">
-      <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo" />
-    </a>
-    <div class="led-dots">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-</nav>
+<div class="container">
 
-<!-- HERO -->
-<section class="referral-hero">
-  <h1>
-    <i class="fa-solid fa-gift"></i>
-    Bright Rewards Referral Program
-  </h1>
-  <p>
-    <i class="fa-solid fa-users"></i>
-    Refer friends & earn exclusive lighting rewards!
-  </p>
-</section>
-
-<!-- REFERRAL LINK -->
-<section class="referral-code-section">
-
-  <div class="referral-card">
-    <h3>
-      <i class="fa-solid fa-link"></i>
-      Your Referral Link
-    </h3>
-
-    <div class="code-box">
-      https://philips.com/ref/PHILIPS2026
-    </div>
-
-    <button onclick="copyReferralLink()">
-      <i class="fa-solid fa-copy"></i>
-      Copy Referral Link
-    </button>
+  <div class="header">
+    <h2>My Team</h2>
   </div>
 
-</section>
-
-<!-- STATS -->
-<section class="referral-stats">
-
-  <div class="stat-card">
-    <i class="fa-solid fa-user-plus stat-icon"></i>
-    <h3>12</h3>
-    <p>Total Referrals</p>
+  <div class="active-box">
+    Active Users: <span id="activeUsers">0</span>
   </div>
 
-  <div class="stat-card">
-    <i class="fa-solid fa-indian-rupee-sign stat-icon"></i>
-    <h3>₹2,400</h3>
-    <p>Total Earnings</p>
+  <div class="team-card">
+    <p>Team Size</p>
+    <h1 id="teamSize">0</h1>
   </div>
 
-  <div class="stat-card">
-    <i class="fa-solid fa-clock stat-icon"></i>
-    <h3>5</h3>
-    <p>Pending Rewards</p>
+  <div class="stats-card">
+    <span>Total Promotion Income</span>
+    <strong id="totalIncome">0.0 INR</strong>
   </div>
 
-</section>
+  <div class="stats-card">
+    <span>Yesterday's Promotion Income</span>
+    <strong id="yesterdayIncome">0.0 INR</strong>
+  </div>
 
-<!-- FORM -->
-<section class="referral-form-section">
-  <h2>
-    <i class="fa-solid fa-paper-plane"></i>
-    Refer a Friend
-  </h2>
+  <div class="stats-card">
+    <span>Direct Referral Number</span>
+    <strong id="directReferral">0</strong>
+  </div>
 
-  <form class="referral-form">
-    <div class="input-group">
-      <i class="fa-solid fa-user"></i>
-      <input type="text" placeholder="Friend Name" required>
-    </div>
+  <div class="stats-card">
+    <span>Invitation Reward</span>
+    <strong id="invitationReward">0.0</strong>
+  </div>
 
-    <div class="input-group">
-      <i class="fa-solid fa-envelope"></i>
-      <input type="email" placeholder="Friend Email" required>
-    </div>
+</div>
 
-    <button type="submit">
-      <i class="fa-solid fa-paper-plane"></i>
-      Send Invite
-    </button>
-  </form>
-</section>
-
-<!-- ===== PREMIUM BOTTOM NAV ===== -->
-<nav class="bottom-nav">
-
-  <a href="../home/index.html" class="nav-btn">
-    <i class="fa-solid fa-house"></i>
-    <span>Home</span>
-  </a>
-
-  <a href="../products/index.html" class="nav-btn">
-    <i class="fa-solid fa-lightbulb"></i>
-    <span>Products</span>
-  </a>
-
-  <a href="../referrals/index.html" class="nav-btn active">
-    <i class="fa-solid fa-gift"></i>
-    <span>Referrals</span>
-  </a>
-
-  <a href="../profile/index.html" class="nav-btn">
-    <i class="fa-solid fa-user"></i>
-    <span>Profile</span>
-  </a>
-
-</nav>
-
-<script src="../referrals/script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
