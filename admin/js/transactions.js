@@ -1,48 +1,68 @@
-let allTransactions = [];
+const token = localStorage.getItem("adminToken");
 
-async function loadTransactions() {
-
-  const response = await fetch(`${API}/admin/transactions`);
-  allTransactions = await response.json();
-
-  renderTransactions("all");
+if (!token) {
+  window.location.href = "/admin/login.html";
 }
 
-function renderTransactions(type) {
+let allBanks = [];
 
-  const table = document.getElementById("transactionTable");
-  table.innerHTML = "";
+async function loadBanks() {
 
-  let filtered = allTransactions;
+  const response = await fetch(`${API}/admin/banks`, {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  });
 
-  if (type !== "all") {
-    filtered = allTransactions.filter(t => t.type === type);
+  if (response.status === 401 || response.status === 403) {
+    localStorage.removeItem("adminToken");
+    window.location.href = "/admin/login.html";
+    return;
   }
 
-  filtered.forEach(t => {
+  allBanks = await response.json();
+  renderBanks(allBanks);
+}
 
-    const date = new Date(t.createdAt).toLocaleString();
+function maskAccount(account) {
+  return account ? "****" + account.slice(-4) : "";
+}
+
+function renderBanks(banks) {
+
+  const table = document.getElementById("bankTable");
+  table.innerHTML = "";
+
+  banks.forEach(bank => {
+
+    const created = new Date(bank.createdAt).toLocaleDateString();
 
     table.innerHTML += `
       <tr>
         <td>
-  ${t.userId?.name || "N/A"} <br>
-  <small>${t.userId?._id || ""}</small>
-</td>
-        <td>${t.orderId}</td>
-        <td>${t.type}</td>
-        <td>₹${t.amount}</td>
-        <td class="status-${t.status}">
-          ${t.status}
+          ${bank.userId?.name || "N/A"} <br>
+          <small>${bank.userId?._id || ""}</small>
         </td>
-        <td>${date}</td>
+        <td>${bank.holderName}</td>
+        <td>${bank.bankName}</td>
+        <td>${maskAccount(bank.accountNumber)}</td>
+        <td>${bank.ifsc}</td>
+        <td>${created}</td>
       </tr>
     `;
   });
 }
 
-function filterTransactions(type) {
-  renderTransactions(type);
+function searchBanks() {
+
+  const keyword = document.getElementById("searchBank").value.toLowerCase();
+
+  const filtered = allBanks.filter(bank =>
+    bank.userId?._id?.toLowerCase().includes(keyword) ||
+    bank.bankName?.toLowerCase().includes(keyword)
+  );
+
+  renderBanks(filtered);
 }
 
-loadTransactions();
+loadBanks();
