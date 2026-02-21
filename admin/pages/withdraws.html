@@ -1,49 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Withdraw Requests</title>
+  <title>Withdraw Requests | Admin</title>
+
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
 <div class="layout">
+
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <h2>PHILIPS ADMIN</h2>
     <nav>
-      <a href="../index.html">Dashboard</a>
-      <a href="users.html">Users</a>
-      <a href="withdraws.html" class="active">Withdraws</a>
-      <a href="transactions.html">Transactions</a>
-      <a href="banks.html">Banks</a>
+      <a href="../index.html">
+        <i class="fa-solid fa-gauge"></i> Dashboard
+      </a>
+      <a href="users.html">
+        <i class="fa-solid fa-users"></i> Users
+      </a>
+      <a href="withdraws.html" class="active">
+        <i class="fa-solid fa-money-bill-transfer"></i> Withdraws
+      </a>
+      <a href="transactions.html">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i> Transactions
+      </a>
+      <a href="banks.html">
+        <i class="fa-solid fa-building-columns"></i> Banks
+      </a>
     </nav>
   </aside>
 
+  <!-- MAIN -->
   <main class="main">
+
+    <!-- TOPBAR -->
     <header class="topbar">
-      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-      <h1>Withdraw Requests</h1>
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1>
+          <i class="fa-solid fa-money-bill-transfer"></i>
+          Withdraw Requests
+        </h1>
+      </div>
+
+      <div class="topbar-right">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
     </header>
 
+    <!-- TABLE -->
     <div class="table-container">
       <table>
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th><i class="fa-solid fa-id-card"></i> User ID</th>
+            <th><i class="fa-solid fa-indian-rupee-sign"></i> Amount</th>
+            <th><i class="fa-solid fa-info-circle"></i> Status</th>
+            <th><i class="fa-solid fa-gears"></i> Action</th>
           </tr>
         </thead>
         <tbody id="withdrawTable"></tbody>
       </table>
     </div>
+
   </main>
+
 </div>
 
 <script src="../js/config.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/withdraws.js"></script>
+
 </body>
 </html>
