@@ -1,28 +1,39 @@
-body {
+/* ===== RESET ===== */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #001509;
-  color: white;
-  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-/* HERO */
+body {
+  background: #0f172a;
+  color: #ffffff;
+  text-align: center;
+  padding-bottom: 80px;
+}
+
+/* ===== HERO ===== */
 .referral-hero {
-  padding: 100px 20px;
-  background: radial-gradient(circle, #00ff99 0%, #001509 60%);
+  padding: 120px 20px 80px;
+  background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)),
+              radial-gradient(circle at center, #0072ff 0%, #0f172a 70%);
 }
 
 .referral-hero h1 {
-  font-size: 3rem;
-  text-shadow: 0 0 25px #00ff99;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .referral-hero p {
-  font-size: 1.2rem;
-  opacity: 0.9;
+  color: #94a3b8;
+  font-size: 1.1rem;
 }
 
-/* REFERRAL CARD */
+/* ===== REFERRAL CARD ===== */
 .referral-code-section {
   display: flex;
   justify-content: center;
@@ -30,58 +41,96 @@ body {
 }
 
 .referral-card {
-  background: #002b18;
+  background: #1e293b;
   padding: 40px;
   border-radius: 20px;
-  width: 350px;
-  box-shadow: 0 0 25px #00ff99;
+  width: 360px;
+  box-shadow: 0 15px 40px rgba(0,114,255,0.2);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: 0.3s;
 }
 
+.referral-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,114,255,0.3);
+}
+
+.referral-card h3 {
+  margin-bottom: 15px;
+  color: #00c6ff;
+}
+
+/* ===== LINK BOX ===== */
 .code-box {
-  background: black;
+  background: #0f172a;
   padding: 15px;
-  font-size: 1.5rem;
+  font-size: 0.9rem;
   margin: 20px 0;
   border-radius: 10px;
-  letter-spacing: 3px;
-  box-shadow: 0 0 15px #00ff99 inset;
+  word-break: break-word;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
-.referral-card button {
-  padding: 10px 25px;
-  border: none;
-  background: #00ff99;
-  color: black;
+/* ===== BUTTON ===== */
+.referral-card button,
+.referral-form button {
+  padding: 12px 30px;
   border-radius: 25px;
+  border: none;
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+  color: white;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
+  transition: 0.3s ease;
 }
 
-/* STATS */
+.referral-card button:hover,
+.referral-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,114,255,0.4);
+}
+
+/* ===== STATS ===== */
 .referral-stats {
   display: flex;
   justify-content: center;
   gap: 30px;
-  padding: 50px 20px;
+  padding: 60px 20px;
   flex-wrap: wrap;
 }
 
 .stat-card {
-  background: #002b18;
+  background: #1e293b;
   padding: 30px;
-  width: 200px;
+  width: 220px;
   border-radius: 20px;
-  box-shadow: 0 0 20px #00ff99;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0,114,255,0.25);
 }
 
 .stat-card h3 {
   font-size: 2rem;
-  color: #00ff99;
+  color: #00c6ff;
+  margin-bottom: 8px;
 }
 
-/* FORM */
+.stat-card p {
+  color: #94a3b8;
+}
+
+/* ===== FORM ===== */
 .referral-form-section {
   padding: 60px 20px;
+}
+
+.referral-form-section h2 {
+  margin-bottom: 30px;
+  color: #00c6ff;
 }
 
 .referral-form {
@@ -91,31 +140,6 @@ body {
   gap: 20px;
 }
 
-.referral-form input {
-  padding: 12px;
-  width: 300px;
-  border-radius: 25px;
-  border: none;
-}
-
-.referral-form button {
-  padding: 12px 30px;
-  border-radius: 25px;
-  border: none;
-  background: #00ff99;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* ===== ICON STYLING ===== */
-.stat-icon {
-  font-size: 24px;
-  color: #00ff99;
-  margin-bottom: 10px;
-}
-
-/* ===== INPUT GROUP ===== */
 .input-group {
   position: relative;
 }
@@ -125,24 +149,24 @@ body {
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #00ff99;
+  color: #00c6ff;
 }
 
-.input-group input {
-  padding-left: 40px;
+.referral-form input {
+  padding: 12px 12px 12px 40px;
+  width: 300px;
+  border-radius: 25px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #1e293b;
+  color: white;
+  outline: none;
 }
 
-/* ===== BUTTON ICON SPACING ===== */
-.referral-card button,
-.referral-form button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+.referral-form input::placeholder {
+  color: #94a3b8;
 }
 
-/* ===== BUTTON HOVER ENHANCE ===== */
-.referral-card button:hover,
-.referral-form button:hover {
-  box-shadow: 0 0 15px #00ff99;
+.referral-form input:focus {
+  border-color: #0072ff;
+  box-shadow: 0 0 10px rgba(0,114,255,0.4);
 }
