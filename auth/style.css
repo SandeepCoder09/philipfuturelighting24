@@ -1,10 +1,16 @@
+/* ===========================
+   GLOBAL RESET
+=========================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/* ===========================
+   BODY
+=========================== */
 body {
   height: 100vh;
   background: linear-gradient(135deg, #141e30, #243b55);
@@ -13,46 +19,89 @@ body {
   align-items: center;
 }
 
+/* ===========================
+   LOGIN CONTAINER
+=========================== */
 .login-container {
   background: white;
   padding: 40px;
   width: 350px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
   text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
+/* ===========================
+   TITLE
+=========================== */
 .login-container h2 {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   color: #243b55;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-.login-container input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+/* ===========================
+   INPUT GROUP
+=========================== */
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-group i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
   font-size: 14px;
 }
 
+.input-group input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #243b55;
+  box-shadow: 0 0 0 2px rgba(36,59,85,0.15);
+}
+
+/* ===========================
+   BUTTON
+=========================== */
 .login-container button {
   width: 100%;
   padding: 12px;
-  margin-top: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   background: #243b55;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   cursor: pointer;
   transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .login-container button:hover {
   background: #16222a;
 }
 
+/* ===========================
+   TEXT & LINK
+=========================== */
 .login-container p {
   margin-top: 15px;
   font-size: 14px;
@@ -62,4 +111,22 @@ body {
   color: #243b55;
   text-decoration: none;
   font-weight: bold;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
