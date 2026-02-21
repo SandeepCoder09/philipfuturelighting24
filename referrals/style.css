@@ -1,50 +1,78 @@
+/* ===== Philips Theme Background ===== */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #F4F9FF;
+  background: linear-gradient(135deg, #001F3F, #003E7E, #007BFF);
+  min-height: 100vh;
+  color: #ffffff;
 }
 
+/* Container */
 .container {
   padding: 20px;
 }
 
+/* Header */
 .header {
   text-align: center;
-  color: #007BFF;
   margin-bottom: 20px;
 }
 
+.header h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+/* Active Users */
 .active-box {
-  color: #1ca21c;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #00ff9d;
 }
 
+/* Team Size Card */
 .team-card {
-  background: linear-gradient(135deg, #007BFF, #00B4FF);
-  color: white;
-  border-radius: 16px;
+  background: linear-gradient(135deg, #00B4FF, #007BFF);
+  border-radius: 18px;
   padding: 25px;
   text-align: center;
   margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.team-card p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
 }
 
 .team-card h1 {
   margin: 10px 0 0;
-  font-size: 32px;
+  font-size: 34px;
+  font-weight: bold;
 }
 
+/* Stats Cards */
 .stats-card {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
   border-radius: 16px;
   padding: 15px 20px;
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stats-card span {
+  font-size: 14px;
+  opacity: 0.9;
 }
 
 .stats-card strong {
-  color: #d10000;
+  font-size: 16px;
+  color: #FFD700;
 }
