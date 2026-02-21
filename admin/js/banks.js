@@ -40,7 +40,7 @@ function renderBanks(banks) {
     table.innerHTML += `
       <tr>
         <td>
-          ${bank.userId?.name || "N/A"} <br>
+         ${bank.userId?._id || "N/A"} <br>
           <small>${bank.userId?._id || ""}</small>
         </td>
         <td>${bank.holderName}</td>
