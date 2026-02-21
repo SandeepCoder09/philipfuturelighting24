@@ -78,5 +78,4 @@ document.addEventListener("DOMContentLoaded", async () => {
       rechargeContainer.innerHTML = "<p>Failed to load recharge history</p>";
       withdrawContainer.innerHTML = "<p>Failed to load withdrawal history</p>";
     }
-  
-  });
+});

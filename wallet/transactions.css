@@ -3,49 +3,49 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #031d33, #052c4a);
     color: white;
-  }
-  
-  .page-title {
+}
+
+.page-title {
     text-align: center;
     margin-top: 40px;
     font-size: 28px;
     color: #00d4ff;
-  }
-  
-  .transactions-wrapper {
+}
+
+.transactions-wrapper {
     display: flex;
     gap: 30px;
     justify-content: center;
     margin: 40px;
     flex-wrap: wrap;
-  }
-  
-  .transactions-column {
+}
+
+.transactions-column {
     flex: 1;
     min-width: 350px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     padding: 25px;
     border-radius: 15px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  }
-  
-  .column-title {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.column-title {
     text-align: center;
     margin-bottom: 20px;
     font-size: 20px;
-  }
-  
-  .recharge-title {
+}
+
+.recharge-title {
     color: #00ff88;
-  }
-  
-  .withdraw-title {
+}
+
+.withdraw-title {
     color: #ff4d4d;
-  }
-  
-  .transaction-item {
-    background: rgba(255,255,255,0.08);
+}
+
+.transaction-item {
+    background: rgba(255, 255, 255, 0.08);
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 10px;
@@ -53,38 +53,38 @@ body {
     justify-content: space-between;
     align-items: center;
     transition: 0.3s ease;
-  }
-  
-  .transaction-item:hover {
-    background: rgba(255,255,255,0.15);
+}
+
+.transaction-item:hover {
+    background: rgba(255, 255, 255, 0.15);
     transform: translateY(-3px);
-  }
-  
-  .transaction-details {
+}
+
+.transaction-details {
     font-size: 14px;
-  }
-  
-  .transaction-amount {
+}
+
+.transaction-amount {
     font-weight: bold;
     font-size: 16px;
-  }
-  
-  .recharge {
+}
+
+.recharge {
     border-left: 4px solid #00ff88;
-  }
-  
-  .withdraw {
+}
+
+.withdraw {
     border-left: 4px solid #ff4d4d;
-  }
-  
-  .status-success {
+}
+
+.status-success {
     color: #00ff88;
-  }
-  
-  .status-pending {
+}
+
+.status-pending {
     color: orange;
-  }
-  
-  .status-failed {
+}
+
+.status-failed {
     color: #ff4d4d;
-  }
+}
