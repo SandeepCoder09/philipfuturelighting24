@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transactions | Admin</title>
+
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
@@ -14,38 +16,73 @@
   <aside class="sidebar">
     <h2>PHILIPS ADMIN</h2>
     <nav>
-      <a href="../index.html">Dashboard</a>
-      <a href="users.html">Users</a>
-      <a href="withdraws.html">Withdraws</a>
-      <a href="transactions.html" class="active">Transactions</a>
-      <a href="banks.html">Banks</a>
+      <a href="../index.html">
+        <i class="fa-solid fa-gauge"></i> Dashboard
+      </a>
+      <a href="users.html">
+        <i class="fa-solid fa-users"></i> Users
+      </a>
+      <a href="withdraws.html">
+        <i class="fa-solid fa-money-bill-transfer"></i> Withdraws
+      </a>
+      <a href="transactions.html" class="active">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i> Transactions
+      </a>
+      <a href="banks.html">
+        <i class="fa-solid fa-building-columns"></i> Banks
+      </a>
     </nav>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
+
+    <!-- TOPBAR -->
     <header class="topbar">
-      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-      <h1>All Transactions</h1>
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1>
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+          All Transactions
+        </h1>
+      </div>
+
+      <div class="topbar-right">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
     </header>
 
     <!-- FILTER BUTTONS -->
-    <div style="margin-top:20px;">
-      <button onclick="filterTransactions('all')">All</button>
-      <button onclick="filterTransactions('recharge')">Recharge</button>
-      <button onclick="filterTransactions('withdraw')">Withdraw</button>
+    <div class="filter-section">
+      <button class="filter-btn" onclick="filterTransactions('all')">
+        <i class="fa-solid fa-list"></i> All
+      </button>
+
+      <button class="filter-btn" onclick="filterTransactions('recharge')">
+        <i class="fa-solid fa-wallet"></i> Recharge
+      </button>
+
+      <button class="filter-btn" onclick="filterTransactions('withdraw')">
+        <i class="fa-solid fa-money-bill-wave"></i> Withdraw
+      </button>
     </div>
 
+    <!-- TABLE -->
     <div class="table-container">
       <table>
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>Order ID</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Date</th>
+            <th><i class="fa-solid fa-id-card"></i> User ID</th>
+            <th><i class="fa-solid fa-hashtag"></i> Order ID</th>
+            <th><i class="fa-solid fa-exchange-alt"></i> Type</th>
+            <th><i class="fa-solid fa-indian-rupee-sign"></i> Amount</th>
+            <th><i class="fa-solid fa-info-circle"></i> Status</th>
+            <th><i class="fa-solid fa-calendar"></i> Date</th>
           </tr>
         </thead>
         <tbody id="transactionTable"></tbody>
