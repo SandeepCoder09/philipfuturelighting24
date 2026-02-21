@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Admin Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="./css/login.css">
 </head>
 
@@ -14,12 +13,18 @@
     <div class="login-box">
       <h2>Admin Login</h2>
 
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Password">
+      <!-- ✅ Proper Form -->
+      <form id="adminLoginForm">
 
-      <button onclick="adminLogin()">Login</button>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
 
-      <p class="error" id="error"></p>
+        <button type="submit">Login</button>
+
+        <p class="error" id="error"></p>
+
+      </form>
+
     </div>
   </div>
 
