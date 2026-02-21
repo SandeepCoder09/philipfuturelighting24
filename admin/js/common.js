@@ -3,32 +3,17 @@
 // ==============================
 function toggleSidebar() {
   const sidebar = document.querySelector(".sidebar");
-  sidebar.classList.toggle("active");
+  if (sidebar) {
+    sidebar.classList.toggle("active");
+  }
 }
 
 // ==============================
-// Close Sidebar on Outside Click (Mobile Friendly)
-// ==============================
-document.addEventListener("click", function (event) {
-  const sidebar = document.querySelector(".sidebar");
-  const toggleBtn = document.querySelector(".menu-toggle");
-
-  if (
-    sidebar &&
-    sidebar.classList.contains("active") &&
-    !sidebar.contains(event.target) &&
-    !toggleBtn.contains(event.target)
-  ) {
-    sidebar.classList.remove("active");
-  }
-});
-
-// ==============================
-// Logout Function
+// Logout
 // ==============================
 function logout() {
   localStorage.removeItem("adminToken");
-  window.location.href = "../pages/login.html";
+  window.location.href = "login.html";
 }
 
 // ==============================
@@ -38,17 +23,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const token = localStorage.getItem("adminToken");
 
-  // If on login page, skip protection
-  const isLoginPage = window.location.pathname.includes("login.html");
+  const currentPath = window.location.pathname;
 
+  const isLoginPage = currentPath.includes("login.html");
+
+  // If NOT login page & no token → redirect
   if (!token && !isLoginPage) {
-    window.location.href = "../admin/login.html";
+    window.location.href = "login.html";
+  }
+
+  // If already logged in & on login page → go dashboard
+  if (token && isLoginPage) {
+    window.location.href = "index.html";
   }
 
 });
 
 // ==============================
-// Auto Highlight Active Sidebar Link
+// Auto Highlight Active Menu
 // ==============================
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -56,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".sidebar nav a");
 
   navLinks.forEach(link => {
-    if (link.getAttribute("href").includes(currentPage)) {
+    if (link.getAttribute("href") === currentPage) {
       navLinks.forEach(l => l.classList.remove("active"));
       link.classList.add("active");
     }
