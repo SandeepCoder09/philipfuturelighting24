@@ -23,7 +23,9 @@ function renderBanks(banks) {
 
     table.innerHTML += `
       <tr>
-        <td>${bank.userId}</td>
+        <td>
+  ${bank.userId?._id || "N/A"}
+</td>
         <td>${bank.holderName}</td>
         <td>${bank.bankName}</td>
         <td>${maskAccount(bank.accountNumber)}</td>
@@ -39,7 +41,7 @@ function searchBanks() {
   const keyword = document.getElementById("searchBank").value.toLowerCase();
 
   const filtered = allBanks.filter(bank =>
-    bank.userId.toLowerCase().includes(keyword) ||
+    bank.userId?._id?.toLowerCase().includes(keyword) ||
     bank.bankName.toLowerCase().includes(keyword)
   );
 
