@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const tableBody = document.querySelector("tbody");
+  const tableBody = document.getElementById("transactionTable");
   const token = localStorage.getItem("adminToken");
 
   if (!token) {
@@ -51,6 +51,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   } catch (error) {
     console.error(error);
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="6">Failed to load transactions</td>
+      </tr>
+    `;
   }
 
 });
