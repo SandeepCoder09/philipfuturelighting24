@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../home/style.css" />
-    <link rel="stylesheet" href="../referrals/style.css" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philips - India</title>
+  <link rel="stylesheet" href="../home/style.css" />
+  <link rel="stylesheet" href="../referrals/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Philips - Referrals</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    
-<!-- ===== NAVBAR (LOGO ONLY) ===== -->
+
+<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
   <div class="logo-wrapper">
     <a href="../home/index.html">
-      <img
-        src="../assets/philips-logo-png-transparent.png"
-        alt="Philips Logo"
-      />
+      <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo" />
     </a>
-
     <div class="led-dots">
       <span></span>
       <span></span>
@@ -27,60 +27,111 @@
   </div>
 </nav>
 
-  <!-- HERO SECTION -->
-  <section class="referral-hero">
-    <h1>💡 Bright Rewards Referral Program</h1>
-    <p>Refer friends & earn exclusive lighting rewards!</p>
-  </section>
+<!-- HERO -->
+<section class="referral-hero">
+  <h1>
+    <i class="fa-solid fa-gift"></i>
+    Bright Rewards Referral Program
+  </h1>
+  <p>
+    <i class="fa-solid fa-users"></i>
+    Refer friends & earn exclusive lighting rewards!
+  </p>
+</section>
 
-  <!-- REFERRAL CODE CARD -->
-  <section class="referral-code-section">
-    <div class="link-box"></div>
-<button class="copy-link-btn" onclick="copyReferralLink()">
-  Copy Referral Link
-</button>
-  </section>
+<!-- REFERRAL LINK -->
+<section class="referral-code-section">
 
-  <!-- STATS SECTION -->
-  <section class="referral-stats">
-    <div class="stat-card">
-      <h3>12</h3>
-      <p>Total Referrals</p>
-    </div>
-    <div class="stat-card">
-      <h3>₹2,400</h3>
-      <p>Total Earnings</p>
-    </div>
-    <div class="stat-card">
-      <h3>5</h3>
-      <p>Pending Rewards</p>
-    </div>
-  </section>
+  <div class="referral-card">
+    <h3>
+      <i class="fa-solid fa-link"></i>
+      Your Referral Link
+    </h3>
 
-  <!-- REFERRAL FORM -->
-  <section class="referral-form-section">
-    <h2>Refer a Friend</h2>
-    <form class="referral-form">
+    <div class="code-box">
+      https://philips.com/ref/PHILIPS2026
+    </div>
+
+    <button onclick="copyReferralLink()">
+      <i class="fa-solid fa-copy"></i>
+      Copy Referral Link
+    </button>
+  </div>
+
+</section>
+
+<!-- STATS -->
+<section class="referral-stats">
+
+  <div class="stat-card">
+    <i class="fa-solid fa-user-plus stat-icon"></i>
+    <h3>12</h3>
+    <p>Total Referrals</p>
+  </div>
+
+  <div class="stat-card">
+    <i class="fa-solid fa-indian-rupee-sign stat-icon"></i>
+    <h3>₹2,400</h3>
+    <p>Total Earnings</p>
+  </div>
+
+  <div class="stat-card">
+    <i class="fa-solid fa-clock stat-icon"></i>
+    <h3>5</h3>
+    <p>Pending Rewards</p>
+  </div>
+
+</section>
+
+<!-- FORM -->
+<section class="referral-form-section">
+  <h2>
+    <i class="fa-solid fa-paper-plane"></i>
+    Refer a Friend
+  </h2>
+
+  <form class="referral-form">
+    <div class="input-group">
+      <i class="fa-solid fa-user"></i>
       <input type="text" placeholder="Friend Name" required>
+    </div>
+
+    <div class="input-group">
+      <i class="fa-solid fa-envelope"></i>
       <input type="email" placeholder="Friend Email" required>
-      <button type="submit">Send Invite</button>
-    </form>
-  </section>
+    </div>
 
-  <!-- ===== BOTTOM MOBILE NAVIGATION ===== -->
-  <nav class="bottom-nav">
-    <a href="../home/index.html" class="nav-btn active">Home</a>
-    <a href="../products/index.html" class="nav-btn">Products</a>
-    <a href="../referrals/index.html" class="nav-btn">Referrals</a>
-    <a href="../profile/index.html" class="nav-btn">Profile</a>
-  </nav>
+    <button type="submit">
+      <i class="fa-solid fa-paper-plane"></i>
+      Send Invite
+    </button>
+  </form>
+</section>
 
-  <script>
-    function copyCode() {
-      navigator.clipboard.writeText("PHILIPS2026");
-      alert("Referral Code Copied!");
-    }
-    </script>
+<!-- ===== PREMIUM BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+
+  <a href="../home/index.html" class="nav-btn">
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span>
+  </a>
+
+  <a href="../products/index.html" class="nav-btn">
+    <i class="fa-solid fa-lightbulb"></i>
+    <span>Products</span>
+  </a>
+
+  <a href="../referrals/index.html" class="nav-btn active">
+    <i class="fa-solid fa-gift"></i>
+    <span>Referrals</span>
+  </a>
+
+  <a href="../profile/index.html" class="nav-btn">
+    <i class="fa-solid fa-user"></i>
+    <span>Profile</span>
+  </a>
+
+</nav>
 
 <script src="../referrals/script.js"></script>
 </body>
