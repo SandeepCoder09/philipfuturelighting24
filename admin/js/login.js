@@ -61,7 +61,7 @@ async function adminLogin(event) {
     localStorage.setItem("adminToken", data.token);
 
     // 🚀 Redirect
-    window.location.href = "dashboard.html";
+    window.location.href = "index.html";
 
   } catch (error) {
     errorBox.innerText = "Network error. Please try again.";
