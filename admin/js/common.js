@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const isLoginPage = window.location.pathname.includes("login.html");
 
   if (!token && !isLoginPage) {
-    window.location.href = "../pages/login.html";
+    window.location.href = "../admin/login.html";
   }
 
 });
