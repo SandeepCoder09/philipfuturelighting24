@@ -51,7 +51,25 @@
 
 </section>
 
-<!-- Modal and Toast remain same -->
+<!-- ===== CONFIRM MODAL ===== -->
+<div id="withdrawModal" class="custom-modal">
+  <div class="modal-content">
+    <h3><i class='bx bx-check-shield'></i> Confirm Withdrawal</h3>
+    <p id="modalDetails"></p>
+
+    <div class="modal-actions">
+      <button id="cancelWithdraw" class="modal-btn cancel">
+        Cancel
+      </button>
+      <button id="confirmWithdraw" class="modal-btn confirm">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="customToast" class="custom-toast"></div>
 
 <script src="../wallet/withdraw.js"></script>
 </body>
