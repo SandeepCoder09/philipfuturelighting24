@@ -1,30 +1,126 @@
 body {
-  background: linear-gradient(135deg,#021B79,#0575E6);
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg,#001a33,#004080);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: Arial;
+  color: white;
 }
 
-.card {
-  background: white;
-  padding: 30px;
-  width: 350px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-input {
+.container {
   width: 100%;
-  padding: 10px;
-  margin: 8px 0;
+  padding: 20px;
+}
+
+.bank-card {
+  max-width: 380px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(0,195,255,0.3);
+}
+
+.bank-card h2 {
+  margin: 0;
+  text-align: center;
+  color: #00c3ff;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.input-group label {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  font-size: 14px;
+  color: #666;
+  transition: 0.3s ease;
+  pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  background: #001a33;
+  padding: 0 5px;
+  font-size: 12px;
+  color: #00c3ff;
 }
 
 button {
   width: 100%;
-  padding: 12px;
-  background: #0575E6;
-  color: white;
+  padding: 14px;
+  border-radius: 25px;
   border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(90deg,#00c3ff,#007bff);
+  color: white;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px #00c3ff;
+}
+
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 3px solid white;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.message.success {
+  background: rgba(0,200,0,0.2);
+  color: #00ff88;
+}
+
+.message.error {
+  background: rgba(255,0,0,0.2);
+  color: #ff4d4d;
 }
