@@ -7,6 +7,9 @@
 
   <link rel="stylesheet" href="../home/style.css" />
   <link rel="stylesheet" href="../profile/style.css" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -34,18 +37,25 @@
 
         <div class="user-details">
           <h2 id="username">Loading...</h2>
+
           <p class="profile-id">
+            <i class="fa-solid fa-id-card"></i>
             ID: <span id="uid">Loading...</span>
           </p>
+
           <p class="mobile-top">
-            📱 <span id="mobile">Loading...</span>
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            Mobile: <span id="mobile">Loading...</span>
           </p>
         </div>
       </div>
 
-      <!-- 🔥 WALLET BALANCE CARD -->
+      <!-- WALLET CARD -->
       <div class="wallet-card">
-        <p class="wallet-title">Current Balance</p>
+        <p class="wallet-title">
+          <i class="fa-solid fa-wallet"></i>
+          Current Balance
+        </p>
         <h2 class="wallet-amount">
           ₹<span id="walletBalance">0</span>
         </h2>
@@ -53,11 +63,13 @@
 
       <div class="action-buttons">
         <a href="../wallet/recharge.html" class="action-btn recharge">
-          💡 Recharge
+          <i class="fa-solid fa-bolt"></i>
+          Recharge
         </a>
 
         <a href="../wallet/withdraw.html" class="action-btn withdraw">
-          💸 Withdrawal
+          <i class="fa-solid fa-money-bill-transfer"></i>
+          Withdrawal
         </a>
       </div>
 
@@ -66,38 +78,69 @@
     <div class="profile-card menu-card">
 
       <a href="../auth/forgot-password.html" class="menu-item">
-        🔐 Forgot Password
-        <span>›</span>
+        <div>
+          <i class="fa-solid fa-lock"></i>
+          Forgot Password
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
       </a>
 
       <a href="../wallet/bind-card.html" class="menu-item">
-        💳 My Card (Bind Bank Account)
-        <span>›</span>
+        <div>
+          <i class="fa-solid fa-credit-card"></i>
+          My Card (Bind Bank Account)
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
       </a>
 
       <a href="../wallet/transactions.html" class="menu-item">
-        📄 Transaction History
-        <span>›</span>
+        <div>
+          <i class="fa-solid fa-file-invoice"></i>
+          Transaction History
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
       </a>
 
       <a href="../referrals/index.html" class="menu-item">
-        🎁 Referral / Invite
-        <span>›</span>
+        <div>
+          <i class="fa-solid fa-gift"></i>
+          Referral / Invite
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
       </a>
 
     </div>
 
     <button onclick="logout()" class="logout-btn">
+      <i class="fa-solid fa-right-from-bracket"></i>
       Logout
     </button>
 
   </section>
 
+  <!-- PREMIUM BOTTOM NAV -->
   <nav class="bottom-nav">
-    <a href="../home/index.html" class="nav-btn">Home</a>
-    <a href="../products/index.html" class="nav-btn">Products</a>
-    <a href="../referrals/index.html" class="nav-btn">Referrals</a>
-    <a href="../profile/index.html" class="nav-btn active">Profile</a>
+
+    <a href="../home/index.html" class="nav-btn">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+
+    <a href="../products/index.html" class="nav-btn">
+      <i class="fa-solid fa-lightbulb"></i>
+      <span>Products</span>
+    </a>
+
+    <a href="../referrals/index.html" class="nav-btn">
+      <i class="fa-solid fa-gift"></i>
+      <span>Referrals</span>
+    </a>
+
+    <a href="../profile/index.html" class="nav-btn active">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </a>
+
   </nav>
 
   <script src="../profile/script.js"></script>
