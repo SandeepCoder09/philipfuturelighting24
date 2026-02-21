@@ -9,41 +9,39 @@
 <body>
 
 <div class="container">
-
   <div class="bank-card">
 
     <h2>Bind Bank Account</h2>
     <p class="subtitle">Link your bank for secure withdrawals</p>
 
     <div class="input-group">
-      <input id="accountNumber" type="text" required>
-      <label>Account Number</label>
+      <span class="icon">🏦</span>
+      <input id="accountNumber" type="text" placeholder="Account Number">
     </div>
 
     <div class="input-group">
-      <input id="ifsc" type="text" required>
-      <label>IFSC Code</label>
+      <span class="icon">🔢</span>
+      <input id="ifsc" type="text" placeholder="IFSC Code">
     </div>
 
     <div class="input-group">
-      <input id="holderName" type="text" required>
-      <label>Account Holder Name</label>
+      <span class="icon">👤</span>
+      <input id="holderName" type="text" placeholder="Account Holder Name">
     </div>
 
     <div class="input-group">
-      <input id="bankName" type="text" required>
-      <label>Bank Name</label>
+      <span class="icon">🏛</span>
+      <input id="bankName" type="text" placeholder="Bank Name">
     </div>
 
     <button id="submitBtn" onclick="bindBank()">
-      <span id="btnText">Submit</span>
+      <span id="btnText">Bind Bank Card</span>
       <div class="loader hidden"></div>
     </button>
 
     <div id="messageBox" class="message hidden"></div>
 
   </div>
-
 </div>
 
 <script src="bind-card.js"></script>
