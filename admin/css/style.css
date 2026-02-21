@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f172a;
+    color: #fff;
+  }
+  
+  .layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    width: 240px;
+    background: #111827;
+    padding: 20px;
+    transition: 0.3s ease;
+  }
+  
+  .sidebar h2 {
+    color: #38bdf8;
+    margin-bottom: 30px;
+  }
+  
+  .sidebar nav a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #cbd5e1;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+  
+  .sidebar nav a:hover,
+  .sidebar nav a.active {
+    background: #1e293b;
+    color: #38bdf8;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 30px;
+  }
+  
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .cards {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 20px;
+  }
+  
+  .card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .card h3 {
+    font-size: 14px;
+    color: #94a3b8;
+  }
+  
+  .card p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    min-width: 700px;
+  }
+  
+  th, td {
+    padding: 12px;
+  }
+  
+  th {
+    background: #1e293b;
+  }
+  
+  tr:nth-child(even) {
+    background: #16202e;
+  }
+  
+  button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .approve { background: #16a34a; color: white; }
+  .reject { background: #dc2626; color: white; }
+  
+  .status-processing { color: orange; }
+  .status-success { color: #16a34a; }
+  .status-rejected { color: red; }
+  
+  @media (max-width: 900px) {
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      height: 100%;
+      z-index: 1000;
+    }
+  
+    .sidebar.active {
+      left: 0;
+    }
+  
+    .menu-toggle {
+      display: block;
+    }
+  
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bind Bank Card</title>
+
+  <link rel="stylesheet" href="bind-card.css">
+
+  <!-- Boxicons CDN for real icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== FORM CARD ===== -->
+  <div class="card">
+
+    <h2>Bind Bank Card</h2>
+    <p class="subtitle">Securely link your bank for withdrawals</p>
+
+    <div class="input-group">
+      <i class='bx bx-credit-card'></i>
+      <input id="accountNumber" type="text" placeholder="Account Number">
+    </div>
+
+    <div class="input-group">
+      <i class='bx bx-barcode'></i>
+      <input id="ifsc" type="text" placeholder="IFSC Code">
+    </div>
+
+    <div class="input-group">
+      <i class='bx bx-user'></i>
+      <input id="holderName" type="text" placeholder="Account Holder Name">
+    </div>
+
+    <div class="input-group">
+      <i class='bx bx-building'></i>
+      <input id="bankName" type="text" placeholder="Bank Name">
+    </div>
+
+    <button id="bindBtn" onclick="bindBank()">
+      <span id="btnText">Bind Bank Card</span>
+      <div class="loader hidden"></div>
+    </button>
+
+    <div id="messageBox" class="message hidden"></div>
+
+  </div>
+
+  <!-- ===== BANK LIST ===== -->
+  <div class="card bank-list-card">
+    <h3>Your Linked Banks</h3>
+    <div id="bankContainer"></div>
+  </div>
+
+</div>
+
+<script src="bind-card.js"></script>
+</body>
+</html>

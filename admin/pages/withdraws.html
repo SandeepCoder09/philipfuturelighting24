@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdraw Requests</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h2>PHILIPS ADMIN</h2>
+    <nav>
+      <a href="../index.html">Dashboard</a>
+      <a href="users.html">Users</a>
+      <a href="withdraws.html" class="active">Withdraws</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="banks.html">Banks</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <h1>Withdraw Requests</h1>
+    </header>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="withdrawTable"></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/withdraws.js"></script>
+</body>
+</html>

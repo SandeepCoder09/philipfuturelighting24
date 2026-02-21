@@ -1,0 +1,1 @@
+const API = "https://philips-backend.onrender.com/api";

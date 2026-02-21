@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions | Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>PHILIPS ADMIN</h2>
+    <nav>
+      <a href="../index.html">Dashboard</a>
+      <a href="users.html">Users</a>
+      <a href="withdraws.html">Withdraws</a>
+      <a href="transactions.html" class="active">Transactions</a>
+      <a href="banks.html">Banks</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <h1>All Transactions</h1>
+    </header>
+
+    <!-- FILTER BUTTONS -->
+    <div style="margin-top:20px;">
+      <button onclick="filterTransactions('all')">All</button>
+      <button onclick="filterTransactions('recharge')">Recharge</button>
+      <button onclick="filterTransactions('withdraw')">Withdraw</button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Order ID</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="transactionTable"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/transactions.js"></script>
+
+</body>
+</html>

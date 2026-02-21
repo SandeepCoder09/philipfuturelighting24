@@ -2,19 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Transaction History</title>
+  <title>Transaction History | Philips</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="transactions.css">
 </head>
 
 <body>
 
-<h2>Transaction History</h2>
+  <h2 class="page-title">Transaction History</h2>
 
-<div class="transactions-container" id="transactionList">
-  <p class="empty">Loading transactions...</p>
-</div>
+  <div class="transactions-wrapper">
 
-<script src="transactions.js"></script>
+    <!-- Recharge Column -->
+    <div class="transactions-column">
+      <h3 class="column-title recharge-title">Recharge History</h3>
+      <div id="rechargeList"></div>
+    </div>
+
+    <!-- Withdrawal Column -->
+    <div class="transactions-column">
+      <h3 class="column-title withdraw-title">Withdrawal History</h3>
+      <div id="withdrawList"></div>
+    </div>
+
+  </div>
+
+  <script src="transactions.js"></script>
+
 </body>
 </html>

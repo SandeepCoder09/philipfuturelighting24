@@ -76,7 +76,6 @@ img {
     box-shadow: 0 0 6px #00c6ff,
                 0 0 12px #0072ff;
   }
-<<<<<<< HEAD
   
   body {
     background: #0f172a;
@@ -218,7 +217,6 @@ img {
   }
   
   /* ===== BUSINESS SEGMENT CARD FIX ===== */
-=======
   100% { opacity: 0.2; box-shadow: none; }
 }
 
@@ -289,7 +287,6 @@ h2 {
 }
 
 /* ===== BUSINESS SEGMENT CARD FIX ===== */
->>>>>>> 88e3a37 (Saving local changes before pull)
 .segment-card {
   background: #1e293b;
   padding: 30px;
@@ -488,7 +485,6 @@ h2 {
     .leader-card img {
       width: 220px;
     }
-<<<<<<< HEAD
   
   @media (max-width: 768px) {
     .hero h1 {
@@ -508,7 +504,7 @@ h2 {
       max-width: 90px !important;
     }
   }
-=======
+
   }
 
 @media (max-width: 768px) {
@@ -529,4 +525,3 @@ h2 {
     max-width: 90px !important;
   }
 }
->>>>>>> 88e3a37 (Saving local changes before pull)

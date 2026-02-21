@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Philips</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <h2>PHILIPS ADMIN</h2>
+    <nav>
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="pages/users.html">Users</a>
+      <a href="pages/withdraws.html">Withdraws</a>
+      <a href="pages/transactions.html">Transactions</a>
+      <a href="pages/banks.html">Banks</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <h1>Dashboard Overview</h1>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Total Users</h3>
+        <p id="totalUsers">0</p>
+      </div>
+
+      <div class="card">
+        <h3>Total Recharge</h3>
+        <p id="totalRecharge">₹0</p>
+      </div>
+
+      <div class="card">
+        <h3>Total Withdraw</h3>
+        <p id="totalWithdraw">₹0</p>
+      </div>
+
+      <div class="card">
+        <h3>Pending Withdraw</h3>
+        <p id="pendingWithdraw">0</p>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

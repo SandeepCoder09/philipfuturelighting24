@@ -11,24 +11,16 @@
 
 <body>
 
-  <!-- ===== NAVBAR ===== -->
   <nav class="navbar">
     <div class="logo-wrapper">
       <a href="../home/index.html">
         <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo" />
       </a>
-      <div class="led-dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </div>
   </nav>
 
-  <!-- ===== PROFILE SECTION ===== -->
   <section class="profile-container">
 
-    <!-- HEADER -->
     <div class="profile-header">
 
       <div class="profile-top">
@@ -51,7 +43,14 @@
         </div>
       </div>
 
-      <!-- ACTION BUTTONS -->
+      <!-- 🔥 WALLET BALANCE CARD -->
+      <div class="wallet-card">
+        <p class="wallet-title">Current Balance</p>
+        <h2 class="wallet-amount">
+          ₹<span id="walletBalance">0</span>
+        </h2>
+      </div>
+
       <div class="action-buttons">
         <a href="../wallet/recharge.html" class="action-btn recharge">
           💡 Recharge
@@ -64,7 +63,6 @@
 
     </div>
 
-    <!-- ACCOUNT OPTIONS -->
     <div class="profile-card menu-card">
 
       <a href="../auth/forgot-password.html" class="menu-item">
@@ -95,7 +93,6 @@
 
   </section>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <nav class="bottom-nav">
     <a href="../home/index.html" class="nav-btn">Home</a>
     <a href="../products/index.html" class="nav-btn">Products</a>

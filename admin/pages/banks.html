@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Accounts | Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>PHILIPS ADMIN</h2>
+    <nav>
+      <a href="../index.html">Dashboard</a>
+      <a href="users.html">Users</a>
+      <a href="withdraws.html">Withdraws</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="banks.html" class="active">Banks</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <h1>All Linked Bank Accounts</h1>
+    </header>
+
+    <!-- Search -->
+    <div style="margin-top:20px;">
+      <input type="text" id="searchBank" placeholder="Search by User ID or Bank Name"
+        style="padding:10px; width:300px; border-radius:6px; border:none;">
+      <button onclick="searchBanks()">Search</button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Holder Name</th>
+            <th>Bank</th>
+            <th>Account Number</th>
+            <th>IFSC</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody id="bankTable"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/banks.js"></script>
+
+</body>
+</html>

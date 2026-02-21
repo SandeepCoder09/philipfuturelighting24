@@ -1,50 +1,82 @@
-const userId = localStorage.getItem("userId");
+document.addEventListener("DOMContentLoaded", async () => {
 
-async function loadTransactions() {
-  try {
-    const response = await fetch(
-      "https://https://philips-backend.onrender.com/api/wallet/transactions/" + userId
-    );
-
-    const data = await response.json();
-    const container = document.getElementById("transactionList");
-    container.innerHTML = "";
-
-    if (!data.length) {
-      container.innerHTML = "<p class='empty'>No transactions found</p>";
+    const rechargeContainer = document.getElementById("rechargeList");
+    const withdrawContainer = document.getElementById("withdrawList");
+  
+    const token = localStorage.getItem("token");
+  
+    if (!token) {
+      window.location.href = "../auth/index.html";
       return;
     }
-
-    data.forEach(txn => {
-      const card = document.createElement("div");
-      card.className = "transaction-card";
-
-      const typeClass = txn.type === "recharge" ? "recharge" : "withdraw";
-      const statusClass = txn.status;
-
-      card.innerHTML = `
-        <div class="txn-left">
-          <p><strong>Type:</strong> ${txn.type.toUpperCase()}</p>
-          <p><strong>Date:</strong> ${new Date(txn.createdAt).toLocaleString()}</p>
-          <span class="status ${statusClass}">
-            ${txn.status.toUpperCase()}
-          </span>
-        </div>
-
-        <div class="txn-right">
-          <div class="amount ${typeClass}">
-            ₹${txn.amount}
+  
+    try {
+      const response = await fetch(
+        "https://philips-backend.onrender.com/api/wallet/transactions",
+        {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        }
+      );
+  
+      if (!response.ok) throw new Error("Failed to fetch");
+  
+      const transactions = await response.json();
+  
+      rechargeContainer.innerHTML = "";
+      withdrawContainer.innerHTML = "";
+  
+      if (transactions.length === 0) {
+        rechargeContainer.innerHTML = "<p>No recharge history</p>";
+        withdrawContainer.innerHTML = "<p>No withdrawal history</p>";
+        return;
+      }
+  
+      transactions.forEach(tx => {
+  
+        const item = document.createElement("div");
+        item.className = "transaction-item";
+  
+        if (tx.type === "recharge") {
+          item.classList.add("recharge");
+        } else {
+          item.classList.add("withdraw");
+        }
+  
+        let statusClass = "";
+        if (tx.status === "success") statusClass = "status-success";
+        if (tx.status === "pending") statusClass = "status-pending";
+        if (tx.status === "failed") statusClass = "status-failed";
+  
+        item.innerHTML = `
+          <div class="transaction-details">
+            <div class="${statusClass}">Status: ${tx.status}</div>
+            <div>${new Date(tx.createdAt).toLocaleString()}</div>
           </div>
-        </div>
-      `;
-
-      container.appendChild(card);
-    });
-
-  } catch (error) {
-    document.getElementById("transactionList").innerHTML =
-      "<p class='empty'>Failed to load transactions</p>";
-  }
-}
-
-loadTransactions();
+          <div class="transaction-amount">
+            ₹${tx.amount}
+          </div>
+        `;
+  
+        if (tx.type === "recharge") {
+          rechargeContainer.appendChild(item);
+        } else {
+          withdrawContainer.appendChild(item);
+        }
+  
+      });
+  
+      if (!rechargeContainer.innerHTML)
+        rechargeContainer.innerHTML = "<p>No recharge history</p>";
+  
+      if (!withdrawContainer.innerHTML)
+        withdrawContainer.innerHTML = "<p>No withdrawal history</p>";
+  
+    } catch (error) {
+      rechargeContainer.innerHTML = "<p>Failed to load recharge history</p>";
+      withdrawContainer.innerHTML = "<p>Failed to load withdrawal history</p>";
+    }
+  
+  });
