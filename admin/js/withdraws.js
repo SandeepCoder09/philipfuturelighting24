@@ -8,7 +8,9 @@ async function loadWithdraws() {
         .forEach(w => {
           table.innerHTML += `
             <tr>
-              <td>${w.userId}</td>
+              <td>
+  ${w.userId?._id || "N/A"}
+</td>
               <td>₹${w.amount}</td>
               <td class="status-${w.status}">${w.status}</td>
               <td>
