@@ -1,11 +1,31 @@
+const token = localStorage.getItem("adminToken");
+
+if (!token) {
+  window.location.href = "/admin/login.html";
+}
+
 let allUsers = [];
 
 async function loadUsers() {
+  try {
+    const response = await fetch(`${API}/admin/users`, {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
 
-  const response = await fetch(`${API}/admin/users`);
-  allUsers = await response.json();
+    if (response.status === 401 || response.status === 403) {
+      localStorage.removeItem("adminToken");
+      window.location.href = "/admin/login.html";
+      return;
+    }
 
-  renderUsers(allUsers);
+    allUsers = await response.json();
+    renderUsers(allUsers);
+
+  } catch (error) {
+    console.error("Error loading users:", error);
+  }
 }
 
 function renderUsers(users) {
@@ -35,8 +55,9 @@ function searchUsers() {
   const keyword = document.getElementById("searchInput").value.toLowerCase();
 
   const filtered = allUsers.filter(user =>
-    user.mobile.toLowerCase().includes(keyword) ||
-    user.email.toLowerCase().includes(keyword)
+    user.mobile?.toLowerCase().includes(keyword) ||
+    user.email?.toLowerCase().includes(keyword) ||
+    user._id?.toLowerCase().includes(keyword)
   );
 
   renderUsers(filtered);
