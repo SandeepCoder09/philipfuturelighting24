@@ -2,7 +2,7 @@ async function loadDashboard() {
     const users = await fetch(`${API}/admin/users`).then(r => r.json());
     const transactions = await fetch(`${API}/admin/transactions`).then(r => r.json());
   
-    document.getElementById("totalUsers").innerText = users.length;
+    totalUsersElement.innerText = users.length;
   
     let recharge = 0, withdraw = 0, pending = 0;
   
