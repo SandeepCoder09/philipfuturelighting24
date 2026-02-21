@@ -6,6 +6,9 @@ const confirmBtn = document.getElementById("confirmWithdraw");
 
 let pendingAmount = null;
 
+/* ===========================
+   TOAST FUNCTION (UNCHANGED)
+=========================== */
 function showToast(message) {
   const toast = document.getElementById("customToast");
   toast.innerText = message;
@@ -16,6 +19,9 @@ function showToast(message) {
   }, 2500);
 }
 
+/* ===========================
+   OPEN CONFIRM MODAL
+=========================== */
 withdrawBtn.addEventListener("click", () => {
 
   const amount = parseFloat(document.getElementById("withdrawAmount").value);
@@ -36,22 +42,38 @@ withdrawBtn.addEventListener("click", () => {
   pendingAmount = amount;
 
   modalDetails.innerHTML = `
-    Processing Fee: ₹${fee}<br>
-    You will receive: ₹${finalAmount}
+    Processing Fee: ₹${fee.toFixed(2)}<br>
+    You will receive: ₹${finalAmount.toFixed(2)}
   `;
 
   modal.classList.add("active");
 });
 
+/* ===========================
+   CANCEL MODAL
+=========================== */
 cancelBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
 
+/* ===========================
+   CONFIRM WITHDRAW
+=========================== */
 confirmBtn.addEventListener("click", async () => {
 
   const token = localStorage.getItem("token");
 
+  if (!token) {
+    modal.classList.remove("active");
+    showToast("Login required.");
+    return;
+  }
+
   try {
+
+    confirmBtn.disabled = true;
+    confirmBtn.innerText = "Processing...";
+
     const res = await fetch(
       "https://philips-backend.onrender.com/api/wallet/withdraw",
       {
@@ -65,11 +87,25 @@ confirmBtn.addEventListener("click", async () => {
     );
 
     const data = await res.json();
-    showToast(data.message || "Withdrawal request submitted.");
+
+    // Close modal BEFORE toast
+    modal.classList.remove("active");
+
+    if (!res.ok) {
+      showToast(data.message || "Withdrawal failed.");
+    } else {
+      showToast(data.message || "Withdrawal request submitted.");
+      document.getElementById("withdrawAmount").value = "";
+    }
 
   } catch (error) {
+
+    modal.classList.remove("active");
     showToast("Server error.");
+
+  } finally {
+    confirmBtn.disabled = false;
+    confirmBtn.innerText = "Confirm";
   }
 
-  modal.classList.remove("active");
 });
