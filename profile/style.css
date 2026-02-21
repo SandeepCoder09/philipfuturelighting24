@@ -163,3 +163,25 @@ body {
   color: white !important;
   border-radius: 20px;
 }
+
+/* ===== WALLET CARD ===== */
+.wallet-card {
+  background: linear-gradient(135deg, #00c3ff, #007bff);
+  padding: 18px;
+  border-radius: 18px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0,195,255,0.5);
+}
+
+.wallet-title {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.wallet-amount {
+  margin: 5px 0 0;
+  font-size: 26px;
+  font-weight: bold;
+}
