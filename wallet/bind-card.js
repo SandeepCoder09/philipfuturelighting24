@@ -1,23 +1,63 @@
 async function bindBank() {
 
   const token = localStorage.getItem("token");
+  const messageBox = document.getElementById("messageBox");
+  const btnText = document.getElementById("btnText");
+  const loader = document.querySelector(".loader");
 
-  const data = {
-    accountNumber: document.getElementById("accountNumber").value,
-    ifsc: document.getElementById("ifsc").value,
-    holderName: document.getElementById("holderName").value,
-    bankName: document.getElementById("bankName").value
-  };
+  const accountNumber = document.getElementById("accountNumber").value.trim();
+  const ifsc = document.getElementById("ifsc").value.trim();
+  const holderName = document.getElementById("holderName").value.trim();
+  const bankName = document.getElementById("bankName").value.trim();
 
-  const response = await fetch("https://YOUR_BACKEND_URL/api/wallet/bind-bank", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    },
-    body: JSON.stringify(data)
-  });
+  messageBox.classList.add("hidden");
+  messageBox.classList.remove("success", "error");
 
-  const result = await response.json();
-  alert(result.message);
+  if (!accountNumber || !ifsc || !holderName || !bankName) {
+    showMessage("Please fill all fields", "error");
+    return;
+  }
+
+  btnText.classList.add("hidden");
+  loader.classList.remove("hidden");
+
+  try {
+    const response = await fetch(
+      "https://philips-backend.onrender.com/api/wallet/bind-bank",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          accountNumber,
+          ifsc,
+          holderName,
+          bankName
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (response.ok) {
+      showMessage(result.message || "Bank submitted successfully", "success");
+    } else {
+      showMessage(result.message || "Failed to bind bank", "error");
+    }
+
+  } catch (error) {
+    showMessage("Server error. Please try again.", "error");
+  }
+
+  btnText.classList.remove("hidden");
+  loader.classList.add("hidden");
+}
+
+function showMessage(text, type) {
+  const messageBox = document.getElementById("messageBox");
+  messageBox.innerText = text;
+  messageBox.classList.remove("hidden");
+  messageBox.classList.add(type);
 }
