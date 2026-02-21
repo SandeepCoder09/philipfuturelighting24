@@ -7,9 +7,7 @@ async function loadProfile() {
   }
 
   try {
-    // =========================
-    // Load Profile Data
-    // =========================
+    // Load profile
     const profileRes = await fetch(
       "https://philips-backend.onrender.com/api/users/profile",
       {
@@ -19,13 +17,11 @@ async function loadProfile() {
       }
     );
 
-    const profileData = await profileRes.json();
-
-    if (!profileData.user) {
-      logout();
-      return;
+    if (!profileRes.ok) {
+      throw new Error("Profile fetch failed");
     }
 
+    const profileData = await profileRes.json();
     const user = profileData.user;
 
     document.getElementById("mobile").innerText = user.mobile;
@@ -33,9 +29,7 @@ async function loadProfile() {
     document.getElementById("username").innerText =
       "User" + user._id.slice(-5);
 
-    // =========================
-    // Load Wallet Balance
-    // =========================
+    // Load balance
     const balanceRes = await fetch(
       "https://philips-backend.onrender.com/api/wallet/balance",
       {
@@ -45,17 +39,18 @@ async function loadProfile() {
       }
     );
 
-    const balanceData = await balanceRes.json();
-
-    if (balanceData.balance !== undefined) {
-      const formatted = Number(balanceData.balance)
-        .toLocaleString("en-IN");
-
-      document.getElementById("walletBalance").innerText = formatted;
+    if (!balanceRes.ok) {
+      throw new Error("Balance fetch failed");
     }
 
+    const balanceData = await balanceRes.json();
+
+    document.getElementById("walletBalance").innerText =
+      Number(balanceData.balance).toLocaleString("en-IN");
+
   } catch (error) {
-    alert("Server error. Please try again.");
+    console.error("Error:", error);
+    alert("Backend not responding. Please wait 30 seconds and refresh.");
   }
 }
 
