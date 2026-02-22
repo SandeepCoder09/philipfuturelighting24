@@ -12,6 +12,10 @@ body {
   overflow-x: hidden;
 }
 
+.navbar {
+  padding: 8px 15px;   /* smaller navbar */
+}
+
 /* ================= HEADER (Compact) ================= */
 .pricing-header {
   text-align: center;
@@ -35,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 12px 4% 95px;
+  padding: 8px 4% 90px;   /* less top padding */
 }
 
 /* ================= CARD ================= */
