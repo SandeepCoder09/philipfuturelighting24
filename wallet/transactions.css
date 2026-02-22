@@ -1,42 +1,52 @@
-/* ===== GLOBAL ===== */
-body {
+/* ===== FULL BACKGROUND FIX ===== */
+html, body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(180deg, #001f3f, #0a3d73);
+  background: linear-gradient(
+    180deg,
+    #001f3f 0%,
+    #0a3d73 40%,
+    #0d4b8f 70%,
+    #082e5c 100%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #ffffff;
 }
 
-/* ===== TITLE ===== */
+/* ===== PAGE TITLE ===== */
 .page-title {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
   font-size: 28px;
   font-weight: 600;
   color: #00cfff;
-  letter-spacing: 1px;
 }
 
-/* ===== FILTER ===== */
+/* ===== FILTER BUTTON ===== */
 .filter-container {
   display: flex;
   justify-content: center;
-  margin: 20px 0 30px;
+  margin: 25px 0 40px;
 }
 
 #transactionFilter {
-  padding: 12px 22px;
-  border-radius: 16px;
+  padding: 12px 24px;
+  border-radius: 18px;
   border: none;
   font-size: 15px;
   font-weight: 600;
   background: linear-gradient(135deg, #00cfff, #007bff);
   color: white;
-  box-shadow: 0 0 20px rgba(0, 207, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 207, 255, 0.6);
   cursor: pointer;
   outline: none;
 }
 
-/* ===== WRAPPER ===== */
+/* ===== TRANSACTION WRAPPER ===== */
 .transactions-wrapper {
   width: 92%;
   max-width: 600px;
@@ -46,13 +56,13 @@ body {
 /* ===== TRANSACTION CARD ===== */
 .transaction-item {
   background: linear-gradient(145deg, #0a3d73, #0d4b8f);
-  border-radius: 20px;
-  padding: 18px;
-  margin-bottom: 20px;
+  border-radius: 22px;
+  padding: 20px;
+  margin-bottom: 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
   transition: 0.3s ease;
 }
 
@@ -61,7 +71,6 @@ body {
   box-shadow: 0 15px 35px rgba(0, 207, 255, 0.4);
 }
 
-/* LEFT SIDE */
 .transaction-left {
   display: flex;
   flex-direction: column;
@@ -77,7 +86,6 @@ body {
   opacity: 0.7;
 }
 
-/* AMOUNT */
 .transaction-amount {
   font-size: 20px;
   font-weight: bold;
@@ -113,19 +121,4 @@ body {
 .status-rejected,
 .status-failed {
   color: #ff4d4d;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
-  .page-title {
-    font-size: 24px;
-  }
-
-  .transaction-item {
-    padding: 15px;
-  }
-
-  .transaction-amount {
-    font-size: 18px;
-  }
 }
