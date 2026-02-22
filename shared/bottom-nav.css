@@ -64,3 +64,10 @@
 body {
   padding-bottom: 80px;
 }
+
+/* ===== ACTIVE NAV ===== */
+.nav-btn.active {
+  background: linear-gradient(90deg, #00c3ff, #007bff);
+  color: white !important;
+  border-radius: 20px;
+}
