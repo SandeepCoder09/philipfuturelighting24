@@ -21,7 +21,6 @@ body {
 
 .pricing-header h1 {
   font-size: 1.5rem;
-  text-shadow: 0 0 10px #00aaff;
 }
 
 .pricing-header p {
@@ -34,101 +33,91 @@ body {
 .pricing-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 12px 4% 95px; /* bottom space for nav */
+  gap: 14px;
+  padding: 12px 4% 95px;
 }
 
 /* ================= CARD ================= */
 .card {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* push content right */
   background: #001d3d;
-  border-radius: 14px;
-  height: 90px;                     /* 🔥 fixed compact height */
+  border-radius: 16px;
+  height: 100px; /* 🔥 fixed height */
   overflow: hidden;
   border: 1px solid rgba(0,170,255,0.25);
-  transition: 0.3s ease;
+  padding-right: 12px;
 }
 
-.card:hover {
-  box-shadow: 0 0 12px rgba(0,170,255,0.35);
-}
-
-/* ================= IMAGE LEFT ================= */
+/* ================= IMAGE ================= */
 .card-image {
-  height: 100%;                     /* equal to card height */
-  width: 90px;                      /* square size */
+  height: 100%;
+  width: 100px;
   flex-shrink: 0;
   background: #012a4a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .card-image img {
   height: 100%;
   width: 100%;
-  object-fit: cover;                /* perfect fill */
+  object-fit: cover;
 }
 
-/* ================= RIGHT CONTENT ================= */
+/* ================= RIGHT SIDE CONTENT WRAPPER ================= */
 .card-content {
   flex: 1;
-  padding: 0 14px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;  /* push everything to right */
+  align-items: center;
 }
 
-/* TITLE */
+/* TEXT BLOCK */
+.card-content-inner {
+  text-align: right;  /* 🔥 all text right aligned */
+  margin-right: 10px;
+}
+
 .card-content h2 {
-  font-size: 14px;
-  margin-bottom: 2px;
+  font-size: 15px;
+  margin-bottom: 4px;
 }
 
-/* PRICE */
 .price {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   color: #00ff64;
-  margin-bottom: 2px;
 }
 
-/* DAILY */
 .daily-earning {
-  font-size: 11px;
+  font-size: 12px;
   color: #00ff64;
-  margin-bottom: 5px;
+  margin-top: 3px;
 }
 
 /* BUTTON */
 .subscribe-btn {
-  padding: 4px 10px;
-  font-size: 11px;
-  border-radius: 14px;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 16px;
   background: #00aaff;
   color: #000814;
   border: none;
   cursor: pointer;
-  align-self: flex-start;
-  transition: 0.3s;
+  margin-left: 10px;
+  white-space: nowrap;
 }
 
 .subscribe-btn:hover {
   background: #0088cc;
 }
 
-.subscribe-btn i {
-  font-size: 11px;
-}
-
-/* ================= LOADING ================= */
+/* ================= LOADING & SUCCESS (unchanged) ================= */
 .loading-screen {
   position: fixed;
   inset: 0;
   background: #000814;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   opacity: 0;
@@ -149,14 +138,12 @@ body {
   border-top: 4px solid #00aaff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 15px;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* ================= SUCCESS POPUP ================= */
 .success-overlay {
   position: fixed;
   inset: 0;
@@ -181,39 +168,4 @@ body {
   border-radius: 16px;
   text-align: center;
   border: 1px solid rgba(0,255,100,0.4);
-}
-
-.checkmark-wrapper {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 15px;
-  border-radius: 50%;
-  background: rgba(0,255,100,0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.checkmark {
-  width: 22px;
-  height: 45px;
-  border-right: 4px solid #00ff64;
-  border-bottom: 4px solid #00ff64;
-  transform: rotate(45deg);
-}
-
-.success-box h2 {
-  color: #00ff64;
-  margin-bottom: 8px;
-}
-
-.success-box button {
-  margin-top: 12px;
-  padding: 6px 18px;
-  border-radius: 16px;
-  background: #00ff64;
-  color: #001d3d;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
 }
