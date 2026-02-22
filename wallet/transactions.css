@@ -1,19 +1,10 @@
 /* ===== FULL BACKGROUND FIX ===== */
 html, body {
-  margin: 0;
   padding: 0;
-  min-height: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(
-    180deg,
-    #001f3f 0%,
-    #0a3d73 40%,
-    #0d4b8f 70%,
-    #082e5c 100%
-  );
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #001F3F, #003E7E, #007BFF);
+  min-height: 100vh;
   color: #ffffff;
 }
 
