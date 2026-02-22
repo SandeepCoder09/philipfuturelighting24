@@ -7,7 +7,9 @@ async function loadProfile() {
   }
 
   try {
-    // Load profile
+    // ===============================
+    // LOAD USER PROFILE
+    // ===============================
     const profileRes = await fetch(
       "https://philips-backend.onrender.com/api/users/profile",
       {
@@ -24,12 +26,21 @@ async function loadProfile() {
     const profileData = await profileRes.json();
     const user = profileData.user;
 
+    // ===============================
+    // DISPLAY USER INFO (NEW SYSTEM)
+    // ===============================
     document.getElementById("mobile").innerText = user.mobile;
-    document.getElementById("uid").innerText = user._id;
-    document.getElementById("username").innerText =
-      "User" + user._id.slice(-5);
 
-    // Load balance
+    // Show numeric userId instead of Mongo _id
+    document.getElementById("uid").innerText = user.userId;
+
+    // Clean username format
+    document.getElementById("username").innerText =
+      "User" + user.userId;
+
+    // ===============================
+    // LOAD WALLET BALANCE
+    // ===============================
     const balanceRes = await fetch(
       "https://philips-backend.onrender.com/api/wallet/balance",
       {
@@ -50,10 +61,15 @@ async function loadProfile() {
 
   } catch (error) {
     console.error("Error:", error);
-    alert("Backend not responding. Please wait 30 seconds and refresh.");
+    alert("Session expired or backend not responding. Please login again.");
+    localStorage.removeItem("token");
+    window.location.href = "../auth/index.html";
   }
 }
 
+// ===============================
+// LOGOUT
+// ===============================
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "../auth/index.html";
