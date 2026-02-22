@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 function goToRecharge() {
-  window.location.href = "../wallet/index.html"; // adjust if needed
+  window.location.href = "../wallet/recharge.html"; // adjust if needed
 }
 
 window.closeErrorPopup = closeErrorPopup;
