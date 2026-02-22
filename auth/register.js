@@ -1,22 +1,45 @@
+const API = "https://philips-backend.onrender.com/api";
+
 const form = document.getElementById("registerForm");
 const message = document.getElementById("message");
 
-// Auto-fill invite code from URL
-const params = new URLSearchParams(window.location.search);
-const invite = params.get("inviteCode");
+// ===============================
+// AUTO-FILL INVITE CODE FROM URL
+// ===============================
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
 
-if (invite) {
-  document.getElementById("inviteCode").value = invite;
-}
+  // 🔥 Must match referral link parameter
+  const invite = params.get("invite");
 
+  if (invite) {
+    const inviteInput = document.getElementById("inviteCode");
+    if (inviteInput) {
+      inviteInput.value = invite;
+    }
+  }
+});
+
+// ===============================
+// REGISTER USER
+// ===============================
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  message.innerText = "";
+
   const name = document.getElementById("name").value.trim();
   const mobile = document.getElementById("mobile").value.trim();
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-  const inviteCode = document.getElementById("inviteCode").value;
+  const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
+  const inviteCode = document.getElementById("inviteCode").value.trim();
+
+  // Basic validation
+  if (!name || !mobile || !password) {
+    message.style.color = "red";
+    message.innerText = "All fields are required";
+    return;
+  }
 
   if (password !== confirmPassword) {
     message.style.color = "red";
@@ -25,7 +48,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch("https://philips-backend.onrender.com/api/auth/register", {
+    const res = await fetch(`${API}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -34,7 +57,7 @@ form.addEventListener("submit", async (e) => {
         name,
         mobile,
         password,
-        inviteCode
+        inviteCode // must match backend field
       })
     });
 
