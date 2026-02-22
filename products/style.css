@@ -9,92 +9,91 @@
 body {
   background: #000814;
   color: white;
+  overflow-x: hidden;
 }
 
-/* HEADER */
+/* HEADER (Reduced Height) */
 .pricing-header {
   text-align: center;
-  padding: 100px 20px 50px;
+  padding: 70px 15px 20px; /* reduced */
   background: radial-gradient(circle at center, #001d3d, #000814);
 }
 
 .pricing-header h1 {
-  font-size: 2.5rem;
-  text-shadow: 0 0 15px #00aaff;
+  font-size: 1.6rem; /* smaller */
+  text-shadow: 0 0 10px #00aaff;
 }
 
 .pricing-header p {
-  margin-top: 10px;
+  margin-top: 6px;
+  font-size: 13px;
   color: #b0c4de;
 }
 
-/* CONTAINER */
+/* CONTAINER - GRID INSTEAD OF COLUMN */
 .pricing-container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding: 40px 6%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  gap: 15px; /* less gap */
+  padding: 15px 4% 90px; /* bottom space for nav */
 }
 
-/* CARD */
+/* CARD (Compact) */
 .card {
-  display: flex;
-  align-items: center;
   background: #001d3d;
-  border-radius: 16px;
-  border: 1px solid rgba(0,170,255,0.3);
-  padding: 15px 25px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,170,255,0.25);
+  padding: 12px;
   transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .card:hover {
-  box-shadow: 0 0 20px rgba(0,170,255,0.4);
+  box-shadow: 0 0 15px rgba(0,170,255,0.3);
 }
 
-/* IMAGE */
+/* IMAGE SMALLER */
 .card-image {
-  width: 120px;
-  min-width: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 8px;
 }
 
 .card-image img {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
 /* CONTENT */
-.card-content {
-  flex: 1;
-  margin-left: 25px;
-}
-
 .card-content h2 {
-  font-size: 18px;
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 
 .price {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   color: #00ff64;
-  margin-top: 6px;
+  margin: 2px 0;
 }
 
 .daily-earning {
-  font-size: 14px;
+  font-size: 12px;
   color: #00ff64;
-  margin: 6px 0 12px;
+  margin-bottom: 8px;
 }
 
 .subscribe-btn {
-  padding: 8px 20px;
-  border-radius: 20px;
+  padding: 6px 14px;
+  border-radius: 18px;
   background: #00aaff;
   color: #000814;
   border: none;
+  font-size: 12px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
@@ -104,116 +103,9 @@ body {
   background: #0088cc;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .card {
-    flex-direction: column;
-    text-align: center;
+/* RESPONSIVE - 1 COLUMN ONLY IF VERY SMALL */
+@media (max-width: 480px) {
+  .pricing-container {
+    grid-template-columns: repeat(2, 1fr); /* still 2 */
   }
-
-  .card-content {
-    margin-left: 0;
-    margin-top: 15px;
-  }
-
-  .card-image img {
-    width: 90px;
-    height: 90px;
-  }
-}
-
-/* LOADING */
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  background: #000814;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.4s;
-  z-index: 9999;
-}
-
-.loading-screen.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.loader-circle {
-  width: 60px;
-  height: 60px;
-  border: 5px solid rgba(0,170,255,0.2);
-  border-top: 5px solid #00aaff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 15px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* SUCCESS */
-.success-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.4s;
-  z-index: 9999;
-}
-
-.success-overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.success-box {
-  background: #001d3d;
-  padding: 40px 30px;
-  border-radius: 18px;
-  text-align: center;
-  border: 1px solid rgba(0,255,100,0.4);
-}
-
-.checkmark-wrapper {
-  width: 70px;
-  height: 70px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background: rgba(0,255,100,0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.checkmark {
-  width: 25px;
-  height: 50px;
-  border-right: 5px solid #00ff64;
-  border-bottom: 5px solid #00ff64;
-  transform: rotate(45deg);
-}
-
-.success-box h2 {
-  color: #00ff64;
-  margin-bottom: 10px;
-}
-
-.success-box button {
-  margin-top: 15px;
-  padding: 8px 20px;
-  border-radius: 20px;
-  background: #00ff64;
-  color: #001d3d;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
 }
