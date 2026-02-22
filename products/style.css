@@ -174,3 +174,67 @@ body {
   text-align: center;
   border: 1px solid rgba(0,255,100,0.4);
 }
+
+/* ================= ERROR POPUP ================= */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.error-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.error-box {
+  background: #001d3d;
+  padding: 30px 25px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  width: 300px;
+}
+
+.error-box h2 {
+  color: #ff4d4d;
+  margin-bottom: 10px;
+}
+
+.error-box p {
+  font-size: 13px;
+  margin-bottom: 15px;
+  color: #ccc;
+}
+
+.error-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.error-buttons button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.error-buttons button:first-child {
+  background: #555;
+  color: white;
+}
+
+.error-buttons button:last-child {
+  background: linear-gradient(135deg, #ff4d4d, #cc0000);
+  color: white;
+}
