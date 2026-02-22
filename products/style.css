@@ -12,54 +12,46 @@ body {
   overflow-x: hidden;
 }
 
-/* HEADER (Reduced Height) */
+/* HEADER - VERY COMPACT */
 .pricing-header {
   text-align: center;
-  padding: 70px 15px 20px; /* reduced */
+  padding: 65px 15px 15px;
   background: radial-gradient(circle at center, #001d3d, #000814);
 }
 
 .pricing-header h1 {
-  font-size: 1.6rem; /* smaller */
-  text-shadow: 0 0 10px #00aaff;
+  font-size: 1.4rem;
 }
 
 .pricing-header p {
-  margin-top: 6px;
-  font-size: 13px;
+  font-size: 12px;
+  margin-top: 4px;
   color: #b0c4de;
 }
 
-/* CONTAINER - GRID INSTEAD OF COLUMN */
+/* LIST CONTAINER */
 .pricing-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 per row */
-  gap: 15px; /* less gap */
-  padding: 15px 4% 90px; /* bottom space for nav */
-}
-
-/* CARD (Compact) */
-.card {
-  background: #001d3d;
-  border-radius: 14px;
-  border: 1px solid rgba(0,170,255,0.25);
-  padding: 12px;
-  transition: 0.3s;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  padding: 12px 4% 90px;
+}
+
+/* LIST CARD */
+.card {
+  display: flex;
   align-items: center;
-  text-align: center;
+  background: #001d3d;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(0,170,255,0.2);
 }
 
-.card:hover {
-  box-shadow: 0 0 15px rgba(0,170,255,0.3);
-}
-
-/* IMAGE SMALLER */
+/* IMAGE SMALL */
 .card-image {
-  width: 70px;
-  height: 70px;
-  margin-bottom: 8px;
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
 }
 
 .card-image img {
@@ -69,43 +61,41 @@ body {
 }
 
 /* CONTENT */
+.card-content {
+  flex: 1;
+  margin-left: 12px;
+}
+
 .card-content h2 {
   font-size: 14px;
-  margin-bottom: 4px;
 }
 
 .price {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   color: #00ff64;
   margin: 2px 0;
 }
 
 .daily-earning {
-  font-size: 12px;
+  font-size: 11px;
   color: #00ff64;
-  margin-bottom: 8px;
 }
 
+/* BUTTON */
 .subscribe-btn {
-  padding: 6px 14px;
-  border-radius: 18px;
+  padding: 5px 10px;
+  font-size: 11px;
+  border-radius: 16px;
   background: #00aaff;
   color: #000814;
   border: none;
-  font-size: 12px;
-  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  white-space: nowrap;
 }
 
-.subscribe-btn:hover {
-  background: #0088cc;
+.subscribe-btn i {
+  font-size: 11px;
 }
 
-/* RESPONSIVE - 1 COLUMN ONLY IF VERY SMALL */
-@media (max-width: 480px) {
-  .pricing-container {
-    grid-template-columns: repeat(2, 1fr); /* still 2 */
-  }
-}
+/* LOADING + SUCCESS remain same */
