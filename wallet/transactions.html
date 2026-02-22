@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Transaction History | Philips</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="transactions.css">
 </head>
 
@@ -12,17 +11,26 @@
 
   <h2 class="page-title">Transaction History</h2>
 
+  <!-- Filter Dropdown -->
+  <div class="filter-container">
+    <select id="transactionFilter">
+      <option value="all" selected>All Transactions</option>
+      <option value="recharge">Recharge</option>
+      <option value="withdraw">Withdraw</option>
+      <option value="purchase">Purchase</option>
+      <option value="earning">Earning</option>
+    </select>
+  </div>
+
   <div class="transactions-wrapper">
 
-    <!-- Recharge Column -->
     <div class="transactions-column">
-      <h3 class="column-title recharge-title">Recharge History</h3>
+      <h3 class="column-title recharge-title">Recharge</h3>
       <div id="rechargeList"></div>
     </div>
 
-    <!-- Withdrawal Column -->
     <div class="transactions-column">
-      <h3 class="column-title withdraw-title">Withdrawal History</h3>
+      <h3 class="column-title withdraw-title">Withdraw</h3>
       <div id="withdrawList"></div>
     </div>
 
