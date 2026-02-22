@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const rechargeContainer = document.getElementById("rechargeList");
-  const withdrawContainer = document.getElementById("withdrawList");
+  const transactionContainer = document.getElementById("transactionList");
   const filterSelect = document.getElementById("transactionFilter");
 
   const token = localStorage.getItem("token");
@@ -13,8 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadTransactions(type = "all") {
 
-    rechargeContainer.innerHTML = "Loading...";
-    withdrawContainer.innerHTML = "Loading...";
+    transactionContainer.innerHTML = "Loading...";
 
     try {
       const response = await fetch(
@@ -28,59 +26,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const transactions = await response.json();
 
-      rechargeContainer.innerHTML = "";
-      withdrawContainer.innerHTML = "";
+      transactionContainer.innerHTML = "";
 
       if (!transactions.length) {
-        rechargeContainer.innerHTML = "<p>No recharge history</p>";
-        withdrawContainer.innerHTML = "<p>No withdrawal history</p>";
+        transactionContainer.innerHTML = "<p>No transactions found</p>";
         return;
       }
 
       transactions.forEach(tx => {
 
         const item = document.createElement("div");
-        item.className = "transaction-item";
+        item.className = `transaction-item type-${tx.type}`;
 
-        if (tx.type === "recharge") {
-          item.classList.add("recharge");
-        } else if (tx.type === "withdraw") {
-          item.classList.add("withdraw");
-        }
-
-        let statusClass = "";
-        if (tx.status === "success") statusClass = "status-success";
-        if (tx.status === "pending" || tx.status === "processing") statusClass = "status-pending";
-        if (tx.status === "rejected" || tx.status === "failed") statusClass = "status-rejected";
+        let statusClass = `status-${tx.status}`;
 
         item.innerHTML = `
-          <div class="transaction-details">
-            <div class="${statusClass}">${tx.status.toUpperCase()}</div>
-            <div>${new Date(tx.createdAt).toLocaleString()}</div>
+          <div class="transaction-left">
+            <div class="transaction-type ${statusClass}">
+              ${tx.type.toUpperCase()} • ${tx.status.toUpperCase()}
+            </div>
+            <div class="transaction-date">
+              ${new Date(tx.createdAt).toLocaleString()}
+            </div>
           </div>
           <div class="transaction-amount">
             ₹${tx.amount}
           </div>
         `;
 
-        if (tx.type === "recharge") {
-          rechargeContainer.appendChild(item);
-        }
-
-        if (tx.type === "withdraw") {
-          withdrawContainer.appendChild(item);
-        }
+        transactionContainer.appendChild(item);
       });
 
-      if (!rechargeContainer.innerHTML)
-        rechargeContainer.innerHTML = "<p>No recharge history</p>";
-
-      if (!withdrawContainer.innerHTML)
-        withdrawContainer.innerHTML = "<p>No withdrawal history</p>";
-
     } catch (error) {
-      rechargeContainer.innerHTML = "<p>Failed to load</p>";
-      withdrawContainer.innerHTML = "<p>Failed to load</p>";
+      transactionContainer.innerHTML = "<p>Failed to load transactions</p>";
     }
   }
 
