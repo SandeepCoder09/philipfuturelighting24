@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hideLoading();
 
         if (!response.ok) {
-          alert("Insufficient Balance. Please Recharge.");
+          document.getElementById("errorPopup").classList.add("active");
           return;
         }
 
@@ -80,7 +80,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  window.closePopup = closePopup;
-  window.goToMyProducts = goToMyProducts;
+  function closeErrorPopup() {
+  document.getElementById("errorPopup").classList.remove("active");
+}
+
+function goToRecharge() {
+  window.location.href = "../wallet/index.html"; // adjust if needed
+}
+
+window.closeErrorPopup = closeErrorPopup;
+window.goToRecharge = goToRecharge;
 
 });
