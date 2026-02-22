@@ -1,82 +1,92 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    const rechargeContainer = document.getElementById("rechargeList");
-    const withdrawContainer = document.getElementById("withdrawList");
-  
-    const token = localStorage.getItem("token");
-  
-    if (!token) {
-      window.location.href = "../auth/index.html";
-      return;
-    }
-  
+  const rechargeContainer = document.getElementById("rechargeList");
+  const withdrawContainer = document.getElementById("withdrawList");
+  const filterSelect = document.getElementById("transactionFilter");
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "../auth/index.html";
+    return;
+  }
+
+  async function loadTransactions(type = "all") {
+
+    rechargeContainer.innerHTML = "Loading...";
+    withdrawContainer.innerHTML = "Loading...";
+
     try {
       const response = await fetch(
-        "https://philips-backend.onrender.com/api/wallet/transactions",
+        `https://philips-backend.onrender.com/api/wallet/transactions?type=${type}`,
         {
-          method: "GET",
           headers: {
-            "Authorization": "Bearer " + token
+            Authorization: "Bearer " + token
           }
         }
       );
-  
-      if (!response.ok) throw new Error("Failed to fetch");
-  
+
       const transactions = await response.json();
-  
+
       rechargeContainer.innerHTML = "";
       withdrawContainer.innerHTML = "";
-  
-      if (transactions.length === 0) {
+
+      if (!transactions.length) {
         rechargeContainer.innerHTML = "<p>No recharge history</p>";
         withdrawContainer.innerHTML = "<p>No withdrawal history</p>";
         return;
       }
-  
+
       transactions.forEach(tx => {
-  
+
         const item = document.createElement("div");
         item.className = "transaction-item";
-  
+
         if (tx.type === "recharge") {
           item.classList.add("recharge");
-        } else {
+        } else if (tx.type === "withdraw") {
           item.classList.add("withdraw");
         }
-  
+
         let statusClass = "";
         if (tx.status === "success") statusClass = "status-success";
-        if (tx.status === "pending") statusClass = "status-pending";
-        if (tx.status === "failed") statusClass = "status-failed";
-  
+        if (tx.status === "pending" || tx.status === "processing") statusClass = "status-pending";
+        if (tx.status === "rejected" || tx.status === "failed") statusClass = "status-rejected";
+
         item.innerHTML = `
           <div class="transaction-details">
-            <div class="${statusClass}">Status: ${tx.status}</div>
+            <div class="${statusClass}">${tx.status.toUpperCase()}</div>
             <div>${new Date(tx.createdAt).toLocaleString()}</div>
           </div>
           <div class="transaction-amount">
             ₹${tx.amount}
           </div>
         `;
-  
+
         if (tx.type === "recharge") {
           rechargeContainer.appendChild(item);
-        } else {
+        }
+
+        if (tx.type === "withdraw") {
           withdrawContainer.appendChild(item);
         }
-  
       });
-  
+
       if (!rechargeContainer.innerHTML)
         rechargeContainer.innerHTML = "<p>No recharge history</p>";
-  
+
       if (!withdrawContainer.innerHTML)
         withdrawContainer.innerHTML = "<p>No withdrawal history</p>";
-  
+
     } catch (error) {
-      rechargeContainer.innerHTML = "<p>Failed to load recharge history</p>";
-      withdrawContainer.innerHTML = "<p>Failed to load withdrawal history</p>";
+      rechargeContainer.innerHTML = "<p>Failed to load</p>";
+      withdrawContainer.innerHTML = "<p>Failed to load</p>";
     }
-  
+  }
+
+  filterSelect.addEventListener("change", () => {
+    loadTransactions(filterSelect.value);
   });
+
+  loadTransactions();
+});
