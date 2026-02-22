@@ -21,7 +21,6 @@
       <a href="../home/index.html">
         <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo">
       </a>
-
       <div class="led-dots">
         <span></span>
         <span></span>
@@ -30,67 +29,82 @@
     </div>
   </nav>
 
-<div class="container">
+  <div class="container">
 
-  <div class="header">
-    <h2>My Team</h2>
+    <div class="header">
+      <h2>My Team</h2>
+    </div>
+
+    <!-- ===== REFERRAL LINK CARD ===== -->
+    <div class="referral-link-card">
+      <p class="invite-title">
+        <i class="fa-solid fa-link"></i>
+        Your Referral Link
+      </p>
+
+      <div class="referral-box">
+        <input type="text" id="referralLink" readonly>
+        <button id="copyBtn">
+          <i class="fa-solid fa-copy"></i>
+        </button>
+      </div>
+
+      <small>Share this link to invite your friends</small>
+    </div>
+
+    <div class="active-box">
+      Active Users: <span id="activeUsers">0</span>
+    </div>
+
+    <div class="team-card">
+      <p>Team Size</p>
+      <h1 id="teamSize">0</h1>
+    </div>
+
+    <div class="stats-card">
+      <span>Total Promotion Income</span>
+      <strong id="totalIncome">0.0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Yesterday's Promotion Income</span>
+      <strong id="yesterdayIncome">0.0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Direct Referral Number</span>
+      <strong id="directReferral">0</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Invitation Reward</span>
+      <strong id="invitationReward">0.0</strong>
+    </div>
+
   </div>
 
-  <div class="active-box">
-    Active Users: <span id="activeUsers">0</span>
-  </div>
+  <!-- ===== BOTTOM NAV ===== -->
+  <nav class="bottom-nav">
+    <a href="../home/index.html" class="nav-btn">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
 
-  <div class="team-card">
-    <p>Team Size</p>
-    <h1 id="teamSize">0</h1>
-  </div>
+    <a href="../products/index.html" class="nav-btn">
+      <i class="fa-solid fa-lightbulb"></i>
+      <span>Products</span>
+    </a>
 
-  <div class="stats-card">
-    <span>Total Promotion Income</span>
-    <strong id="totalIncome">0.0 INR</strong>
-  </div>
+    <a href="../referrals/index.html" class="nav-btn active">
+      <i class="fa-solid fa-gift"></i>
+      <span>Referrals</span>
+    </a>
 
-  <div class="stats-card">
-    <span>Yesterday's Promotion Income</span>
-    <strong id="yesterdayIncome">0.0 INR</strong>
-  </div>
-
-  <div class="stats-card">
-    <span>Direct Referral Number</span>
-    <strong id="directReferral">0</strong>
-  </div>
-
-  <div class="stats-card">
-    <span>Invitation Reward</span>
-    <strong id="invitationReward">0.0</strong>
-  </div>
-
-</div>
-
-  <!-- PREMIUM BOTTOM NAV -->
-<nav class="bottom-nav">
-
-  <a href="../home/index.html" class="nav-btn">
-    <i class="fa-solid fa-house"></i>
-    <span>Home</span>
-  </a>
-
-  <a href="../products/index.html" class="nav-btn">
-    <i class="fa-solid fa-lightbulb"></i>
-    <span>Products</span>
-  </a>
-
-  <a href="../referrals/index.html" class="nav-btn active">
-    <i class="fa-solid fa-gift"></i>
-    <span>Referrals</span>
-  </a>
-
-  <a href="../profile/index.html" class="nav-btn">
-    <i class="fa-solid fa-user"></i>
-    <span>Profile</span>
-  </a>
-
-</nav>
+    <a href="../profile/index.html" class="nav-btn">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
 
 <script src="../referrals/script.js"></script>
 </body>
