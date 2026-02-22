@@ -1,9 +1,11 @@
 /* ===== BACKGROUND ===== */
 body {
+  padding: 0;
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(180deg, #001a33, #002b55);
-  color: white;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #001F3F, #003E7E, #007BFF);
+  min-height: 100vh;
+  color: #ffffff;
 }
 
 /* ===== PROFILE CONTAINER ===== */
