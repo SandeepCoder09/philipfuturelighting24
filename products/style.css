@@ -12,20 +12,21 @@ body {
   overflow-x: hidden;
 }
 
-/* ================= HEADER ================= */
+/* ================= HEADER (Compact) ================= */
 .pricing-header {
   text-align: center;
-  padding: 60px 15px 15px;
+  padding: 55px 10px 10px;   /* 🔥 reduced top space */
   background: radial-gradient(circle at center, #001d3d, #000814);
 }
 
 .pricing-header h1 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 3px;
 }
 
 .pricing-header p {
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 11px;
+  margin-top: 2px;
   color: #b0c4de;
 }
 
