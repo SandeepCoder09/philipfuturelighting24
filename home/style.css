@@ -437,40 +437,6 @@ h2 {
   border: 1px solid #0072ff;
 }
 
-/* ===== BOTTOM NAVIGATION ===== */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #111827;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 14px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  z-index: 1000;
-}
-
-.nav-btn {
-  text-decoration: none;
-  color: #94a3b8;
-  font-size: 0.9rem;
-  padding: 8px 18px;
-  border-radius: 20px;
-  transition: 0.3s;
-}
-
-.nav-btn:hover {
-  color: #ffffff;
-  background: #1e293b;
-}
-
-.nav-btn.active {
-  background: linear-gradient(to right, #0072ff, #00c6ff);
-  color: #ffffff;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
   .about-grid {
