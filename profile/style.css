@@ -157,13 +157,6 @@ body {
   box-shadow: 0 0 15px #00c3ff;
 }
 
-/* ===== ACTIVE NAV ===== */
-.nav-btn.active {
-  background: linear-gradient(90deg, #00c3ff, #007bff);
-  color: white !important;
-  border-radius: 20px;
-}
-
 /* ===== WALLET CARD ===== */
 .wallet-card {
   background: linear-gradient(135deg, #00c3ff, #007bff);
