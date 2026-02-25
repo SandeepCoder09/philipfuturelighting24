@@ -1,117 +1,138 @@
-document.addEventListener("DOMContentLoaded", function () {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Philips</title>
 
-  const withdrawBtn = document.getElementById("withdrawBtn");
-  const modal = document.getElementById("withdrawModal");
-  const modalDetails = document.getElementById("modalDetails");
-  const cancelBtn = document.getElementById("cancelWithdraw");
-  const confirmBtn = document.getElementById("confirmWithdraw");
-  const amountInput = document.getElementById("withdrawAmount");
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="css/style.css" />
 
-  let pendingAmount = 0;
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
 
-  /* ===========================
-     TOAST
-  =========================== */
-  function showToast(message) {
-    const toast = document.getElementById("customToast");
-    toast.innerText = message;
-    toast.classList.add("show");
+<body>
 
-    setTimeout(() => {
-      toast.classList.remove("show");
-    }, 2500);
-  }
+<div class="layout">
 
-  /* ===========================
-     CLICK WITHDRAW
-  =========================== */
-  withdrawBtn.addEventListener("click", function () {
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">PHILIPS ADMIN</h2>
 
-    const amount = parseFloat(amountInput.value);
+    <nav class="nav-menu">
 
-    // Empty check
-    if (!amount || amount <= 0) {
-      showToast("Please enter amount.");
-      return;
-    }
+      <a href="index.html" class="active">
+        <i class="fa-solid fa-gauge"></i>
+        <span>Dashboard</span>
+      </a>
 
-    // Minimum check
-    if (amount < 120) {
-      showToast("Minimum withdrawal amount is ₹120.");
-      return;
-    }
+      <a href="pages/users.html">
+        <i class="fa-solid fa-users"></i>
+        <span>Users</span>
+      </a>
 
-    // Calculate fee
-    const fee = amount * 0.10;
-    const finalAmount = amount - fee;
+      <a href="pages/withdraws.html">
+        <i class="fa-solid fa-money-bill-transfer"></i>
+        <span>Withdraws</span>
+      </a>
 
-    pendingAmount = amount;
+      <a href="pages/transactions.html">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        <span>Transactions</span>
+      </a>
 
-    modalDetails.innerHTML = `
-      <strong>Withdrawal Amount:</strong> ₹${amount.toFixed(2)} <br>
-      <strong>Processing Fee (10%):</strong> ₹${fee.toFixed(2)} <br>
-      <strong>You Will Receive:</strong> ₹${finalAmount.toFixed(2)}
-    `;
+      <a href="pages/banks.html">
+        <i class="fa-solid fa-building-columns"></i>
+        <span>Banks</span>
+      </a>
 
-    modal.classList.add("active");
-  });
+      <!-- NEW GIFT MENU -->
+      <a href="pages/gift.html">
+        <i class="fa-solid fa-gift"></i>
+        <span>Gift Codes</span>
+      </a>
 
-  /* ===========================
-     CANCEL
-  =========================== */
-  cancelBtn.addEventListener("click", function () {
-    modal.classList.remove("active");
-  });
+    </nav>
+  </aside>
 
-  /* ===========================
-     CONFIRM
-  =========================== */
-  confirmBtn.addEventListener("click", async function () {
+  <!-- ================= MAIN ================= -->
+  <main class="main">
 
-    const token = localStorage.getItem("token");
+    <!-- ========== TOPBAR ========== -->
+    <header class="topbar">
 
-    if (!token) {
-      modal.classList.remove("active");
-      showToast("Login required.");
-      return;
-    }
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1>Dashboard Overview</h1>
+      </div>
 
-    try {
+      <div class="topbar-right">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
 
-      confirmBtn.disabled = true;
-      confirmBtn.innerText = "Processing...";
+    </header>
 
-      const res = await fetch(
-        "https://philips-backend.onrender.com/api/wallet/withdraw",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({ amount: pendingAmount })
-        }
-      );
+    <!-- ========== DASHBOARD CARDS ========== -->
+    <section class="cards">
 
-      const data = await res.json();
+      <div class="card">
+        <div class="card-icon">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="card-content">
+          <h3>Total Users</h3>
+          <p id="totalUsers">0</p>
+        </div>
+      </div>
 
-      modal.classList.remove("active");
+      <div class="card">
+        <div class="card-icon">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+        <div class="card-content">
+          <h3>Total Recharge</h3>
+          <p id="totalRecharge">₹0</p>
+        </div>
+      </div>
 
-      if (!res.ok) {
-        showToast(data.message || "Withdrawal failed.");
-      } else {
-        showToast(data.message || "Withdrawal request submitted.");
-        amountInput.value = "";
-      }
+      <div class="card">
+        <div class="card-icon">
+          <i class="fa-solid fa-money-bill-wave"></i>
+        </div>
+        <div class="card-content">
+          <h3>Total Withdraw</h3>
+          <p id="totalWithdraw">₹0</p>
+        </div>
+      </div>
 
-    } catch (error) {
-      modal.classList.remove("active");
-      showToast("Server error.");
-    } finally {
-      confirmBtn.disabled = false;
-      confirmBtn.innerText = "Confirm";
-    }
+      <div class="card">
+        <div class="card-icon">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <div class="card-content">
+          <h3>Pending Withdraw</h3>
+          <p id="pendingWithdraw">0</p>
+        </div>
+      </div>
 
-  });
+    </section>
 
-});
+  </main>
+
+</div>
+  
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
