@@ -1,3 +1,4 @@
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -7,7 +8,7 @@ body {
 
 /* ===== PAGE WRAPPER ===== */
 .page-content {
-  padding-top: 90px; /* space for fixed navbar */
+  padding-top: 100px; /* space for fixed navbar */
   width: 92%;
   max-width: 420px;
   margin: 0 auto;
@@ -47,40 +48,41 @@ body {
   margin-bottom: 22px;
 }
 
-/* ===== INPUT GROUP ===== */
-.input-group {
+/* ===== PIN WRAPPER ===== */
+.pin-wrapper {
   display: flex;
-  align-items: center;
-  background: #0f172a;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+/* ===== PIN BOX ===== */
+.pin-box,
+.confirm-box {
+  width: 55px;
+  height: 60px;
   border-radius: 14px;
-  padding: 12px 14px;
-  margin-bottom: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #0f172a;
+  text-align: center;
+  font-size: 22px;
+  color: white;
+  outline: none;
   transition: 0.3s ease;
 }
 
-.input-group:focus-within {
-  border-color: #00cfff;
-  box-shadow: 0 0 12px rgba(0,207,255,0.4);
+/* Focus Effect */
+.pin-box:focus,
+.confirm-box:focus {
+  border-color: #19d1ff;
+  box-shadow: 0 0 12px rgba(25,209,255,0.6);
+  transform: translateY(-3px);
 }
 
-.input-group i {
-  font-size: 18px;
-  color: #00cfff;
-  margin-right: 10px;
-}
-
-.input-group input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 15px;
-  background: transparent;
-  color: white;
-}
-
-.input-group input::placeholder {
-  color: #64748b;
+/* Filled State */
+.pin-box.filled,
+.confirm-box.filled {
+  border-color: #1b75ff;
 }
 
 /* ===== BUTTON ===== */
@@ -112,4 +114,5 @@ body {
   margin-top: 12px;
   font-size: 13px;
   text-align: center;
+  min-height: 18px;
 }

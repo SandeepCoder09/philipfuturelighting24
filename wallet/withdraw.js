@@ -13,10 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const cancelBtn = document.getElementById("cancelWithdraw");
   const confirmBtn = document.getElementById("confirmWithdraw");
   const amountInput = document.getElementById("withdrawAmount");
-  const pinInput = document.getElementById("withdrawPin");
+  const modalPinBoxes = document.querySelectorAll(".modal-pin-box");
 
   let pendingAmount = 0;
 
+  /* ===========================
+     TOAST
+  =========================== */
   function showToast(message) {
     const toast = document.getElementById("customToast");
     toast.innerText = message;
@@ -25,6 +28,45 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       toast.classList.remove("show");
     }, 2500);
+  }
+
+  /* ===========================
+     PIN AUTO MOVE SYSTEM
+  =========================== */
+  modalPinBoxes.forEach((box, index) => {
+
+    box.addEventListener("input", () => {
+      box.value = box.value.replace(/\D/g, "");
+
+      if (box.value !== "") {
+        box.classList.add("filled");
+        if (index < modalPinBoxes.length - 1) {
+          modalPinBoxes[index + 1].focus();
+        }
+      } else {
+        box.classList.remove("filled");
+      }
+    });
+
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && box.value === "" && index > 0) {
+        modalPinBoxes[index - 1].focus();
+      }
+    });
+
+  });
+
+  function getPinValue() {
+    return Array.from(modalPinBoxes)
+      .map(box => box.value)
+      .join("");
+  }
+
+  function clearPinBoxes() {
+    modalPinBoxes.forEach(box => {
+      box.value = "";
+      box.classList.remove("filled");
+    });
   }
 
   /* ===========================
@@ -86,6 +128,11 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     modal.classList.add("active");
+
+    // focus first PIN box
+    setTimeout(() => {
+      modalPinBoxes[0].focus();
+    }, 200);
   });
 
   /* ===========================
@@ -93,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
   =========================== */
   cancelBtn.addEventListener("click", function () {
     modal.classList.remove("active");
+    clearPinBoxes();
   });
 
   /* ===========================
@@ -108,7 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (!pinInput || !pinInput.value || pinInput.value.length !== 4) {
+    const pin = getPinValue();
+
+    if (pin.length !== 4) {
       showToast("Enter valid 4-digit PIN.");
       return;
     }
@@ -128,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             amount: pendingAmount,
-            pin: pinInput.value
+            pin: pin
           })
         }
       );
@@ -142,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         showToast(data.message || "Withdrawal request submitted.");
         amountInput.value = "";
-        pinInput.value = "";
+        clearPinBoxes();
       }
 
     } catch (error) {

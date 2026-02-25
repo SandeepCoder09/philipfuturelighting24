@@ -69,14 +69,13 @@
     <h3><i class='bx bx-check-shield'></i> Confirm Withdrawal</h3>
     <p id="modalDetails"></p>
 
-    <div class="modal-pin">
-      <input 
-        type="password"
-        id="withdrawPin"
-        maxlength="4"
-        placeholder="Enter 4-digit PIN"
-      />
-    </div>
+    <!-- 🔐 PIN BOXES -->
+<div class="modal-pin-wrapper">
+  <input type="password" maxlength="1" class="modal-pin-box">
+  <input type="password" maxlength="1" class="modal-pin-box">
+  <input type="password" maxlength="1" class="modal-pin-box">
+  <input type="password" maxlength="1" class="modal-pin-box">
+</div>
 
     <div class="modal-actions">
       <button id="cancelWithdraw" class="modal-btn cancel">

@@ -1,4 +1,4 @@
-// 🌍 Auto API Switch (Local + Production)
+// 🌍 Auto API Switch
 const API_BASE =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
@@ -7,44 +7,52 @@ const API_BASE =
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  const pinBoxes = document.querySelectorAll(".pin-box");
+  const confirmBoxes = document.querySelectorAll(".confirm-box");
   const setPinBtn = document.getElementById("setPinBtn");
-  const pinInput = document.getElementById("pin");
-  const confirmPinInput = document.getElementById("confirmPin");
   const toast = document.getElementById("pinToast");
 
-  // Safety check (prevents JS crash if ID missing)
-  if (!setPinBtn || !pinInput || !confirmPinInput || !toast) {
-    console.error("Required elements not found in HTML.");
-    return;
+  // ===== AUTO MOVE & BACKSPACE =====
+  function setupPinInputs(boxes) {
+    boxes.forEach((box, index) => {
+
+      box.addEventListener("input", () => {
+        box.value = box.value.replace(/\D/g, "");
+
+        if (box.value !== "") {
+          box.classList.add("filled");
+          if (index < boxes.length - 1) {
+            boxes[index + 1].focus();
+          }
+        } else {
+          box.classList.remove("filled");
+        }
+      });
+
+      box.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && box.value === "" && index > 0) {
+          boxes[index - 1].focus();
+        }
+      });
+
+    });
   }
 
-  // 🔐 Allow only numbers
-  pinInput.addEventListener("input", () => {
-    pinInput.value = pinInput.value.replace(/\D/g, "").slice(0, 4);
-  });
+  setupPinInputs(pinBoxes);
+  setupPinInputs(confirmBoxes);
 
-  confirmPinInput.addEventListener("input", () => {
-    confirmPinInput.value = confirmPinInput.value.replace(/\D/g, "").slice(0, 4);
-  });
-
-  // 🔘 Submit Click
+  // ===== SUBMIT PIN =====
   setPinBtn.addEventListener("click", async () => {
 
-    const pin = pinInput.value.trim();
-    const confirmPin = confirmPinInput.value.trim();
+    const pin = Array.from(pinBoxes).map(b => b.value).join("");
+    const confirmPin = Array.from(confirmBoxes).map(b => b.value).join("");
     const token = localStorage.getItem("token");
 
     toast.style.color = "#f87171";
     toast.innerText = "";
 
-    // ✅ Validation
-    if (!pin || !confirmPin) {
-      toast.innerText = "All fields are required.";
-      return;
-    }
-
-    if (pin.length !== 4) {
-      toast.innerText = "PIN must be exactly 4 digits.";
+    if (pin.length !== 4 || confirmPin.length !== 4) {
+      toast.innerText = "Enter complete 4-digit PIN.";
       return;
     }
 
@@ -59,9 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // Disable button while processing
       setPinBtn.disabled = true;
-      setPinBtn.innerText = "Setting PIN...";
+      setPinBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Setting...';
 
       const res = await fetch(
         `${API_BASE}/api/users/set-withdraw-pin`,
@@ -80,10 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) {
         toast.innerText = data.message || "Failed to set PIN.";
         setPinBtn.disabled = false;
-        setPinBtn.innerText = "Set Secure PIN";
+        setPinBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Set Secure PIN';
       } else {
         toast.style.color = "#22c55e";
-        toast.innerText = "PIN set successfully! Redirecting...";
+        toast.innerText = "PIN set successfully!";
 
         setTimeout(() => {
           window.location.href = "../withdraw.html";
@@ -91,10 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
     } catch (error) {
-      console.error("Set PIN Error:", error);
-      toast.innerText = "Server error. Try again.";
+      toast.innerText = "Server error.";
       setPinBtn.disabled = false;
-      setPinBtn.innerText = "Set Secure PIN";
+      setPinBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Set Secure PIN';
     }
 
   });

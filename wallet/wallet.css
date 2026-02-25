@@ -8,42 +8,6 @@ min-height: 100vh;
 color: #ffffff;
 }
 
-/* ===== TOP BAR ===== */
-/* .top-bar {
-display: flex;
-align-items: center;
-gap: 15px;
-padding: 20px;
-}
-
-.back-btn {
-width: 42px;
-height: 42px;
-border-radius: 50%;
-border: none;
-background: #1e293b;
-color: #00c6ff;
-font-size: 20px;
-cursor: pointer;
-transition: 0.3s ease;
-}
-
-.back-btn:hover {
-background: linear-gradient(135deg, #0072ff, #00c6ff);
-color: white;
-box-shadow: 0 0 15px rgba(0,114,255,0.5);
-transform: scale(1.1);
-}
-
-.page-title {
-font-size: 18px;
-margin: 0;
-color: #00c6ff;
-display: flex;
-align-items: center;
-gap: 6px;
-} */
-
 /* ===== CONTAINER ===== */
 .wallet-container {
 min-height: 100vh;
@@ -199,6 +163,40 @@ gap: 8px;
 
 .withdraw-info strong {
 color: #ff9800;
+}
+
+/* ===== MODAL PIN WRAPPER ===== */
+.modal-pin-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px 0 22px;
+}
+
+/* ===== MODAL PIN BOX ===== */
+.modal-pin-box {
+  width: 52px;
+  height: 58px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0f172a;
+  text-align: center;
+  font-size: 22px;
+  color: white;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+/* Focus Effect */
+.modal-pin-box:focus {
+  border-color: #ff8a00;
+  box-shadow: 0 0 14px rgba(255,138,0,0.6);
+  transform: translateY(-3px);
+}
+
+/* Filled State */
+.modal-pin-box.filled {
+  border-color: #ff8a00;
 }
 
 /* ===== MODAL ===== */

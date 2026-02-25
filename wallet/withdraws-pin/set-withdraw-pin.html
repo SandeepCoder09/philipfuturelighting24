@@ -43,27 +43,21 @@
         Protect your wallet with a secure 4-digit PIN.
       </p>
 
-      <!-- PIN Input -->
-      <div class="input-group">
-        <i class="fa-solid fa-lock"></i>
-        <input 
-          type="password"
-          id="pin"
-          maxlength="4"
-          placeholder="Enter 4-digit PIN"
-        >
-      </div>
+      <!-- 🔐 PIN BOXES -->
+<div class="pin-wrapper">
+  <input type="password" maxlength="1" class="pin-box" />
+  <input type="password" maxlength="1" class="pin-box" />
+  <input type="password" maxlength="1" class="pin-box" />
+  <input type="password" maxlength="1" class="pin-box" />
+</div>
 
-      <!-- Confirm PIN -->
-      <div class="input-group">
-        <i class="fa-solid fa-lock"></i>
-        <input 
-          type="password"
-          id="confirmPin"
-          maxlength="4"
-          placeholder="Confirm PIN"
-        >
-      </div>
+<!-- 🔐 CONFIRM PIN BOXES -->
+<div class="pin-wrapper">
+  <input type="password" maxlength="1" class="confirm-box" />
+  <input type="password" maxlength="1" class="confirm-box" />
+  <input type="password" maxlength="1" class="confirm-box" />
+  <input type="password" maxlength="1" class="confirm-box" />
+</div>
 
       <!-- Submit -->
       <button id="setPinBtn" class="primary-btn">
