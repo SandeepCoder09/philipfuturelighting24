@@ -2,32 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Set Withdraw PIN</title>
+  <title>Set Withdraw PIN | Philips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Shared Navbar -->
+  <link rel="stylesheet" href="../shared/top-nav.css">
+
+  <!-- Page CSS -->
   <link rel="stylesheet" href="set-withdraw-pin.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
-<div class="pin-wrapper">
-  <div class="pin-card">
+  <!-- 🔷 Fixed Navbar -->
+  <div class="top-nav">
+    <button class="back-btn" onclick="window.location.href='../withdraw.html'">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back
+    </button>
+    <h2 class="page-title">Set Withdraw PIN</h2>
+  </div>
 
-    <h2>🔐 Set Withdraw PIN</h2>
-    <p class="subtitle">This PIN will be required for every withdrawal.</p>
+  <!-- 📦 Page Content -->
+  <div class="page-content">
 
-    <div class="input-group">
-      <input type="password" id="pin" maxlength="4" placeholder="Enter 4-digit PIN">
+    <div class="pin-card">
+
+      <!-- 🔐 Security Image -->
+      <img 
+        src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png"
+        alt="Secure Shield"
+        class="security-image"
+      >
+
+      <p class="pin-subtitle">
+        Protect your wallet with a secure 4-digit PIN.
+      </p>
+
+      <!-- PIN Input -->
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input 
+          type="password"
+          id="pin"
+          maxlength="4"
+          placeholder="Enter 4-digit PIN"
+        >
+      </div>
+
+      <!-- Confirm PIN -->
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input 
+          type="password"
+          id="confirmPin"
+          maxlength="4"
+          placeholder="Confirm PIN"
+        >
+      </div>
+
+      <!-- Submit -->
+      <button id="setPinBtn" class="primary-btn">
+        <i class="fa-solid fa-shield-halved"></i>
+        Set Secure PIN
+      </button>
+
+      <div id="pinToast" class="pin-toast"></div>
+
     </div>
-
-    <div class="input-group">
-      <input type="password" id="confirmPin" maxlength="4" placeholder="Confirm PIN">
-    </div>
-
-    <button id="setPinBtn">Set PIN</button>
-
-    <div id="pinToast" class="toast"></div>
 
   </div>
-</div>
 
-<script src="set-withdraw-pin.js"></script>
+  <script src="set-withdraw-pin.js"></script>
 </body>
 </html>
