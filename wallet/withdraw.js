@@ -1,3 +1,10 @@
+// 🌍 Auto API Switch
+const API_BASE =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5001"
+    : "https://philips-backend.onrender.com";
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const withdrawBtn = document.getElementById("withdrawBtn");
@@ -6,12 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const cancelBtn = document.getElementById("cancelWithdraw");
   const confirmBtn = document.getElementById("confirmWithdraw");
   const amountInput = document.getElementById("withdrawAmount");
+  const pinInput = document.getElementById("withdrawPin");
 
   let pendingAmount = 0;
 
-  /* ===========================
-     TOAST
-  =========================== */
   function showToast(message) {
     const toast = document.getElementById("customToast");
     toast.innerText = message;
@@ -25,23 +30,50 @@ document.addEventListener("DOMContentLoaded", function () {
   /* ===========================
      CLICK WITHDRAW
   =========================== */
-  withdrawBtn.addEventListener("click", function () {
+  withdrawBtn.addEventListener("click", async function () {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      showToast("Login required.");
+      return;
+    }
+
+    try {
+      const checkRes = await fetch(
+        `${API_BASE}/api/users/check-withdraw-pin`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      const checkData = await checkRes.json();
+
+      if (!checkData.hasPin) {
+        window.location.href = "withdraws-pin/set-withdraw-pin.html";
+        return;
+      }
+
+    } catch (error) {
+      showToast("Error checking PIN.");
+      return;
+    }
 
     const amount = parseFloat(amountInput.value);
 
-    // Empty check
     if (!amount || amount <= 0) {
       showToast("Please enter amount.");
       return;
     }
 
-    // Minimum check
     if (amount < 120) {
       showToast("Minimum withdrawal amount is ₹120.");
       return;
     }
 
-    // Calculate fee
     const fee = amount * 0.10;
     const finalAmount = amount - fee;
 
@@ -76,20 +108,28 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    if (!pinInput || !pinInput.value || pinInput.value.length !== 4) {
+      showToast("Enter valid 4-digit PIN.");
+      return;
+    }
+
     try {
 
       confirmBtn.disabled = true;
       confirmBtn.innerText = "Processing...";
 
       const res = await fetch(
-        "https://philips-backend.onrender.com/api/wallet/withdraw",
+        `${API_BASE}/api/wallet/withdraw`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
           },
-          body: JSON.stringify({ amount: pendingAmount })
+          body: JSON.stringify({
+            amount: pendingAmount,
+            pin: pinInput.value
+          })
         }
       );
 
@@ -102,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         showToast(data.message || "Withdrawal request submitted.");
         amountInput.value = "";
+        pinInput.value = "";
       }
 
     } catch (error) {

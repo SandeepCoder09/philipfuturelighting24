@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Set Withdraw PIN</title>
+  <link rel="stylesheet" href="set-withdraw-pin.css">
+</head>
+<body>
+
+<div class="pin-wrapper">
+  <div class="pin-card">
+
+    <h2>🔐 Set Withdraw PIN</h2>
+    <p class="subtitle">This PIN will be required for every withdrawal.</p>
+
+    <div class="input-group">
+      <input type="password" id="pin" maxlength="4" placeholder="Enter 4-digit PIN">
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="confirmPin" maxlength="4" placeholder="Confirm PIN">
+    </div>
+
+    <button id="setPinBtn">Set PIN</button>
+
+    <div id="pinToast" class="toast"></div>
+
+  </div>
+</div>
+
+<script src="set-withdraw-pin.js"></script>
+</body>
+</html>
