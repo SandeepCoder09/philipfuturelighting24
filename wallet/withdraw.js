@@ -14,8 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const confirmBtn = document.getElementById("confirmWithdraw");
   const amountInput = document.getElementById("withdrawAmount");
   const modalPinBoxes = document.querySelectorAll(".modal-pin-box");
+  const bankSection = document.getElementById("bankSection");
 
   let pendingAmount = 0;
+  let selectedBankId = null;
 
   /* ===========================
      TOAST
@@ -29,6 +31,70 @@ document.addEventListener("DOMContentLoaded", function () {
       toast.classList.remove("show");
     }, 2500);
   }
+
+  /* ===========================
+     LOAD BANKS
+  =========================== */
+  async function loadBanks() {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/wallet/banks`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const banks = await res.json();
+
+      if (!banks.length) {
+        renderNoBank();
+      } else {
+        renderBankList(banks);
+      }
+
+    } catch (error) {
+      renderNoBank();
+    }
+  }
+
+  function renderNoBank() {
+    bankSection.innerHTML = `
+      <div class="bank-empty">
+        ⚠ No bank account linked <br>
+        <button class="bind-btn" onclick="window.location.href='bind-card.html'">
+          Bind Bank Card
+        </button>
+      </div>
+    `;
+
+    withdrawBtn.disabled = true;
+  }
+
+  function renderBankList(banks) {
+    withdrawBtn.disabled = false;
+
+    bankSection.innerHTML = banks.map(bank => `
+      <div class="bank-card" data-id="${bank._id}">
+        <strong>${bank.bankName}</strong><br>
+        ****${bank.accountNumber.slice(-4)} • ${bank.holderName}
+      </div>
+    `).join("");
+
+    document.querySelectorAll(".bank-card").forEach(card => {
+      card.addEventListener("click", () => {
+
+        document.querySelectorAll(".bank-card")
+          .forEach(c => c.classList.remove("active"));
+
+        card.classList.add("active");
+        selectedBankId = card.dataset.id;
+      });
+    });
+  }
+
+  loadBanks();
 
   /* ===========================
      PIN AUTO MOVE SYSTEM
@@ -81,6 +147,11 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    if (!selectedBankId) {
+      showToast("Please select a bank account.");
+      return;
+    }
+
     try {
       const checkRes = await fetch(
         `${API_BASE}/api/users/check-withdraw-pin`,
@@ -129,7 +200,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modal.classList.add("active");
 
-    // focus first PIN box
     setTimeout(() => {
       modalPinBoxes[0].focus();
     }, 200);
@@ -144,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ===========================
-     CONFIRM
+     CONFIRM WITHDRAW
   =========================== */
   confirmBtn.addEventListener("click", async function () {
 
@@ -178,7 +248,8 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             amount: pendingAmount,
-            pin: pin
+            pin: pin,
+            bankId: selectedBankId
           })
         }
       );

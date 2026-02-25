@@ -8,6 +8,45 @@ min-height: 100vh;
 color: #ffffff;
 }
 
+/* ===== BANK CARD ===== */
+.bank-card {
+  background: #1e293b;
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.bank-card:hover {
+  border-color: #19d1ff;
+  transform: translateY(-2px);
+}
+
+.bank-card.active {
+  border-color: #ff8a00;
+  box-shadow: 0 0 12px rgba(255,138,0,0.5);
+}
+
+.bank-empty {
+  background: #1e293b;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.bind-btn {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 25px;
+  background: linear-gradient(135deg,#19d1ff,#1b75ff);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
 /* ===== CONTAINER ===== */
 .wallet-container {
 min-height: 100vh;
