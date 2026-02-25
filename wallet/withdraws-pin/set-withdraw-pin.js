@@ -5,65 +5,98 @@ const API_BASE =
     ? "http://localhost:5001"
     : "https://philips-backend.onrender.com";
 
-document.getElementById("setPinBtn").addEventListener("click", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  const pin = document.getElementById("pin").value.trim();
-  const confirmPin = document.getElementById("confirmPin").value.trim();
-  const token = localStorage.getItem("token");
+  const setPinBtn = document.getElementById("setPinBtn");
+  const pinInput = document.getElementById("pin");
+  const confirmPinInput = document.getElementById("confirmPin");
   const toast = document.getElementById("pinToast");
 
-  toast.style.color = "#f87171";
-  toast.innerText = "";
-
-  if (!pin || !confirmPin) {
-    toast.innerText = "All fields are required.";
+  // Safety check (prevents JS crash if ID missing)
+  if (!setPinBtn || !pinInput || !confirmPinInput || !toast) {
+    console.error("Required elements not found in HTML.");
     return;
   }
 
-  if (pin.length !== 4 || isNaN(pin)) {
-    toast.innerText = "PIN must be 4 digits.";
-    return;
-  }
+  // 🔐 Allow only numbers
+  pinInput.addEventListener("input", () => {
+    pinInput.value = pinInput.value.replace(/\D/g, "").slice(0, 4);
+  });
 
-  if (pin !== confirmPin) {
-    toast.innerText = "PINs do not match.";
-    return;
-  }
+  confirmPinInput.addEventListener("input", () => {
+    confirmPinInput.value = confirmPinInput.value.replace(/\D/g, "").slice(0, 4);
+  });
 
-  if (!token) {
-    toast.innerText = "Login required.";
-    return;
-  }
+  // 🔘 Submit Click
+  setPinBtn.addEventListener("click", async () => {
 
-  try {
+    const pin = pinInput.value.trim();
+    const confirmPin = confirmPinInput.value.trim();
+    const token = localStorage.getItem("token");
 
-    const res = await fetch(
-      `${API_BASE}/api/users/set-withdraw-pin`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ pin })
-      }
-    );
+    toast.style.color = "#f87171";
+    toast.innerText = "";
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      toast.innerText = data.message || "Failed to set PIN.";
-    } else {
-      toast.style.color = "#22c55e";
-      toast.innerText = "PIN set successfully! Redirecting...";
-
-      setTimeout(() => {
-        window.location.href = "../withdraw.html";
-      }, 1500);
+    // ✅ Validation
+    if (!pin || !confirmPin) {
+      toast.innerText = "All fields are required.";
+      return;
     }
 
-  } catch (error) {
-    toast.innerText = "Server error.";
-  }
+    if (pin.length !== 4) {
+      toast.innerText = "PIN must be exactly 4 digits.";
+      return;
+    }
+
+    if (pin !== confirmPin) {
+      toast.innerText = "PINs do not match.";
+      return;
+    }
+
+    if (!token) {
+      toast.innerText = "Login required.";
+      return;
+    }
+
+    try {
+      // Disable button while processing
+      setPinBtn.disabled = true;
+      setPinBtn.innerText = "Setting PIN...";
+
+      const res = await fetch(
+        `${API_BASE}/api/users/set-withdraw-pin`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ pin })
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.innerText = data.message || "Failed to set PIN.";
+        setPinBtn.disabled = false;
+        setPinBtn.innerText = "Set Secure PIN";
+      } else {
+        toast.style.color = "#22c55e";
+        toast.innerText = "PIN set successfully! Redirecting...";
+
+        setTimeout(() => {
+          window.location.href = "../withdraw.html";
+        }, 1500);
+      }
+
+    } catch (error) {
+      console.error("Set PIN Error:", error);
+      toast.innerText = "Server error. Try again.";
+      setPinBtn.disabled = false;
+      setPinBtn.innerText = "Set Secure PIN";
+    }
+
+  });
 
 });
