@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const confirmBtn = document.getElementById("confirmWithdraw");
   const amountInput = document.getElementById("withdrawAmount");
 
-  let pendingAmount = null;
+  let pendingAmount = 0;
 
   /* ===========================
      TOAST
@@ -29,19 +29,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const amount = parseFloat(amountInput.value);
 
-    // 1️⃣ Empty check
-    if (!amount) {
+    // Empty check
+    if (!amount || amount <= 0) {
       showToast("Please enter amount.");
       return;
     }
 
-    // 2️⃣ Minimum check
+    // Minimum check
     if (amount < 120) {
       showToast("Minimum withdrawal amount is ₹120.");
       return;
     }
 
-    // 3️⃣ Valid amount → Show modal
+    // Calculate fee
     const fee = amount * 0.10;
     const finalAmount = amount - fee;
 
