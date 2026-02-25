@@ -1,0 +1,300 @@
+/* ============================= */
+/* 🌌 Global Styling */
+/* ============================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background: #0f172a;
+    min-height: 100vh;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    overflow: hidden;
+  }
+  
+  /* ============================= */
+  /* 🔙 Back Button */
+  /* ============================= */
+  
+  .back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 1000;
+  }
+  
+  /* Hover Effect */
+  .back-btn:hover {
+    background: rgba(250, 204, 21, 0.15);
+    border-color: #facc15;
+    color: #facc15;
+    transform: translateX(-3px);
+  }
+  
+  /* Icon Animation */
+  .back-btn i {
+    transition: 0.3s;
+  }
+  
+  .back-btn:hover i {
+    transform: translateX(-4px);
+  }
+  
+  /* ============================= */
+  /* 🎁 3D Floating Images */
+  /* ============================= */
+  
+  .floating-img {
+    position: absolute;
+    width: 300px;
+    opacity: 0.12;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    animation: float3d 10s ease-in-out infinite;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+  }
+  
+  /* 🔼 Top Left */
+  .top-img {
+    top: 40px;
+    left: 40px;
+    animation-delay: 0s;
+  }
+  
+  /* 🔽 Bottom Right */
+  .bottom-img {
+    bottom: 40px;
+    right: 40px;
+    animation-delay: 4s;
+  }
+  
+  /* Floating + Slight 3D Rotation */
+  @keyframes float3d {
+    0%, 100% {
+      transform: translateY(0px) rotateY(0deg) rotateX(0deg);
+    }
+    50% {
+      transform: translateY(-30px) rotateY(15deg) rotateX(10deg);
+    }
+  }
+  
+  /* ============================= */
+  /* 🧧 Gift Card Container */
+  /* ============================= */
+  
+  .gift-container {
+    width: 400px;
+    padding: 40px 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
+    text-align: center;
+    animation: fadeIn 1s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* ============================= */
+  /* 🎀 Header */
+  /* ============================= */
+  
+  .gift-header {
+    margin-bottom: 30px;
+  }
+  
+  .gift-icon {
+    font-size: 50px;
+    color: #facc15;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .gift-header h2 {
+    font-weight: 600;
+    font-size: 22px;
+  }
+  
+  /* ============================= */
+  /* 🎟 Input Styling */
+  /* ============================= */
+  
+  .input-group {
+    position: relative;
+    margin-bottom: 25px;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #0AA2FF;
+    box-shadow: 0 0 10px #0AA2FF;
+  }
+  
+  /* ============================= */
+  /* 🚀 Claim Button */
+  /* ============================= */
+  
+  #redeemBtn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    /* background: linear-gradient(
+      135deg,
+      #19d1ff 0%,
+      #0aa2ff 45%,
+      #1b75ff 100%
+    );
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.3s; */
+    background: linear-gradient(
+      135deg,
+      #19d1ff 0%,
+      #0aa2ff 45%,
+      #1b75ff 100%
+    );
+    color: #000;
+    /* color: #ffffff; */
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #redeemBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px linear-gradient(
+      135deg,
+      #19d1ff 0%,
+      #0aa2ff 45%,
+      #1b75ff 100%
+    );
+  }
+  
+  /* Button Shine Effect */
+  #redeemBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition: 0.5s;
+  }
+  
+  #redeemBtn:hover::before {
+    left: 100%;
+  }
+  
+  /* ============================= */
+  /* 🔥 Popup Styling */
+  /* ============================= */
+  
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+  }
+  
+  .popup-box {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 320px;
+    animation: popupFade 0.4s ease;
+  }
+  
+  @keyframes popupFade {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  .popup-icon i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #22c55e;
+  }
+  
+  #popupOkBtn {
+    margin-top: 15px;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #22c55e;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  #popupOkBtn:hover {
+    opacity: 0.8;
+  }
+  
+  /* ============================= */
+  /* 📱 Responsive */
+  /* ============================= */
+  
+  @media (max-width: 480px) {
+    .gift-container {
+      width: 90%;
+      padding: 30px 20px;
+    }
+  }

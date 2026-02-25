@@ -3,60 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bind Bank Card</title>
 
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>Bind Bank Card | Philips</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../shared/top-nav.css">
   <link rel="stylesheet" href="bind-card.css">
 
-  <!-- Boxicons CDN for real icons -->
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
-<div class="page">
-
-  <!-- ===== FORM CARD ===== -->
-  <div class="card">
-
-    <h2>Bind Bank Card</h2>
-    <p class="subtitle">Securely link your bank for withdrawals</p>
-
-    <div class="input-group">
-      <i class='bx bx-credit-card'></i>
-      <input id="accountNumber" type="text" placeholder="Account Number">
-    </div>
-
-    <div class="input-group">
-      <i class='bx bx-barcode'></i>
-      <input id="ifsc" type="text" placeholder="IFSC Code">
-    </div>
-
-    <div class="input-group">
-      <i class='bx bx-user'></i>
-      <input id="holderName" type="text" placeholder="Account Holder Name">
-    </div>
-
-    <div class="input-group">
-      <i class='bx bx-building'></i>
-      <input id="bankName" type="text" placeholder="Bank Name">
-    </div>
-
-    <button id="bindBtn" onclick="bindBank()">
-      <span id="btnText">Bind Bank Card</span>
-      <div class="loader hidden"></div>
+  <!-- 🔷 Fixed Navbar -->
+  <div class="top-nav">
+    <button class="back-btn" onclick="history.back()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back
     </button>
+    <h2 class="page-title">Bind Bank Card</h2>
+  </div>
 
-    <div id="messageBox" class="message hidden"></div>
+  <!-- 📦 Page Content -->
+  <div class="page-content">
+
+    <!-- ===== Bind Form Card ===== -->
+    <div class="card">
+
+      <p class="subtitle">
+        Securely link your bank account for withdrawals
+      </p>
+
+      <div class="input-group">
+        <i class="fa-solid fa-credit-card"></i>
+        <input id="accountNumber" type="text" placeholder="Account Number">
+      </div>
+
+      <div class="input-group">
+        <i class="fa-solid fa-hashtag"></i>
+        <input id="ifsc" type="text" placeholder="IFSC Code">
+      </div>
+
+      <div class="input-group">
+        <i class="fa-solid fa-user"></i>
+        <input id="holderName" type="text" placeholder="Account Holder Name">
+      </div>
+
+      <div class="input-group">
+        <i class="fa-solid fa-building-columns"></i>
+        <input id="bankName" type="text" placeholder="Bank Name">
+      </div>
+
+      <button id="bindBtn" onclick="bindBank()">
+        <i class="fa-solid fa-link"></i>
+        <span id="btnText">Bind Bank Card</span>
+        <div class="loader hidden"></div>
+      </button>
+
+      <div id="messageBox" class="message hidden"></div>
+
+    </div>
+
+    <!-- ===== Linked Banks Card ===== -->
+    <div class="card bank-list-card">
+
+      <h3>
+        <i class="fa-solid fa-wallet"></i>
+        Your Linked Banks
+      </h3>
+
+      <div id="bankContainer"></div>
+
+    </div>
 
   </div>
 
-  <!-- ===== BANK LIST ===== -->
-  <div class="card bank-list-card">
-    <h3>Your Linked Banks</h3>
-    <div id="bankContainer"></div>
-  </div>
-
-</div>
-
-<script src="bind-card.js"></script>
+  <script src="bind-card.js"></script>
 </body>
 </html>

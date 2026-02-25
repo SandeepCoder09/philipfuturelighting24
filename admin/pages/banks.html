@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank Accounts | Admin</title>
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+<div class="layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">PHILIPS ADMIN</h2>
+
+    <nav class="nav-menu">
+
+      <a href="../index.html">
+        <i class="fa-solid fa-gauge"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="users.html">
+        <i class="fa-solid fa-users"></i>
+        <span>Users</span>
+      </a>
+
+      <a href="withdraws.html">
+        <i class="fa-solid fa-money-bill-transfer"></i>
+        <span>Withdraws</span>
+      </a>
+
+      <a href="transactions.html">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        <span>Transactions</span>
+      </a>
+
+      <a href="banks.html" class="active">
+        <i class="fa-solid fa-building-columns"></i>
+        <span>Banks</span>
+      </a>
+
+      <!-- NEW GIFT MENU -->
+      <a href="gift.html">
+        <i class="fa-solid fa-gift"></i>
+        <span>Gift Codes</span>
+      </a>
+
+    </nav>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+
+    <!-- ========== TOPBAR ========== -->
+    <header class="topbar">
+
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <h1>
+          <i class="fa-solid fa-building-columns"></i>
+          All Linked Bank Accounts
+        </h1>
+      </div>
+
+      <div class="topbar-right">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
+
+    </header>
+
+    <!-- ========== SEARCH SECTION ========== -->
+    <section class="search-section">
+
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          id="searchBank"
+          placeholder="Search by User ID or Bank Name"
+        />
+      </div>
+
+      <button class="search-btn" onclick="searchBanks()">
+        <i class="fa-solid fa-search"></i>
+        Search
+      </button>
+
+    </section>
+
+    <!-- ========== TABLE SECTION ========== -->
+    <section class="table-container">
+
+      <table>
+        <thead>
+          <tr>
+            <th><i class="fa-solid fa-id-card"></i> User ID</th>
+            <th><i class="fa-solid fa-user"></i> Holder Name</th>
+            <th><i class="fa-solid fa-building"></i> Bank</th>
+            <th><i class="fa-solid fa-credit-card"></i> Account Number</th>
+            <th><i class="fa-solid fa-code"></i> IFSC</th>
+            <th><i class="fa-solid fa-calendar"></i> Created</th>
+          </tr>
+        </thead>
+
+        <tbody id="bankTable">
+          <!-- Bank data loads dynamically -->
+        </tbody>
+
+      </table>
+
+    </section>
+
+  </main>
+
+</div>
+
+  <!-- TOAST CONTAINER -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/banks.js"></script>
+
+</body>
+</html>

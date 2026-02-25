@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+
+  <title>Recharge Records | Philips</title>
+
+  <!-- Shared Navbar CSS -->
+  <link rel="stylesheet" href="../../shared/top-nav.css">
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="records.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- 🔷 Top Navbar -->
+  <div class="top-nav">
+    <button class="back-btn" onclick="history.back()">
+      <i class="fa-solid fa-arrow-left"></i> Back
+    </button>
+    <h2 class="page-title">Recharge Records</h2>
+  </div>
+
+  <!-- 📦 Content -->
+  <div class="page-content">
+    <div id="recordsContainer"></div>
+  </div>
+
+  <script>
+    const RECORD_TYPE = "recharge";
+  </script>
+  <script src="records.js"></script>
+
+</body>
+</html>

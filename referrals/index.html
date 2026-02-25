@@ -1,86 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../home/style.css" />
-    <link rel="stylesheet" href="../referrals/style.css" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philips - India</title>
+  <meta charset="UTF-8">
+  <title>My Team | Philips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#111827">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="../home/style.css">
+  <link rel="stylesheet" href="../referrals/style.css">
+  <link rel="stylesheet" href="../shared/bottom-nav.css">
 </head>
+
 <body>
-    
-<!-- ===== NAVBAR (LOGO ONLY) ===== -->
-<nav class="navbar">
-  <div class="logo-wrapper">
-    <a href="../home/index.html">
-      <img
-        src="../assets/philips-logo-png-transparent.png"
-        alt="Philips Logo"
-      />
-    </a>
 
-    <div class="led-dots">
-      <span></span>
-      <span></span>
-      <span></span>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo-wrapper">
+      <a href="../home/index.html">
+        <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo">
+      </a>
+      <div class="led-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-  </div>
-</nav>
-
-  <!-- HERO SECTION -->
-  <section class="referral-hero">
-    <h1>💡 Bright Rewards Referral Program</h1>
-    <p>Refer friends & earn exclusive lighting rewards!</p>
-  </section>
-
-  <!-- REFERRAL CODE CARD -->
-  <section class="referral-code-section">
-    <div class="link-box"></div>
-<button class="copy-link-btn" onclick="copyReferralLink()">
-  Copy Referral Link
-</button>
-  </section>
-
-  <!-- STATS SECTION -->
-  <section class="referral-stats">
-    <div class="stat-card">
-      <h3>12</h3>
-      <p>Total Referrals</p>
-    </div>
-    <div class="stat-card">
-      <h3>₹2,400</h3>
-      <p>Total Earnings</p>
-    </div>
-    <div class="stat-card">
-      <h3>5</h3>
-      <p>Pending Rewards</p>
-    </div>
-  </section>
-
-  <!-- REFERRAL FORM -->
-  <section class="referral-form-section">
-    <h2>Refer a Friend</h2>
-    <form class="referral-form">
-      <input type="text" placeholder="Friend Name" required>
-      <input type="email" placeholder="Friend Email" required>
-      <button type="submit">Send Invite</button>
-    </form>
-  </section>
-
-  <!-- ===== BOTTOM MOBILE NAVIGATION ===== -->
-  <nav class="bottom-nav">
-    <a href="../home/index.html" class="nav-btn active">Home</a>
-    <a href="../products/index.html" class="nav-btn">Products</a>
-    <a href="../referrals/index.html" class="nav-btn">Referrals</a>
-    <a href="../profile/index.html" class="nav-btn">Profile</a>
   </nav>
 
-  <script>
-    function copyCode() {
-      navigator.clipboard.writeText("PHILIPS2026");
-      alert("Referral Code Copied!");
-    }
-    </script>
+  <div class="container">
+
+    <div class="header">
+      <h2>My Team</h2>
+    </div>
+
+    <!-- ===== REFERRAL LINK CARD ===== -->
+    <div class="referral-link-card">
+      <p class="invite-title">
+        <i class="fa-solid fa-link"></i>
+        Your Referral Link
+      </p>
+
+      <div class="referral-box">
+        <input type="text" id="referralLink" readonly>
+        <button id="copyBtn">
+          <i class="fa-solid fa-copy"></i>
+        </button>
+      </div>
+
+      <small>Share this link to invite your friends</small>
+    </div>
+
+    <div class="active-box">
+      Active Users: <span id="activeUsers">0</span>
+    </div>
+
+    <div class="team-card">
+      <p>Team Size</p>
+      <h1 id="teamSize">0</h1>
+    </div>
+
+    <div class="stats-card">
+      <span>Total Promotion Income</span>
+      <strong id="totalIncome">0.0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Yesterday's Promotion Income</span>
+      <strong id="yesterdayIncome">0.0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Direct Referral Number</span>
+      <strong id="directReferral">0</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Invitation Reward</span>
+      <strong id="invitationReward">0.0</strong>
+    </div>
+
+  </div>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <nav class="bottom-nav">
+    <a href="../home/index.html" class="nav-btn">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+
+    <a href="../products/index.html" class="nav-btn">
+      <i class="fa-solid fa-lightbulb"></i>
+      <span>Products</span>
+    </a>
+
+    <a href="../referrals/index.html" class="nav-btn active">
+      <i class="fa-solid fa-gift"></i>
+      <span>Referrals</span>
+    </a>
+
+    <a href="../profile/index.html" class="nav-btn">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
 
 <script src="../referrals/script.js"></script>
 </body>

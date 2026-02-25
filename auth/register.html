@@ -5,28 +5,66 @@
   <title>Register | Philips</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Link CSS -->
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
   <link rel="stylesheet" href="../auth/register.css">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-  <div class="register-container">
-    <h2>Create Account</h2>
+<div class="register-container">
 
-    <form id="registerForm">
+  <h2>
+    <i class="fa-solid fa-user-plus"></i>
+    Create Account
+  </h2>
+
+  <form id="registerForm">
+
+    <div class="input-group">
+      <i class="fa-solid fa-user"></i>
       <input type="text" id="name" placeholder="Full Name" required>
-      <input type="email" id="email" placeholder="Email Address" required>
+    </div>
+
+    <div class="input-group">
+      <i class="fa-solid fa-phone"></i>
       <input type="text" id="mobile" placeholder="Mobile Number" required>
+    </div>
+
+    <div class="input-group">
+      <i class="fa-solid fa-lock"></i>
       <input type="password" id="password" placeholder="Password" required>
-      <button type="submit">Register</button>
-    </form>
+    </div>
 
-    <p>Already have an account?
-      <a href="../auth/index.html">Login</a>
-    </p>
-  </div>
+    <div class="input-group">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+    </div>
 
-  <!-- Link JS -->
-  <script src="../auth/register.js"></script>
+    <div class="input-group">
+      <i class="fa-solid fa-gift"></i>
+      <input type="number" id="inviteCode" placeholder="Invite Code (Optional)">
+    </div>
+
+    <button type="submit">
+      <i class="fa-solid fa-user-check"></i>
+      Register
+    </button>
+
+  </form>
+
+  <p id="message"></p>
+
+  <p>Already have an account?
+    <a href="../auth/index.html">Login</a>
+  </p>
+
+</div>
+
+<script src="../auth/register.js"></script>
 </body>
 </html>

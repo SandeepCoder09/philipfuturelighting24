@@ -3,59 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recharge | Philips India</title>
 
-  <link rel="stylesheet" href="../home/style.css">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>Recharge | Philips</title>
+
+  <!----------------- Styles CSS --------------------------------->
   <link rel="stylesheet" href="../wallet/wallet.css">
+  <link rel="stylesheet" href="../shared/top-nav.css">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
+  <!-- 🔷 Fixed Navbar -->
+  <div class="top-nav">
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="logo-wrapper">
-      <a href="../home/index.html">
-        <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo">
-      </a>
-    </div>
-  </nav>
+  <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back
+  </button>
 
-  <!-- ===== RECHARGE SECTION ===== -->
-  <section class="wallet-container recharge-page">
+  <h2 class="page-title">Deposit Fund</h2>
 
-    <h2>💡 Recharge Wallet</h2>
+  <!-- New Records Button -->
+  <!-- New Records Button -->
+  <button class="nav-right-btn" onclick="window.location.href='../wallet/records/recharge-records.html'">
+    <i class="fa-solid fa-clock-rotate-left"></i>
+    Records
+  </button>
 
-    <div class="wallet-card">
+</div>
 
-      <!-- Selected Amount Input -->
-      <label>Selected Amount</label>
-      <input 
-        type="text" 
-        id="selectedAmount" 
-        placeholder="Select amount" 
-        readonly 
-      />
+<section class="wallet-container recharge-page">
 
-      <!-- Amount Options -->
-      <div class="amount-options">
-        <button type="button" class="amount-btn" data-amount="99">₹99</button>
-        <button type="button" class="amount-btn" data-amount="499">₹499</button>
-        <button type="button" class="amount-btn" data-amount="999">₹999</button>
-        <button type="button" class="amount-btn" data-amount="4999">₹4999</button>
-      </div>
+  <div class="wallet-card">
 
-      <!-- Recharge Button -->
-      <button id="rechargeBtn" class="wallet-btn recharge-style">
-        Recharge Now
+    <label>
+      <i class='bx bx-wallet'></i>
+      Selected Amount
+    </label>
+
+    <input type="text" id="selectedAmount" placeholder="Select amount" readonly />
+
+    <div class="amount-options">
+      <button type="button" class="amount-btn" data-amount="1">
+        ₹1
       </button>
-
+      <button type="button" class="amount-btn" data-amount="99">
+        ₹99
+      </button>
+      <button type="button" class="amount-btn" data-amount="499">
+        ₹499
+      </button>
+      <button type="button" class="amount-btn" data-amount="999">
+        ₹999
+      </button>
+      <button type="button" class="amount-btn" data-amount="4999">
+        ₹4999
+      </button>
     </div>
 
-  </section>
+    <button id="rechargeBtn" class="wallet-btn recharge-style">
+      <i class='bx bx-bolt'></i>
+      Deposit Now
+    </button>
 
-  <!-- ===== SCRIPTS ===== -->
-  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
-  <script src="../wallet/recharge.js"></script>
+  </div>
 
+</section>
+
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+<script src="../wallet/recharge.js"></script>
 </body>
 </html>

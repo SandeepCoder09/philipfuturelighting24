@@ -1,8 +1,9 @@
 /* ===== BACKGROUND ===== */
 body {
+  padding: 0;
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(180deg, #001a33, #002b55);
+  font-family: "Poppins", sans-serif;
+  background: #0f172a;
   color: white;
 }
 
@@ -30,7 +31,7 @@ body {
   margin-bottom: 25px;
 }
 
-/* Smaller image */
+/* Profile image */
 .profile-img.small {
   width: 85px;
   height: 85px;
@@ -68,6 +69,11 @@ body {
   opacity: 0.9;
 }
 
+.mobile-top i {
+  margin-right: 6px;
+  color: #00c3ff;
+}
+
 /* ===== ACTION BUTTONS ===== */
 .action-buttons {
   display: flex;
@@ -97,11 +103,104 @@ body {
   box-shadow: 0 0 12px rgba(255,140,0,0.5);
 }
 
-.action-btn:hover {
-  transform: translateY(-3px);
+.action-btn i {
+  margin-right: 6px;
 }
 
-/* ===== GLASS CARD ===== */
+/* ===== WALLET BOX ===== */
+.wallet-box {
+  width: 100%;
+  max-width: 380px;
+  height: 115px;
+  margin: 20px auto;
+
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    #19d1ff 0%,
+    #0aa2ff 45%,
+    #1b75ff 100%
+  );
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 18px 20px;
+  position: relative;
+
+  box-shadow:
+    0 8px 25px rgba(0, 115, 255, 0.35),
+    0 0 20px rgba(0, 170, 255, 0.25);
+}
+
+/* Gloss effect */
+.wallet-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.25) 0%,
+    rgba(255,255,255,0.1) 35%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* Wallet header */
+.wallet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* Wallet title */
+.wallet-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.wallet-title i {
+  font-size: 14px;
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+/* Balance amount */
+.wallet-box h3 {
+  margin: 8px 0 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: #eaf8ff;
+  letter-spacing: 1px;
+}
+
+/* Refresh button */
+.refresh-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.refresh-btn:hover {
+  transform: rotate(180deg) scale(1.1);
+  background: rgba(255,255,255,0.25);
+}
+
+/* ===== MENU CARD ===== */
 .profile-card {
   width: 100%;
   max-width: 380px;
@@ -114,7 +213,6 @@ body {
   margin-bottom: 25px;
 }
 
-/* ===== MENU ITEMS ===== */
 .menu-item {
   display: flex;
   justify-content: space-between;
@@ -135,53 +233,35 @@ body {
   background: rgba(255,255,255,0.08);
 }
 
-.menu-item span {
-  opacity: 0.6;
-  font-size: 18px;
+.menu-item div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* ===== LOGOUT ===== */
-.logout-btn {
-  padding: 12px 30px;
-  border-radius: 25px;
+.menu-item i:first-child {
+  margin-right: 10px;
+  color: #00c3ff;
+}
+
+/* ===== NAVBAR LOGOUT BUTTON ===== */
+.nav-logout-btn {
+  background: linear-gradient(90deg, #00c3ff, #007bff);
   border: none;
-  background: linear-gradient(90deg, #00c3ff, #007bff);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.logout-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px #00c3ff;
-}
-
-/* ===== ACTIVE NAV ===== */
-.nav-btn.active {
-  background: linear-gradient(90deg, #00c3ff, #007bff);
-  color: white !important;
+  padding: 8px 16px;
   border-radius: 20px;
-}
-
-/* ===== WALLET CARD ===== */
-.wallet-card {
-  background: linear-gradient(135deg, #00c3ff, #007bff);
-  padding: 18px;
-  border-radius: 18px;
-  text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 0 0 20px rgba(0,195,255,0.5);
-}
-
-.wallet-title {
-  margin: 0;
+  color: white;
+  font-weight: 500;
   font-size: 13px;
-  opacity: 0.9;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 6px;
+  transition: box-shadow 0.3s ease;
 }
 
-.wallet-amount {
-  margin: 5px 0 0;
-  font-size: 26px;
-  font-weight: bold;
+/* Glow only */
+.nav-logout-btn:hover {
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
 }

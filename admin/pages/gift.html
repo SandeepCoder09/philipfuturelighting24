@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gift Codes | Admin</title>
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>PHILIPS ADMIN</h2>
+
+    <nav>
+      <a href="../index.html">
+        <i class="fa-solid fa-gauge"></i> Dashboard
+      </a>
+
+      <a href="users.html">
+        <i class="fa-solid fa-users"></i> Users
+      </a>
+
+      <a href="withdraws.html">
+        <i class="fa-solid fa-money-bill-transfer"></i> Withdraws
+      </a>
+
+      <a href="transactions.html">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i> Transactions
+      </a>
+
+      <a href="banks.html">
+        <i class="fa-solid fa-building-columns"></i> Banks
+      </a>
+
+      <a href="gift.html" class="active">
+        <i class="fa-solid fa-gift"></i> Gift Codes
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <h1>
+          <i class="fa-solid fa-gift"></i> Gift Code Management
+        </h1>
+      </div>
+
+      <div class="topbar-right">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- CREATE GIFT -->
+    <div class="card">
+
+      <h3>
+        <i class="fa-solid fa-plus"></i> Create Gift Code
+      </h3>
+
+      <div class="search-section">
+
+        <div class="search-box">
+          <input type="text" id="giftCode" placeholder="Gift Code">
+        </div>
+
+        <div class="search-box">
+          <input type="number" id="amountPerUser" placeholder="Amount Per User (₹)">
+        </div>
+
+        <div class="search-box">
+          <input type="number" id="totalAmount" placeholder="Total Pool Amount (₹)">
+        </div>
+
+        <button class="search-btn" onclick="createGift()">
+          <i class="fa-solid fa-plus"></i> Generate
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- GIFT TABLE -->
+    <div class="table-container">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Per User</th>
+            <th>Total Pool</th>
+            <th>Remaining</th>
+            <th>Expires In</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="giftTable"></tbody>
+      </table>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<!-------------------JS FILES--------------->
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/gift.js"></script>
+
+</body>
+</html>

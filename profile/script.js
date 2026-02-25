@@ -1,4 +1,11 @@
+const API = "https://philips-backend.onrender.com/api";
+
+
+// ===============================
+// LOAD PROFILE
+// ===============================
 async function loadProfile() {
+
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -7,15 +14,15 @@ async function loadProfile() {
   }
 
   try {
-    // Load profile
-    const profileRes = await fetch(
-      "https://philips-backend.onrender.com/api/users/profile",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+
+    // ===============================
+    // LOAD USER PROFILE
+    // ===============================
+    const profileRes = await fetch(`${API}/users/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-    );
+    });
 
     if (!profileRes.ok) {
       throw new Error("Profile fetch failed");
@@ -24,23 +31,45 @@ async function loadProfile() {
     const profileData = await profileRes.json();
     const user = profileData.user;
 
+    // ===============================
+    // DISPLAY USER INFO
+    // ===============================
     document.getElementById("mobile").innerText = user.mobile;
-    document.getElementById("uid").innerText = user._id;
+    document.getElementById("uid").innerText = user.userId;
     document.getElementById("username").innerText =
-      "User" + user._id.slice(-5);
+      "User" + user.userId;
 
-    // Load balance
-    const balanceRes = await fetch(
-      "https://philips-backend.onrender.com/api/wallet/balance",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+    // ===============================
+    // LOAD WALLET BALANCE
+    // ===============================
+    await refreshWalletBalance();
+
+  } catch (error) {
+    console.error("Profile Error:", error);
+    alert("Session expired or backend not responding. Please login again.");
+    localStorage.removeItem("token");
+    window.location.href = "../auth/index.html";
+  }
+}
+
+
+// ===============================
+// REFRESH WALLET BALANCE
+// ===============================
+async function refreshWalletBalance() {
+
+  const token = localStorage.getItem("token");
+
+  try {
+
+    const balanceRes = await fetch(`${API}/wallet/balance`, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-    );
+    });
 
     if (!balanceRes.ok) {
-      throw new Error("Balance fetch failed");
+      throw new Error("Failed to fetch balance");
     }
 
     const balanceData = await balanceRes.json();
@@ -49,14 +78,45 @@ async function loadProfile() {
       Number(balanceData.balance).toLocaleString("en-IN");
 
   } catch (error) {
-    console.error("Error:", error);
-    alert("Backend not responding. Please wait 30 seconds and refresh.");
+    console.error("Wallet refresh error:", error);
   }
 }
 
+
+// ===============================
+// REFRESH BUTTON HANDLER
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+
+  const refreshBtn = document.getElementById("refreshWalletBtn");
+
+  if (refreshBtn) {
+    refreshBtn.addEventListener("click", async () => {
+
+      refreshBtn.innerHTML =
+        `<i class="fa-solid fa-spinner fa-spin"></i>`;
+
+      await refreshWalletBalance();
+
+      setTimeout(() => {
+        refreshBtn.innerHTML =
+          `<i class="fa-solid fa-rotate-right"></i>`;
+      }, 600);
+
+    });
+  }
+
+});
+
+
+// ===============================
+// LOGOUT
+// ===============================
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "../auth/index.html";
 }
 
+
+// ===============================
 loadProfile();

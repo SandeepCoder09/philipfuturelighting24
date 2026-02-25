@@ -1,109 +1,121 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #001509;
-  color: white;
+  background: #0f172a;
+  min-height: 100vh;
+  color: #ffffff;
+  padding-bottom: 90px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.header {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-/* HERO */
-.referral-hero {
-  padding: 100px 20px;
-  background: radial-gradient(circle, #00ff99 0%, #001509 60%);
+.header h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 1px;
 }
 
-.referral-hero h1 {
-  font-size: 3rem;
-  text-shadow: 0 0 25px #00ff99;
+/* ===== REFERRAL LINK CARD ===== */
+
+.referral-link-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.referral-hero p {
-  font-size: 1.2rem;
+.invite-title {
+  margin: 0 0 12px;
+  font-size: 14px;
   opacity: 0.9;
-}
-
-/* REFERRAL CARD */
-.referral-code-section {
   display: flex;
-  justify-content: center;
-  padding: 60px 20px;
-}
-
-.referral-card {
-  background: #002b18;
-  padding: 40px;
-  border-radius: 20px;
-  width: 350px;
-  box-shadow: 0 0 25px #00ff99;
-}
-
-.code-box {
-  background: black;
-  padding: 15px;
-  font-size: 1.5rem;
-  margin: 20px 0;
-  border-radius: 10px;
-  letter-spacing: 3px;
-  box-shadow: 0 0 15px #00ff99 inset;
-}
-
-.referral-card button {
-  padding: 10px 25px;
-  border: none;
-  background: #00ff99;
-  color: black;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* STATS */
-.referral-stats {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 50px 20px;
-  flex-wrap: wrap;
-}
-
-.stat-card {
-  background: #002b18;
-  padding: 30px;
-  width: 200px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px #00ff99;
-}
-
-.stat-card h3 {
-  font-size: 2rem;
-  color: #00ff99;
-}
-
-/* FORM */
-.referral-form-section {
-  padding: 60px 20px;
-}
-
-.referral-form {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
 }
 
-.referral-form input {
-  padding: 12px;
-  width: 300px;
-  border-radius: 25px;
-  border: none;
+.referral-box {
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.25);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.referral-form button {
-  padding: 12px 30px;
-  border-radius: 25px;
+.referral-box input {
+  flex: 1;
   border: none;
-  background: #00ff99;
-  color: black;
-  font-weight: bold;
+  background: transparent;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+}
+
+.referral-box button {
+  background: linear-gradient(135deg, #00B4FF, #007BFF);
+  border: none;
+  padding: 10px 14px;
   cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+.referral-box button:hover {
+  opacity: 0.85;
+}
+
+.referral-link-card small {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.active-box {
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00ff9d;
+}
+
+.team-card {
+  background: linear-gradient(135deg, #00B4FF, #007BFF);
+  border-radius: 18px;
+  padding: 25px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.team-card p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.team-card h1 {
+  margin: 10px 0 0;
+  font-size: 34px;
+}
+
+.stats-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stats-card strong {
+  color: #FFD700;
 }

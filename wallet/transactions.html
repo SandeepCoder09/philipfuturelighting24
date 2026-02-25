@@ -5,30 +5,50 @@
   <title>Transaction History | Philips</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="transactions.css">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!----------------- CCS ---------------------------->
+  <link rel="stylesheet" href="../wallet/transactions.css">
+  <link rel="stylesheet" href="../shared/top-nav.css">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
+  <!-- 🔷 Fixed Navbar -->
+  <div class="top-nav">
 
-  <h2 class="page-title">Transaction History</h2>
+    <button class="back-btn" onclick="history.back()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back
+    </button>
 
-  <div class="transactions-wrapper">
-
-    <!-- Recharge Column -->
-    <div class="transactions-column">
-      <h3 class="column-title recharge-title">Recharge History</h3>
-      <div id="rechargeList"></div>
-    </div>
-
-    <!-- Withdrawal Column -->
-    <div class="transactions-column">
-      <h3 class="column-title withdraw-title">Withdrawal History</h3>
-      <div id="withdrawList"></div>
-    </div>
+    <h2 class="page-title">Transaction History</h2>
 
   </div>
 
-  <script src="transactions.js"></script>
+  <!-- 🔽 Fixed Filter -->
+  <div class="filter-wrapper">
+    <div class="filter-container">
+      <select id="transactionFilter">
+        <option value="all" selected>All Transactions</option>
+        <option value="recharge">Recharge</option>
+        <option value="withdraw">Withdraw</option>
+        <option value="purchase">Purchase</option>
+        <option value="earning">Earning</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Transactions -->
+  <div class="transactions-wrapper">
+    <div id="transactionList"></div>
+  </div>
+
+  <script src="../wallet/transactions.js"></script>
 
 </body>
 </html>
