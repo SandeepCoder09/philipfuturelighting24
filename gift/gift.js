@@ -1,4 +1,12 @@
-const API = "https://philips-backend.onrender.com/api";
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname.startsWith("10.");
+
+const API = isLocal
+  ? "http://localhost:5001/api"
+  : "https://philips-backend.onrender.com/api";
+
 const token = localStorage.getItem("token");
 
 const redeemBtn = document.getElementById("redeemBtn");
@@ -113,7 +121,7 @@ redeemBtn.addEventListener("click", async () => {
   if (!isLoggedIn) {
     showPopup("error", "Session Expired", "Please login again.");
     setTimeout(() => {
-      window.location.href = "/auth/login.html";
+      window.location.href = "../auth/index.html";
     }, 1500);
     return;
   }

@@ -1,3 +1,13 @@
+// 🌍 Auto API Switch
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname.startsWith("10.");
+
+const API = isLocal
+  ? "http://localhost:5001/api"
+  : "https://philips-backend.onrender.com/api";
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const transactionContainer = document.getElementById("transactionList");
@@ -10,15 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  function formatType(type) {
+    if (!type) return "Other";
+
+    return type
+      .replace(/_/g, " ")
+      .toLowerCase()
+      .replace(/\b\w/g, c => c.toUpperCase());
+  }
+
   async function loadTransactions(type = "all") {
 
-    transactionContainer.innerHTML = `
-      <p style="color:#94a3b8;">Loading...</p>
-    `;
+    transactionContainer.innerHTML =
+      `<p style="color:#94a3b8;">Loading...</p>`;
 
     try {
+
       const response = await fetch(
-        `https://philips-backend.onrender.com/api/wallet/transactions?type=${type}`,
+        `${API}/wallet/transactions?type=${type}`,
         {
           headers: {
             Authorization: "Bearer " + token
@@ -35,42 +54,41 @@ document.addEventListener("DOMContentLoaded", () => {
       transactionContainer.innerHTML = "";
 
       if (!Array.isArray(transactions) || !transactions.length) {
-        transactionContainer.innerHTML = `
-          <p style="color:#94a3b8;">No transactions found</p>
-        `;
+        transactionContainer.innerHTML =
+          `<p style="color:#94a3b8;">No transactions found</p>`;
         return;
       }
 
-      // ✅ Sort newest → oldest
-      transactions.sort((a, b) => {
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
-        return dateB - dateA;
-      });
 
+      
       transactions.forEach(tx => {
 
         const item = document.createElement("div");
 
-        // ✅ Safe type class
+
         const typeClass = tx.type
           ? tx.type.replace(/\s+/g, "-").toLowerCase()
           : "other";
 
-        item.className = `transaction-item type-${typeClass}`;
 
-        // ✅ Safe status class (handles "under review")
-        const statusClass = tx.status
+
+      
+          const statusClass = tx.status
           ? tx.status.replace(/\s+/g, "-").toLowerCase()
           : "pending";
+
+        item.className = `transaction-item type-${typeClass}`;
 
         item.innerHTML = `
           <div class="transaction-left">
             <div class="transaction-type status-${statusClass}">
-              ${tx.type.toUpperCase()} • ${tx.status.toUpperCase()}
+              ${formatType(tx.type)} • ${tx.status.toUpperCase()}
             </div>
             <div class="transaction-date">
               ${new Date(tx.createdAt).toLocaleString()}
+            </div>
+            <div class="transaction-id">
+              ID: ${tx.orderId}
             </div>
           </div>
           <div class="transaction-amount">
@@ -83,9 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (error) {
       console.error(error);
-      transactionContainer.innerHTML = `
-        <p style="color:#ff4d4d;">Failed to load transactions</p>
-      `;
+      transactionContainer.innerHTML =
+        `<p style="color:#ff4d4d;">Failed to load transactions</p>`;
     }
   }
 

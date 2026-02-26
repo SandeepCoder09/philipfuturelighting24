@@ -1,9 +1,12 @@
 // 🌍 Auto API Switch
-const API_BASE =
+const isLocal =
   window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-    ? "http://localhost:5001"
-    : "https://philips-backend.onrender.com";
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname.startsWith("10.");
+
+const API = isLocal
+  ? "http://localhost:5001/api"
+  : "https://philips-backend.onrender.com/api";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -40,11 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!token) return;
 
     try {
-      const res = await fetch(`${API_BASE}/api/wallet/banks`, {
+      const res = await fetch(`${API}/wallet/banks`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
+
+      if (!res.ok) {
+        renderNoBank();
+        return;
+      }
 
       const banks = await res.json();
 
@@ -84,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelectorAll(".bank-card").forEach(card => {
       card.addEventListener("click", () => {
-
         document.querySelectorAll(".bank-card")
           .forEach(c => c.classList.remove("active"));
 
@@ -97,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
   loadBanks();
 
   /* ===========================
-     PIN AUTO MOVE SYSTEM
+     PIN SYSTEM
   =========================== */
   modalPinBoxes.forEach((box, index) => {
 
@@ -149,29 +156,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!selectedBankId) {
       showToast("Please select a bank account.");
-      return;
-    }
-
-    try {
-      const checkRes = await fetch(
-        `${API_BASE}/api/users/check-withdraw-pin`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
-
-      const checkData = await checkRes.json();
-
-      if (!checkData.hasPin) {
-        window.location.href = "withdraws-pin/set-withdraw-pin.html";
-        return;
-      }
-
-    } catch (error) {
-      showToast("Error checking PIN.");
       return;
     }
 
@@ -238,21 +222,18 @@ document.addEventListener("DOMContentLoaded", function () {
       confirmBtn.disabled = true;
       confirmBtn.innerText = "Processing...";
 
-      const res = await fetch(
-        `${API_BASE}/api/wallet/withdraw`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            amount: pendingAmount,
-            pin: pin,
-            bankId: selectedBankId
-          })
-        }
-      );
+      const res = await fetch(`${API}/wallet/withdraw`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          amount: pendingAmount,
+          pin: pin,
+          bankId: selectedBankId
+        })
+      });
 
       const data = await res.json();
 

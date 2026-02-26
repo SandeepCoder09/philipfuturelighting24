@@ -1,4 +1,11 @@
-const API = "https://philips-backend.onrender.com/api/wallet";
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname.startsWith("10.");
+
+const API = isLocal
+  ? "http://localhost:5001/api"
+  : "https://philips-backend.onrender.com/api";
 
 /* =====================================
    DOM ELEMENTS
@@ -51,7 +58,7 @@ async function bindBank() {
   loader.classList.remove("hidden");
 
   try {
-    const response = await fetch(`${API}/bind-bank`, {
+    const response = await fetch(`${API}/wallet/bind-bank`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,22 +95,24 @@ async function loadBanks() {
   const token = getToken();
 
   try {
-    const response = await fetch(`${API}/banks`, {
+    const response = await fetch(`${API}/wallet/banks`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
 
-    if (!response.ok) return;
+    if (!response.ok) {
+      console.error("Failed to load banks");
+      return;
+    }
 
     const banks = await response.json();
 
     bankContainer.innerHTML = "";
 
     if (!banks.length) {
-      bankContainer.innerHTML = `
-        <div class="bank-empty">No bank linked yet</div>
-      `;
+      bankContainer.innerHTML =
+        `<div class="bank-empty">No bank linked yet</div>`;
       return;
     }
 

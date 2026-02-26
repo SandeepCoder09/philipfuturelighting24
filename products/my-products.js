@@ -3,7 +3,7 @@ const token = localStorage.getItem("token");
 
 /* ===== Redirect if not logged in ===== */
 if (!token) {
-  window.location.href = "../auth/login.html";
+  window.location.href = "../auth/index.html";
 }
 
 /* ===== Product Image Map ===== */
