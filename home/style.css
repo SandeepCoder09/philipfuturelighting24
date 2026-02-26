@@ -75,7 +75,7 @@ img {
   50% {
     opacity: 1;
     box-shadow: 0 0 6px #00c6ff,
-                0 0 12px #0072ff;
+                0 0 12px #0072ff; }
   }
   
   body {
@@ -217,9 +217,9 @@ img {
     gap: 35px;
   }
   
-  /* ===== BUSINESS SEGMENT CARD FIX ===== */
+  /* ===== BUSINESS SEGMENT CARD FIX =====
   100% { opacity: 0.2; box-shadow: none; }
-}
+} */
 
 /* ===== HERO ===== */
 .hero {
