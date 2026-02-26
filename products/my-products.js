@@ -1,4 +1,4 @@
-const API = "https://philips-backend.onrender.com/api";
+
 const token = localStorage.getItem("token");
 
 /* ===== Redirect if not logged in ===== */

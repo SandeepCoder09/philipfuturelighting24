@@ -1,13 +1,3 @@
-// 🌍 Auto API Switch
-const isLocal =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1" ||
-  window.location.hostname.startsWith("10.");
-
-const API = isLocal
-  ? "http://localhost:5001/api"
-  : "https://philips-backend.onrender.com/api";
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const pinBoxes = document.querySelectorAll(".pin-box");

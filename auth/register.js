@@ -1,4 +1,4 @@
-// const API = "https://philips-backend.onrender.com/api";
+console.log("Using API:", API);
 
 const form = document.getElementById("registerForm");
 const message = document.getElementById("message");

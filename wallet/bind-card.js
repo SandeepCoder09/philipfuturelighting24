@@ -1,15 +1,7 @@
-const isLocal =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1" ||
-  window.location.hostname.startsWith("10.");
-
-const API = isLocal
-  ? "http://localhost:5001/api"
-  : "https://philips-backend.onrender.com/api";
-
 /* =====================================
    DOM ELEMENTS
 ===================================== */
+
 const accountNumberInput = document.getElementById("accountNumber");
 const ifscInput = document.getElementById("ifsc");
 const holderNameInput = document.getElementById("holderName");

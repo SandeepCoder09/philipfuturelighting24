@@ -1,5 +1,3 @@
-const API = "https://philips-backend.onrender.com/api";
-
 async function loadReferralDashboard() {
 
   const token = localStorage.getItem("token");

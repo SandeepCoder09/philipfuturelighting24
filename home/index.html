@@ -9,9 +9,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
 
-  <!-- CSS -->
+  <!-- ==================== Shared CSS ========================== -->
+  <link rel="stylesheet" href="../shared/css/bottom-nav.css">
+
+<!-- ===================== Main CSS ========================== -->
   <link rel="stylesheet" href="../home/style.css">
-  <link rel="stylesheet" href="../shared/bottom-nav.css">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -188,16 +190,11 @@
 
 </nav>
 
-<script>
-  window.addEventListener("load", function() {
-    const loader = document.getElementById("pageLoader");
-    loader.style.opacity = "0";
-    loader.style.transition = "0.5s ease";
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 500);
-  });
-</script>
+<!-- ==================== Shared JS ========================== -->
+<script src="../shared/js/config.js"></script>
+
+<!-- ===================== Main JS ========================== -->
+<script src="../home/script.js"></script>
   
 </body>
 </html>

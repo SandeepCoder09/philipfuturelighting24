@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  const API = "https://philips-backend.onrender.com/api";
+  
 
   const loadingScreen = document.getElementById("loadingScreen");
   const successPopup = document.getElementById("successPopup");
