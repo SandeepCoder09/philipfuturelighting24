@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Team Overview | Philips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../shared/css/top-nav.css" />
+  <link rel="stylesheet" href="../../referrals/view-team/view-team.css" />
+  <link rel="stylesheet" href="../../home/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- 🔷 Fixed Navbar -->
+<div class="top-nav">
+  <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back
+  </button>
+  <h2 class="page-title">My Team Overview</h2>
+</div>
+
+<div class="page-content">
+
+  <!-- ================= TEAM SUMMARY ================= -->
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <p>Total Members</p>
+      <h3 id="totalMembers">0</h3>
+    </div>
+
+    <div class="summary-card">
+      <p>Total Team Recharge</p>
+      <h3 id="totalRecharge">0 INR</h3>
+    </div>
+
+    <div class="summary-card">
+      <p>Total Team Commission</p>
+      <h3 id="totalCommission">0 INR</h3>
+    </div>
+
+  </div>
+
+
+  <!-- ================= COMMISSION OVERVIEW ================= -->
+  <h3 class="section-title">Commission Overview</h3>
+
+  <div class="stats-grid">
+
+    <div class="stats-card highlight">
+      <span>Total Income</span>
+      <strong id="totalIncome">0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Today</span>
+      <strong id="todayIncome">0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Yesterday</span>
+      <strong id="yesterdayIncome">0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>This Week</span>
+      <strong id="weekIncome">0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Pending</span>
+      <strong id="pendingIncome">0 INR</strong>
+    </div>
+
+    <div class="stats-card">
+      <span>Invitation Reward</span>
+      <strong id="invitationReward">0 INR</strong>
+    </div>
+
+  </div>
+
+
+  <!-- ================= LEVEL INCOME ================= -->
+  <h3 class="section-title">Level Income</h3>
+
+  <div class="level-grid">
+
+    <div class="level-card">
+      <p>Level 1 (5%)</p>
+      <strong id="level1Income">0 INR</strong>
+    </div>
+
+    <div class="level-card">
+      <p>Level 2 (3%)</p>
+      <strong id="level2Income">0 INR</strong>
+    </div>
+
+    <div class="level-card">
+      <p>Level 3 (2%)</p>
+      <strong id="level3Income">0 INR</strong>
+    </div>
+
+  </div>
+
+
+  <!-- ================= QUALIFICATION ================= -->
+  <div class="qualification-card" id="qualificationStatus">
+    Checking qualification...
+  </div>
+
+
+  <!-- ================= TEAM TABLE ================= -->
+  <div class="table-section">
+
+    <h3>All Levels Team Members</h3>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Level</th>
+            <th>Total Recharge</th>
+            <th>Commission</th>
+            <th>Join Date</th>
+          </tr>
+        </thead>
+
+        <tbody id="teamTable">
+          <!-- Injected by JS -->
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="../../shared/js/config.js"></script>
+<script src="./view-team.js"></script>
+
+</body>
+</html>

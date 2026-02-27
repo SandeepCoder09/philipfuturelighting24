@@ -1,8 +1,10 @@
+/* =========================================
+   GLOBAL
+========================================= */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #111827);
   color: #ffffff;
   padding-bottom: 90px;
 }
@@ -11,111 +13,214 @@ body {
   padding: 20px;
 }
 
-.header {
+.page-title {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  font-size: 20px;
 }
 
-.header h2 {
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: 1px;
-}
-
-/* ===== REFERRAL LINK CARD ===== */
-
-.referral-link-card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(8px);
+/* =========================================
+   CARD BASE
+========================================= */
+.card {
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 18px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.invite-title {
-  margin: 0 0 12px;
+.card-title {
+  margin-bottom: 12px;
   font-size: 14px;
-  opacity: 0.9;
+  opacity: 0.85;
+}
+
+/* =========================================
+   REFERRAL LINK
+========================================= */
+/* =========================================
+   REFERRAL LINK FIXED
+========================================= */
+
+.referral-box {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.referral-box {
-  display: flex;
-  align-items: center;
-  background: rgba(0,0,0,0.25);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
 .referral-box input {
   flex: 1;
   border: none;
-  background: transparent;
-  padding: 10px 12px;
-  color: #fff;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.35);
+  color: white;
+  border-radius: 12px;
   font-size: 13px;
-  outline: none;
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
 .referral-box button {
-  background: linear-gradient(135deg, #00B4FF, #007BFF);
+  flex-shrink: 0;
   border: none;
   padding: 10px 14px;
-  cursor: pointer;
+  background: linear-gradient(135deg,#00B4FF,#007BFF);
   color: white;
-  transition: 0.3s;
+  border-radius: 12px;
+  cursor: pointer;
+  
 }
 
 .referral-box button:hover {
   opacity: 0.85;
 }
 
-.referral-link-card small {
-  display: block;
-  margin-top: 8px;
-  font-size: 12px;
-  opacity: 0.7;
+/* =========================================
+   SECTION TITLES
+========================================= */
+.section-title {
+  margin: 25px 0 12px;
+  font-size: 15px;
+  opacity: 0.9;
 }
 
-.active-box {
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #00ff9d;
-}
-
-.team-card {
-  background: linear-gradient(135deg, #00B4FF, #007BFF);
-  border-radius: 18px;
-  padding: 25px;
-  text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.team-card p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.team-card h1 {
-  margin: 10px 0 0;
-  font-size: 34px;
+/* =========================================
+   COMMISSION GRID
+========================================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
 }
 
 .stats-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid rgba(255,255,255,0.1);
+  align-items: center;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .stats-card strong {
   color: #FFD700;
+  font-size: 14px;
+}
+
+/* Highlight total income */
+.stats-card.highlight {
+  background: linear-gradient(135deg, #00B4FF, #007BFF);
+  border: none;
+}
+
+.stats-card.highlight strong {
+  color: #ffffff;
+}
+
+/* =========================================
+   LEVEL INCOME
+========================================= */
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.level-card {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 15px;
+  border-radius: 14px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.level-card strong {
+  color: #00ffcc;
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* =========================================
+   QUALIFICATION CARD
+========================================= */
+.qualification-card {
+  margin-top: 20px;
+  padding: 14px;
+  text-align: center;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 14px;
+}
+
+/* =========================================
+   NAV RIGHT BUTTON
+========================================= */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.view-team-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #00ff64, #00aaff);
+  color: #000814;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.view-team-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(0, 255, 100, 0.4);
+}
+
+.view-team-btn i {
+  font-size: 12px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 768px) {
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .level-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+}
+
+/* =========================================
+   REWARD DETAILS
+========================================= */
+
+.reward-item {
+  margin-bottom: 15px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.reward-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #00ffcc;
 }

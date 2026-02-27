@@ -1,65 +1,108 @@
-async function loadReferralDashboard() {
+document.addEventListener("DOMContentLoaded", initReferralPage);
 
+/* =====================================================
+   INITIALIZE PAGE
+===================================================== */
+async function initReferralPage() {
   const token = localStorage.getItem("token");
 
   if (!token) {
-    window.location.href = "../auth/index.html";
+    redirectToLogin();
     return;
   }
 
   try {
-
-    // ===== GET PROFILE FOR userId =====
-    const profileRes = await fetch(`${API}/users/profile`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    const profileData = await profileRes.json();
-    const user = profileData.user;
-
-    // ===== GENERATE FULL REFERRAL LINK =====
-    const domain = window.location.origin;
-    const referralLink =
-      `${domain}/auth/register.html?invite=${user.userId}`;
-
-    document.getElementById("referralLink").value = referralLink;
-
-    // ===== COPY BUTTON =====
-    document.getElementById("copyBtn")
-      .addEventListener("click", async () => {
-
-        await navigator.clipboard.writeText(referralLink);
-        alert("Referral link copied!");
-      });
-
-    // ===== LOAD DASHBOARD DATA =====
-    const response = await fetch(`${API}/referral/dashboard`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    const data = await response.json();
-
-    document.getElementById("activeUsers").innerText =
-      data.activeUsers || 0;
-
-    document.getElementById("teamSize").innerText =
-      data.teamSize || 0;
-
-    document.getElementById("totalIncome").innerText =
-      (data.totalPromotionIncome || 0) + " INR";
-
-    document.getElementById("yesterdayIncome").innerText =
-      (data.yesterdayIncome || 0) + " INR";
-
-    document.getElementById("directReferral").innerText =
-      data.directReferralNumber || 0;
-
-    document.getElementById("invitationReward").innerText =
-      data.invitationReward || 0;
-
+    const user = await fetchProfile(token);
+    generateReferralLink(user.userId);
   } catch (error) {
-    console.error("Referral Error:", error);
+    console.error("Referral Page Error:", error);
+    redirectToLogin();
   }
 }
 
-loadReferralDashboard();
+
+/* =====================================================
+   FETCH USER PROFILE
+===================================================== */
+async function fetchProfile(token) {
+  const response = await fetch(`${API}/users/profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error("Profile fetch failed");
+  }
+
+  const data = await response.json();
+
+  if (!data.user) {
+    throw new Error("User not found");
+  }
+
+  return data.user;
+}
+
+
+/* =====================================================
+   GENERATE REFERRAL LINK
+===================================================== */
+function generateReferralLink(userId) {
+  const domain = window.location.origin;
+  const referralLink = `${domain}/auth/register.html?invite=${userId}`;
+
+  const input = document.getElementById("referralLink");
+  const copyBtn = document.getElementById("copyBtn");
+
+  if (input) {
+    input.value = referralLink;
+  }
+
+  if (copyBtn) {
+    copyBtn.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(referralLink);
+        showToast("Referral link copied!");
+      } catch (error) {
+        showToast("Copy failed");
+      }
+    };
+  }
+}
+
+
+/* =====================================================
+   TOAST MESSAGE
+===================================================== */
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.innerText = message;
+
+  toast.style.position = "fixed";
+  toast.style.bottom = "100px";
+  toast.style.left = "50%";
+  toast.style.transform = "translateX(-50%)";
+  toast.style.background = "#00B4FF";
+  toast.style.color = "#fff";
+  toast.style.padding = "10px 18px";
+  toast.style.borderRadius = "25px";
+  toast.style.fontSize = "13px";
+  toast.style.zIndex = "9999";
+  toast.style.boxShadow = "0 6px 20px rgba(0,0,0,0.4)";
+
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
+}
+
+
+/* =====================================================
+   REDIRECT TO LOGIN
+===================================================== */
+function redirectToLogin() {
+  localStorage.removeItem("token");
+  window.location.href = "../auth/index.html";
+}

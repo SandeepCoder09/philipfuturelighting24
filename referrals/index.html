@@ -2,123 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Team | Philips</title>
+  <title>Referrals | Philips</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#111827">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
-
-  <!-- ================== FontAwesome ================== -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
- 
-  <!-- ==================== Shared CSS ========================== -->
   <link rel="stylesheet" href="../shared/css/bottom-nav.css" />
   <link rel="stylesheet" href="../home/style.css" />
 
-<!-- ===================== Main CSS ========================== -->
+
   <link rel="stylesheet" href="../referrals/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="logo-wrapper">
-      <a href="../home/index.html">
-        <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo">
-      </a>
-      <div class="led-dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="logo-wrapper">
+    <a href="../home/index.html">
+      <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo" />
+    </a>
+
+    <div class="led-dots">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </nav>
-
-  <div class="container">
-
-    <div class="header">
-      <h2>My Team</h2>
-    </div>
-
-    <!-- ===== REFERRAL LINK CARD ===== -->
-    <div class="referral-link-card">
-      <p class="invite-title">
-        <i class="fa-solid fa-link"></i>
-        Your Referral Link
-      </p>
-
-      <div class="referral-box">
-        <input type="text" id="referralLink" readonly>
-        <button id="copyBtn">
-          <i class="fa-solid fa-copy"></i>
-        </button>
-      </div>
-
-      <small>Share this link to invite your friends</small>
-    </div>
-
-    <!-- ================== Team Data ================== -->
-
-    <div class="active-box">
-      Active Users: <span id="activeUsers">0</span>
-    </div>
-
-    <div class="team-card">
-      <p>Team Size</p>
-      <h1 id="teamSize">0</h1>
-    </div>
-
-    <div class="stats-card">
-      <span>Total Promotion Income</span>
-      <strong id="totalIncome">0.0 INR</strong>
-    </div>
-
-    <div class="stats-card">
-      <span>Yesterday's Promotion Income</span>
-      <strong id="yesterdayIncome">0.0 INR</strong>
-    </div>
-
-    <div class="stats-card">
-      <span>Direct Referral Number</span>
-      <strong id="directReferral">0</strong>
-    </div>
-
-    <div class="stats-card">
-      <span>Invitation Reward</span>
-      <strong id="invitationReward">0.0</strong>
-    </div>
-
   </div>
 
-  <!-- ================== BOTTOM NAV ================== -->
-  <nav class="bottom-nav">
-    <a href="../home/index.html" class="nav-btn">
-      <i class="fa-solid fa-house"></i>
-      <span>Home</span>
+  <div class="nav-right">
+    <a href="../referrals/view-team/view-team.html" class="view-team-btn">
+      <i class="fa-solid fa-users"></i> My Team
     </a>
+  </div>
+</nav>
 
-    <a href="../products/index.html" class="nav-btn">
-      <i class="fa-solid fa-lightbulb"></i>
-      <span>Products</span>
-    </a>
+<div class="container">
 
-    <a href="../referrals/index.html" class="nav-btn active">
-      <i class="fa-solid fa-gift"></i>
-      <span>Referrals</span>
-    </a>
+  <h2 class="page-title">Referral Center</h2>
 
-    <a href="../profile/index.html" class="nav-btn">
-      <i class="fa-solid fa-user"></i>
-      <span>Profile</span>
-    </a>
-  </nav>
+  <!-- Referral Link -->
+  <div class="card">
+    <p class="card-title"><i class="fa-solid fa-link"></i> Your Referral Link</p>
+    <div class="referral-box">
+      <input type="text" id="referralLink" readonly>
+      <button id="copyBtn">
+        <i class="fa-solid fa-copy"></i>
+      </button>
+    </div>
+  </div>
 
-  <!-- ==================== Shared JS ========================== -->
+  <div class="card">
+    <p class="card-title"><i class="fa-solid fa-gift"></i> How Commission Works</p>
+  
+    <div class="reward-item">
+      <strong>🎁 First Referral Activation</strong>
+      <p>
+        When your first referral purchases a product and activates daily income,
+        you become eligible for commission earnings.
+      </p>
+    </div>
+  
+    <div class="reward-item">
+      <strong>💰 Daily Commission System</strong>
+      <p>
+        Commission is calculated from your referral's daily product income,
+        not from the product price.
+      </p>
+    </div>
+  
+    <div class="reward-item">
+      <strong>📊 Example</strong>
+      <p>
+        If your Level 1 member buys a ₹399 product
+        and earns ₹20 per day:
+      </p>
+      <p>
+        You earn 5% of ₹20 = ₹1 per day.
+      </p>
+      <p>
+        Level 2 earns 3% of ₹20 = ₹0.60 per day.
+      </p>
+      <p>
+        Level 3 earns 2% of ₹20 = ₹0.40 per day.
+      </p>
+    </div>
+  </div>
+
+<!-- ===================== Bottom Nav ======================== -->
+<nav class="bottom-nav">
+  <a href="../home/index.html" class="nav-btn"><i class="fa-solid fa-house"></i><span>Home</span></a>
+  <a href="../products/index.html" class="nav-btn"><i class="fa-solid fa-lightbulb"></i><span>Products</span></a>
+  <a href="../referrals/index.html" class="nav-btn active"><i class="fa-solid fa-gift"></i><span>Referrals</span></a>
+  <a href="../profile/index.html" class="nav-btn"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+</nav>
+
 <script src="../shared/js/config.js"></script>
-
-<!-- ===================== Main JS ========================== -->
 <script src="../referrals/script.js"></script>
+
 </body>
 </html>
