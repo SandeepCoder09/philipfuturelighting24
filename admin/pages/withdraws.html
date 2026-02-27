@@ -82,6 +82,37 @@
 
     </header>
 
+    <!-- ========== FILTER SECTION ========== -->
+<section class="search-section">
+
+  <div class="search-box">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="number" id="searchUserId" placeholder="Search by User ID">
+  </div>
+
+  <select id="statusFilter" class="filter-btn">
+    <option value="processing">Processing</option>
+    <option value="under review">Under Review</option>
+    <option value="success">Success</option>
+    <option value="rejected">Rejected</option>
+    <option value="all">All</option>
+  </select>
+
+  <input type="date" id="startDate" class="filter-btn">
+  <input type="date" id="endDate" class="filter-btn">
+
+  <button class="search-btn" onclick="applyFilters()">
+    <i class="fa-solid fa-filter"></i>
+    Apply
+  </button>
+
+  <button class="filter-btn" onclick="resetFilters()">
+    <i class="fa-solid fa-rotate"></i>
+    Reset
+  </button>
+
+</section>
+
     <!-- ========== TABLE SECTION ========== -->
     <section class="table-container">
 

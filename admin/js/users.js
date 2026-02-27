@@ -8,6 +8,7 @@ let allUsers = [];
 
 async function loadUsers() {
   try {
+
     const response = await fetch(`${API}/admin/users`, {
       headers: {
         Authorization: "Bearer " + token
@@ -33,16 +34,26 @@ function renderUsers(users) {
   const table = document.getElementById("userTable");
   table.innerHTML = "";
 
+  if (!users.length) {
+    table.innerHTML = `
+      <tr>
+        <td colspan="6">No users found</td>
+      </tr>
+    `;
+    return;
+  }
+
   users.forEach(user => {
 
-    const created = new Date(user.createdAt).toLocaleDateString();
+    const created = user.createdAt
+      ? new Date(user.createdAt).toLocaleDateString()
+      : "-";
 
     table.innerHTML += `
       <tr>
-        <td>${user._id}</td>
+        <td>${user.userId}</td>
         <td>${user.name}</td>
-        <td>${user.email}</td>
-        <td>${user.mobile}</td>
+        <td>${user.mobile || "-"}</td>
         <td>₹${user.walletBalance || 0}</td>
         <td>${created}</td>
       </tr>
@@ -56,8 +67,8 @@ function searchUsers() {
 
   const filtered = allUsers.filter(user =>
     user.mobile?.toLowerCase().includes(keyword) ||
-    user.email?.toLowerCase().includes(keyword) ||
-    user._id?.toLowerCase().includes(keyword)
+    user.name?.toLowerCase().includes(keyword) ||
+    user.userId?.toString().includes(keyword)
   );
 
   renderUsers(filtered);

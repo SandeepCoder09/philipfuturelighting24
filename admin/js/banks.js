@@ -8,20 +8,25 @@ let allBanks = [];
 
 async function loadBanks() {
 
-  const response = await fetch(`${API}/admin/banks`, {
-    headers: {
-      Authorization: "Bearer " + token
+  try {
+    const response = await fetch(`${API}/admin/banks`, {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      localStorage.removeItem("adminToken");
+      window.location.href = "/admin/login.html";
+      return;
     }
-  });
 
-  if (response.status === 401 || response.status === 403) {
-    localStorage.removeItem("adminToken");
-    window.location.href = "/admin/login.html";
-    return;
+    allBanks = await response.json();
+    renderBanks(allBanks);
+
+  } catch (error) {
+    console.error("Error loading banks:", error);
   }
-
-  allBanks = await response.json();
-  renderBanks(allBanks);
 }
 
 function maskAccount(account) {
@@ -33,6 +38,15 @@ function renderBanks(banks) {
   const table = document.getElementById("bankTable");
   table.innerHTML = "";
 
+  if (!banks.length) {
+    table.innerHTML = `
+      <tr>
+        <td colspan="6">No bank records found</td>
+      </tr>
+    `;
+    return;
+  }
+
   banks.forEach(bank => {
 
     const created = new Date(bank.createdAt).toLocaleDateString();
@@ -40,8 +54,9 @@ function renderBanks(banks) {
     table.innerHTML += `
       <tr>
         <td>
-         ${bank.userId?._id || "N/A"} <br>
-          <small>${bank.userId?._id || ""}</small>
+          ${bank.user?.name || "N/A"}
+          <br>
+          <small>${bank.user?.userId || ""}</small>
         </td>
         <td>${bank.holderName}</td>
         <td>${bank.bankName}</td>
@@ -58,7 +73,8 @@ function searchBanks() {
   const keyword = document.getElementById("searchBank").value.toLowerCase();
 
   const filtered = allBanks.filter(bank =>
-    bank.userId?._id?.toLowerCase().includes(keyword) ||
+    bank.user?.userId?.toString().includes(keyword) ||
+    bank.user?.name?.toLowerCase().includes(keyword) ||
     bank.bankName?.toLowerCase().includes(keyword)
   );
 

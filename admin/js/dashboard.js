@@ -1,67 +1,77 @@
 document.addEventListener("DOMContentLoaded", () => {
-    loadDashboard();
-  });
-  
-  async function loadDashboard() {
-  
-    const token = localStorage.getItem("adminToken");
-  
-    // 🔐 Protect page
-    if (!token) {
+  loadDashboard();
+});
+
+async function loadDashboard() {
+
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    window.location.href = "pages/login.html";
+    return;
+  }
+
+  try {
+
+    const response = await fetch(`${API}/admin/dashboard`, {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      localStorage.removeItem("adminToken");
       window.location.href = "pages/login.html";
       return;
     }
-  
-    try {
-      // ✅ Fetch Users with admin token
-      const usersResponse = await fetch(`${API}/admin/users`, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      });
-  
-      if (!usersResponse.ok) throw new Error("Failed to fetch users");
-  
-      const users = await usersResponse.json();
-  
-      // ✅ Fetch Transactions with admin token
-      const transactionsResponse = await fetch(`${API}/admin/transactions`, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      });
-  
-      if (!transactionsResponse.ok) throw new Error("Failed to fetch transactions");
-  
-      const transactions = await transactionsResponse.json();
-  
-      // ✅ Update Total Users
-      document.getElementById("totalUsers").innerText = users.length;
-  
-      let recharge = 0;
-      let withdraw = 0;
-      let pending = 0;
-  
-      transactions.forEach(t => {
-        if (t.type === "recharge" && t.status === "success") {
-          recharge += t.amount;
-        }
-  
-        if (t.type === "withdraw") {
-          withdraw += t.amount;
-  
-          if (t.status === "processing" || t.status === "pending") {
-            pending++;
-          }
-        }
-      });
-  
-      // ✅ Update Dashboard Cards
-      document.getElementById("totalRecharge").innerText = "₹" + recharge;
-      document.getElementById("totalWithdraw").innerText = "₹" + withdraw;
-      document.getElementById("pendingWithdraw").innerText = pending;
-  
-    } catch (error) {
-      console.error("Dashboard Error:", error);
-    }
+
+    const data = await response.json();
+
+    // ================= OVERALL =================
+    document.getElementById("totalUsers").innerText =
+      data.totalUsers || 0;
+
+    document.getElementById("totalRecharge").innerText =
+      "₹" + formatMoney(data.totalRecharge);
+
+    document.getElementById("totalWithdraw").innerText =
+      "₹" + formatMoney(data.totalWithdraw);
+
+    document.getElementById("totalCommission").innerText =
+      "₹" + formatMoney(data.totalCommission);
+
+    document.getElementById("totalWithdrawRequested").innerText =
+      "₹" + formatMoney(data.totalWithdrawRequested);
+
+    document.getElementById("pendingWithdraw").innerText =
+      data.pendingWithdrawCount || 0;
+
+    document.getElementById("underReviewWithdraw").innerText =
+      data.underReviewWithdrawCount || 0;
+
+    document.getElementById("successWithdrawCount").innerText =
+      data.successWithdrawCount || 0;
+
+    // ================= TODAY =================
+    document.getElementById("todayUsers").innerText =
+      data.todayUsers || 0;
+
+    document.getElementById("todayRecharge").innerText =
+      "₹" + formatMoney(data.todayRecharge);
+
+    document.getElementById("todayWithdraw").innerText =
+      "₹" + formatMoney(data.todayWithdraw);
+
+    document.getElementById("todayCommission").innerText =
+      "₹" + formatMoney(data.todayCommission);
+
+  } catch (error) {
+    console.error("Dashboard Error:", error);
   }
+}
+
+
+// ================= MONEY FORMATTER =================
+function formatMoney(amount) {
+  return Number(amount || 0).toLocaleString("en-IN");
+}
