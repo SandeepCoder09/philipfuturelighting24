@@ -1,24 +1,26 @@
-const token = localStorage.getItem("adminToken");
+document.addEventListener("DOMContentLoaded", () => {
+  loadBanks();
 
-if (!token) {
-  window.location.href = "/admin/login.html";
-}
+  const searchInput = document.getElementById("searchBank");
+  if (searchInput) {
+    searchInput.addEventListener("input", searchBanks);
+  }
+});
 
 let allBanks = [];
 
+
+/* ==============================
+   LOAD BANKS
+============================== */
 async function loadBanks() {
-
   try {
-    const response = await fetch(`${API}/admin/banks`, {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    });
 
-    if (response.status === 401 || response.status === 403) {
-      localStorage.removeItem("adminToken");
-      window.location.href = "/admin/login.html";
-      return;
+    // 🔥 FIXED: removed ${API}
+    const response = await authFetch(`/api/admin/banks`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch banks");
     }
 
     allBanks = await response.json();
@@ -26,19 +28,28 @@ async function loadBanks() {
 
   } catch (error) {
     console.error("Error loading banks:", error);
+    showToast("Failed to load banks", "error");
   }
 }
 
+
+/* ==============================
+   MASK ACCOUNT NUMBER
+============================== */
 function maskAccount(account) {
-  return account ? "****" + account.slice(-4) : "";
+  return account ? "****" + account.slice(-4) : "-";
 }
 
+
+/* ==============================
+   RENDER BANKS
+============================== */
 function renderBanks(banks) {
 
   const table = document.getElementById("bankTable");
   table.innerHTML = "";
 
-  if (!banks.length) {
+  if (!banks || banks.length === 0) {
     table.innerHTML = `
       <tr>
         <td colspan="6">No bank records found</td>
@@ -49,7 +60,9 @@ function renderBanks(banks) {
 
   banks.forEach(bank => {
 
-    const created = new Date(bank.createdAt).toLocaleDateString();
+    const created = bank.createdAt
+      ? new Date(bank.createdAt).toLocaleString("en-GB")
+      : "-";
 
     table.innerHTML += `
       <tr>
@@ -58,19 +71,32 @@ function renderBanks(banks) {
           <br>
           <small>${bank.user?.userId || ""}</small>
         </td>
-        <td>${bank.holderName}</td>
-        <td>${bank.bankName}</td>
+        <td>${bank.holderName || "-"}</td>
+        <td>${bank.bankName || "-"}</td>
         <td>${maskAccount(bank.accountNumber)}</td>
-        <td>${bank.ifsc}</td>
+        <td>${bank.ifsc || "-"}</td>
         <td>${created}</td>
       </tr>
     `;
   });
 }
 
+
+/* ==============================
+   SEARCH BANKS
+============================== */
 function searchBanks() {
 
-  const keyword = document.getElementById("searchBank").value.toLowerCase();
+  const keyword = document
+    .getElementById("searchBank")
+    .value
+    .toLowerCase()
+    .trim();
+
+  if (!keyword) {
+    renderBanks(allBanks);
+    return;
+  }
 
   const filtered = allBanks.filter(bank =>
     bank.user?.userId?.toString().includes(keyword) ||
@@ -81,4 +107,3 @@ function searchBanks() {
   renderBanks(filtered);
 }
 
-loadBanks();

@@ -1,26 +1,28 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
+  loadTransactions();
+});
+
+
+/* ==============================
+   LOAD TRANSACTIONS
+============================== */
+async function loadTransactions() {
 
   const tableBody = document.getElementById("transactionTable");
-  const token = localStorage.getItem("adminToken");
-
-  if (!token) {
-    window.location.href = "../login.html";
-    return;
-  }
 
   try {
-    const response = await fetch(`${API}/admin/transactions`, {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    });
 
-    if (!response.ok) throw new Error("Failed to fetch transactions");
+    // 🔥 FIXED: removed ${API}
+    const response = await authFetch(`/api/admin/transactions`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch transactions");
+    }
 
     const transactions = await response.json();
     tableBody.innerHTML = "";
 
-    if (!transactions.length) {
+    if (!transactions || transactions.length === 0) {
       tableBody.innerHTML = `
         <tr>
           <td colspan="6">No transactions found</td>
@@ -31,7 +33,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     transactions.forEach(tx => {
 
-      const created = new Date(tx.createdAt).toLocaleString();
+      const created = tx.createdAt
+        ? new Date(tx.createdAt).toLocaleString("en-GB")
+        : "-";
 
       const row = document.createElement("tr");
 
@@ -41,11 +45,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           <br>
           <small>${tx.user?.userId || ""}</small>
         </td>
-        <td>${tx.orderId}</td>
-        <td>${tx.type}</td>
-        <td>₹${tx.amount}</td>
-        <td class="status-${tx.status.replace(" ", "-")}">
-          ${tx.status}
+        <td>${tx.orderId || "-"}</td>
+        <td>${tx.type || "-"}</td>
+        <td>₹${formatMoney(tx.amount)}</td>
+        <td class="status-${tx.status?.replace(" ", "-")}">
+          ${tx.status || "-"}
         </td>
         <td>${created}</td>
       `;
@@ -54,12 +58,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Transaction Load Error:", error);
+
     tableBody.innerHTML = `
       <tr>
         <td colspan="6">Failed to load transactions</td>
       </tr>
     `;
-  }
 
-});
+    showToast("Failed to load transactions", "error");
+  }
+}
+
+
+/* ==============================
+   MONEY FORMATTER
+============================== */
+function formatMoney(amount) {
+  return Number(amount || 0).toLocaleString("en-IN");
+}

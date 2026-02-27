@@ -2,76 +2,67 @@ document.addEventListener("DOMContentLoaded", () => {
   loadDashboard();
 });
 
+
+/* ==============================
+   LOAD DASHBOARD
+============================== */
 async function loadDashboard() {
-
-  const token = localStorage.getItem("adminToken");
-
-  if (!token) {
-    window.location.href = "pages/login.html";
-    return;
-  }
-
   try {
 
-    const response = await fetch(`${API}/admin/dashboard`, {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    });
+    // 🔥 FIXED: removed ${API}
+    const response = await authFetch(`/api/admin/dashboard`);
 
-    if (response.status === 401 || response.status === 403) {
-      localStorage.removeItem("adminToken");
-      window.location.href = "pages/login.html";
-      return;
+    if (!response.ok) {
+      throw new Error("Failed to load dashboard");
     }
 
     const data = await response.json();
 
     // ================= OVERALL =================
-    document.getElementById("totalUsers").innerText =
-      data.totalUsers || 0;
+    setText("totalUsers", data.totalUsers);
+    setMoney("totalRecharge", data.totalRecharge);
+    setMoney("totalWithdraw", data.totalWithdraw);
+    setMoney("totalCommission", data.totalCommission);
+    setMoney("totalWithdrawRequested", data.totalWithdrawRequested);
 
-    document.getElementById("totalRecharge").innerText =
-      "₹" + formatMoney(data.totalRecharge);
-
-    document.getElementById("totalWithdraw").innerText =
-      "₹" + formatMoney(data.totalWithdraw);
-
-    document.getElementById("totalCommission").innerText =
-      "₹" + formatMoney(data.totalCommission);
-
-    document.getElementById("totalWithdrawRequested").innerText =
-      "₹" + formatMoney(data.totalWithdrawRequested);
-
-    document.getElementById("pendingWithdraw").innerText =
-      data.pendingWithdrawCount || 0;
-
-    document.getElementById("underReviewWithdraw").innerText =
-      data.underReviewWithdrawCount || 0;
-
-    document.getElementById("successWithdrawCount").innerText =
-      data.successWithdrawCount || 0;
+    setText("pendingWithdraw", data.pendingWithdrawCount);
+    setText("underReviewWithdraw", data.underReviewWithdrawCount);
+    setText("successWithdrawCount", data.successWithdrawCount);
 
     // ================= TODAY =================
-    document.getElementById("todayUsers").innerText =
-      data.todayUsers || 0;
-
-    document.getElementById("todayRecharge").innerText =
-      "₹" + formatMoney(data.todayRecharge);
-
-    document.getElementById("todayWithdraw").innerText =
-      "₹" + formatMoney(data.todayWithdraw);
-
-    document.getElementById("todayCommission").innerText =
-      "₹" + formatMoney(data.todayCommission);
+    setText("todayUsers", data.todayUsers);
+    setMoney("todayRecharge", data.todayRecharge);
+    setMoney("todayWithdraw", data.todayWithdraw);
+    setMoney("todayCommission", data.todayCommission);
 
   } catch (error) {
     console.error("Dashboard Error:", error);
+    showToast("Failed to load dashboard data", "error");
   }
 }
 
 
-// ================= MONEY FORMATTER =================
+/* ==============================
+   SAFE TEXT SETTER
+============================== */
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = value || 0;
+}
+
+
+/* ==============================
+   SAFE MONEY SETTER
+============================== */
+function setMoney(id, amount) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = "₹" + formatMoney(amount);
+}
+
+
+/* ==============================
+   MONEY FORMATTER
+============================== */
 function formatMoney(amount) {
   return Number(amount || 0).toLocaleString("en-IN");
 }

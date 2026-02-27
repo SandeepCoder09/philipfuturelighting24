@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Risk Panel | Admin</title>
+
+  <link rel="stylesheet" href="../css/user-detail.css" />
+   <!-- <link rel="stylesheet" href="../css/style.css" /> -->
+</head>
+<body>
+
+<div class="risk-container">
+
+  <!-- PROFILE -->
+  <section class="card" id="profileCard">
+    <h2>User Profile</h2>
+    <div id="profileData"></div>
+  </section>
+
+  <!-- FINANCIAL SUMMARY -->
+  <section class="card" id="financialCard">
+    <h2>Financial Summary</h2>
+    <div class="grid-4">
+      <div class="stat-box" id="totalRecharge"></div>
+      <div class="stat-box" id="totalWithdraw"></div>
+      <div class="stat-box" id="netResult"></div>
+      <div class="stat-box" id="riskScore"></div>
+    </div>
+  </section>
+
+  <!-- REFERRAL TREE -->
+  <section class="card">
+    <h2>Referral Network</h2>
+    <div id="referralTree"></div>
+  </section>
+
+  <!-- DEVICE HISTORY -->
+  <section class="card">
+    <h2>Device & IP History</h2>
+    <table id="deviceTable">
+      <thead>
+        <tr>
+          <th>IP</th>
+          <th>Device</th>
+          <th>User Agent</th>
+          <th>Login Time</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- ACTIVITY TIMELINE -->
+  <section class="card">
+    <h2>Activity Timeline</h2>
+    <div id="activityTimeline"></div>
+  </section>
+
+</div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/user-detail.js"></script>
+</body>
+</html>

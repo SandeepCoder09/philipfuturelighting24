@@ -9,8 +9,10 @@
   <link rel="stylesheet" href="../css/style.css" />
 
   <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 </head>
 
 <body>
@@ -19,7 +21,10 @@
 
   <!-- ================= SIDEBAR ================= -->
   <aside class="sidebar" id="sidebar">
-    <h2 class="logo">PHILIPS ADMIN</h2>
+    <h2 class="logo">
+      <i class="fa-solid fa-shield-halved"></i>
+      PHILIPS ADMIN
+    </h2>
 
     <nav class="nav-menu">
 
@@ -48,7 +53,6 @@
         <span>Banks</span>
       </a>
 
-      <!-- NEW GIFT MENU -->
       <a href="gift.html">
         <i class="fa-solid fa-gift"></i>
         <span>Gift Codes</span>
@@ -64,12 +68,13 @@
     <header class="topbar">
 
       <div class="topbar-left">
-        <button class="menu-toggle" onclick="toggleSidebar()">
+        <button class="menu-toggle">
           <i class="fa-solid fa-bars"></i>
         </button>
+
         <h1>
-          <i class="fa-solid fa-users"></i>
-          All Users
+          <i class="fa-solid fa-user-group"></i>
+          User Management
         </h1>
       </div>
 
@@ -90,7 +95,7 @@
         <input
           type="text"
           id="searchInput"
-          placeholder="Search by Mobile or Email"
+          placeholder="Search by User ID, Name or Mobile"
         />
       </div>
 
@@ -105,19 +110,23 @@
     <section class="table-container">
 
       <table>
+
         <thead>
           <tr>
             <th><i class="fa-solid fa-id-card"></i> User ID</th>
             <th><i class="fa-solid fa-user"></i> Name</th>
-            <th><i class="fa-solid fa-envelope"></i> Email</th>
             <th><i class="fa-solid fa-phone"></i> Mobile</th>
             <th><i class="fa-solid fa-wallet"></i> Wallet</th>
-            <th><i class="fa-solid fa-calendar"></i> Created</th>
+            <th><i class="fa-solid fa-calendar-plus"></i> Created</th>
+            <th><i class="fa-solid fa-toggle-on"></i> Status</th>
+            <th><i class="fa-solid fa-gears"></i> Action</th>
           </tr>
         </thead>
+
         <tbody id="userTable">
-          <!-- Users will load dynamically -->
+          <!-- Users load dynamically -->
         </tbody>
+
       </table>
 
     </section>
@@ -126,13 +135,14 @@
 
 </div>
 
-  <!-- TOAST CONTAINER -->
+<!-- TOAST CONTAINER -->
 <div id="toastContainer" class="toast-container"></div>
 
 <!-- ================= SCRIPTS ================= -->
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>  
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script src="../js/config.js"></script>
 <script src="../js/common.js"></script>
+<script src="../js/layout.js"></script>
 <script src="../js/users.js"></script>
 
 </body>

@@ -1,16 +1,29 @@
-/* ================= API AUTO SWITCH ================= */
+// 🌍 Auto API Switch
+const API_BASE =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname.startsWith("10.")
+    ? "http://localhost:5001"
+    : "https://philips-backend.onrender.com";
 
-const hostname = window.location.hostname;
+// 🔐 Auth Fetch Wrapper
+async function authFetch(url, options = {}) {
+  const token = localStorage.getItem("adminToken"); // 🔥 FIXED
 
-const isLocal =
-  hostname === "localhost" ||
-  hostname === "127.0.0.1" ||
-  hostname.startsWith("10.") ||
-  hostname.startsWith("192.168.") ||
-  hostname.endsWith(".local");
+  const response = await fetch(API_BASE + url, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ? "Bearer " + token : "",
+      ...(options.headers || {})
+    }
+  });
 
-const API = isLocal
-  ? "http://localhost:5001/api"
-  : "https://philips-backend.onrender.com/api";
+  // Auto logout on expired
+  if (response.status === 401) {
+    localStorage.removeItem("adminToken");
+    window.location.href = "login.html";
+  }
 
-console.log("Using API:", API);
+  return response;
+}

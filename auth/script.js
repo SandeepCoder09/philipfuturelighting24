@@ -1,3 +1,5 @@
+/* ================= LOGIN ================= */
+
 const form = document.getElementById("loginForm");
 
 form.addEventListener("submit", async (e) => {
@@ -7,15 +9,13 @@ form.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value;
 
   try {
-    const res = await fetch("https://philips-backend.onrender.com/api/auth/login", {
+
+    const res = await fetch(`${API}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        mobile,
-        password
-      })
+      body: JSON.stringify({ mobile, password })
     });
 
     const data = await res.json();
@@ -24,7 +24,7 @@ form.addEventListener("submit", async (e) => {
       localStorage.setItem("token", data.token);
       window.location.href = "../profile/index.html";
     } else {
-      alert(data.message || data.error);
+      alert(data.message || "Login failed");
     }
 
   } catch (error) {

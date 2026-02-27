@@ -1,37 +1,25 @@
-const token = localStorage.getItem("adminToken");
-
-if (!token) {
-  window.location.href = "/admin/login.html";
-}
-
-// ==============================
-// LOAD WITHDRAWS WITH FILTERS
-// ==============================
+/* ==============================
+   LOAD WITHDRAWS WITH FILTERS
+============================== */
 async function loadWithdraws(filters = {}) {
   try {
 
     const query = new URLSearchParams(filters).toString();
 
-    const response = await fetch(
-      `${API}/admin/withdraws?${query}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      }
+    // 🔥 FIXED: removed ${API}
+    const response = await authFetch(
+      `/api/admin/withdraws?${query}`
     );
 
-    if (response.status === 401 || response.status === 403) {
-      localStorage.removeItem("adminToken");
-      window.location.href = "/admin/login.html";
-      return;
+    if (!response.ok) {
+      throw new Error("Failed to fetch withdraws");
     }
 
     const withdraws = await response.json();
     const table = document.getElementById("withdrawTable");
     table.innerHTML = "";
 
-    if (withdraws.length === 0) {
+    if (!withdraws || withdraws.length === 0) {
       table.innerHTML = `
         <tr>
           <td colspan="4" style="text-align:center;">
@@ -46,7 +34,6 @@ async function loadWithdraws(filters = {}) {
 
       let actionHTML = "";
 
-
       if (w.status === "processing") {
         actionHTML = `
           <button class="action-btn btn-review"
@@ -59,7 +46,6 @@ async function loadWithdraws(filters = {}) {
           </button>
         `;
       }
-
 
       else if (w.status === "under review") {
         actionHTML = `
@@ -74,7 +60,6 @@ async function loadWithdraws(filters = {}) {
         `;
       }
 
-
       else {
         actionHTML = `
           <span class="action-label">${w.status}</span>
@@ -85,7 +70,7 @@ async function loadWithdraws(filters = {}) {
         <tr>
           <td>
             ${w.user?.name || "N/A"}
-             <small>${w.user?.userId || ""}</small>
+            <small>${w.user?.userId || ""}</small>
           </td>
           <td>₹${formatMoney(w.amount)}</td>
           <td class="status-${w.status.replace(" ", "-")}">
@@ -103,9 +88,9 @@ async function loadWithdraws(filters = {}) {
 }
 
 
-// ==============================
-// APPLY FILTERS
-// ==============================
+/* ==============================
+   APPLY FILTERS
+============================== */
 function applyFilters() {
 
   const status = document.getElementById("statusFilter").value;
@@ -115,29 +100,18 @@ function applyFilters() {
 
   const filters = {};
 
-  if (status && status !== "all") {
-    filters.status = status;
-  }
-
-  if (userId) {
-    filters.userId = userId;
-  }
-
-  if (startDate) {
-    filters.startDate = startDate;
-  }
-
-  if (endDate) {
-    filters.endDate = endDate;
-  }
+  if (status && status !== "all") filters.status = status;
+  if (userId) filters.userId = userId;
+  if (startDate) filters.startDate = startDate;
+  if (endDate) filters.endDate = endDate;
 
   loadWithdraws(filters);
 }
 
 
-// ==============================
-// RESET FILTERS
-// ==============================
+/* ==============================
+   RESET FILTERS
+============================== */
 function resetFilters() {
   document.getElementById("statusFilter").value = "processing";
   document.getElementById("searchUserId").value = "";
@@ -148,29 +122,31 @@ function resetFilters() {
 }
 
 
-// ==============================
-// HANDLE ACTION
-// ==============================
+/* ==============================
+   HANDLE ACTION
+============================== */
 async function handleAction(id, status) {
   try {
 
-    const res = await fetch(`${API}/admin/withdraw/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      },
-      body: JSON.stringify({ status })
-    });
+    // 🔥 FIXED: removed ${API}
+    const response = await authFetch(
+      `/api/admin/withdraw/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ status })
+      }
+    );
 
-    const data = await res.json();
+    const data = await response.json();
 
-    if (res.ok) {
-      showToast(data.message || "Updated successfully", "success");
-      applyFilters();
-    } else {
+    if (!response.ok) {
       showToast(data.message || "Failed to update", "error");
+      return;
     }
+
+    showToast(data.message || "Updated successfully", "success");
+
+    applyFilters();
 
   } catch (error) {
     console.error("Withdraw Action Error:", error);
@@ -179,13 +155,17 @@ async function handleAction(id, status) {
 }
 
 
-// ==============================
-// MONEY FORMATTER
-// ==============================
+/* ==============================
+   MONEY FORMATTER
+============================== */
 function formatMoney(amount) {
   return Number(amount || 0).toLocaleString("en-IN");
 }
 
 
-// Default load = processing only
-loadWithdraws({ status: "processing" });
+/* ==============================
+   INITIAL LOAD
+============================== */
+document.addEventListener("DOMContentLoaded", () => {
+  loadWithdraws({ status: "processing" });
+});
