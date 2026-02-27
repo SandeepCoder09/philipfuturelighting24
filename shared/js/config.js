@@ -12,5 +12,5 @@ const API = (() => {
   }
 
   // Production (Vercel / Render)
-  return "https://your-backend-domain.com/api";
+  return "https://philips-backend.onrender.com/api";
 })();
