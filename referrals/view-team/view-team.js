@@ -27,9 +27,7 @@ async function initTeamPage() {
 ===================================================== */
 async function loadTeamData(token) {
   const response = await fetch(`${API}/referral/supervisor-team`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+    headers: { Authorization: `Bearer ${token}` }
   });
 
   if (!response.ok) {
@@ -38,27 +36,22 @@ async function loadTeamData(token) {
   }
 
   const data = await response.json();
-
   if (!data.success) return;
 
-  /* ===== Summary ===== */
   setText("totalMembers", data.totalMembers);
   setMoney("totalRecharge", data.totalTeamRecharge);
   setMoney("totalCommission", data.totalTeamCommission);
 
-  /* ===== Table ===== */
   renderTable(data.team);
 }
 
 
 /* =====================================================
-   LOAD COMMISSION / DASHBOARD DATA
+   LOAD COMMISSION DATA (SUCCESS ONLY)
 ===================================================== */
 async function loadIncomeData(token) {
   const response = await fetch(`${API}/referral/dashboard`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+    headers: { Authorization: `Bearer ${token}` }
   });
 
   if (!response.ok) {
@@ -67,23 +60,18 @@ async function loadIncomeData(token) {
   }
 
   const data = await response.json();
-
   if (!data.success) return;
 
-  /* ===== Commission Overview ===== */
   setMoney("totalIncome", data.totalPromotionIncome);
   setMoney("todayIncome", data.todayIncome);
   setMoney("yesterdayIncome", data.yesterdayIncome);
   setMoney("weekIncome", data.weekIncome);
-  setMoney("pendingIncome", data.pendingIncome);
   setMoney("invitationReward", data.invitationReward);
 
-  /* ===== Level Income ===== */
   setMoney("level1Income", data.level1Income);
   setMoney("level2Income", data.level2Income);
   setMoney("level3Income", data.level3Income);
 
-  /* ===== Qualification ===== */
   handleQualification(data.isQualified);
 }
 
@@ -108,11 +96,8 @@ function renderTable(team) {
     return;
   }
 
-  // Sort by Level → Commission (desc)
   team.sort((a, b) => {
-    if (a.level !== b.level) {
-      return a.level - b.level;
-    }
+    if (a.level !== b.level) return a.level - b.level;
     return (b.totalCommission || 0) - (a.totalCommission || 0);
   });
 

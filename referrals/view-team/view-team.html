@@ -13,7 +13,6 @@
 
 <body>
 
-<!-- 🔷 Fixed Navbar -->
 <div class="top-nav">
   <button class="back-btn" onclick="history.back()">
     <i class="fa-solid fa-arrow-left"></i>
@@ -24,9 +23,8 @@
 
 <div class="page-content">
 
-  <!-- ================= TEAM SUMMARY ================= -->
+  <!-- TEAM SUMMARY -->
   <div class="summary-grid">
-
     <div class="summary-card">
       <p>Total Members</p>
       <h3 id="totalMembers">0</h3>
@@ -41,11 +39,10 @@
       <p>Total Team Commission</p>
       <h3 id="totalCommission">0 INR</h3>
     </div>
-
   </div>
 
 
-  <!-- ================= COMMISSION OVERVIEW ================= -->
+  <!-- COMMISSION OVERVIEW -->
   <h3 class="section-title">Commission Overview</h3>
 
   <div class="stats-grid">
@@ -71,11 +68,6 @@
     </div>
 
     <div class="stats-card">
-      <span>Pending</span>
-      <strong id="pendingIncome">0 INR</strong>
-    </div>
-
-    <div class="stats-card">
       <span>Invitation Reward</span>
       <strong id="invitationReward">0 INR</strong>
     </div>
@@ -83,7 +75,7 @@
   </div>
 
 
-  <!-- ================= LEVEL INCOME ================= -->
+  <!-- LEVEL INCOME -->
   <h3 class="section-title">Level Income</h3>
 
   <div class="level-grid">
@@ -106,15 +98,14 @@
   </div>
 
 
-  <!-- ================= QUALIFICATION ================= -->
+  <!-- QUALIFICATION -->
   <div class="qualification-card" id="qualificationStatus">
     Checking qualification...
   </div>
 
 
-  <!-- ================= TEAM TABLE ================= -->
+  <!-- TEAM TABLE -->
   <div class="table-section">
-
     <h3>All Levels Team Members</h3>
 
     <div class="table-wrapper">
@@ -129,19 +120,15 @@
           </tr>
         </thead>
 
-        <tbody id="teamTable">
-          <!-- Injected by JS -->
-        </tbody>
-
+        <tbody id="teamTable"></tbody>
       </table>
     </div>
-
   </div>
 
 </div>
 
 <script src="../../shared/js/config.js"></script>
-<script src="./view-team.js"></script>
+<script src="../../referrals/view-team/view-team.js"></script>
 
 </body>
 </html>
