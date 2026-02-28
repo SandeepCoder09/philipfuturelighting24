@@ -1,4 +1,4 @@
-const token = localStorage.getItem("token");
+
 
 const redeemBtn = document.getElementById("redeemBtn");
 const giftInput = document.getElementById("giftCodeInput");
@@ -9,16 +9,16 @@ const popupMessage = document.getElementById("popupMessage");
 const popupIcon = document.getElementById("popupIcon");
 const popupOkBtn = document.getElementById("popupOkBtn");
 
-// =============================
-// AUTO UPPERCASE INPUT
-// =============================
+/* =============================
+   AUTO UPPERCASE
+============================= */
 giftInput.addEventListener("input", function () {
   this.value = this.value.toUpperCase();
 });
 
-// =============================
-// SHOW POPUP
-// =============================
+/* =============================
+   POPUP
+============================= */
 function showPopup(type, title, message) {
 
   popupTitle.innerText = title;
@@ -26,77 +26,70 @@ function showPopup(type, title, message) {
 
   popupIcon.className = "fa-solid";
 
-  if (type === "success") {
-    popupIcon.classList.add("fa-circle-check");
-    popupIcon.style.color = "#22c55e";
-  } else if (type === "error") {
-    popupIcon.classList.add("fa-circle-xmark");
-    popupIcon.style.color = "#ef4444";
-  } else if (type === "warning") {
-    popupIcon.classList.add("fa-triangle-exclamation");
-    popupIcon.style.color = "#facc15";
-  } else {
-    popupIcon.classList.add("fa-circle-info");
-    popupIcon.style.color = "#3b82f6";
-  }
+  const colors = {
+    success: "#22c55e",
+    error: "#ef4444",
+    warning: "#facc15",
+    info: "#3b82f6"
+  };
+
+  const icons = {
+    success: "fa-circle-check",
+    error: "fa-circle-xmark",
+    warning: "fa-triangle-exclamation",
+    info: "fa-circle-info"
+  };
+
+  popupIcon.classList.add(icons[type] || icons.info);
+  popupIcon.style.color = colors[type] || colors.info;
 
   popup.style.display = "flex";
 }
 
-// Close popup
+
 popupOkBtn.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
-// =============================
-// VERIFY USER SESSION
-// =============================
+/* =============================
+   VERIFY SESSION (FIXED)
+============================= */
 async function verifyUserSession() {
 
+  const token = localStorage.getItem("token");
   if (!token) return false;
 
   try {
-    const res = await fetch(`${API}/users/profile`, {
-      headers: {
-        "Authorization": "Bearer " + token
-      }
-    });
+    const res = await authFetch("/users/profile");
 
-    if (!res.ok) {
-      localStorage.removeItem("token");
+    if (res.status === 401) {
       return false;
     }
 
-    return true;
+    return res.ok;
 
-  } catch (error) {
+  } catch {
     return false;
   }
 }
 
-// =============================
-// UPDATE WALLET UI + STORAGE
-// =============================
+/* =============================
+   UPDATE WALLET UI
+============================= */
 function updateWalletUI(newBalance) {
-
-  // Update wallet element if exists
-  const walletElement = document.getElementById("walletBalance");
+  const walletElement = document.getElementById
+  ("walletBalance");
   if (walletElement) {
     walletElement.innerText = "₹" + newBalance;
   }
 
-  // Update localStorage user object
-  const storedUser = localStorage.getItem("user");
-  if (storedUser) {
-    const parsedUser = JSON.parse(storedUser);
-    parsedUser.wallet = newBalance;
-    localStorage.setItem("user", JSON.stringify(parsedUser));
-  }
+
 }
 
-// =============================
-// REDEEM GIFT
-// =============================
+
+/* =============================
+   REDEEM GIFT (FIXED)
+============================= */
 redeemBtn.addEventListener("click", async () => {
 
   const code = giftInput.value.trim();
@@ -106,14 +99,14 @@ redeemBtn.addEventListener("click", async () => {
     return;
   }
 
-  // 🔐 Check login & session
+
   const isLoggedIn = await verifyUserSession();
 
   if (!isLoggedIn) {
     showPopup("error", "Session Expired", "Please login again.");
     setTimeout(() => {
       window.location.href = "../auth/index.html";
-    }, 1500);
+    }, 1200);
     return;
   }
 
@@ -122,12 +115,8 @@ redeemBtn.addEventListener("click", async () => {
 
   try {
 
-    const res = await fetch(`${API}/gift/claim`, {
+    const res = await authFetch("/gift/claim", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
-      },
       body: JSON.stringify({ code })
     });
 
@@ -137,7 +126,7 @@ redeemBtn.addEventListener("click", async () => {
 
       showPopup("success", "Congratulations 🎉", data.message);
 
-      // 🔥 Update wallet instantly
+
       if (data.wallet !== undefined) {
         updateWalletUI(data.wallet);
       }
@@ -146,11 +135,11 @@ redeemBtn.addEventListener("click", async () => {
 
     } else {
 
-      showPopup("error", "Failed", data.message);
+      showPopup("error", "Failed", data.message || "Invalid gift code");
 
     }
 
-  } catch (error) {
+  } catch {
 
     showPopup("error", "Server Error", "Please try again later.");
 

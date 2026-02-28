@@ -12,7 +12,7 @@ function toggleSidebar() {
 ===================================================== */
 function logout() {
   localStorage.removeItem("adminToken");
-  window.location.href = "login.html";
+  window.location.href = "/admin/login.html";
 }
 
 

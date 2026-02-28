@@ -1,149 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Users | Admin</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users | Admin</title>
 
-  <!-- Main Styles -->
-  <link rel="stylesheet" href="../css/style.css" />
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="../css/style.css" />
 
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-</head>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
+    <div class="layout">
+      <!-- ================= SIDEBAR ================= -->
+      <aside class="sidebar" id="sidebar">
+        <h2 class="logo">
+          <i class="fa-solid fa-shield-halved"></i>
+          PHILIPS ADMIN
+        </h2>
 
-<div class="layout">
+        <nav class="nav-menu">
+          <a href="../index.html">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Dashboard</span>
+          </a>
 
-  <!-- ================= SIDEBAR ================= -->
-  <aside class="sidebar" id="sidebar">
-    <h2 class="logo">
-      <i class="fa-solid fa-shield-halved"></i>
-      PHILIPS ADMIN
-    </h2>
+          <a href="users.html" class="active">
+            <i class="fa-solid fa-users"></i>
+            <span>Users</span>
+          </a>
 
-    <nav class="nav-menu">
+          <a href="withdraws.html">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <span>Withdraws</span>
+          </a>
 
-      <a href="../index.html">
-        <i class="fa-solid fa-gauge"></i>
-        <span>Dashboard</span>
-      </a>
+          <a href="transactions.html">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            <span>Transactions</span>
+          </a>
 
-      <a href="users.html" class="active">
-        <i class="fa-solid fa-users"></i>
-        <span>Users</span>
-      </a>
+          <a href="banks.html">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>Banks</span>
+          </a>
 
-      <a href="withdraws.html">
-        <i class="fa-solid fa-money-bill-transfer"></i>
-        <span>Withdraws</span>
-      </a>
+          <a href="gift.html">
+            <i class="fa-solid fa-gift"></i>
+            <span>Gift Codes</span>
+          </a>
+        </nav>
+      </aside>
 
-      <a href="transactions.html">
-        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-        <span>Transactions</span>
-      </a>
+      <!-- ================= MAIN ================= -->
+      <main class="main">
+        <!-- ========== TOPBAR ========== -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>User Management</h1>
+          </div>
 
-      <a href="banks.html">
-        <i class="fa-solid fa-building-columns"></i>
-        <span>Banks</span>
-      </a>
+          <div class="topbar-right">
+            <button class="logout-btn" onclick="logout()">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              Logout
+            </button>
+          </div>
+        </header>
 
-      <a href="gift.html">
-        <i class="fa-solid fa-gift"></i>
-        <span>Gift Codes</span>
-      </a>
+        <!-- ========== SEARCH SECTION ========== -->
+        <section class="search-section">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search by User ID, Name or Mobile"
+            />
+          </div>
 
-    </nav>
-  </aside>
+          <button class="search-btn" onclick="searchUsers()">
+            <i class="fa-solid fa-search"></i>
+            Search
+          </button>
+        </section>
 
-  <!-- ================= MAIN ================= -->
-  <main class="main">
+        <!-- ========== TABLE SECTION ========== -->
+        <section class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th><i class="fa-solid fa-id-card"></i> User ID</th>
+                <th><i class="fa-solid fa-user"></i> Name</th>
+                <th><i class="fa-solid fa-phone"></i> Mobile</th>
+                <th><i class="fa-solid fa-wallet"></i> Wallet</th>
+                <th><i class="fa-solid fa-calendar-plus"></i> Created</th>
+                <th><i class="fa-solid fa-toggle-on"></i> Status</th>
+                <th><i class="fa-solid fa-gears"></i> Action</th>
+              </tr>
+            </thead>
 
-    <!-- ========== TOPBAR ========== -->
-    <header class="topbar">
+            <tbody id="userTable">
+              <!-- Users load dynamically -->
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
 
-      <div class="topbar-left">
-        <button class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
 
-        <h1>
-          <i class="fa-solid fa-user-group"></i>
-          User Management
-        </h1>
-      </div>
-
-      <div class="topbar-right">
-        <button class="logout-btn" onclick="logout()">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          Logout
-        </button>
-      </div>
-
-    </header>
-
-    <!-- ========== SEARCH SECTION ========== -->
-    <section class="search-section">
-
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search by User ID, Name or Mobile"
-        />
-      </div>
-
-      <button class="search-btn" onclick="searchUsers()">
-        <i class="fa-solid fa-search"></i>
-        Search
-      </button>
-
-    </section>
-
-    <!-- ========== TABLE SECTION ========== -->
-    <section class="table-container">
-
-      <table>
-
-        <thead>
-          <tr>
-            <th><i class="fa-solid fa-id-card"></i> User ID</th>
-            <th><i class="fa-solid fa-user"></i> Name</th>
-            <th><i class="fa-solid fa-phone"></i> Mobile</th>
-            <th><i class="fa-solid fa-wallet"></i> Wallet</th>
-            <th><i class="fa-solid fa-calendar-plus"></i> Created</th>
-            <th><i class="fa-solid fa-toggle-on"></i> Status</th>
-            <th><i class="fa-solid fa-gears"></i> Action</th>
-          </tr>
-        </thead>
-
-        <tbody id="userTable">
-          <!-- Users load dynamically -->
-        </tbody>
-
-      </table>
-
-    </section>
-
-  </main>
-
-</div>
-
-<!-- TOAST CONTAINER -->
-<div id="toastContainer" class="toast-container"></div>
-
-<!-- ================= SCRIPTS ================= -->
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-<script src="../js/config.js"></script>
-<script src="../js/common.js"></script>
-<script src="../js/layout.js"></script>
-<script src="../js/users.js"></script>
-
-</body>
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../js/users.js"></script>
+  </body>
 </html>

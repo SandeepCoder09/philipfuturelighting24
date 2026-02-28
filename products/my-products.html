@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="theme-color" content="#111827">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#111827" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <title>My Products | Philips</title>
+    <title>My Products | Philips</title>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <!-- ==================== Shared CSS ========================== -->
-  <link rel="stylesheet" href="../shared/css/top-nav.css">
+    <!-- ==================== Shared CSS ========================== -->
+    <link rel="stylesheet" href="../shared/css/top-nav.css" />
 
-<!-- ===================== Main CSS ========================== -->
-  <link rel="stylesheet" href="../products/my-products.css" />
-  
-</head>
-<body>
+    <!-- ===================== Main CSS ========================== -->
+    <link rel="stylesheet" href="../products/my-products.css" />
+  </head>
+  <body>
+    <!-- Back Button -->
+    <div class="top-nav">
+      <button class="back-btn" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back
+      </button>
 
-  <!-- Back Button -->
-  <div class="top-bar">
-    <button class="back-btn" onclick="history.back()">
-      <i class="fa-solid fa-arrow-left"></i>
-      Back
-    </button>
-    <h2>My Products</h2>
-  </div>
-
-  <div class="page-container">
-
-    <div id="loading" class="loading-text">
-      <i class="fa-solid fa-spinner fa-spin"></i> Loading products...
+      <h2 class="page-title">My Products</h2>
     </div>
 
-    <div id="productsContainer" class="products-list"></div>
+    <div class="page-content">
+      <div id="loading" class="loading-text">
+        <i class="fa-solid fa-spinner fa-spin"></i> Loading products...
+      </div>
 
-  </div>
+      <div id="productsContainer" class="products-list"></div>
+    </div>
 
-  <!-- ==================== Shared JS ========================== -->
-<script src="../shared/js/config.js"></script>
+    <!-- ==================== Shared JS ========================== -->
+    <script src="../shared/js/config.js"></script>
 
-<!-- ===================== Main JS ========================== -->
-  <script src="../products/my-products.js"></script>
-</body>
+    <!-- ===================== Main JS ========================== -->
+    <script src="../products/my-products.js"></script>
+  </body>
 </html>

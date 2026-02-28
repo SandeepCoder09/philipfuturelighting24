@@ -1,189 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard | Philips</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Philips</title>
 
-  <!-- Main Styles -->
-  <link rel="stylesheet" href="css/style.css" />
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
+    <div class="layout">
+      <!-- ================= SIDEBAR ================= -->
+      <aside class="sidebar" id="sidebar">
+        <h2 class="logo">PHILIPS ADMIN</h2>
 
-<div class="layout">
+        <nav class="nav-menu">
+          <a href="index.html" class="active">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Dashboard</span>
+          </a>
 
-  <!-- ================= SIDEBAR ================= -->
-  <aside class="sidebar" id="sidebar">
-    <h2 class="logo">PHILIPS ADMIN</h2>
+          <a href="pages/users.html">
+            <i class="fa-solid fa-users"></i>
+            <span>Users</span>
+          </a>
 
-    <nav class="nav-menu">
+          <a href="pages/withdraws.html">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <span>Withdraws</span>
+          </a>
 
-      <a href="index.html" class="active">
-        <i class="fa-solid fa-gauge"></i>
-        <span>Dashboard</span>
-      </a>
+          <a href="pages/transactions.html">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            <span>Transactions</span>
+          </a>
 
-      <a href="pages/users.html">
-        <i class="fa-solid fa-users"></i>
-        <span>Users</span>
-      </a>
+          <a href="pages/banks.html">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>Banks</span>
+          </a>
 
-      <a href="pages/withdraws.html">
-        <i class="fa-solid fa-money-bill-transfer"></i>
-        <span>Withdraws</span>
-      </a>
+          <!-- NEW GIFT MENU -->
+          <a href="pages/gift.html">
+            <i class="fa-solid fa-gift"></i>
+            <span>Gift Codes</span>
+          </a>
+        </nav>
+      </aside>
 
-      <a href="pages/transactions.html">
-        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-        <span>Transactions</span>
-      </a>
+      <!-- ================= MAIN ================= -->
+      <main class="main">
+        <!-- ========== TOPBAR ========== -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1>Dashboard Overview</h1>
+          </div>
 
-      <a href="pages/banks.html">
-        <i class="fa-solid fa-building-columns"></i>
-        <span>Banks</span>
-      </a>
+          <div class="topbar-right">
+            <button class="logout-btn" onclick="logout()">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              Logout
+            </button>
+          </div>
+        </header>
 
-      <!-- NEW GIFT MENU -->
-      <a href="pages/gift.html">
-        <i class="fa-solid fa-gift"></i>
-        <span>Gift Codes</span>
-      </a>
+        <!-- ========== TODAY STATS ========== -->
+        <section class="cards" style="margin-bottom: 25px">
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-user-plus"></i> Today Users</h3>
+              <p id="todayUsers">0</p>
+            </div>
+          </div>
 
-    </nav>
-  </aside>
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-wallet"></i> Today Recharge</h3>
+              <p id="todayRecharge">₹0</p>
+            </div>
+          </div>
 
-  <!-- ================= MAIN ================= -->
-  <main class="main">
+          <div class="card">
+            <div class="card-content">
+              <h3>
+                <i class="fa-solid fa-money-bill-wave"></i> Today Withdraw
+              </h3>
+              <p id="todayWithdraw">₹0</p>
+            </div>
+          </div>
 
-    <!-- ========== TOPBAR ========== -->
-    <header class="topbar">
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-coins"></i> Today Commission</h3>
+              <p id="todayCommission">₹0</p>
+            </div>
+          </div>
+        </section>
 
-      <div class="topbar-left">
-        <button class="menu-toggle" onclick="toggleSidebar()">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <h1>Dashboard Overview</h1>
-      </div>
+        <!-- ========== DASHBOARD CARDS ========== -->
+        <section class="cards">
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-users"></i> Total Users</h3>
+              <p id="totalUsers">0</p>
+            </div>
+          </div>
 
-      <div class="topbar-right">
-        <button class="logout-btn" onclick="logout()">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          Logout
-        </button>
-      </div>
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-wallet"></i> Total Recharge</h3>
+              <p id="totalRecharge">₹0</p>
+            </div>
+          </div>
 
-    </header>
+          <div class="card">
+            <div class="card-content">
+              <h3>
+                <i class="fa-solid fa-money-bill-wave"></i> Total Withdraw
+                (Success)
+              </h3>
+              <p id="totalWithdraw">₹0</p>
+            </div>
+          </div>
 
-    <!-- ========== TODAY STATS ========== -->
-<section class="cards" style="margin-bottom: 25px;">
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-coins"></i> Total Commission</h3>
+              <p id="totalCommission">₹0</p>
+            </div>
+          </div>
 
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-user-plus"></i> Today Users</h3>
-      <p id="todayUsers">0</p>
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-clock"></i> Pending Withdraw</h3>
+              <p id="pendingWithdraw">0</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-content">
+              <h3><i class="fa-solid fa-hourglass-half"></i> Under Review</h3>
+              <p id="underReviewWithdraw">0</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-content">
+              <h3>
+                <i class="fa-solid fa-check-circle"></i> Success Withdraw Count
+              </h3>
+              <p id="successWithdrawCount">0</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-content">
+              <h3>
+                <i class="fa-solid fa-money-bill-transfer"></i> Total Withdraw
+                Requested
+              </h3>
+              <p id="totalWithdrawRequested">₹0</p>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-wallet"></i> Today Recharge</h3>
-      <p id="todayRecharge">₹0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-money-bill-wave"></i> Today Withdraw</h3>
-      <p id="todayWithdraw">₹0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-coins"></i> Today Commission</h3>
-      <p id="todayCommission">₹0</p>
-    </div>
-  </div>
-
-</section>
-
-    <!-- ========== DASHBOARD CARDS ========== -->
-<section class="cards">
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-users"></i> Total Users</h3>
-      <p id="totalUsers">0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-wallet"></i> Total Recharge</h3>
-      <p id="totalRecharge">₹0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-money-bill-wave"></i> Total Withdraw (Success)</h3>
-      <p id="totalWithdraw">₹0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-coins"></i> Total Commission</h3>
-      <p id="totalCommission">₹0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-clock"></i> Pending Withdraw</h3>
-      <p id="pendingWithdraw">0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-hourglass-half"></i> Under Review</h3>
-      <p id="underReviewWithdraw">0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-check-circle"></i> Success Withdraw Count</h3>
-      <p id="successWithdrawCount">0</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <h3><i class="fa-solid fa-money-bill-transfer"></i> Total Withdraw Requested</h3>
-      <p id="totalWithdrawRequested">₹0</p>
-    </div>
-  </div>
-
-</section>
-
-  </main>
-
-</div>
-  
-<!-- ================= SCRIPTS ================= -->
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-<script src="../admin/js/config.js"></script>
-<script src="../admin/js/common.js"></script>
-<script src="../js/layout.js"></script>
-<script src="../admin/js/dashboard.js"></script>
-
-</body>
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="../admin/js/config.js"></script>
+    <script src="../admin/js/common.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../admin/js/dashboard.js"></script>
+  </body>
 </html>
 
