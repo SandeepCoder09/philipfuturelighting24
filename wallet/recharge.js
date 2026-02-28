@@ -1,3 +1,7 @@
+/* =====================================
+   PHILIPS RECHARGE SCRIPT (FIXED)
+===================================== */
+
 // ===============================
 // Amount Selection Logic
 // ===============================
@@ -24,21 +28,20 @@ amountButtons.forEach(button => {
 
 
 // ===============================
-// Recharge Button Logic (JWT)
+// Recharge Button Logic (JWT + API_BASE)
 // ===============================
 
 rechargeBtn.addEventListener("click", async () => {
 
   if (!selectedAmount) {
-    alert("Please select amount");
+    showPhilipsPopup("Error", "Please select amount", "error");
     return;
   }
 
-  // ✅ Get JWT token
   const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("User not logged in");
+    showPhilipsPopup("Session Expired", "Please login again", "error");
     window.location.href = "../auth/index.html";
     return;
   }
@@ -47,40 +50,37 @@ rechargeBtn.addEventListener("click", async () => {
     rechargeBtn.innerText = "Processing...";
     rechargeBtn.disabled = true;
 
-    const response = await fetch(
-      "https://philips-backend.onrender.com/api/wallet/create-order",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify({
-          amount: Number(selectedAmount)
-        })
-      }
-    );
+    // ✅ Using centralized API_BASE
+    const response = await authFetch("/wallet/create-order", {
+      method: "POST",
+      body: JSON.stringify({
+        amount: Number(selectedAmount)
+      })
+    });
 
     const data = await response.json();
 
     console.log("Create Order Response:", data);
 
     if (!response.ok) {
-      alert(data.message || "Order creation failed");
+      showPhilipsPopup("Recharge Failed", data.message || "Order creation failed", "error");
       rechargeBtn.innerText = "Recharge Now";
       rechargeBtn.disabled = false;
       return;
     }
 
     if (!data.payment_session_id) {
-      alert("Payment session not received");
+      showPhilipsPopup("Error", "Payment session not received", "error");
       rechargeBtn.innerText = "Recharge Now";
       rechargeBtn.disabled = false;
       return;
     }
 
+    // ===============================
+    // CASHFREE CHECKOUT
+    // ===============================
     const cashfree = Cashfree({
-      mode: "production"
+      mode: "production" // change to "sandbox" if testing
     });
 
     await cashfree.checkout({
@@ -93,7 +93,9 @@ rechargeBtn.addEventListener("click", async () => {
 
   } catch (error) {
     console.error("Recharge error:", error);
-    alert("Server error");
+
+    showPhilipsPopup("Server Error", "Unable to connect to server", "error");
+
     rechargeBtn.innerText = "Recharge Now";
     rechargeBtn.disabled = false;
   }

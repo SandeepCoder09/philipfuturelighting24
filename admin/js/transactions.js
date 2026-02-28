@@ -9,11 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadTransactions() {
 
   const tableBody = document.getElementById("transactionTable");
+  if (!tableBody) return;
 
   try {
 
-    // 🔥 FIXED: removed ${API}
-    const response = await authFetch(`/api/admin/transactions`);
+    // ✅ REMOVE /api (already inside API_BASE)
+    const response = await authFetch(`/admin/transactions`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch transactions");
@@ -48,7 +49,7 @@ async function loadTransactions() {
         <td>${tx.orderId || "-"}</td>
         <td>${tx.type || "-"}</td>
         <td>₹${formatMoney(tx.amount)}</td>
-        <td class="status-${tx.status?.replace(" ", "-")}">
+        <td class="status-${(tx.status || "").replace(/\s+/g, "-")}">
           ${tx.status || "-"}
         </td>
         <td>${created}</td>

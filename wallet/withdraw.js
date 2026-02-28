@@ -26,18 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ===========================
-     LOAD BANKS
+     LOAD BANKS (FIXED)
   =========================== */
   async function loadBanks() {
-    const token = localStorage.getItem("token");
-    if (!token) return;
 
     try {
-      const res = await fetch(`${API}/wallet/banks`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const res = await authFetch("/wallet/banks");
 
       if (!res.ok) {
         renderNoBank();
@@ -53,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
     } catch (error) {
+      console.error("Bank Load Error:", error);
       renderNoBank();
     }
   }
@@ -135,14 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* ===========================
      CLICK WITHDRAW
   =========================== */
-  withdrawBtn.addEventListener("click", async function () {
-
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      showToast("Login required.");
-      return;
-    }
+  withdrawBtn.addEventListener("click", function () {
 
     if (!selectedBankId) {
       showToast("Please select a bank account.");
@@ -188,17 +176,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ===========================
-     CONFIRM WITHDRAW
+     CONFIRM WITHDRAW (FIXED)
   =========================== */
   confirmBtn.addEventListener("click", async function () {
-
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      modal.classList.remove("active");
-      showToast("Login required.");
-      return;
-    }
 
     const pin = getPinValue();
 
@@ -212,12 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
       confirmBtn.disabled = true;
       confirmBtn.innerText = "Processing...";
 
-      const res = await fetch(`${API}/wallet/withdraw`, {
+      const res = await authFetch("/wallet/withdraw", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
         body: JSON.stringify({
           amount: pendingAmount,
           pin: pin,
@@ -238,6 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
     } catch (error) {
+      console.error("Withdraw Error:", error);
       modal.classList.remove("active");
       showToast("Server error.");
     } finally {

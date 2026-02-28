@@ -16,8 +16,8 @@ let allBanks = [];
 async function loadBanks() {
   try {
 
-    // 🔥 FIXED: removed ${API}
-    const response = await authFetch(`/api/admin/banks`);
+    // ✅ REMOVE /api (already inside API_BASE)
+    const response = await authFetch(`/admin/banks`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch banks");
@@ -47,6 +47,8 @@ function maskAccount(account) {
 function renderBanks(banks) {
 
   const table = document.getElementById("bankTable");
+  if (!table) return;
+
   table.innerHTML = "";
 
   if (!banks || banks.length === 0) {

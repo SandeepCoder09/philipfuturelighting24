@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
      LOAD USER RISK
   ===================================================== */
   async function loadUserRisk(userId) {
-    const res = await authFetch(`/api/admin/user-risk/${userId}`);
+  
+    // ✅ REMOVE /api
+    const res = await authFetch(`/admin/user-risk/${userId}`);
   
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
@@ -66,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
      LOAD USER ACTIVITY
   ===================================================== */
   async function loadUserActivity(userId) {
-    const res = await authFetch(`/api/admin/user-activity/${userId}`);
+  
+    // ✅ REMOVE /api
+    const res = await authFetch(`/admin/user-activity/${userId}`);
   
     if (!res.ok) {
       console.warn("Activity API not ready");
@@ -86,11 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!el) return;
   
     el.innerHTML = `
-      <p><strong>Name:</strong> ${user.name || "-"}</p>
-      <p><strong>Phone:</strong> ${user.mobile || "-"}</p>
-      <p><strong>Status:</strong> ${user.isBanned ? "BANNED" : "Active"}</p>
-      <p><strong>Last Login:</strong> ${formatDate(user.lastLogin)}</p>
-      <p><strong>Ban Reason:</strong> ${user.banReason || "None"}</p>
+      <p><strong>Name:</strong> ${user?.name || "-"}</p>
+      <p><strong>Phone:</strong> ${user?.mobile || "-"}</p>
+      <p><strong>Status:</strong> ${user?.isBanned ? "BANNED" : "Active"}</p>
+      <p><strong>Last Login:</strong> ${formatDate(user?.lastLogin)}</p>
+      <p><strong>Ban Reason:</strong> ${user?.banReason || "None"}</p>
     `;
   }
   
@@ -148,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
   /* =====================================================
-     ✅ FIXED RENDER TIMELINE
+     RENDER TIMELINE
   ===================================================== */
   function renderTimeline(logs) {
     const timeline = document.getElementById("activityTimeline");

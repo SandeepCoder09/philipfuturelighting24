@@ -1,27 +1,41 @@
-// 🌍 Auto API Switch
-const API_BASE =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1" ||
-  window.location.hostname.startsWith("10.")
-    ? "http://localhost:5001"
-    : "https://philips-backend.onrender.com";
+// 🌍 Auto API Switch (ADMIN SAFE)
 
-// 🔐 Auth Fetch Wrapper
-async function authFetch(url, options = {}) {
-  const token = localStorage.getItem("adminToken"); // 🔥 FIXED
+const host = window.location.hostname;
 
-  const response = await fetch(API_BASE + url, {
+let API_BASE;
+
+if (host === "localhost" || host === "127.0.0.1") {
+  API_BASE = "http://localhost:5001/api";
+}
+else if (host.startsWith("10.") || host.startsWith("192.168.")) {
+  API_BASE = `http://${host}:5001/api`;
+}
+else {
+  API_BASE = "https://philips-backend.onrender.com/api";
+}
+
+
+// 🔐 Auth Fetch Wrapper (WITH TOKEN)
+async function authFetch(endpoint, options = {}) {
+
+  // 🔥 Check both possible tokens
+  const token =
+    localStorage.getItem("adminToken") ||
+    localStorage.getItem("token");
+
+  const response = await fetch(API_BASE + endpoint, {
     ...options,
     headers: {
       "Content-Type": "application/json",
-      Authorization: token ? "Bearer " + token : "",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...(options.headers || {})
     }
   });
 
-  // Auto logout on expired
+  // 🔴 Auto logout if unauthorized
   if (response.status === 401) {
     localStorage.removeItem("adminToken");
+    localStorage.removeItem("token");
     window.location.href = "login.html";
   }
 

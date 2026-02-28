@@ -1,4 +1,9 @@
 /* =====================================
+   PHILIPS BIND BANK SCRIPT (FIXED)
+===================================== */
+
+
+/* =====================================
    DOM ELEMENTS
 ===================================== */
 
@@ -16,21 +21,24 @@ const bankContainer = document.getElementById("bankContainer");
 /* =====================================
    TOKEN CHECK
 ===================================== */
-function getToken() {
+function ensureLoggedIn() {
   const token = localStorage.getItem("token");
+
   if (!token) {
     window.location.href = "../auth/index.html";
+    return false;
   }
-  return token;
+
+  return true;
 }
 
 
 /* =====================================
-   BIND BANK FUNCTION
+   BIND BANK FUNCTION (FIXED)
 ===================================== */
 async function bindBank() {
 
-  const token = getToken();
+  if (!ensureLoggedIn()) return;
 
   const data = {
     accountNumber: accountNumberInput.value.trim(),
@@ -50,12 +58,10 @@ async function bindBank() {
   loader.classList.remove("hidden");
 
   try {
-    const response = await fetch(`${API}/wallet/bind-bank`, {
+
+    // ✅ Using centralized authFetch
+    const response = await authFetch("/wallet/bind-bank", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
       body: JSON.stringify(data)
     });
 
@@ -80,18 +86,15 @@ async function bindBank() {
 
 
 /* =====================================
-   LOAD BANKS
+   LOAD BANKS (FIXED)
 ===================================== */
 async function loadBanks() {
 
-  const token = getToken();
+  if (!ensureLoggedIn()) return;
 
   try {
-    const response = await fetch(`${API}/wallet/banks`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+
+    const response = await authFetch("/wallet/banks");
 
     if (!response.ok) {
       console.error("Failed to load banks");

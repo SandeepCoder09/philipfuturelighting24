@@ -1,55 +1,46 @@
-// 🔹 Get auth token
-const token = localStorage.getItem("token");
+/* ==========================================
+   PHILIPS RECORDS SCRIPT (FIXED)
+========================================== */
 
-// 🔹 Get container
-const container = document.getElementById("recordsContainer");
+document.addEventListener("DOMContentLoaded", async () => {
 
-// ==========================================
-// 🔹 AUTH CHECK
-// ==========================================
-if (!token) {
+  const container = document.getElementById("recordsContainer");
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    container.innerHTML = `
+      <div class="empty-state">
+        Please login again.
+      </div>
+    `;
+    return;
+  }
+
+  // 🔹 SHOW LOADING
   container.innerHTML = `
     <div class="empty-state">
-      Please login again.
+      Loading records...
     </div>
   `;
-  throw new Error("No authentication token found");
-}
 
-// ==========================================
-// 🔹 SHOW LOADING
-// ==========================================
-container.innerHTML = `
-  <div class="empty-state">
-    Loading records...
-  </div>
-`;
+  try {
 
-// ==========================================
-// 🔹 FETCH TRANSACTIONS
-// ==========================================
-fetch(`${API}/wallet/transactions`, {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`
-  }
-})
-  .then(async (res) => {
+    // ✅ Using centralized authFetch
+    const res = await authFetch("/wallet/transactions");
+
     if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || "Failed to fetch");
+      throw new Error("Failed to fetch records");
     }
-    return res.json();
-  })
-  .then((data) => {
+
+    const data = await res.json();
 
     if (!Array.isArray(data)) {
       throw new Error("Invalid data format");
     }
 
     // ==========================================
-    // 🔹 FILTER BY PAGE TYPE (Recharge / Withdraw)
+    // 🔹 FILTER BY PAGE TYPE
     // ==========================================
     const filtered = data.filter(
       (item) =>
@@ -72,10 +63,9 @@ fetch(`${API}/wallet/transactions`, {
     const sorted = filtered.sort((a, b) => {
       const dateA = new Date(a.createdAt || a.date);
       const dateB = new Date(b.createdAt || b.date);
-      return dateB - dateA; // newest first
+      return dateB - dateA;
     });
 
-    // Clear loading
     container.innerHTML = "";
 
     // ==========================================
@@ -86,7 +76,6 @@ fetch(`${API}/wallet/transactions`, {
       const div = document.createElement("div");
       div.className = "record-item";
 
-      // Convert status safely (handle spaces like "under review")
       const statusClass = tx.status
         ? tx.status.replace(/\s+/g, "-").toLowerCase()
         : "pending";
@@ -114,13 +103,15 @@ fetch(`${API}/wallet/transactions`, {
       container.appendChild(div);
     });
 
-  })
-  .catch((err) => {
-    console.error("❌ Fetch Error:", err);
+  } catch (err) {
+
+    console.error("Record Fetch Error:", err);
 
     container.innerHTML = `
       <div class="empty-state">
         Failed to load records.
       </div>
     `;
-  });
+  }
+
+});

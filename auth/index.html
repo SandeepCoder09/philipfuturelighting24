@@ -1,68 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="theme-color" content="#0f172a">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
-  <title>Login Philips</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- CSS -->
-  <!-- <link rel="stylesheet" href="../auth/style.css"> -->
+    <title>Login | Philips</title>
 
-  <link rel="stylesheet" href="../shared/auth/auth.css">
+    <link rel="stylesheet" href="../shared/auth/auth.css" />
+    <link rel="stylesheet" href="../shared/ui/popup.css" />
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body>
-
-  <div class="philips-bg">
-    <div class="bulb-glow"></div>
-    <div class="bulb-core"></div>
-    <div class="power-ring ring1"></div>
-    <div class="power-ring ring2"></div>
-  </div>
-
-  <div class="login-container">
-
-    <h2>
-      <i class="fa-solid fa-right-to-bracket"></i>
-      Login
-    </h2>
-
-    <form id="loginForm">
-
-      <div class="input-group">
-        <i class="fa-solid fa-phone"></i>
-        <input type="text" id="mobile" placeholder="Mobile Number" required>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="auth-logo">
+        <img src="../assets/philips-ind.jpg" alt="Philips Logo" />
       </div>
+      <h2>
+        <!-- <i class="fa-solid fa-right-to-bracket"></i> -->
+        Philips India
+      </h2>
 
-      <div class="input-group">
-        <i class="fa-solid fa-lock"></i>
-        <input type="password" id="password" placeholder="Password" required>
-      </div>
+      <form id="loginForm">
+        <!-- Mobile -->
+        <div class="input-group mobile-group">
+          <span class="country-code">+91</span>
+          <input
+            type="tel"
+            id="mobile"
+            placeholder="Mobile Number"
+            maxlength="10"
+            inputmode="numeric"
+            required
+          />
+        </div>
 
-      <button type="submit">
-        <i class="fa-solid fa-arrow-right"></i>
-        Login
-      </button>
+        <!-- Password -->
+        <div class="input-group password-group">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <i class="fa-solid fa-eye toggle-password" data-target="password"></i>
+        </div>
 
-    </form>
+        <button type="submit" class="auth-btn">
+          <span class="btn-text">Login</span>
+          <div class="led-dots hidden">
+            <span></span><span></span><span></span>
+          </div>
+        </button>
+      </form>
 
-    <p>Don't have an account?
-      <a href="../auth/register.html">Register</a>
-    </p>
+      <p>
+        Don't have an account?
+        <a href="../auth/register.html">Register</a>
+      </p>
+    </div>
 
-  </div>
-
-  <!-----------------Config JS File --------------->
-<script src="../shared/js/config.js"></script>
-<!---------------- Main JS File ------------------>
-  <script src="../auth/script.js"></script>
-
-</body>
+    <script src="../shared/js/config.js"></script>
+    <script src="../shared/ui/popup.js"></script>
+    <script src="../auth/script.js"></script>
+  </body>
 </html>

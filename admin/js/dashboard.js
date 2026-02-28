@@ -10,7 +10,7 @@ async function loadDashboard() {
   try {
 
     // 🔥 FIXED: removed ${API}
-    const response = await authFetch(`/api/admin/dashboard`);
+    const response = await authFetch(`/admin/dashboard`);
 
     if (!response.ok) {
       throw new Error("Failed to load dashboard");

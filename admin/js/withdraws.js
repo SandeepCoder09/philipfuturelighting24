@@ -6,9 +6,9 @@ async function loadWithdraws(filters = {}) {
 
     const query = new URLSearchParams(filters).toString();
 
-    // 🔥 FIXED: removed ${API}
+    // ✅ REMOVE /api
     const response = await authFetch(
-      `/api/admin/withdraws?${query}`
+      `/admin/withdraws?${query}`
     );
 
     if (!response.ok) {
@@ -17,6 +17,8 @@ async function loadWithdraws(filters = {}) {
 
     const withdraws = await response.json();
     const table = document.getElementById("withdrawTable");
+    if (!table) return;
+
     table.innerHTML = "";
 
     if (!withdraws || withdraws.length === 0) {
@@ -73,7 +75,7 @@ async function loadWithdraws(filters = {}) {
             <small>${w.user?.userId || ""}</small>
           </td>
           <td>₹${formatMoney(w.amount)}</td>
-          <td class="status-${w.status.replace(" ", "-")}">
+          <td class="status-${(w.status || "").replace(/\s+/g, "-")}">
             ${w.status}
           </td>
           <td>${actionHTML}</td>
@@ -128,9 +130,9 @@ function resetFilters() {
 async function handleAction(id, status) {
   try {
 
-    // 🔥 FIXED: removed ${API}
+    // ✅ REMOVE /api
     const response = await authFetch(
-      `/api/admin/withdraw/${id}`,
+      `/admin/withdraw/${id}`,
       {
         method: "PUT",
         body: JSON.stringify({ status })

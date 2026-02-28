@@ -27,8 +27,8 @@ async function createGift() {
 
   try {
 
-    // 🔥 FIXED: removed ${API}
-    const res = await authFetch(`/api/gift/create`, {
+    // ✅ REMOVE /api
+    const res = await authFetch(`/gift/create`, {
       method: "POST",
       body: JSON.stringify({
         code,
@@ -65,8 +65,8 @@ async function loadGifts() {
 
   try {
 
-    // 🔥 FIXED: removed ${API}
-    const res = await authFetch(`/api/gift/all`);
+    // ✅ REMOVE /api
+    const res = await authFetch(`/gift/all`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch gifts");
@@ -74,6 +74,7 @@ async function loadGifts() {
 
     const gifts = await res.json();
 
+    if (!giftTable) return;
     giftTable.innerHTML = "";
 
     if (!gifts || gifts.length === 0) {

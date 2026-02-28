@@ -26,17 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
 
-      const response = await fetch(
-        `${API}/wallet/transactions?type=${type}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token
-          }
-        }
+      // ✅ Using centralized authFetch
+      const response = await authFetch(
+        `/wallet/transactions?type=${type}`
       );
 
       if (!response.ok) {
-        throw new Error("Failed to fetch");
+        throw new Error("Failed to fetch transactions");
       }
 
       const transactions = await response.json();
@@ -49,21 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-
-
       transactions.forEach(tx => {
 
         const item = document.createElement("div");
-
 
         const typeClass = tx.type
           ? tx.type.replace(/\s+/g, "-").toLowerCase()
           : "other";
 
-
-
-      
-          const statusClass = tx.status
+        const statusClass = tx.status
           ? tx.status.replace(/\s+/g, "-").toLowerCase()
           : "pending";
 
@@ -90,7 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
     } catch (error) {
-      console.error(error);
+      console.error("Transaction Load Error:", error);
+
       transactionContainer.innerHTML =
         `<p style="color:#ff4d4d;">Failed to load transactions</p>`;
     }

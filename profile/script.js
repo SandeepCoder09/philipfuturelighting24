@@ -1,3 +1,8 @@
+/* =====================================
+   PHILIPS PROFILE SCRIPT (FIXED VERSION)
+===================================== */
+
+
 // ========================= LOAD PROFILE ========================
 
 async function loadProfile() {
@@ -14,11 +19,7 @@ async function loadProfile() {
     // ===============================
     // LOAD USER PROFILE
     // ===============================
-    const profileRes = await fetch(`${API}/users/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const profileRes = await authFetch("/users/profile");
 
     if (!profileRes.ok) {
       throw new Error("Profile fetch failed");
@@ -42,7 +43,9 @@ async function loadProfile() {
 
   } catch (error) {
     console.error("Profile Error:", error);
+
     alert("Session expired or backend not responding. Please login again.");
+
     localStorage.removeItem("token");
     window.location.href = "../auth/index.html";
   }
@@ -54,15 +57,9 @@ async function loadProfile() {
 // ===============================
 async function refreshWalletBalance() {
 
-  const token = localStorage.getItem("token");
-
   try {
 
-    const balanceRes = await fetch(`${API}/wallet/balance`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const balanceRes = await authFetch("/wallet/balance");
 
     if (!balanceRes.ok) {
       throw new Error("Failed to fetch balance");

@@ -1,86 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Register | Philips</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register | Philips</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="theme-color" content="#0f172a">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- <link rel="stylesheet" href="../auth/register.css"> -->
+    <link rel="stylesheet" href="../shared/auth/auth.css" />
+    <link rel="stylesheet" href="../shared/ui/popup.css" />
 
-  <link rel="stylesheet" href="../shared//auth/auth.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="register-container">
+      <div class="auth-logo">
+        <img src="../assets/philips-ind.jpg" alt="Philips Logo" />
+      </div>
+      <h2>
+        <!-- <i class="fa-solid fa-user-plus"></i> -->
+        Philips India
+      </h2>
 
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body>
+      <form id="registerForm">
+        <!-- Nickname -->
+        <div class="input-group">
+          <i class="fa-solid fa-user"></i>
+          <input
+            type="text"
+            id="name"
+            placeholder="Nickname"
+            maxlength="20"
+            required
+          />
+        </div>
 
-  <div class="philips-bg">
-    <div class="bulb-glow"></div>
-    <div class="bulb-core"></div>
-    <div class="power-ring ring1"></div>
-    <div class="power-ring ring2"></div>
-  </div>
+        <!-- Mobile with +91 -->
+        <div class="input-group mobile-group">
+          <span class="country-code">+91</span>
+          <input
+            type="tel"
+            id="mobile"
+            placeholder="Mobile Number"
+            maxlength="10"
+            inputmode="numeric"
+            required
+          />
+        </div>
 
-<div class="register-container">
+        <!-- Password -->
+        <div class="input-group password-group">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <i class="fa-solid fa-eye toggle-password" data-target="password"></i>
+        </div>
 
-  <h2>
-    <i class="fa-solid fa-user-plus"></i>
-    Create Account
-  </h2>
+        <!-- Confirm Password -->
+        <div class="input-group password-group">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
+          <i
+            class="fa-solid fa-eye toggle-password"
+            data-target="confirmPassword"
+          ></i>
+        </div>
 
-  <form id="registerForm">
+        <!-- Invite -->
+        <div class="input-group">
+          <i class="fa-solid fa-gift"></i>
+          <input
+            type="number"
+            id="inviteCode"
+            placeholder="Invite Code (Optional)"
+          />
+        </div>
 
-    <div class="input-group">
-      <i class="fa-solid fa-user"></i>
-      <input type="text" id="name" placeholder="Full Name" required>
+        <button type="submit" class="auth-btn">
+          <span class="btn-text">Register</span>
+          <div class="led-dots hidden">
+            <span></span><span></span><span></span>
+          </div>
+        </button>
+      </form>
+
+      <p>
+        Already have an account?
+        <a href="../auth/index.html">Login</a>
+      </p>
     </div>
 
-    <div class="input-group">
-      <i class="fa-solid fa-phone"></i>
-      <input type="text" id="mobile" placeholder="Mobile Number" required>
-    </div>
-
-    <div class="input-group">
-      <i class="fa-solid fa-lock"></i>
-      <input type="password" id="password" placeholder="Password" required>
-    </div>
-
-    <div class="input-group">
-      <i class="fa-solid fa-lock"></i>
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-    </div>
-
-    <div class="input-group">
-      <i class="fa-solid fa-gift"></i>
-      <input type="number" id="inviteCode" placeholder="Invite Code (Optional)">
-    </div>
-
-    <button type="submit">
-      <i class="fa-solid fa-user-check"></i>
-      Register
-    </button>
-
-  </form>
-
-  <p id="message"></p>
-
-  <p>Already have an account?
-    <a href="../auth/index.html">Login</a>
-  </p>
-
-</div>
-
-<!-- <div class="bg-sphere sphere1"></div>
-<div class="bg-sphere sphere2"></div>
-<div class="bg-sphere sphere3"></div> -->
-
-<!-----------------Config JS File --------------->
-<script src="../shared/js/config.js"></script>
-<!---------------- Main JS File ------------------>
-<script src="../auth/register.js"></script>
-</body>
+    <script src="../shared/js/config.js"></script>
+    <script src="../shared/ui/popup.js"></script>
+    <script src="../auth/register.js"></script>
+  </body>
 </html>

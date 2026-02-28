@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadUsers() {
     try {
 
-      const response = await authFetch(`/api/admin/users`);
+      // ✅ REMOVE /api (already inside API_BASE)
+      const response = await authFetch(`/admin/users`);
 
       if (!response.ok) {
         throw new Error("Failed to fetch users");
@@ -49,12 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
         ? `<span class="badge badge-danger">Banned</span>`
         : `<span class="badge badge-success">Active</span>`;
 
-      // 🔵 DETAILS BUTTON
       const detailsBtn = `
         <a href="user-detail.html?userId=${user.userId}">
-          <button class="action-btn btn-info">
-            Details
-          </button>
+          <button class="action-btn btn-info">Details</button>
         </a>
       `;
 
@@ -116,9 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function searchUsers() {
 
-    const keyword = searchInput.value
-      .toLowerCase()
-      .trim();
+    const keyword = searchInput.value.toLowerCase().trim();
 
     if (!keyword) {
       renderUsers(allUsers);
@@ -148,8 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
 
+      // ✅ REMOVE /api here also
       const response = await authFetch(
-        `/api/admin/user/${userId}/ban`,
+        `/admin/user/${userId}/ban`,
         {
           method: "PUT",
           body: JSON.stringify({ banned })
