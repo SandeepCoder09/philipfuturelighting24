@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", initTeamPage);
    INIT PAGE
 ===================================================== */
 async function initTeamPage() {
+
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -13,11 +14,12 @@ async function initTeamPage() {
 
   try {
     await Promise.all([
-      loadTeamData(token),
-      loadIncomeData(token)
+      loadTeamData(),
+      loadIncomeData()
     ]);
   } catch (error) {
     console.error("Team Page Error:", error);
+    redirectToLogin();
   }
 }
 
@@ -25,10 +27,9 @@ async function initTeamPage() {
 /* =====================================================
    LOAD TEAM DATA
 ===================================================== */
-async function loadTeamData(token) {
-  const response = await fetch(`${API}/referral/supervisor-team`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+async function loadTeamData() {
+
+  const response = await authFetch("/referral/supervisor-team");
 
   if (!response.ok) {
     console.error("Supervisor API Error:", response.status);
@@ -47,12 +48,11 @@ async function loadTeamData(token) {
 
 
 /* =====================================================
-   LOAD COMMISSION DATA (SUCCESS ONLY)
+   LOAD COMMISSION DATA
 ===================================================== */
-async function loadIncomeData(token) {
-  const response = await fetch(`${API}/referral/dashboard`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+async function loadIncomeData() {
+
+  const response = await authFetch("/referral/dashboard");
 
   if (!response.ok) {
     console.error("Dashboard API Error:", response.status);
@@ -80,6 +80,7 @@ async function loadIncomeData(token) {
    RENDER TEAM TABLE
 ===================================================== */
 function renderTable(team) {
+
   const tableBody = document.getElementById("teamTable");
   if (!tableBody) return;
 
@@ -102,6 +103,7 @@ function renderTable(team) {
   });
 
   team.forEach(member => {
+
     const joinDate = member.joinDate
       ? new Date(member.joinDate).toLocaleDateString()
       : "-";
@@ -125,6 +127,7 @@ function renderTable(team) {
    QUALIFICATION STATUS
 ===================================================== */
 function handleQualification(isQualified) {
+
   const box = document.getElementById("qualificationStatus");
   if (!box) return;
 
@@ -143,14 +146,12 @@ function handleQualification(isQualified) {
 ===================================================== */
 function setText(id, value) {
   const el = document.getElementById(id);
-  if (!el) return;
-  el.innerText = value ?? 0;
+  if (el) el.innerText = value ?? 0;
 }
 
 function setMoney(id, value) {
   const el = document.getElementById(id);
-  if (!el) return;
-  el.innerText = (value ?? 0) + " INR";
+  if (el) el.innerText = (value ?? 0) + " INR";
 }
 
 
