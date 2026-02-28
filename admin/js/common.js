@@ -43,7 +43,7 @@ function showToast(message, type = "info", duration = 3000) {
 
 
 /* =====================================================
-   REAL-TIME SOCKET SYSTEM
+   REAL-TIME SOCKET SYSTEM (PRO VERSION)
 ===================================================== */
 let socket;
 
@@ -51,8 +51,9 @@ function initSocket() {
 
   if (socket) return;
 
-  // ✅ Use API_BASE from config.js
-  socket = io(API_BASE, { transports: ["websocket"] });
+  socket = io(API_BASE, {
+    transports: ["websocket", "polling"]
+  });
 
   socket.on("connect", () => {
     console.log("🟢 Real-time Connected:", socket.id);
@@ -63,17 +64,33 @@ function initSocket() {
     console.log("🔴 Real-time Disconnected");
   });
 
-  socket.on("withdraw_updated", () => {
-    if (typeof loadWithdraws === "function") loadWithdraws();
-  });
-
-  socket.on("transaction_updated", () => {
-    if (typeof loadTransactions === "function") loadTransactions();
-  });
-
+  /* 🔥 NEW USER */
   socket.on("user_registered", () => {
+    console.log("👤 New user registered");
+    showToast("New user registered", "success");
+
     if (typeof loadUsers === "function") loadUsers();
+    if (typeof loadDashboard === "function") loadDashboard();
   });
+
+  /* 🔥 NEW TRANSACTION */
+  socket.on("transaction_updated", () => {
+    console.log("💰 Transaction updated");
+    showToast("New transaction received", "info");
+
+    if (typeof loadTransactions === "function") loadTransactions();
+    if (typeof loadDashboard === "function") loadDashboard();
+  });
+
+  /* 🔥 NEW WITHDRAWAL */
+  socket.on("withdraw_updated", () => {
+    console.log("💸 New withdrawal request");
+    showToast("New withdrawal request", "warning");
+
+    if (typeof loadWithdraws === "function") loadWithdraws();
+    if (typeof loadDashboard === "function") loadDashboard();
+  });
+
 }
 
 
