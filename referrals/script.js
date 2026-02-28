@@ -86,3 +86,5 @@ function redirectToLogin() {
   localStorage.removeItem("token");
   window.location.href = "../auth/index.html";
 }
+
+//Fix Push//
