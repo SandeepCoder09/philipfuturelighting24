@@ -51,9 +51,11 @@ function initSocket() {
 
   if (socket) return;
 
-  socket = io(API_BASE, {
-    transports: ["websocket", "polling"]
-  });
+  const SOCKET_URL = API_BASE.replace("/api", "");
+
+socket = io(SOCKET_URL, {
+  transports: ["websocket", "polling"]
+});
 
   socket.on("connect", () => {
     console.log("🟢 Real-time Connected:", socket.id);
@@ -135,5 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!isLoginPage) {
     initSocket();
   }
+
+  socket.onAny((event, ...args) => {
+    console.log("📡 Socket Event Received:", event, args);
+  });
 
 });

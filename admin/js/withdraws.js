@@ -1,15 +1,25 @@
 /* ==============================
-   LOAD WITHDRAWS WITH FILTERS
+   LOAD WITHDRAWS (UI-BASED FILTERS)
 ============================== */
-async function loadWithdraws(filters = {}) {
+async function loadWithdraws() {
   try {
+
+    // 🔥 Always read current UI filter values
+    const status = document.getElementById("statusFilter")?.value;
+    const userId = document.getElementById("searchUserId")?.value;
+    const startDate = document.getElementById("startDate")?.value;
+    const endDate = document.getElementById("endDate")?.value;
+
+    const filters = {};
+
+    if (status && status !== "all") filters.status = status;
+    if (userId) filters.userId = userId;
+    if (startDate) filters.startDate = startDate;
+    if (endDate) filters.endDate = endDate;
 
     const query = new URLSearchParams(filters).toString();
 
-    // ✅ REMOVE /api
-    const response = await authFetch(
-      `/admin/withdraws?${query}`
-    );
+    const response = await authFetch(`/admin/withdraws?${query}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch withdraws");
@@ -94,20 +104,7 @@ async function loadWithdraws(filters = {}) {
    APPLY FILTERS
 ============================== */
 function applyFilters() {
-
-  const status = document.getElementById("statusFilter").value;
-  const userId = document.getElementById("searchUserId").value;
-  const startDate = document.getElementById("startDate").value;
-  const endDate = document.getElementById("endDate").value;
-
-  const filters = {};
-
-  if (status && status !== "all") filters.status = status;
-  if (userId) filters.userId = userId;
-  if (startDate) filters.startDate = startDate;
-  if (endDate) filters.endDate = endDate;
-
-  loadWithdraws(filters);
+  loadWithdraws();
 }
 
 
@@ -120,7 +117,7 @@ function resetFilters() {
   document.getElementById("startDate").value = "";
   document.getElementById("endDate").value = "";
 
-  loadWithdraws({ status: "processing" });
+  loadWithdraws();
 }
 
 
@@ -130,7 +127,6 @@ function resetFilters() {
 async function handleAction(id, status) {
   try {
 
-    // ✅ REMOVE /api
     const response = await authFetch(
       `/admin/withdraw/${id}`,
       {
@@ -148,7 +144,8 @@ async function handleAction(id, status) {
 
     showToast(data.message || "Updated successfully", "success");
 
-    applyFilters();
+    // 🔥 Always refresh with current UI filters
+    loadWithdraws();
 
   } catch (error) {
     console.error("Withdraw Action Error:", error);
@@ -169,5 +166,11 @@ function formatMoney(amount) {
    INITIAL LOAD
 ============================== */
 document.addEventListener("DOMContentLoaded", () => {
-  loadWithdraws({ status: "processing" });
+  loadWithdraws();
 });
+
+
+/* ==============================
+   MAKE GLOBAL FOR SOCKET
+============================== */
+window.loadWithdraws = loadWithdraws;
