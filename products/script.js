@@ -250,3 +250,4 @@ function hideLoading() {
   document.getElementById("loadingScreen").classList.remove("active");
 }
 
+// Test
