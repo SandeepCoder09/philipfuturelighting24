@@ -1,8 +1,11 @@
 /* ===============================
-   MY PRODUCTS PAGE (FINAL)
+   MY PRODUCTS PAGE (FINAL FIXED)
 =============================== */
 
 document.addEventListener("DOMContentLoaded", loadProducts);
+
+// 🔥 IMPORTANT
+const BACKEND_BASE = API_BASE.replace("/api", "");
 
 async function loadProducts() {
 
@@ -56,51 +59,51 @@ async function loadProducts() {
       const purchasedDate = new Date(product.purchaseDate)
         .toLocaleDateString("en-IN");
 
-      // ✅ Since same origin, just use /uploads
+      // ✅ CORRECT IMAGE URL FOR VERCEL
       const imageSrc = product.image
-        ? `/uploads/${product.image}`
-        : `/uploads/default-product.png`;
+        ? `${BACKEND_BASE}/uploads/${product.image}`
+        : `${BACKEND_BASE}/uploads/default-product.png`;
 
       const card = `
-  <div class="card">
+        <div class="card">
 
-    <div class="card-image">
-      <img src="${imageSrc}" alt="${product.name}" loading="lazy">
-    </div>
+          <div class="card-image">
+            <img src="${imageSrc}" alt="${product.name}" loading="lazy">
+          </div>
 
-    <div class="card-content">
+          <div class="card-content">
 
-      <div class="card-text">
-        <h2>${product.name}</h2>
+            <div class="card-text">
+              <h2>${product.name}</h2>
 
-        <p class="price">Price: ₹${product.price}</p>
-        <p class="daily-earning">Daily Income: ₹${product.dailyEarning}</p>
+              <p class="price">Price: ₹${product.price}</p>
+              <p class="daily-earning">Daily Income: ₹${product.dailyEarning}</p>
 
-        <p class="product-row">
-          Earned: <span class="highlight">₹${product.totalEarned}</span>
-        </p>
+              <p class="product-row">
+                Earned: <span class="highlight">₹${product.totalEarned}</span>
+              </p>
 
-        <p class="product-row">
-          Purchased: ${purchasedDate}
-        </p>
+              <p class="product-row">
+                Purchased: ${purchasedDate}
+              </p>
 
-        <p class="product-row">
-          ${isExpired
+              <p class="product-row">
+                ${isExpired
           ? `Expired on: ${endDate.toLocaleDateString("en-IN")}`
           : `Days Remaining: ${daysRemaining}`
         }
-        </p>
-      </div>
+              </p>
+            </div>
 
-      <div class="card-action">
-        <span class="status-badge ${isExpired ? "status-expired" : "status-active"}">
-          ${isExpired ? "Expired" : "Active"}
-        </span>
-      </div>
+            <div class="card-action">
+              <span class="status-badge ${isExpired ? "status-expired" : "status-active"}">
+                ${isExpired ? "Expired" : "Active"}
+              </span>
+            </div>
 
-    </div>
-  </div>
-`;
+          </div>
+        </div>
+      `;
 
       container.insertAdjacentHTML("beforeend", card);
     });
