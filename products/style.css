@@ -1,0 +1,362 @@
+/* ==================================================
+   PRODUCTS PAGE STYLE
+   Used only for: products/index.html
+================================================== */
+
+/* ================= GLOBAL ================= */
+
+body {
+  background: #0f172a;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ================= NAVBAR FIX ================= */
+
+/* ================= NAVBAR FIX ================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;   /* small side padding */
+}
+
+/* Make right section stick to extreme right */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* ================= HEADER ================= */
+
+.pricing-header {
+  text-align: center;
+  padding: 25px 10px 15px;
+  background: radial-gradient(circle at center, #001d3d, #000814);
+}
+
+.pricing-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.pricing-header p {
+  font-size: 13px;
+  color: #9fb3c8;
+  margin-top: 4px;
+}
+
+/* ================= PRODUCT LIST ================= */
+
+.pricing-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 3% 120px;
+}
+
+/* ================= PRODUCT CARD ================= */
+
+.card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, #002b5c, #003b7a);
+  border-radius: 16px;
+  height: 130px;
+  /* smaller height */
+  width: 100%;
+  border: 1px solid rgba(0, 170, 255, 0.25);
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 255, 150, 0.3);
+}
+
+/* ================= IMAGE ================= */
+
+.card-image {
+  width: 150px;
+  height: 100%;
+  background: #012a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================= CONTENT ================= */
+
+.card-content {
+  flex: 1;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-text h2 {
+  font-size: 16px;
+  color: #33d6ff;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 13px;
+  margin-top: 2px;
+  font-weight: 700;
+  color: #00ff88;
+}
+
+.daily-earning,
+.validity,
+.limit {
+  font-size: 12px;
+  margin-top: 2px;
+  color: #dbeafe;
+}
+
+/* ================= BUY BUTTON ================= */
+
+.card-action {
+  min-width: 110px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ================= BUY BUTTON ================= */
+
+.subscribe-btn {
+  padding: 6px 16px;
+  font-size: 12px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+}
+
+.subscribe-btn:hover {
+  transform: scale(1.05);
+}
+
+.subscribe-btn:disabled {
+  background: #444;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ================= MODAL ================= */
+
+.buy-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.buy-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.buy-modal-content {
+  background: #001d3d;
+  padding: 24px;
+  border-radius: 18px;
+  width: 92%;
+  max-width: 360px;
+  animation: popupScale 0.25s ease;
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal-header img {
+  width: 90px;
+  margin-bottom: 8px;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.modal-row strong {
+  color: #00ff88;
+}
+
+/* ================= LOADING SCREEN ================= */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #000814;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.loading-screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.loader-circle {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 170, 255, 0.2);
+  border-top: 4px solid #00aaff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes popupScale {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 480px) {
+  .card {
+    height: 125px;
+  }
+
+  .card-image {
+    width: 130px;
+  }
+
+  .subscribe-btn {
+    font-size: 12px;
+    padding: 7px 14px;
+  }
+}
+
+/* ================= NAV MY PRODUCTS BUTTON ================= */
+
+.my-products-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+}
+
+.my-products-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 255, 150, 0.5);
+}
+
+/* ================= MODAL BUTTONS ================= */
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 22px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* Close button */
+.modal-close {
+  background: #2c3e50;
+  color: #ffffff;
+}
+
+.modal-close:hover {
+  background: #34495e;
+}
+
+/* Buy Now / My Products button */
+.modal-buy {
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+}
+
+.modal-buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 255, 150, 0.4);
+}
+
+/* ================= MODAL IMAGE STYLE ================= */
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal-image-wrapper {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  padding: 6px;
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  box-shadow: 0 6px 18px rgba(0, 255, 150, 0.4);
+}
+
+.modal-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #001f3f;
+}

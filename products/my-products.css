@@ -1,0 +1,312 @@
+/* ==================================================
+   MY PRODUCTS PAGE (SAFE VERSION)
+   Works with shared fixed top-nav
+================================================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #0f172a;
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+}
+
+/* ================= PAGE LAYOUT ================= */
+
+.page-content {
+  margin-top: 70px;
+  /* prevents hiding under fixed top-nav */
+  padding: 20px 4% 100px;
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ================= CARD ================= */
+
+.card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+
+  background: linear-gradient(145deg, #002b5c, #003b7a);
+  border-radius: 16px;
+
+  border: 1px solid rgba(0, 170, 255, 0.25);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+
+  overflow: hidden;
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* ================= IMAGE ================= */
+
+.card-image {
+  width: 120px;
+  height: 100%;
+  background: #012a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================= CONTENT ================= */
+
+.card-content {
+  flex: 1;
+  padding: 18px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LEFT SIDE TEXT */
+
+.card-text {
+  line-height: 1.3;
+}
+
+.card-text h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #33d6ff;
+}
+
+.price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #00ff88;
+  margin-bottom: 6px;
+}
+
+.product-row {
+  font-size: 13px;
+  color: #dbeafe;
+}
+
+.highlight {
+  color: #00ff88;
+  font-weight: 700;
+}
+
+/* ================= COLLECT SECTION ================= */
+
+.collect-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 120px;
+}
+
+/* Countdown */
+
+.countdown {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(0, 200, 255, 0.25);
+  padding: 6px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  text-align: center;
+}
+
+/* Collect Button */
+
+.collect-btn {
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+
+  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+  transition: 0.25s ease;
+}
+
+.collect-btn:hover {
+  transform: translateY(-2px);
+}
+
+.collect-btn:disabled {
+  background: #444;
+  color: #999;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Earned Row */
+
+.earned-row {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #dbeafe;
+  text-align: center;
+}
+
+
+
+/* Expired Badge */
+
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-expired {
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 77, 77, 0.4);
+}
+
+/* ================= LOADING / EMPTY ================= */
+
+.loading-text {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 60px;
+  opacity: 0.8;
+}
+
+.empty-state i {
+  font-size: 42px;
+  margin-bottom: 14px;
+  color: #00aaff;
+}
+
+.browse-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* ================= MOBILE OPTIMIZATION ================= */
+
+@media (max-width: 480px) {
+
+  .card {
+    height: 125px;
+  }
+
+  .card-image {
+    width: 100px;
+  }
+
+  .card-content {
+    padding: 10px;
+  }
+
+  .collect-section {
+    min-width: 95px;
+  }
+
+  .countdown {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .collect-btn {
+    font-size: 11px;
+    padding: 5px 14px;
+  }
+}
+
+/* ================= PRODUCT CARD ================= */
+
+.card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, #002b5c, #003b7a);
+  border-radius: 16px;
+  height: 130px;
+  /* smaller height */
+  width: 100%;
+  border: 1px solid rgba(0, 170, 255, 0.25);
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 255, 150, 0.3);
+}
+
+/* ================= IMAGE ================= */
+
+.card-image {
+  width: 150px;
+  height: 100%;
+  background: #012a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================= CONTENT ================= */
+
+.card-content {
+  flex: 1;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-text h2 {
+  font-size: 16px;
+  color: #33d6ff;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 13px;
+  margin-top: 2px;
+  font-weight: 700;
+  color: #00ff88;
+}
+
+.daily-earning,
+.validity,
+.limit {
+  font-size: 12px;
+  margin-top: 2px;
+  color: #dbeafe;
+}

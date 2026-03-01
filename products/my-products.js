@@ -4,8 +4,12 @@
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 
-// Backend base (important for Vercel + localhost)
+
 const BACKEND_BASE = API_BASE.replace("/api", "");
+
+/* ===============================
+   LOAD PRODUCTS
+=============================== */
 
 async function loadProducts() {
 
@@ -22,6 +26,10 @@ async function loadProducts() {
 
   if (!container || !loading) return;
 
+  loading.style.display = "block";
+  container.innerHTML = "";
+  if (emptyState) emptyState.style.display = "none";
+
   try {
 
     const response = await authFetch("/products/my");
@@ -29,7 +37,7 @@ async function loadProducts() {
     const data = await response.json();
 
     loading.style.display = "none";
-    container.innerHTML = "";
+
 
     if (!response.ok || !data.success) {
       container.innerHTML = `<p>${data.message || "Failed to load products."}</p>`;
@@ -46,24 +54,33 @@ async function loadProducts() {
     data.products.forEach(product => {
 
       const now = new Date();
+      const purchaseDate = new Date(product.purchaseDate);
       const endDate = new Date(product.endDate);
 
       const isExpired = now > endDate;
 
+      /* ===== Remaining Days ===== */
+      const totalDays = Math.ceil(
+        (endDate - purchaseDate) / (1000 * 60 * 60 * 24)
+      );
 
+      const remainingDays = Math.max(
+        0,
+        Math.ceil((endDate - now) / (1000 * 60 * 60 * 24))
+      );
 
-      const purchasedDate = new Date(product.purchaseDate)
-        .toLocaleDateString("en-IN");
-
-      // 🔥 Calculate 24h collect logic
-      const last = product.lastEarningDate
+      /* ===== 24H Collect Logic ===== */
+      const lastEarning = product.lastEarningDate
         ? new Date(product.lastEarningDate)
-        : new Date(product.purchaseDate);
+        : purchaseDate;
 
-      const nextCollectAt = new Date(last.getTime() + 24 * 60 * 60 * 1000);
+      const nextCollectAt = new Date(
+        lastEarning.getTime() + 24 * 60 * 60 * 1000
+      );
+
       const canCollect = now >= nextCollectAt && !isExpired;
 
-      // Image URL
+
       const imageSrc = product.image
         ? `${BACKEND_BASE}/uploads/${product.image}`
         : `${BACKEND_BASE}/uploads/default-product.png`;
@@ -78,42 +95,50 @@ async function loadProducts() {
 
         <div class="card-content">
 
+          <!-- LEFT SIDE -->
           <div class="card-text">
             <h2>${product.name}</h2>
 
             <p class="price">Price: ₹${product.price}</p>
-            <p class="daily-earning">Daily Income: ₹${product.dailyEarning}</p>
+
 
             <p class="product-row">
-              Earned: <span class="highlight">₹${product.totalEarned}</span>
+              Remaining:
+              <span class="highlight">
+                ${remainingDays}/${totalDays} Days
+              </span>
             </p>
 
             <p class="product-row">
-              Purchased: ${purchasedDate}
+              Today Earn:
+              <span class="highlight">
+                ₹${canCollect ? product.dailyEarning : 0}
+              </span>
             </p>
 
-            <p class="product-row">
-              ${isExpired
-          ? `Expired on: ${endDate.toLocaleDateString("en-IN")}`
-          : `Valid Till: ${endDate.toLocaleDateString("en-IN")}`
-        }
+            <p class="product-row total-earned">
+              Total Earned:
+              <span class="highlight">
+                ₹${product.totalEarned}
+              </span>
             </p>
           </div>
 
-          <div class="collect-section">
-
-            ${isExpired
-          ? `<span class="status-badge status-expired">Expired</span>`
-          : canCollect
-            ? `<button class="collect-btn" data-id="${product._id}">
+          <!-- RIGHT SIDE -->
+          <div class="collect-section" id="collect-${product._id}">
+            ${
+              isExpired
+                ? `<span class="status-badge status-expired">Expired</span>`
+                : canCollect
+                  ? `<button class="collect-btn" data-id="${product._id}">
                         Collect
                      </button>`
-            : `<div class="countdown" 
+                  : `<div class="countdown"
                         data-id="${product._id}"
                         data-time="${nextCollectAt.toISOString()}">
                         Loading...
                      </div>`
-        }
+            }
 
           </div>
 
@@ -125,7 +150,7 @@ async function loadProducts() {
     });
 
     startCountdowns();
-    setupCollectButtons();
+
 
   } catch (error) {
     console.error("Product Load Error:", error);
@@ -147,6 +172,7 @@ function startCountdowns() {
   countdowns.forEach(el => {
 
     const targetTime = new Date(el.dataset.time);
+    const productId = el.dataset.id;
 
     const interval = setInterval(() => {
 
@@ -156,13 +182,16 @@ function startCountdowns() {
       if (diff <= 0) {
         clearInterval(interval);
 
-        el.innerHTML = `
-          <button class="collect-btn" data-id="${el.dataset.id}">
+        const parent = document.getElementById(`collect-${productId}`);
+        if (!parent) return;
+
+        parent.innerHTML = `
+          <button class="collect-btn" data-id="${productId}">
             Collect
           </button>
         `;
 
-        setupCollectButtons();
+
         return;
       }
 
@@ -181,42 +210,40 @@ function startCountdowns() {
    COLLECT BUTTON
 =============================== */
 
-function setupCollectButtons() {
+document.addEventListener("click", async function (e) {
 
-  document.querySelectorAll(".collect-btn").forEach(button => {
+  if (!e.target.classList.contains("collect-btn")) return;
 
-    button.addEventListener("click", async function () {
+  const button = e.target;
+  const id = button.dataset.id;
 
-      const id = this.dataset.id;
+  button.disabled = true;
+  button.innerText = "Collecting...";
 
-      this.disabled = true;
-      this.innerText = "Collecting...";
+  try {
 
-      try {
-
-        const res = await authFetch(`/products/collect/${id}`, {
-          method: "POST"
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-          alert(data.message || "Failed to collect");
-          this.disabled = false;
-          this.innerText = "Collect";
-          return;
-        }
-
-        alert(`₹${data.amount} credited successfully!`);
-
-        // 🔁 Reload to reset timer
-        loadProducts();
-
-      } catch (err) {
-        alert("Network error");
-        this.disabled = false;
-        this.innerText = "Collect";
-      }
+    const res = await authFetch(`/products/collect/${id}`, {
+      method: "POST"
     });
-  });
-}
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || "Failed to collect");
+      button.disabled = false;
+      button.innerText = "Collect";
+      return;
+    }
+
+    alert(`₹${data.amount} credited successfully!`);
+
+    
+    loadProducts();
+
+  } catch (err) {
+    alert("Network error");
+    button.disabled = false;
+    button.innerText = "Collect";
+  }
+});
+
