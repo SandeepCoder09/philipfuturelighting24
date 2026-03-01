@@ -1,5 +1,5 @@
 /* ===============================
-   MY PRODUCTS PAGE (FIXED)
+   MY PRODUCTS PAGE (FINAL)
 =============================== */
 
 document.addEventListener("DOMContentLoaded", loadProducts);
@@ -15,6 +15,7 @@ async function loadProducts() {
 
   const container = document.getElementById("productsContainer");
   const loading = document.getElementById("loading");
+  const emptyState = document.getElementById("emptyState");
 
   if (!container || !loading) return;
 
@@ -33,54 +34,73 @@ async function loadProducts() {
     }
 
     if (!data.products || data.products.length === 0) {
-      container.innerHTML = "<p>No products purchased yet.</p>";
+      if (emptyState) emptyState.style.display = "block";
       return;
     }
 
-    const productImages = {
-      "0.5W LED Bulb": "../assets/bulb0.5watts.jpg",
-      "5W Smart Bulb": "../assets/bulb5watts.jpg",
-      "10W LED Bulb": "../assets/bulb10watts.webp",
-      "Decorative Light": "../assets/philips-health.jpg"
-    };
+
 
     data.products.forEach(product => {
 
-      const imageSrc =
-        productImages[product.name] ||
-        "../assets/bulb0.5watts.jpg";
+      const now = new Date();
+      const endDate = new Date(product.endDate);
 
-      const purchasedDate = new Date(product.createdAt)
-        .toLocaleString("en-IN");
+      const isExpired = now > endDate;
+
+      const diffTime = endDate - now;
+      const daysRemaining = Math.max(
+        Math.ceil(diffTime / (1000 * 60 * 60 * 24)),
+        0
+      );
+
+      const purchasedDate = new Date(product.purchaseDate)
+        .toLocaleDateString("en-IN");
+
+      // ✅ Since same origin, just use /uploads
+      const imageSrc = product.image
+        ? `/uploads/${product.image}`
+        : `/uploads/default-product.png`;
 
       const card = `
-        <div class="product-card">
+  <div class="card">
 
-          <div class="product-image">
-            <img src="${imageSrc}" alt="${product.name}">
-          </div>
+    <div class="card-image">
+      <img src="${imageSrc}" alt="${product.name}" loading="lazy">
+    </div>
 
-          <div class="product-info">
-            <div class="product-title">${product.name}</div>
-            <div class="product-row">
-              Price: ₹${product.price}
-            </div>
+    <div class="card-content">
 
-            <div class="product-row">
-              Earned: ₹${product.totalEarned}
-            </div>
+      <div class="card-text">
+        <h2>${product.name}</h2>
 
-            <div class="product-row">
-              Purchased: ${purchasedDate}
-            </div>
+        <p class="price">Price: ₹${product.price}</p>
+        <p class="daily-earning">Daily Income: ₹${product.dailyEarning}</p>
 
+        <p class="product-row">
+          Earned: <span class="highlight">₹${product.totalEarned}</span>
+        </p>
 
-          </div>
+        <p class="product-row">
+          Purchased: ${purchasedDate}
+        </p>
 
-        </div>
+        <p class="product-row">
+          ${isExpired
+          ? `Expired on: ${endDate.toLocaleDateString("en-IN")}`
+          : `Days Remaining: ${daysRemaining}`
+        }
+        </p>
+      </div>
 
+      <div class="card-action">
+        <span class="status-badge ${isExpired ? "status-expired" : "status-active"}">
+          ${isExpired ? "Expired" : "Active"}
+        </span>
+      </div>
 
-      `;
+    </div>
+  </div>
+`;
 
       container.insertAdjacentHTML("beforeend", card);
     });

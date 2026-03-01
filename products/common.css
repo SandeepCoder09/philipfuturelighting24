@@ -1,0 +1,389 @@
+/* ==========================================
+   PRODUCTS MODULE - COMMON CSS
+   (Used by Products & My Products pages)
+========================================== */
+
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #0f172a;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* ================= NAV RIGHT BUTTON ================= */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.my-products-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #00ff64, #00aaff);
+  color: #000814;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+  transition: 0.25s ease;
+}
+
+.my-products-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 255, 150, 0.5);
+}
+
+/* ================= HEADER ================= */
+.pricing-header {
+  text-align: center;
+  padding: 30px 10px 15px;
+  background: radial-gradient(circle at center, #001d3d, #000814);
+}
+
+.pricing-header h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.pricing-header p {
+  font-size: 11px;
+  color: #9fb3c8;
+  margin-top: 4px;
+}
+
+/* ================= PRODUCT CONTAINER ================= */
+.pricing-container,
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 5% 100px;
+}
+
+/* ================= CARD ================= */
+.card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, #001d3d, #002b5c);
+  border-radius: 14px;
+  height: 110px;
+  border: 1px solid rgba(0, 170, 255, 0.25);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 255, 150, 0.25);
+}
+
+/* ================= IMAGE ================= */
+.card-image {
+  width: 150px;
+  height: 100%;
+  flex-shrink: 0;
+  background: #012a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* .card-image {
+  width: 150px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+/* ================= CONTENT ================= */
+.card-content {
+  flex: 1;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ================= TEXT ================= */
+.card-text {
+  text-align: left;
+  line-height: 1.3;
+}
+
+.card-text h2 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #19d1ff;
+}
+
+.price {
+  font-size: 12px;
+  font-weight: 600;
+  color: #00ff64;
+}
+
+.daily-earning {
+  font-size: 11px;
+  color: #00e0ff;
+  margin-top: 2px;
+}
+
+.product-row,
+.validity,
+.limit {
+  font-size: 11px;
+  margin-top: 2px;
+  color: #9fb3c8;
+}
+
+.highlight {
+  color: #00ff64;
+  font-weight: 600;
+}
+
+/* ================= BUY BUTTON ================= */
+.card-action {
+  position: absolute;
+  right: 14px;
+}
+
+.subscribe-btn {
+  padding: 6px 14px;
+  font-size: 11px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #00ff64, #00aaff);
+  color: #000814;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.subscribe-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 255, 150, 0.6);
+}
+
+.subscribe-btn:disabled {
+  background: #444;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ================= STATUS BADGE ================= */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.status-active {
+  background: rgba(0, 255, 100, 0.15);
+  color: #00ff64;
+  border: 1px solid rgba(0, 255, 100, 0.4);
+}
+
+.status-expired {
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 77, 77, 0.4);
+}
+
+/* ================= LOADING SCREEN ================= */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #000814;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.loading-screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.loader-circle {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 170, 255, 0.2);
+  border-top: 4px solid #00aaff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ================= POPUPS ================= */
+.success-overlay,
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.success-overlay.active,
+.error-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.success-box,
+.error-box {
+  background: #001d3d;
+  padding: 25px;
+  border-radius: 14px;
+  text-align: center;
+  width: 280px;
+  animation: popupScale 0.25s ease;
+}
+
+@keyframes popupScale {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-box {
+  border: 1px solid rgba(0, 255, 100, 0.4);
+}
+
+.error-box {
+  border: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+.success-buttons,
+.error-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.success-buttons button,
+.error-buttons button {
+  flex: 1;
+  padding: 7px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.success-buttons button:first-child,
+.error-buttons button:first-child {
+  background: #555;
+  color: white;
+}
+
+.success-buttons button:last-child,
+.error-buttons button:last-child {
+  background: linear-gradient(135deg, #00ff64, #00aaff);
+  color: #000814;
+}
+
+/* ================= LOADING TEXT & EMPTY ================= */
+.loading-text {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+  margin: 20px 0;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 50px;
+  opacity: 0.8;
+}
+
+.empty-state i {
+  font-size: 40px;
+  margin-bottom: 12px;
+  color: #00aaff;
+}
+
+.browse-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #00ff64, #00aaff);
+  color: #000814;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 480px) {
+  .card {
+    height: 100px;
+  }
+
+  .card-image {
+    width: 85px;
+  }
+
+  .card-text h2 {
+    font-size: 13px;
+  }
+
+  .product-row {
+    font-size: 11px;
+  }
+}

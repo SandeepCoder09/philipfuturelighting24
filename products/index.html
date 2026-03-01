@@ -2,182 +2,99 @@
 <html lang="en">
 <head>
 
-  <!-- ==================== Shared CSS ========================== -->
+  <!-- Shared CSS -->
   <link rel="stylesheet" href="../shared/css/bottom-nav.css" />
   <link rel="stylesheet" href="../home/style.css" />
 
-<!-- ===================== Main CSS ========================== -->
-  <link rel="stylesheet" href="../products/style.css" />
+
+  <link rel="stylesheet" href="../products/common.css" />
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <meta name="theme-color" content="#111827">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
+
 
   <title>Products | Philips</title>
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
   <!-- ===== NAVBAR ===== -->
-<nav class="navbar">
-  <div class="logo-wrapper">
-    <a href="../home/index.html">
-      <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo" />
-    </a>
+  <nav class="navbar">
+    <div class="logo-wrapper">
+      <a href="../home/index.html">
+        <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo" />
+      </a>
 
-    <div class="led-dots">
-      <span></span>
-      <span></span>
-      <span></span>
+      <div class="led-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-  </div>
 
-  <!-- 🔥 NEW: My Products Button -->
-  <div class="nav-right">
-    <a href="../products/my-products.html" class="my-products-btn">
-      <i class="fa-solid fa-box"></i> My Products
-    </a>
-  </div>
-</nav>
+
+    <div class="nav-right">
+      <button 
+  class="my-products-btn"
+  type="button"
+  onclick="window.location.href='my-products.html'">
+  <i class="fa-solid fa-box"></i> My Products
+</button>
+    </div>
+  </nav>
 
   <!-- ===== HEADER ===== -->
   <section class="pricing-header">
-    <h1>Our Premium Lighting</h1>
-    <p>Choose the perfect lighting solution for your space</p>
+    <h1>Our Premium Plans</h1>
+    <p>Select the perfect plan for you</p>
   </section>
 
-  <!-- ===== PRODUCTS ===== -->
-  <section class="pricing-container">
-
-    <!-- PRODUCT CARD -->
-    <div class="card">
-      <div class="card-image">
-        <img src="../assets/bulb0.5watts.jpg" alt="0.5W LED Bulb" />
-      </div>
-
-      <div class="card-content">
-
-        <!-- LEFT TEXT BLOCK -->
-        <div class="card-text">
-          <h2>0.5W LED Bulb</h2>
-          <p class="price">Price: ₹99</p>
-          <p class="daily-earning">Daily Earning: ₹5</p>
-        </div>
-
-        <!-- RIGHT BUTTON -->
-        <div class="card-action">
-          <button class="subscribe-btn">
-            <i class="fa-solid fa-cart-shopping"></i> Buy
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- PRODUCT 2 -->
-    <div class="card">
-      <div class="card-image">
-        <img src="../assets/bulb5watts.jpg" alt="5W Smart Bulb" />
-      </div>
-
-      <div class="card-content">
-        <div class="card-text">
-          <h2>5W Smart Bulb</h2>
-          <p class="price">Price: ₹499</p>
-          <p class="daily-earning">Daily Earning: ₹20</p>
-        </div>
-
-        <div class="card-action">
-          <button class="subscribe-btn">
-            <i class="fa-solid fa-cart-shopping"></i> Buy
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- PRODUCT 3 -->
-    <div class="card">
-      <div class="card-image">
-        <img src="../assets/bulb10watts.webp" alt="10W LED Bulb" />
-      </div>
-
-      <div class="card-content">
-        <div class="card-text">
-          <h2>10W LED Bulb</h2>
-          <p class="price">Price: ₹999</p>
-          <p class="daily-earning">Daily Earning: ₹50</p>
-        </div>
-
-        <div class="card-action">
-          <button class="subscribe-btn">
-            <i class="fa-solid fa-cart-shopping"></i> Buy
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- PRODUCT 4 -->
-    <div class="card">
-      <div class="card-image">
-        <img src="../assets/philips-health.jpg" alt="Decorative Light" />
-      </div>
-
-      <div class="card-content">
-        <div class="card-text">
-          <h2>Decorative Light</h2>
-          <p class="price">Price: ₹4999</p>
-          <p class="daily-earning">Daily Earning: ₹250</p>
-        </div>
-
-        <div class="card-action">
-          <button class="subscribe-btn">
-            <i class="fa-solid fa-cart-shopping"></i> Buy
-          </button>
-        </div>
-      </div>
-    </div>
-
+  <!-- ===== PRODUCTS CONTAINER (Dynamic) ===== -->
+  <section class="pricing-container" id="productsContainer">
+    <!-- Products will be injected by script.js -->
   </section>
 
-  <!-- ===== LOADING ===== -->
+  <!-- ===== LOADING SCREEN ===== -->
   <div class="loading-screen" id="loadingScreen">
     <div class="loader-circle"></div>
     <p>Processing Payment...</p>
   </div>
 
-  <!-- ===== SUCCESS ===== -->
-<div class="success-overlay" id="successPopup">
-  <div class="success-box">
-    <div class="checkmark-wrapper">
-      <div class="checkmark"></div>
-    </div>
-    <h2>Congrats!</h2>
-    <p>Your earning has started successfully.</p>
+  <!-- ===== SUCCESS POPUP ===== -->
+  <div class="success-overlay" id="successPopup">
+    <div class="success-box">
+      <h2>Congrats!</h2>
+      <p id="successMessage">
+        Your earning has started successfully.
+      </p>
 
-    <div class="success-buttons">
-      <button onclick="closePopup()">OK</button>
-      <button onclick="goToMyProducts()">My Products</button>
+      <div class="success-buttons">
+        <button onclick="closePopup()">OK</button>
+        <button onclick="goToMyProducts()">My Products</button>
+      </div>
     </div>
   </div>
-</div>
 
-  <!-- INSUFFICIENT BALANCE POPUP -->
-<div class="error-overlay" id="errorPopup">
-  <div class="error-box">
-    <h2>Insufficient Balance</h2>
-    <p>Please recharge your wallet to purchase this product.</p>
-    <div class="error-buttons">
-      <button onclick="closeErrorPopup()">Close</button>
-      <button onclick="goToRecharge()">Recharge</button>
+  <!-- ===== ERROR POPUP ===== -->
+  <div class="error-overlay" id="errorPopup">
+    <div class="error-box">
+      <h2>Error</h2>
+      <p id="errorMessage">
+        Something went wrong.
+      </p>
+
+      <div class="error-buttons">
+        <button onclick="closeErrorPopup()">Close</button>
+        <button onclick="goToRecharge()">Recharge</button>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- ===== BOTTOM NAV ===== -->
   <nav class="bottom-nav">
@@ -202,10 +119,10 @@
     </a>
   </nav>
 
-  <!-- ==================== Shared JS ========================== -->
-<script src="../shared/js/config.js"></script>
+  <!-- Shared Config -->
+  <script src="../shared/js/config.js"></script>
 
-<!-- ===================== Main JS ========================== -->
+  <!-- Main JS -->
   <script src="../products/script.js"></script>
 
 </body>

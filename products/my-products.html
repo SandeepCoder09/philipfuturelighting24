@@ -3,13 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <meta name="theme-color" content="#111827" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta name="mobile-web-app-capable" content="yes" />
 
     <title>My Products | Philips</title>
 
@@ -19,14 +13,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <!-- ==================== Shared CSS ========================== -->
+    <!-- Shared CSS -->
     <link rel="stylesheet" href="../shared/css/top-nav.css" />
 
-    <!-- ===================== Main CSS ========================== -->
-    <link rel="stylesheet" href="../products/my-products.css" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../products/common.css" />
   </head>
+
   <body>
-    <!-- Back Button -->
+    <!-- ================= TOP NAV ================= -->
     <div class="top-nav">
       <button class="back-btn" onclick="history.back()">
         <i class="fa-solid fa-arrow-left"></i>
@@ -36,18 +31,29 @@
       <h2 class="page-title">My Products</h2>
     </div>
 
+    <!-- ================= PAGE CONTENT ================= -->
     <div class="page-content">
+      <!-- Loading -->
       <div id="loading" class="loading-text">
-        <i class="fa-solid fa-spinner fa-spin"></i> Loading products...
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Loading products...
       </div>
 
+      <!-- Empty State -->
+      <div id="emptyState" class="empty-state" style="display: none">
+        <i class="fa-solid fa-box-open"></i>
+        <p>You have not purchased any products yet.</p>
+        <a href="index.html" class="browse-btn">Browse Products</a>
+      </div>
+
+      <!-- Products List -->
       <div id="productsContainer" class="products-list"></div>
     </div>
 
-    <!-- ==================== Shared JS ========================== -->
+    <!-- Shared JS -->
     <script src="../shared/js/config.js"></script>
 
-    <!-- ===================== Main JS ========================== -->
+    <!-- Main JS -->
     <script src="../products/my-products.js"></script>
   </body>
 </html>
