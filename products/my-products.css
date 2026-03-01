@@ -1,22 +1,20 @@
 /* ==================================================
-   MY PRODUCTS PAGE (SAFE VERSION)
-   Works with shared fixed top-nav
+   MY PRODUCTS PAGE
+   Matches products/index card style
 ================================================== */
 
 body {
   margin: 0;
-  padding: 0;
   background: #0f172a;
-  font-family: "Poppins", sans-serif;
   color: #ffffff;
+  font-family: "Poppins", sans-serif;
 }
 
-/* ================= PAGE LAYOUT ================= */
+/* ================= PAGE CONTENT ================= */
 
 .page-content {
-  margin-top: 70px;
-  /* prevents hiding under fixed top-nav */
-  padding: 20px 4% 100px;
+  margin-top: 70px; /* space for fixed top-nav */
+  padding: 20px 3% 120px;
 }
 
 .products-list {
@@ -30,27 +28,25 @@ body {
 .card {
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 150px;
-
   background: linear-gradient(145deg, #002b5c, #003b7a);
   border-radius: 16px;
-
+  height: 130px;
+  width: 100%;
   border: 1px solid rgba(0, 170, 255, 0.25);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-
   overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
   transition: 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 255, 150, 0.25);
 }
 
 /* ================= IMAGE ================= */
 
 .card-image {
-  width: 120px;
+  width: 150px;
   height: 100%;
   background: #012a4a;
   display: flex;
@@ -68,7 +64,7 @@ body {
 
 .card-content {
   flex: 1;
-  padding: 18px 16px;
+  padding: 12px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,25 +73,28 @@ body {
 /* LEFT SIDE TEXT */
 
 .card-text {
-  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .card-text h2 {
   font-size: 16px;
-  margin-bottom: 8px;
   color: #33d6ff;
+  margin: 0;
 }
 
 .price {
   font-size: 13px;
   font-weight: 700;
   color: #00ff88;
-  margin-bottom: 6px;
+  margin: 0;
 }
 
 .product-row {
-  font-size: 13px;
+  font-size: 12px;
   color: #dbeafe;
+  margin: 0;
 }
 
 .highlight {
@@ -103,16 +102,16 @@ body {
   font-weight: 700;
 }
 
-/* ================= COLLECT SECTION ================= */
+/* ================= RIGHT SIDE (COLLECT/TIMER) ================= */
 
 .collect-section {
+  min-width: 110px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  min-width: 120px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-/* Countdown */
+/* Countdown Badge */
 
 .countdown {
   font-size: 12px;
@@ -128,48 +127,35 @@ body {
 /* Collect Button */
 
 .collect-btn {
-  padding: 6px 18px;
-  border-radius: 20px;
-  border: none;
+  padding: 6px 16px;
   font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-
+  border-radius: 20px;
   background: linear-gradient(135deg, #00ff88, #00c6ff);
   color: #001f3f;
-
-  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
   transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
 }
 
 .collect-btn:hover {
-  transform: translateY(-2px);
+  transform: scale(1.05);
 }
 
 .collect-btn:disabled {
   background: #444;
   color: #999;
-  box-shadow: none;
   cursor: not-allowed;
+  box-shadow: none;
 }
-
-/* Earned Row */
-
-.earned-row {
-  margin-top: 6px;
-  font-size: 12px;
-  color: #dbeafe;
-  text-align: center;
-}
-
-
 
 /* Expired Badge */
 
 .status-badge {
-  padding: 5px 12px;
-  border-radius: 14px;
-  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 18px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -211,7 +197,7 @@ body {
   font-size: 12px;
 }
 
-/* ================= MOBILE OPTIMIZATION ================= */
+/* ================= MOBILE ================= */
 
 @media (max-width: 480px) {
 
@@ -220,11 +206,7 @@ body {
   }
 
   .card-image {
-    width: 100px;
-  }
-
-  .card-content {
-    padding: 10px;
+    width: 130px;
   }
 
   .collect-section {
@@ -238,75 +220,6 @@ body {
 
   .collect-btn {
     font-size: 11px;
-    padding: 5px 14px;
+    padding: 6px 14px;
   }
-}
-
-/* ================= PRODUCT CARD ================= */
-
-.card {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(145deg, #002b5c, #003b7a);
-  border-radius: 16px;
-  height: 130px;
-  /* smaller height */
-  width: 100%;
-  border: 1px solid rgba(0, 170, 255, 0.25);
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-  transition: 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 255, 150, 0.3);
-}
-
-/* ================= IMAGE ================= */
-
-.card-image {
-  width: 150px;
-  height: 100%;
-  background: #012a4a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ================= CONTENT ================= */
-
-.card-content {
-  flex: 1;
-  padding: 12px 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-text h2 {
-  font-size: 16px;
-  color: #33d6ff;
-  margin-bottom: 4px;
-}
-
-.price {
-  font-size: 13px;
-  margin-top: 2px;
-  font-weight: 700;
-  color: #00ff88;
-}
-
-.daily-earning,
-.validity,
-.limit {
-  font-size: 12px;
-  margin-top: 2px;
-  color: #dbeafe;
 }
