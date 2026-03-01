@@ -1,10 +1,10 @@
 /* ===============================
-   MY PRODUCTS PAGE (FINAL FIXED)
+   MY PRODUCTS PAGE (COLLECT + TIMER)
 =============================== */
 
 document.addEventListener("DOMContentLoaded", loadProducts);
 
-// 🔥 IMPORTANT
+// Backend base (important for Vercel + localhost)
 const BACKEND_BASE = API_BASE.replace("/api", "");
 
 async function loadProducts() {
@@ -50,63 +50,82 @@ async function loadProducts() {
 
       const isExpired = now > endDate;
 
-      const diffTime = endDate - now;
-      const daysRemaining = Math.max(
-        Math.ceil(diffTime / (1000 * 60 * 60 * 24)),
-        0
-      );
+
 
       const purchasedDate = new Date(product.purchaseDate)
         .toLocaleDateString("en-IN");
 
-      // ✅ CORRECT IMAGE URL FOR VERCEL
+      // 🔥 Calculate 24h collect logic
+      const last = product.lastEarningDate
+        ? new Date(product.lastEarningDate)
+        : new Date(product.purchaseDate);
+
+      const nextCollectAt = new Date(last.getTime() + 24 * 60 * 60 * 1000);
+      const canCollect = now >= nextCollectAt && !isExpired;
+
+      // Image URL
       const imageSrc = product.image
         ? `${BACKEND_BASE}/uploads/${product.image}`
         : `${BACKEND_BASE}/uploads/default-product.png`;
 
-      const card = `
-        <div class="card">
+      const card = document.createElement("div");
+      card.className = "card";
 
-          <div class="card-image">
-            <img src="${imageSrc}" alt="${product.name}" loading="lazy">
-          </div>
+      card.innerHTML = `
+        <div class="card-image">
+          <img src="${imageSrc}" alt="${product.name}" loading="lazy">
+        </div>
 
-          <div class="card-content">
+        <div class="card-content">
 
-            <div class="card-text">
-              <h2>${product.name}</h2>
+          <div class="card-text">
+            <h2>${product.name}</h2>
 
-              <p class="price">Price: ₹${product.price}</p>
-              <p class="daily-earning">Daily Income: ₹${product.dailyEarning}</p>
+            <p class="price">Price: ₹${product.price}</p>
+            <p class="daily-earning">Daily Income: ₹${product.dailyEarning}</p>
 
-              <p class="product-row">
-                Earned: <span class="highlight">₹${product.totalEarned}</span>
-              </p>
+            <p class="product-row">
+              Earned: <span class="highlight">₹${product.totalEarned}</span>
+            </p>
 
-              <p class="product-row">
-                Purchased: ${purchasedDate}
-              </p>
+            <p class="product-row">
+              Purchased: ${purchasedDate}
+            </p>
 
-              <p class="product-row">
-                ${isExpired
+            <p class="product-row">
+              ${isExpired
           ? `Expired on: ${endDate.toLocaleDateString("en-IN")}`
-          : `Days Remaining: ${daysRemaining}`
+          : `Valid Till: ${endDate.toLocaleDateString("en-IN")}`
         }
-              </p>
-            </div>
+            </p>
+          </div>
 
-            <div class="card-action">
-              <span class="status-badge ${isExpired ? "status-expired" : "status-active"}">
-                ${isExpired ? "Expired" : "Active"}
-              </span>
-            </div>
+          <div class="collect-section">
+
+            ${isExpired
+          ? `<span class="status-badge status-expired">Expired</span>`
+          : canCollect
+            ? `<button class="collect-btn" data-id="${product._id}">
+                        Collect
+                     </button>`
+            : `<div class="countdown" 
+                        data-id="${product._id}"
+                        data-time="${nextCollectAt.toISOString()}">
+                        Loading...
+                     </div>`
+        }
 
           </div>
+
+
         </div>
       `;
 
-      container.insertAdjacentHTML("beforeend", card);
+      container.appendChild(card);
     });
+
+    startCountdowns();
+    setupCollectButtons();
 
   } catch (error) {
     console.error("Product Load Error:", error);
@@ -116,3 +135,88 @@ async function loadProducts() {
   }
 }
 
+
+/* ===============================
+   COUNTDOWN TIMER
+=============================== */
+
+function startCountdowns() {
+
+  const countdowns = document.querySelectorAll(".countdown");
+
+  countdowns.forEach(el => {
+
+    const targetTime = new Date(el.dataset.time);
+
+    const interval = setInterval(() => {
+
+      const now = new Date();
+      const diff = targetTime - now;
+
+      if (diff <= 0) {
+        clearInterval(interval);
+
+        el.innerHTML = `
+          <button class="collect-btn" data-id="${el.dataset.id}">
+            Collect
+          </button>
+        `;
+
+        setupCollectButtons();
+        return;
+      }
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      el.innerText = `${hours}h ${minutes}m ${seconds}s`;
+
+    }, 1000);
+  });
+}
+
+
+/* ===============================
+   COLLECT BUTTON
+=============================== */
+
+function setupCollectButtons() {
+
+  document.querySelectorAll(".collect-btn").forEach(button => {
+
+    button.addEventListener("click", async function () {
+
+      const id = this.dataset.id;
+
+      this.disabled = true;
+      this.innerText = "Collecting...";
+
+      try {
+
+        const res = await authFetch(`/products/collect/${id}`, {
+          method: "POST"
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Failed to collect");
+          this.disabled = false;
+          this.innerText = "Collect";
+          return;
+        }
+
+        alert(`₹${data.amount} credited successfully!`);
+
+        // 🔁 Reload to reset timer
+        loadProducts();
+
+      } catch (err) {
+        alert("Network error");
+        this.disabled = false;
+        this.innerText = "Collect";
+      }
+    });
+  });
+}

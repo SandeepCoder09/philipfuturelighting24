@@ -380,3 +380,101 @@ body {
     font-size: 11px;
   }
 }
+
+/* ==========================================
+   COLLECT SYSTEM (My Products Page)
+========================================== */
+
+.collect-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 90px;
+}
+
+/* ================= COLLECT BUTTON ================= */
+
+.collect-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00ff64, #00aaff);
+  color: #000814;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+}
+
+.collect-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 255, 150, 0.5);
+}
+
+.collect-btn:active {
+  transform: scale(0.95);
+}
+
+.collect-btn:disabled {
+  background: #444;
+  color: #aaa;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ================= COUNTDOWN ================= */
+
+.countdown {
+  font-size: 12px;
+  font-weight: 600;
+  color: #00e0ff;
+  background: rgba(0, 170, 255, 0.1);
+  padding: 6px 10px;
+  border-radius: 16px;
+  min-width: 85px;
+  text-align: center;
+  border: 1px solid rgba(0, 170, 255, 0.3);
+}
+
+/* ================= STATUS BADGE POSITION FIX ================= */
+
+.collect-section .status-badge {
+  position: static;
+}
+
+/* ==========================================
+   CARD ADJUSTMENT FOR COLLECT SYSTEM
+========================================== */
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-text {
+  flex: 1;
+}
+
+/* ==========================================
+   MOBILE OPTIMIZATION
+========================================== */
+
+@media (max-width: 480px) {
+
+  .card {
+    height: 115px;
+  }
+
+  .collect-btn {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  .countdown {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+}
