@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", initProductsPage);
    BACKEND BASE (SAFE)
 ===================================================== */
 
-// Remove /api only if it exists at the end
+
 const BACKEND_BASE = API_BASE.endsWith("/api")
   ? API_BASE.slice(0, -4)
   : API_BASE;
@@ -23,7 +23,7 @@ async function initProductsPage() {
   }
 
   try {
-    
+
     const response = await authFetch("/users/profile");
 
     if (!response.ok) {
@@ -57,10 +57,7 @@ async function loadProducts() {
   try {
 
     const res = await authFetch("/products/list");
-    if (!res.ok) {
-      console.error("Failed to load products");
-      return;
-    }
+    if (!res.ok) return;
 
     const products = await res.json();
 
@@ -68,7 +65,7 @@ async function loadProducts() {
 
       const card = document.createElement("div");
       card.className = "card";
-      card.dataset.productId = product.code;
+
 
       const isLimitReached = product.remaining <= 0;
 
@@ -97,143 +94,159 @@ async function loadProducts() {
               class="subscribe-btn"
               ${isLimitReached ? "disabled" : ""}
             >
-              ${
-                isLimitReached
-                  ? "Limit Reached"
-                  : `<i class="fa-solid fa-cart-shopping"></i> Buy`
-              }
+              ${isLimitReached
+          ? "Limit Reached"
+          : `<i class="fa-solid fa-cart-shopping"></i> Buy`
+        }
             </button>
           </div>
         </div>
       `;
 
       container.appendChild(card);
-    });
 
-    setupBuyButtons();
-
-  } catch (err) {
-    console.error("Error loading products", err);
-  }
-}
-
-
-/* =====================================================
-   BUY LOGIC
-===================================================== */
-
-function setupBuyButtons() {
-
-  const buyButtons = document.querySelectorAll(".subscribe-btn");
-
-  buyButtons.forEach(button => {
-
-    if (button.disabled) return;
-
-    button.addEventListener("click", async function () {
-
-      const card = this.closest(".card");
-      if (!card) return;
-
-      const productId = card.dataset.productId;
-
-      showLoading();
-
-      try {
-
-
-        const response = await authFetch("/products/buy", {
-          method: "POST",
-          body: JSON.stringify({ productId })
-        });
-
-        const data = await response.json();
-        hideLoading();
-
-        if (!response.ok) {
-          showError(data.message || "Purchase failed.");
-          return;
-        }
-
-        showSuccess(data.remainingBalance);
-
-        // Reload to update remaining limit
-        await loadProducts();
-
-      } catch (error) {
-        hideLoading();
-        showError("Network error. Please try again.");
+      if (!isLimitReached) {
+        const buyBtn = card.querySelector(".subscribe-btn");
+        buyBtn.addEventListener("click", () => openBuyModal(product));
       }
     });
 
-  });
+  } catch (err) {
+    console.error("Load products error:", err);
+  }
 }
 
+/* =====================================================
+   PRODUCT DETAIL MODAL
+===================================================== */
+
+let selectedProductCode = null;
+
+function openBuyModal(product) {
+
+  selectedProductCode = product.code;
+
+  document.getElementById("modalProductName").innerText = product.name;
+  document.getElementById("modalPrice").innerText = product.price;
+  document.getElementById("modalDaily").innerText = product.dailyIncome;
+  document.getElementById("modalValidity").innerText = product.validityDays;
+  document.getElementById("modalRemaining").innerText = product.remaining;
+
+  const totalReturn = product.dailyIncome * product.validityDays;
+  document.getElementById("modalTotal").innerText = totalReturn;
+
+  const imageUrl = product.image
+    ? `${BACKEND_BASE}/uploads/${product.image}`
+    : `${BACKEND_BASE}/uploads/default-product.png`;
+
+  document.getElementById("modalImage").src = imageUrl;
+
+  document.getElementById("buyModal").classList.add("active");
+}
 
 /* =====================================================
-   UI HELPERS
+   BUY CONFIRM
+===================================================== */
+
+document.getElementById("buyCloseBtn").onclick = () => {
+  document.getElementById("buyModal").classList.remove("active");
+};
+
+document.getElementById("confirmBuyBtn").onclick = async () => {
+
+  if (!selectedProductCode) return;
+
+  document.getElementById("buyModal").classList.remove("active");
+  showLoading();
+
+  try {
+
+    const response = await authFetch("/products/buy", {
+      method: "POST",
+      body: JSON.stringify({ productId: selectedProductCode })
+    });
+
+    const data = await response.json();
+
+    hideLoading();
+
+    if (data.success) {
+
+      showActionModal(
+        "Purchase Successful",
+        "Your earning has started successfully.",
+        "My Products",
+        () => window.location.href = "my-products.html"
+      );
+
+      await loadProducts();
+
+    } else {
+
+      if (data.message === "Insufficient Balance") {
+
+        showActionModal(
+          "Insufficient Balance",
+          "Your wallet balance is too low.",
+          "Recharge",
+          () => window.location.href = "../wallet/recharge.html"
+        );
+
+      } else {
+
+        showActionModal(
+          "Error",
+          data.message || "Something went wrong.",
+          "OK",
+          closeActionModal
+        );
+      }
+    }
+
+  } catch (err) {
+
+    hideLoading();
+
+    showActionModal(
+      "Error",
+      "Network error. Please try again.",
+      "OK",
+      closeActionModal
+    );
+  }
+};
+
+/* =====================================================
+   ACTION MODAL
+===================================================== */
+
+function showActionModal(title, message, rightBtnText, rightAction) {
+
+  document.getElementById("actionTitle").innerText = title;
+  document.getElementById("actionMessage").innerText = message;
+
+  const rightBtn = document.getElementById("actionRightBtn");
+  rightBtn.innerText = rightBtnText;
+  rightBtn.onclick = rightAction;
+
+  document.getElementById("actionModal").classList.add("active");
+}
+
+function closeActionModal() {
+  document.getElementById("actionModal").classList.remove("active");
+}
+
+document.getElementById("actionCloseBtn").onclick = closeActionModal;
+
+/* =====================================================
+   LOADING
 ===================================================== */
 
 function showLoading() {
-  const loadingScreen = document.getElementById("loadingScreen");
-  if (loadingScreen) loadingScreen.classList.add("active");
+  document.getElementById("loadingScreen").classList.add("active");
 }
 
 function hideLoading() {
-  const loadingScreen = document.getElementById("loadingScreen");
-  if (loadingScreen) loadingScreen.classList.remove("active");
+  document.getElementById("loadingScreen").classList.remove("active");
 }
-
-function showSuccess(balance) {
-
-  const successPopup = document.getElementById("successPopup");
-  if (!successPopup) return;
-
-  const messageEl = document.getElementById("successMessage");
-
-  if (messageEl && balance !== undefined) {
-    messageEl.innerHTML =
-      `Your earning has started successfully.<br>
-       Remaining Balance: <b>₹${balance}</b>`;
-  }
-
-  successPopup.classList.add("active");
-}
-
-function showError(message) {
-
-  const errorPopup = document.getElementById("errorPopup");
-  if (!errorPopup) return;
-
-  const messageEl = document.getElementById("errorMessage");
-
-  if (messageEl && message) {
-    messageEl.innerText = message;
-  }
-
-  errorPopup.classList.add("active");
-}
-
-function closePopup() {
-  const successPopup = document.getElementById("successPopup");
-  if (successPopup) successPopup.classList.remove("active");
-}
-
-function closeErrorPopup() {
-  const errorPopup = document.getElementById("errorPopup");
-  if (errorPopup) errorPopup.classList.remove("active");
-}
-
-function goToMyProducts() {
-  window.location.href = "my-products.html";
-}
-
-function goToRecharge() {
-  window.location.href = "../wallet/recharge.html";
-}
-
-window.closePopup = closePopup;
-window.goToMyProducts = goToMyProducts;
-window.closeErrorPopup = closeErrorPopup;
-window.goToRecharge = goToRecharge;
 

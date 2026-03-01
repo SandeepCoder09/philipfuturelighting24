@@ -1,129 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Shared CSS -->
-  <link rel="stylesheet" href="../shared/css/bottom-nav.css" />
-  <link rel="stylesheet" href="../home/style.css" />
+    <meta name="theme-color" content="#111827" />
 
+    <title>Products | Philips</title>
 
-  <link rel="stylesheet" href="../products/common.css" />
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../shared/css/bottom-nav.css" />
+    <link rel="stylesheet" href="../home/style.css" />
+    <link rel="stylesheet" href="../products/common.css" />
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-  <meta name="theme-color" content="#111827">
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <div class="logo-wrapper">
+        <a href="../home/index.html">
+          <img
+            src="../assets/philips-logo-png-transparent.png"
+            alt="Philips Logo"
+          />
+        </a>
 
+        <div class="led-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
 
-  <title>Products | Philips</title>
+      <div class="nav-right">
+        <button
+          class="my-products-btn"
+          type="button"
+          onclick="window.location.href='my-products.html'"
+        >
+          <i class="fa-solid fa-box"></i> My Products
+        </button>
+      </div>
+    </nav>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+    <!-- ================= HEADER ================= -->
+    <section class="pricing-header">
+      <h1>Our Premium Plans</h1>
+      <p>Select the perfect plan for you</p>
+    </section>
 
-<body>
+    <!-- ================= PRODUCTS CONTAINER ================= -->
+    <section class="pricing-container" id="productsContainer">
+      <!-- Products injected by script.js -->
+    </section>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="logo-wrapper">
-      <a href="../home/index.html">
-        <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo" />
+    <!-- ================= LOADING SCREEN ================= -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loader-circle"></div>
+      <p>Processing Payment...</p>
+    </div>
+
+    <!-- ================= PRODUCT DETAIL BUY MODAL ================= -->
+    <div id="buyModal" class="buy-modal">
+      <div class="buy-modal-content">
+        <div class="modal-header">
+          <img id="modalImage" src="" alt="" />
+          <h2 id="modalProductName"></h2>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-row">
+            <span>Price</span>
+            <strong>₹<span id="modalPrice"></span></strong>
+          </div>
+
+          <div class="modal-row">
+            <span>Daily Income</span>
+            <strong>₹<span id="modalDaily"></span></strong>
+          </div>
+
+          <div class="modal-row">
+            <span>Validity</span>
+            <strong><span id="modalValidity"></span> Days</strong>
+          </div>
+
+          <div class="modal-row">
+            <span>Total Return</span>
+            <strong>₹<span id="modalTotal"></span></strong>
+          </div>
+
+          <div class="modal-row">
+            <span>Remaining Limit</span>
+            <strong><span id="modalRemaining"></span></strong>
+          </div>
+        </div>
+
+        <div class="modal-buttons">
+          <button id="buyCloseBtn" class="modal-close">Close</button>
+          <button id="confirmBuyBtn" class="modal-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= ACTION MODAL ================= -->
+    <div id="actionModal" class="buy-modal">
+      <div class="buy-modal-content">
+        <h2 id="actionTitle"></h2>
+        <p
+          id="actionMessage"
+          style="text-align: center; font-size: 13px; margin-top: 8px"
+        ></p>
+
+        <div class="modal-buttons">
+          <button id="actionCloseBtn" class="modal-close">Close</button>
+          <button id="actionRightBtn" class="modal-buy">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= BOTTOM NAV ================= -->
+    <nav class="bottom-nav">
+      <a href="../home/index.html" class="nav-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
       </a>
 
-      <div class="led-dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+      <a href="../products/index.html" class="nav-btn active">
+        <i class="fa-solid fa-lightbulb"></i>
+        <span>Products</span>
+      </a>
 
+      <a href="../referrals/index.html" class="nav-btn">
+        <i class="fa-solid fa-gift"></i>
+        <span>Referrals</span>
+      </a>
 
-    <div class="nav-right">
-      <button 
-  class="my-products-btn"
-  type="button"
-  onclick="window.location.href='my-products.html'">
-  <i class="fa-solid fa-box"></i> My Products
-</button>
-    </div>
-  </nav>
+      <a href="../profile/index.html" class="nav-btn">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </nav>
 
-  <!-- ===== HEADER ===== -->
-  <section class="pricing-header">
-    <h1>Our Premium Plans</h1>
-    <p>Select the perfect plan for you</p>
-  </section>
+    <!-- ================= SCRIPTS ================= -->
 
-  <!-- ===== PRODUCTS CONTAINER (Dynamic) ===== -->
-  <section class="pricing-container" id="productsContainer">
-    <!-- Products will be injected by script.js -->
-  </section>
+    <!-- Shared Config -->
+    <script src="../shared/js/config.js"></script>
 
-  <!-- ===== LOADING SCREEN ===== -->
-  <div class="loading-screen" id="loadingScreen">
-    <div class="loader-circle"></div>
-    <p>Processing Payment...</p>
-  </div>
-
-  <!-- ===== SUCCESS POPUP ===== -->
-  <div class="success-overlay" id="successPopup">
-    <div class="success-box">
-      <h2>Congrats!</h2>
-      <p id="successMessage">
-        Your earning has started successfully.
-      </p>
-
-      <div class="success-buttons">
-        <button onclick="closePopup()">OK</button>
-        <button onclick="goToMyProducts()">My Products</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== ERROR POPUP ===== -->
-  <div class="error-overlay" id="errorPopup">
-    <div class="error-box">
-      <h2>Error</h2>
-      <p id="errorMessage">
-        Something went wrong.
-      </p>
-
-      <div class="error-buttons">
-        <button onclick="closeErrorPopup()">Close</button>
-        <button onclick="goToRecharge()">Recharge</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== BOTTOM NAV ===== -->
-  <nav class="bottom-nav">
-    <a href="../home/index.html" class="nav-btn">
-      <i class="fa-solid fa-house"></i>
-      <span>Home</span>
-    </a>
-
-    <a href="../products/index.html" class="nav-btn active">
-      <i class="fa-solid fa-lightbulb"></i>
-      <span>Products</span>
-    </a>
-
-    <a href="../referrals/index.html" class="nav-btn">
-      <i class="fa-solid fa-gift"></i>
-      <span>Referrals</span>
-    </a>
-
-    <a href="../profile/index.html" class="nav-btn">
-      <i class="fa-solid fa-user"></i>
-      <span>Profile</span>
-    </a>
-  </nav>
-
-  <!-- Shared Config -->
-  <script src="../shared/js/config.js"></script>
-
-  <!-- Main JS -->
-  <script src="../products/script.js"></script>
-
-</body>
+    <!-- Products JS -->
+    <script src="../products/script.js"></script>
+  </body>
 </html>
