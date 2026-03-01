@@ -462,19 +462,33 @@ body {
    MOBILE OPTIMIZATION
 ========================================== */
 
+/* ================= RESPONSIVE ================= */
 @media (max-width: 480px) {
 
   .card {
-    height: 115px;
+    height: 120px; /* slightly bigger */
   }
 
-  .collect-btn {
-    font-size: 11px;
-    padding: 5px 12px;
+  .card-image {
+    width: 110px;   /* increase image width */
   }
 
-  .countdown {
-    font-size: 11px;
-    padding: 5px 8px;
+  .card-image img {
+    object-fit: cover;
   }
+
+  .card-content {
+    padding: 10px 12px;
+  }
+
+  .card-text h2 {
+    font-size: 14px;
+  }
+
+  .product-row,
+  .price,
+  .daily-earning {
+    font-size: 12px;
+  }
+
 }
