@@ -1,20 +1,237 @@
+/* ==================================================
+   WALLET PAGE (Recharge + Withdraw Shared CSS)
+================================================== */
+
 /* ===== GLOBAL ===== */
 body {
-padding: 0;
-margin: 0;
-font-family: Arial, sans-serif;
-background: #0f172a;
-min-height: 100vh;
-color: #ffffff;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  min-height: 100vh;
+  color: #ffffff;
 }
 
-/* ===== BANK CARD ===== */
+/* ==================================================
+   CONTAINER
+================================================== */
+
+.wallet-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 90px 20px 40px;
+  /* space for fixed nav */
+}
+
+/* ==================================================
+   PAYMENT TABS
+================================================== */
+
+.payment-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  background: rgba(0, 200, 255, 0.08);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.tab-btn:hover {
+  background: rgba(0, 200, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+  box-shadow: 0 6px 20px rgba(0, 255, 150, 0.4);
+}
+
+/* ==================================================
+   WALLET CARD
+================================================== */
+
+.wallet-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 28px;
+  border-radius: 20px;
+
+  background: linear-gradient(145deg, #002b5c, #003b7a);
+  border: 1px solid rgba(0, 170, 255, 0.25);
+
+  box-shadow: 0 10px 30px rgba(0, 114, 255, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  transition: 0.25s ease;
+}
+
+.wallet-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 45px rgba(0, 255, 150, 0.25);
+}
+
+/* ===== LABEL ===== */
+
+.wallet-card label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==================================================
+   INPUTS
+================================================== */
+
+.wallet-card input,
+.wallet-input,
+.wallet-card select {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  background: #0f172a;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: 0.25s ease;
+  margin-bottom: 20px;
+}
+
+.wallet-card input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.wallet-card input:focus,
+.wallet-card select:focus {
+  border-color: #00ff88;
+  box-shadow: 0 0 14px rgba(0, 255, 150, 0.4);
+}
+
+/* ==================================================
+   USDT ADDRESS BOX
+================================================== */
+
+.usdt-address {
+  background: #0f172a;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  word-break: break-all;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==================================================
+   AMOUNT OPTIONS (INR)
+================================================== */
+
+.amount-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.amount-btn {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  background: rgba(0, 200, 255, 0.08);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.amount-btn:hover {
+  background: rgba(0, 200, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.amount-btn.active {
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+  box-shadow: 0 6px 20px rgba(0, 255, 150, 0.4);
+}
+
+/* ==================================================
+   BUTTONS
+================================================== */
+
+.wallet-btn {
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.wallet-btn:hover {
+  transform: translateY(-3px);
+}
+
+.wallet-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== RECHARGE ===== */
+
+.recharge-style {
+  background: linear-gradient(135deg, #00ff88, #00c6ff);
+  color: #001f3f;
+  box-shadow: 0 6px 18px rgba(0, 255, 150, 0.35);
+}
+
+.recharge-style:hover {
+  box-shadow: 0 10px 28px rgba(0, 255, 150, 0.5);
+}
+
+/* ===== WITHDRAW ===== */
+
+.withdraw-style {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: #ffffff;
+}
+
+.withdraw-style:hover {
+  box-shadow: 0 10px 25px rgba(255, 152, 0, 0.5);
+}
+
+/* ==================================================
+   BANK CARDS (Withdraw Page Safe)
+================================================== */
+
 .bank-card {
   background: #1e293b;
   padding: 14px;
   border-radius: 14px;
   margin-bottom: 10px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: 0.3s ease;
 }
@@ -26,7 +243,7 @@ color: #ffffff;
 
 .bank-card.active {
   border-color: #ff8a00;
-  box-shadow: 0 0 12px rgba(255,138,0,0.5);
+  box-shadow: 0 0 12px rgba(255, 138, 0, 0.5);
 }
 
 .bank-empty {
@@ -41,170 +258,42 @@ color: #ffffff;
   margin-top: 12px;
   padding: 10px 18px;
   border-radius: 25px;
-  background: linear-gradient(135deg,#19d1ff,#1b75ff);
+  background: linear-gradient(135deg, #19d1ff, #1b75ff);
   border: none;
   color: white;
   cursor: pointer;
 }
 
-/* ===== CONTAINER ===== */
-.wallet-container {
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 20px;
-}
+/* ==================================================
+   WITHDRAW INFO
+================================================== */
 
-/* ===== WALLET CARD ===== */
-.wallet-card {
-width: 100%;
-max-width: 380px;
-padding: 30px;
-border-radius: 20px;
-background: #1e293b;
-border: 1px solid rgba(255,255,255,0.05);
-box-shadow: 0 15px 40px rgba(0,114,255,0.15);
-display: flex;
-flex-direction: column;
-transition: 0.3s ease;
-}
-
-.wallet-card:hover {
-transform: translateY(-5px);
-box-shadow: 0 20px 50px rgba(0,114,255,0.25);
-}
-
-/* ===== LABEL ===== */
-.wallet-card label {
-margin-bottom: 10px;
-font-size: 14px;
-opacity: 0.85;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-
-/* ===== INPUT ===== */
-.wallet-card input {
-padding: 14px 16px;
-border-radius: 12px;
-border: 1px solid rgba(255,255,255,0.1);
-background: #0f172a;
-color: white;
-font-size: 15px;
-outline: none;
-transition: 0.3s ease;
-margin-bottom: 20px;
-}
-
-.wallet-card input::placeholder {
-color: rgba(255,255,255,0.4);
-}
-
-.wallet-card input:focus {
-border-color: #0072ff;
-box-shadow: 0 0 10px rgba(0,114,255,0.4);
-}
-
-/* ===== AMOUNT OPTIONS ===== */
-.amount-options {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 12px;
-margin-bottom: 25px;
-}
-
-.amount-btn {
-padding: 14px;
-border-radius: 14px;
-border: 2px solid #00c6ff;
-background: transparent;
-color: white;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s ease;
-}
-
-.amount-btn:hover {
-background: rgba(0,198,255,0.15);
-}
-
-.amount-btn.active {
-background: linear-gradient(135deg, #0072ff, #00c6ff);
-box-shadow:
-  0 0 12px #00c6ff,
-  0 0 25px rgba(0,198,255,0.6);
-}
-
-/* ===== BUTTON ===== */
-.wallet-btn {
-padding: 14px;
-border-radius: 30px;
-border: none;
-font-weight: 600;
-cursor: pointer;
-transition: 0.3s ease;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-}
-
-.wallet-btn:hover {
-transform: translateY(-3px);
-}
-
-/* Recharge */
-.recharge-style {
-background: linear-gradient(90deg, #0072ff, #00c6ff);
-color: white;
-}
-
-.recharge-style:hover {
-box-shadow: 0 10px 25px rgba(0,114,255,0.5);
-}
-
-/* Withdraw */
-.withdraw-style {
-background: linear-gradient(90deg, #ff9800, #ff5722);
-color: white;
-}
-
-.withdraw-style:hover {
-box-shadow: 0 10px 25px rgba(255,152,0,0.5);
-}
-
-.wallet-btn:disabled {
-opacity: 0.6;
-cursor: not-allowed;
-}
-
-/* ===== WITHDRAW INFO ===== */
 .withdraw-info {
-width: 100%;
-max-width: 380px;
-background: rgba(255,152,0,0.08);
-border-left: 4px solid #ff9800;
-padding: 15px 20px;
-border-radius: 12px;
-margin-bottom: 25px;
-font-size: 14px;
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 152, 0, 0.08);
+  border-left: 4px solid #ff9800;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  font-size: 14px;
 }
 
 .withdraw-info p {
-margin: 8px 0;
-display: flex;
-align-items: center;
-gap: 8px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .withdraw-info strong {
-color: #ff9800;
+  color: #ff9800;
 }
 
-/* ===== MODAL PIN WRAPPER ===== */
+/* ==================================================
+   MODAL + PIN
+================================================== */
+
 .modal-pin-wrapper {
   display: flex;
   justify-content: center;
@@ -212,12 +301,12 @@ color: #ff9800;
   margin: 18px 0 22px;
 }
 
-/* ===== MODAL PIN BOX ===== */
+
 .modal-pin-box {
   width: 52px;
   height: 58px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0f172a;
   text-align: center;
   font-size: 22px;
@@ -226,90 +315,133 @@ color: #ff9800;
   transition: 0.3s ease;
 }
 
-/* Focus Effect */
+
 .modal-pin-box:focus {
   border-color: #ff8a00;
-  box-shadow: 0 0 14px rgba(255,138,0,0.6);
+  box-shadow: 0 0 14px rgba(255, 138, 0, 0.6);
   transform: translateY(-3px);
 }
 
-/* Filled State */
+
 .modal-pin-box.filled {
   border-color: #ff8a00;
 }
 
 /* ===== MODAL ===== */
+
 .custom-modal {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.6);
-display: none;
-align-items: center;
-justify-content: center;
-backdrop-filter: blur(4px);
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
 }
 
 .custom-modal.active {
-display: flex;
+  display: flex;
 }
 
 .modal-content {
-width: 90%;
-max-width: 350px;
-padding: 30px;
-border-radius: 20px;
-background: #1e293b;
-text-align: center;
-box-shadow: 0 20px 60px rgba(0,114,255,0.3);
-animation: modalPop 0.3s ease;
+  width: 90%;
+  max-width: 350px;
+  padding: 30px;
+  border-radius: 20px;
+  background: #1e293b;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 114, 255, 0.3);
+  animation: modalPop 0.3s ease;
 }
 
 @keyframes modalPop {
-from { transform: scale(0.9); opacity: 0; }
-to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .modal-actions {
-display: flex;
-gap: 15px;
-margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .modal-btn {
-flex: 1;
-padding: 12px;
-border-radius: 20px;
-border: none;
-cursor: pointer;
-font-weight: 600;
+  flex: 1;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .modal-btn.cancel {
-background: #444;
-color: white;
+  background: #444;
+  color: white;
 }
 
 .modal-btn.confirm {
-background: linear-gradient(90deg, #ff9800, #ff5722);
-color: white;
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: white;
 }
 
-/* ===== TOAST ===== */
+/* ==================================================
+   TOAST
+================================================== */
+
 .custom-toast {
-position: fixed;
-bottom: 30px;
-left: 50%;
-transform: translateX(-50%);
-background: #ff5722;
-padding: 14px 22px;
-border-radius: 30px;
-opacity: 0;
-transition: 0.4s;
-color: white;
-font-weight: 500;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff5722;
+  padding: 14px 22px;
+  border-radius: 30px;
+  opacity: 0;
+  transition: 0.4s;
+  color: white;
+  font-weight: 500;
 }
 
 .custom-toast.show {
-opacity: 1;
-bottom: 50px;
+  opacity: 1;
+  bottom: 50px;
+}
+
+/* USDT Address Wrapper */
+.usdt-address-wrapper {
+  display: flex;
+  align-items: center;
+  background: #0f172a;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+}
+
+.usdt-address {
+  flex: 1;
+  font-size: 14px;
+  word-break: break-all;
+  color: #ffffff;
+}
+
+.copy-icon-btn {
+  background: transparent;
+  border: none;
+  color: #00c6ff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.copy-icon-btn:hover {
+  color: #00ff88;
+  transform: scale(1.1);
 }
