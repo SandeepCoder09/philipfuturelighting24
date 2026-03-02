@@ -15,6 +15,36 @@ function logout() {
   window.location.href = "/admin/login.html";
 }
 
+/* =====================================================
+   ADMIN AUTH FETCH
+===================================================== */
+async function authFetch(endpoint, options = {}) {
+
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    ...options
+  };
+
+  const response = await fetch(`${API_BASE}${endpoint}`, config);
+
+  if (response.status === 401 || response.status === 403) {
+    localStorage.removeItem("adminToken");
+    window.location.href = "login.html";
+  }
+
+  return response;
+}
+
 
 /* =====================================================
    TOAST SYSTEM

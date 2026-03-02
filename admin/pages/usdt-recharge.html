@@ -73,7 +73,7 @@
             <button class="menu-toggle" onclick="toggleSidebar()">
               <i class="fa-solid fa-bars"></i>
             </button>
-            <h1>All Linked Bank Accounts</h1>
+            <h1>USDT Recharges</h1>
           </div>
 
           <div class="topbar-right">
@@ -85,52 +85,76 @@
         </header>
 
         <!-- ========== SEARCH SECTION ========== -->
-        <section class="search-section">
-          <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input
-              type="text"
-              id="searchBank"
-              placeholder="Search by User ID or Bank Name"
-            />
-          </div>
+<section class="search-section">
 
-          <button class="search-btn" onclick="searchBanks()">
-            <i class="fa-solid fa-search"></i>
-            Search
-          </button>
-        </section>
-
-        <!-- ========== TABLE SECTION ========== -->
-        <section class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th><i class="fa-solid fa-id-card"></i> User ID</th>
-                <th><i class="fa-solid fa-user"></i> Holder Name</th>
-                <th><i class="fa-solid fa-building"></i> Bank</th>
-                <th><i class="fa-solid fa-credit-card"></i> Account Number</th>
-                <th><i class="fa-solid fa-code"></i> IFSC</th>
-                <th><i class="fa-solid fa-calendar"></i> Created</th>
-              </tr>
-            </thead>
-
-            <tbody id="bankTable">
-              <!-- Bank data loads dynamically -->
-            </tbody>
-          </table>
-        </section>
-      </main>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input
+        type="text"
+        id="searchUsdt"
+        placeholder="Search by User ID or Txn Hash"
+      />
     </div>
+  
+    <select id="usdtStatusFilter" class="filter-select">
+      <option value="">All Status</option>
+      <option value="pending">Pending</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+    </select>
+  
+    <button class="search-btn" onclick="loadUsdtRecharges()">
+      <i class="fa-solid fa-search"></i>
+      Apply
+    </button>
+  
+  </section>
+
+       <!-- ========== USDT TABLE SECTION ========== -->
+<section class="table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th><i class="fa-solid fa-id-badge"></i> User ID</th>
+          <th><i class="fa-solid fa-hashtag"></i> Txn Hash</th>
+          <th><i class="fa-solid fa-coins"></i> Amount</th>
+          <th><i class="fa-solid fa-circle-info"></i> Status</th>
+          <th><i class="fa-solid fa-calendar"></i> Date</th>
+          <th><i class="fa-solid fa-gear"></i> Action</th>
+        </tr>
+      </thead>
+  
+      <tbody id="usdtTableBody">
+        <tr>
+          <td colspan="6" class="table-empty">
+            Loading USDT deposits...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
     <!-- TOAST CONTAINER -->
     <div id="toastContainer" class="toast-container"></div>
+
+    <!-- ================= CONFIRM MODAL ================= -->
+<div id="confirmModal" class="custom-modal">
+    <div class="modal-content">
+      <h3 id="modalTitle">Confirm Action</h3>
+      <p id="modalMessage">Are you sure?</p>
+  
+      <div class="modal-actions">
+        <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+        <button class="modal-confirm" id="modalConfirmBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
 
     <!-- ================= SCRIPTS ================= -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/common.js"></script>
     <!-- <script src="../js/layout.js"></script> -->
-    <script src="../js/banks.js"></script>
+    <script src="../js/usdt-recharge.js"></script>
   </body>
 </html>

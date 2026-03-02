@@ -15,27 +15,29 @@ else {
 }
 
 
-// 🔐 Auth Fetch Wrapper (WITH TOKEN)
+// 🔐 ADMIN Auth Fetch Wrapper (STRICT)
 async function authFetch(endpoint, options = {}) {
 
-  // 🔥 Check both possible tokens
-  const token =
-    localStorage.getItem("adminToken") ||
-    localStorage.getItem("token");
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
 
   const response = await fetch(API_BASE + endpoint, {
     ...options,
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      Authorization: `Bearer ${token}`,
       ...(options.headers || {})
     }
   });
 
   // 🔴 Auto logout if unauthorized
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
     localStorage.removeItem("adminToken");
-    localStorage.removeItem("token");
+    
     window.location.href = "login.html";
   }
 

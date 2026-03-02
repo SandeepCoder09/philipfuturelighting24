@@ -5,9 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalDetails = document.getElementById("modalDetails");
   const cancelBtn = document.getElementById("cancelWithdraw");
   const confirmBtn = document.getElementById("confirmWithdraw");
-  const amountInput = document.getElementById("withdrawAmount");
   const modalPinBoxes = document.querySelectorAll(".modal-pin-box");
   const bankSection = document.getElementById("bankSection");
+  const amountInput = document.getElementById("withdrawAmount");
+  const feePreview = document.getElementById("feePreview");
+  const finalPreview = document.getElementById("finalAmountPreview");
+  const balanceElement = document.getElementById("availableBalance");
 
   let pendingAmount = 0;
   let selectedBankId = null;
@@ -17,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   =========================== */
   function showToast(message) {
     const toast = document.getElementById("customToast");
+    if (!toast) return;
+
     toast.innerText = message;
     toast.classList.add("show");
 
@@ -26,7 +31,50 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ===========================
-     LOAD BANKS (FIXED)
+     LOAD WALLET BALANCE
+  =========================== */
+  async function loadBalance() {
+    try {
+
+      const res = await authFetch("/users/profile");
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      const walletBalance =
+        data.walletBalance ??
+        data.user?.walletBalance ??
+        0;
+
+      if (balanceElement) {
+        balanceElement.innerText = Number(walletBalance).toFixed(2);
+      }
+
+    } catch (error) {
+      console.error("Balance Load Error:", error);
+    }
+  }
+
+  loadBalance();
+
+  /* ===========================
+     LIVE FEE PREVIEW
+  =========================== */
+  if (amountInput) {
+    amountInput.addEventListener("input", () => {
+
+      const amount = Number(amountInput.value) || 0;
+      const fee = amount * 0.10;
+      const finalAmount = amount - fee;
+
+      if (feePreview) feePreview.innerText = fee.toFixed(2);
+      if (finalPreview) finalPreview.innerText = finalAmount.toFixed(2);
+
+    });
+  }
+
+  /* ===========================
+     LOAD BANKS
   =========================== */
   async function loadBanks() {
 
@@ -66,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function renderBankList(banks) {
+
     withdrawBtn.disabled = false;
 
     bankSection.innerHTML = banks.map(bank => `
@@ -77,11 +126,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelectorAll(".bank-card").forEach(card => {
       card.addEventListener("click", () => {
+
         document.querySelectorAll(".bank-card")
           .forEach(c => c.classList.remove("active"));
 
         card.classList.add("active");
         selectedBankId = card.dataset.id;
+
       });
     });
   }
@@ -176,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ===========================
-     CONFIRM WITHDRAW (FIXED)
+     CONFIRM WITHDRAW
   =========================== */
   confirmBtn.addEventListener("click", async function () {
 
@@ -211,6 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showToast(data.message || "Withdrawal request submitted.");
         amountInput.value = "";
         clearPinBoxes();
+        loadBalance(); // 🔥 Refresh balance after withdrawal
       }
 
     } catch (error) {
@@ -219,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showToast("Server error.");
     } finally {
       confirmBtn.disabled = false;
-      confirmBtn.innerText = "Confirm";
+      confirmBtn.innerText = "Submit";
     }
 
   });

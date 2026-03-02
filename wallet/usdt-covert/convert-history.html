@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USDT Conversion History | Philips</title>
+
+  <!-- Shared Top Nav CSS -->
+  <link rel="stylesheet" href="../../shared/css/top-nav.css" />
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="../usdt-covert/convert-history.css" />
+</head>
+
+<body>
+
+  <!-- 🔷 Fixed Navbar -->
+  <div class="top-nav">
+
+    <button class="back-btn" onclick="history.back()">
+      ← Back
+    </button>
+
+    <h2 class="page-title">USDT Conversion History</h2>
+
+  </div>
+
+  <!-- ================= PAGE CONTENT ================= -->
+  <div class="history-wrapper">
+
+    <div class="history-card">
+
+      <div class="history-table-wrapper">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>USDT</th>
+              <th>Rate</th>
+              <th>INR</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <!-- Data loads here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="emptyState" class="empty-state" style="display:none;">
+        No conversion history found.
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="../../shared/js/config.js"></script>
+  <script src="../usdt-covert/convert-history.js"></script>
+
+</body>
+</html>

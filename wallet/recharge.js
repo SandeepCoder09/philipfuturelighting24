@@ -254,3 +254,46 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 });
+
+const FIXED_RATE = 80;
+
+async function loadUsdtBalance() {
+  try {
+    const res = await fetch(`${API_BASE}/users/profile`, {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      const balance = data.user.usdtBalance || 0;
+
+      document.getElementById("usdtBalance").innerText = balance.toFixed(2);
+      document.getElementById("usdtInrValue").innerText = 
+        (balance * FIXED_RATE).toFixed(2);
+    }
+
+  } catch (err) {
+    console.error("USDT Balance Error:", err);
+  }
+}
+
+loadUsdtBalance();
+
+document.getElementById("convertToInrBtn")
+  .addEventListener("click", () => {
+
+    const balance = parseFloat(
+      document.getElementById("usdtBalance").innerText
+    );
+
+    if (balance <= 0) {
+      alert("No USDT balance available");
+      return;
+    }
+
+    // Redirect to convert page
+    window.location.href = "../wallet/usdt-covert/usdt-convert.html";
+});

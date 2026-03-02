@@ -342,3 +342,181 @@ td:last-child {
     min-width: 800px;
   }
 }
+
+/* ==========================================
+   ADMIN TABLE STYLE (Withdraw Style)
+========================================== */
+
+.table-wrapper {
+  margin-top: 20px;
+  background: linear-gradient(145deg, #142133, #0f1b2b);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #cbd5e1;
+}
+
+.admin-table thead {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 14px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.admin-table td {
+  padding: 14px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px;
+}
+
+.admin-table tr:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.table-empty {
+  text-align: center;
+  padding: 30px;
+  color: #94a3b8;
+}
+
+/* STATUS BADGE */
+
+.table-status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-pending {
+  background: rgba(255,193,7,0.15);
+  color: #ffc107;
+}
+
+.status-approved,
+.status-success {
+  background: rgba(0,230,118,0.15);
+  color: #00e676;
+}
+
+.status-rejected,
+.status-failed {
+  background: rgba(255,77,77,0.15);
+  color: #ff4d4d;
+}
+
+/* ACTION BUTTONS */
+
+.table-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.btn-approve {
+  background: #00e676;
+  color: #000;
+}
+
+.btn-reject {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+.filter-select {
+  background: #1e293b;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #cbd5e1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  min-width: 150px;
+}
+
+/* ================= CUSTOM MODAL ================= */
+
+.custom-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 9999;
+}
+
+.custom-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, #0f1b2d, #13243d);
+  border-radius: 14px;
+  padding: 30px;
+  width: 380px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  animation: popIn 0.25s ease;
+}
+
+.modal-content h3 {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.modal-content p {
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal-cancel {
+  background: #2d3b55;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-confirm {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-confirm.danger {
+  background: linear-gradient(90deg, #ff4d4d, #d60000);
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

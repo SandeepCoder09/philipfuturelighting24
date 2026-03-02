@@ -93,39 +93,61 @@
       </div>
 
       <!-- ================= USDT SECTION ================= -->
-      <div class="usdt-section" style="display:none;">
+      <div class="usdt-section" style="display: none">
+
+        <!-- ===== USDT BALANCE CARD ===== -->
+    <div class="wallet-card usdt-balance-card">
+      <div class="usdt-balance-header">
+        <i class="fa-solid fa-coins"></i>
+        <span>Available USDT Balance</span>
+      </div>
+
+      <div class="usdt-balance-amount">
+        <span id="usdtBalance">0.00</span> USDT
+      </div>
+
+      <div class="usdt-balance-inr">≈ ₹<span id="usdtInrValue">0</span></div>
+
+      <button id="convertToInrBtn" class="wallet-btn convert-style">
+        <i class="fa-solid fa-right-left"></i>
+        Convert to INR
+      </button>
+    </div>
 
         <div class="wallet-card">
-      
           <label>Network</label>
-          <div class="usdt-network-badge">
-            USDT (TRC20 - Tron)
-          </div>
-      
+          <div class="usdt-network-badge">USDT (TRC20 - Tron)</div>
+
           <div class="usdt-address-wrapper">
             <div id="usdtAddress" class="usdt-address">
               TPXJ5Yjzzz4397BX56cDuMpCSU1bWDbtqh
             </div>
-          
+
             <button id="copyAddressBtn" class="copy-icon-btn">
               <i class="fa-solid fa-copy"></i>
             </button>
           </div>
-      
+
           <label>Enter Amount (USDT)</label>
-          <input type="number" id="usdtAmount" placeholder="Enter USDT amount">
-      
+          <input
+            type="number"
+            id="usdtAmount"
+            placeholder="Enter USDT amount"
+          />
+
           <label>Transaction Hash</label>
-          <input type="text" id="txnHash" placeholder="Paste transaction hash">
-      
+          <input
+            type="text"
+            id="txnHash"
+            placeholder="Paste transaction hash"
+          />
+
           <button id="usdtSubmit" class="wallet-btn recharge-style">
             Submit Deposit
           </button>
-      
         </div>
-      
       </div>
-      </section>
+    </section>
 
     <!-- ================= CASHFREE SDK ================= -->
     <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>

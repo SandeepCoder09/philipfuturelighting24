@@ -41,17 +41,26 @@
 
 <section class="wallet-container">
 
-  <div class="withdraw-info">
-    <p><i class='bx bx-error-circle'></i> Minimum Withdrawal: <strong>₹120</strong></p>
-    <p><i class='bx bx-receipt'></i> Processing Fee: <strong>10%</strong></p>
-    <p><i class='bx bx-time-five'></i> Monday – Saturday (9 AM – 6 PM)</p>
+  <!-- 🔷 BALANCE SUMMARY -->
+  <div class="withdraw-balance-card">
+    <p class="balance-label">Available Balance</p>
+    <h2 class="balance-amount">₹<span id="availableBalance">0.00</span></h2>
   </div>
 
-  <div class="wallet-card">
+  <!-- 🔶 WITHDRAW RULES -->
+  <div class="withdraw-info refined-info">
+    <p>Minimum Withdrawal: <strong>₹120</strong></p>
+    <p>Processing Fee: <strong>10%</strong></p>
+    <p>Working Hours: <strong>Mon – Sat (9 AM – 6 PM)</strong></p>
+  </div>
 
-    <!--------------Bank Selection ---------->
+  <!-- 🔵 WITHDRAW CARD -->
+  <div class="wallet-card withdraw-card">
+
+    <!-- Bank Section -->
     <div id="bankSection"></div>
 
+    <!-- Amount -->
     <label>
       <i class='bx bx-rupee'></i>
       Enter Amount
@@ -59,8 +68,13 @@
 
     <input type="number" id="withdrawAmount" placeholder="Enter amount">
 
+    <!-- Fee Preview -->
+    <div class="withdraw-preview">
+      <p>Processing Fee: ₹<span id="feePreview">0</span></p>
+      <p>You Will Receive: ₹<span id="finalAmountPreview">0</span></p>
+    </div>
+
     <button id="withdrawBtn" class="wallet-btn withdraw-style">
-      <i class='bx bx-transfer'></i>
       Withdraw Now
     </button>
 
