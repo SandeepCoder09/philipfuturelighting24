@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showPhilipsPopup(
           "Submitted",
-          "Deposit submitted successfully. Waiting for admin approval.",
+          "Deposit submitted successfully. Waiting for  Approval.",
           "success"
         );
 

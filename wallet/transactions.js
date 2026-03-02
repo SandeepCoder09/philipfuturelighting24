@@ -1,6 +1,7 @@
 /* ==========================================
    PHILIPS TRANSACTIONS SCRIPT (UPDATED)
    - Supports INR + USDT display
+   - Uses blockchain hash for USDT
 ========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,15 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
+  // SHORTEN HASH (UI CLEAN)
+  // ==========================================
+  function formatHash(hash) {
+    if (!hash) return "";
+    if (hash.length <= 18) return hash;
+    return hash.substring(0, 8) + "..." + hash.substring(hash.length - 6);
+  }
+
+  // ==========================================
   // DETECT CURRENCY (INR / USDT)
   // ==========================================
   function formatAmount(tx) {
 
-    const isUSDT =
-      (tx.description && tx.description.toLowerCase().includes("usdt")) ||
-      (tx.network && tx.network.toLowerCase().includes("trc20"));
-
-    if (isUSDT) {
+    if (tx.type === "usdt_recharge") {
       return `USDT ${tx.amount}`;
     }
 
@@ -97,7 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="transaction-id">
-              ID: ${tx.orderId || "-"}
+              ${tx.type === "usdt_recharge"
+                ? `Hash: ${formatHash(tx.orderId)}`
+                : `ID: ${tx.orderId}`
+              }
             </div>
           </div>
 
