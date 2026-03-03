@@ -18,16 +18,26 @@ document.addEventListener("DOMContentLoaded", function () {
   /* ===========================
      TOAST
   =========================== */
-  function showToast(message) {
+  function showToast(message, type = "success") {
     const toast = document.getElementById("customToast");
     if (!toast) return;
 
-    toast.innerText = message;
+    toast.className = `custom-toast ${type}`;
+
+    let icon = "fa-circle-check";
+    if (type === "error") icon = "fa-circle-xmark";
+    if (type === "warning") icon = "fa-triangle-exclamation";
+
+    toast.innerHTML = `
+      <i class="fa-solid ${icon}"></i>
+      <span>${message}</span>
+    `;
+
     toast.classList.add("show");
 
     setTimeout(() => {
       toast.classList.remove("show");
-    }, 2500);
+    }, 3000);
   }
 
   /* ===========================
@@ -74,10 +84,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ===========================
-     LOAD BANKS
-  =========================== */
+   LOAD BANKS
+=========================== */
   async function loadBanks() {
-
     try {
       const res = await authFetch("/wallet/banks");
 
@@ -100,41 +109,74 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /* ===========================
+     NO BANK UI
+  =========================== */
   function renderNoBank() {
     bankSection.innerHTML = `
-      <div class="bank-empty">
-        ⚠ No bank account linked <br>
-        <button class="bind-btn" onclick="window.location.href='bind-card.html'">
-          Bind Bank Card
-        </button>
-      </div>
-    `;
+    <div class="bank-empty">
+      ⚠ No bank account linked <br>
+      <button class="bind-btn" onclick="window.location.href='bind-card.html'">
+        Bind Bank Card
+      </button>
+    </div>
+  `;
 
     withdrawBtn.disabled = true;
+    selectedBankId = null;
   }
 
+  /* ===========================
+     RENDER BANK LIST
+  =========================== */
   function renderBankList(banks) {
 
-    withdrawBtn.disabled = false;
+    selectedBankId = null;
+    withdrawBtn.disabled = true;
 
-    bankSection.innerHTML = banks.map(bank => `
-      <div class="bank-card" data-id="${bank._id}">
+    bankSection.innerHTML = banks.map((bank, index) => `
+    <div class="bank-card" data-id="${bank._id}">
+      <div class="bank-info">
         <strong>${bank.bankName}</strong><br>
         ****${bank.accountNumber.slice(-4)} • ${bank.holderName}
       </div>
-    `).join("");
+      <button class="select-bank-btn">
+        Select
+      </button>
+    </div>
+  `).join("");
 
-    document.querySelectorAll(".bank-card").forEach(card => {
-      card.addEventListener("click", () => {
+    const cards = document.querySelectorAll(".bank-card");
 
-        document.querySelectorAll(".bank-card")
-          .forEach(c => c.classList.remove("active"));
+    cards.forEach(card => {
+      const button = card.querySelector(".select-bank-btn");
 
+      button.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        // Remove active from all
+        cards.forEach(c => {
+          c.classList.remove("active");
+          c.querySelector(".select-bank-btn").innerText = "Select";
+        });
+
+        // Activate selected
         card.classList.add("active");
-        selectedBankId = card.dataset.id;
+        button.innerText = "Selected";
 
+        selectedBankId = card.dataset.id;
+        withdrawBtn.disabled = false;
       });
     });
+
+    // 🔥 OPTIONAL: Auto-select first bank (recommended UX)
+    if (banks.length > 0) {
+      const firstCard = cards[0];
+      firstCard.classList.add("active");
+      firstCard.querySelector(".select-bank-btn").innerText = "Selected";
+      selectedBankId = firstCard.dataset.id;
+      withdrawBtn.disabled = false;
+    }
   }
 
   loadBanks();
@@ -184,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
   withdrawBtn.addEventListener("click", function () {
 
     if (!selectedBankId) {
-      showToast("Please select a bank account.");
+      showToast("Please select a bank account.", "warning");
       return;
     }
 
@@ -257,9 +299,9 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.classList.remove("active");
 
       if (!res.ok) {
-        showToast(data.message || "Withdrawal failed.");
+        showToast("Withdrawal failed.", "error");
       } else {
-        showToast(data.message || "Withdrawal request submitted.");
+        showToast("Withdrawal request submitted.", "success");
         amountInput.value = "";
         clearPinBoxes();
         loadBalance(); // 🔥 Refresh balance after withdrawal
