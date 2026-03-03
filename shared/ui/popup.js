@@ -11,18 +11,24 @@ function showPhilipsPopup(title, message, type = "info") {
     const overlay = document.createElement("div");
     overlay.className = "philips-popup-overlay active";
 
-    overlay.innerHTML = `
-      <div class="philips-popup ${type}">
-        <h3>${title}</h3>
-        <p>${message}</p>
-        <button>OK</button>
-      </div>
-    `;
+    const popup = document.createElement("div");
+    popup.className = `philips-popup ${type}`;
+
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+
+    const description = document.createElement("p");
+    description.textContent = message;
+
+    const button = document.createElement("button");
+    button.textContent = "OK";
+
+    popup.appendChild(heading);
+    popup.appendChild(description);
+    popup.appendChild(button);
+    overlay.appendChild(popup);
 
     document.body.appendChild(overlay);
-
-    const popup = overlay.querySelector(".philips-popup");
-    const button = overlay.querySelector("button");
 
     // Close on button click
     button.addEventListener("click", () => {
