@@ -80,10 +80,10 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }
   
-  .history-table tbody tr:hover {
+  /* .history-table tbody tr:hover {
     background: rgba(0, 200, 255, 0.08);
     transition: 0.2s ease;
-  }
+  } */
   
   /* ==================================================
      STATUS STYLES

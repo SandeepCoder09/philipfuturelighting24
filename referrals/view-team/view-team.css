@@ -38,10 +38,10 @@ body {
     transition: 0.3s ease;
   }
   
-  .summary-card:hover {
+  /* .summary-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-  }
+  } */
   
   .summary-card p {
     opacity: 0.8;
@@ -87,9 +87,9 @@ body {
     transition: 0.3s ease;
   }
   
-  .stats-card:hover {
+  /* .stats-card:hover {
     transform: translateY(-3px);
-  }
+  } */
   
   .stats-card strong {
     color: #FFD700;
@@ -126,9 +126,9 @@ body {
     transition: 0.3s ease;
   }
   
-  .level-card:hover {
+  /* .level-card:hover {
     transform: translateY(-3px);
-  }
+  } */
   
   .level-card p {
     opacity: 0.8;
@@ -193,9 +193,9 @@ body {
     opacity: 0.9;
   }
   
-  tr:hover {
+  /* tr:hover {
     background: rgba(255,255,255,0.04);
-  }
+  } */
   
   .no-data {
     text-align: center;

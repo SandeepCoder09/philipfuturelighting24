@@ -74,9 +74,9 @@ body {
   
 }
 
-.referral-box button:hover {
+/* .referral-box button:hover {
   opacity: 0.85;
-}
+} */
 
 /* =========================================
    SECTION TITLES
@@ -184,10 +184,10 @@ body {
   white-space: nowrap;
 }
 
-.view-team-btn:hover {
+/* .view-team-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 12px rgba(0, 255, 100, 0.4);
-}
+} */
 
 .view-team-btn i {
   font-size: 12px;

@@ -1,182 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="theme-color" content="#111827">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#111827" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <title>Profile | Philips India</title>
+    <title>Profile | Philips India</title>
 
+    <!-- ==================== Shared CSS ========================== -->
+    <link rel="stylesheet" href="../shared/css/bottom-nav.css" />
+    <link rel="stylesheet" href="../home/style.css" />
 
-  <!-- ==================== Shared CSS ========================== -->
-  <link rel="stylesheet" href="../shared/css/bottom-nav.css" />
-  <link rel="stylesheet" href="../home/style.css" />
+    <!-- ===================== Main CSS ========================== -->
+    <link rel="stylesheet" href="../profile/style.css" />
 
-<!-- ===================== Main CSS ========================== -->
-  <link rel="stylesheet" href="../profile/style.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-
-<body>
-
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-  <div class="logo-wrapper">
-    <a href="../home/index.html">
-      <img src="../assets/philips-logo-png-transparent.png" alt="Philips Logo">
-    </a>
-
-    <div class="led-dots">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-
-  <!-- NEW TOP RIGHT LOGOUT -->
-  <button onclick="logout()" class="nav-logout-btn">
-    <i class="fa-solid fa-right-from-bracket"></i>
-    Logout
-  </button>
-</nav>
-
-  <section class="profile-container">
-
-    <div class="profile-header">
-
-      <div class="profile-top">
-        <div class="profile-img small">
-          <img 
-            src="../assets/bulb10watts.webp"
-            onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'"
-            alt="Profile"
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+      <div class="logo-wrapper">
+        <a href="../home/index.html">
+          <img
+            src="../assets/philips-logo-png-transparent.png"
+            alt="Philips Logo"
           />
-        </div>
+        </a>
 
-        <div class="user-details">
-          <h2 id="username">Loading...</h2>
-
-          <p class="profile-id">
-            <i class="fa-solid fa-id-card"></i>
-            ID: <span id="uid">Loading...</span>
-          </p>
-
-          <p class="mobile-top">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-            Mobile: <span id="mobile">Loading...</span>
-          </p>
+        <div class="led-dots">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
 
-      <div class="wallet-box">
-  <div class="wallet-header">
-  <div class="wallet-title">
-    <i class="fa-solid fa-wallet"></i>
-    <span>Current Balance</span>
-  </div>
+      <!-- NEW TOP RIGHT LOGOUT -->
+      <button onclick="logout()" class="nav-logout-btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </button>
+    </nav>
 
-  <button id="refreshWalletBtn" class="refresh-btn">
-    <i class="fa-solid fa-rotate-right"></i>
-  </button>
-</div>
+    <section class="profile-container">
+      <div class="profile-header">
+        <div class="profile-top">
+          <div class="profile-img small">
+            <img
+              src="../assets/bulb10watts.webp"
+              onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'"
+              alt="Profile"
+            />
+          </div>
 
-  <h3>₹<span id="walletBalance">0</span></h3>
-</div>
+          <div class="user-details">
+            <h2 id="username">Loading...</h2>
 
-      <div class="action-buttons">
-        <a href="../wallet/recharge.html" class="action-btn recharge">
-          <i class="fa-solid fa-bolt"></i>
-          Deposit
-        </a>
+            <p class="profile-id">
+              <i class="fa-solid fa-id-card"></i>
+              ID: <span id="uid">Loading...</span>
+            </p>
 
-        <a href="../wallet/withdraw.html" class="action-btn withdraw">
-          <i class="fa-solid fa-money-bill-transfer"></i>
-          Withdrawal
-        </a>
+            <p class="mobile-top">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+              Mobile: <span id="mobile">Loading...</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="wallet-box">
+          <div class="wallet-header">
+            <div class="wallet-title">
+              <i class="fa-solid fa-wallet"></i>
+              <span>Current Balance</span>
+            </div>
+
+            <button id="refreshWalletBtn" class="refresh-btn">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+
+          <h3>₹<span id="walletBalance">0</span></h3>
+        </div>
+
+        <div class="action-buttons">
+          <a href="../wallet/recharge.html" class="action-btn recharge">
+            <i class="fa-solid fa-bolt"></i>
+            Deposit
+          </a>
+
+          <a href="../wallet/withdraw.html" class="action-btn withdraw">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            Withdrawal
+          </a>
+        </div>
       </div>
 
-    </div>
+      <div class="profile-card menu-card">
+        <!-- <a href="../auth/forgot-password.html" class="menu-item">
+          <div>
+            <i class="fa-solid fa-lock"></i>
+            Forgot Password
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </a> -->
 
-    <div class="profile-card menu-card">
+        <a href="../wallet/bind-card.html" class="menu-item">
+          <div>
+            <i class="fa-solid fa-credit-card"></i>
+            My Bank Cards
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
 
-      <a href="../auth/forgot-password.html" class="menu-item">
-        <div>
-          <i class="fa-solid fa-lock"></i>
-          Forgot Password
-        </div>
-        <i class="fa-solid fa-chevron-right"></i>
+        <a href="../wallet/transactions.html" class="menu-item">
+          <div>
+            <i class="fa-solid fa-file-invoice"></i>
+            Transaction History
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+
+        <a href="../gift/gift.html" class="menu-item">
+          <div>
+            <i class="fa-solid fa-gift"></i>
+            Redeem Gift Code
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+
+        <a href="" class="menu-item">
+          <div>
+            <i class="fa-solid fa-headset"></i>
+            Costumer Service
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- PREMIUM BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <a href="../home/index.html" class="nav-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
       </a>
 
-      <a href="../wallet/bind-card.html" class="menu-item">
-        <div>
-          <i class="fa-solid fa-credit-card"></i>
-          My Bank Cards
-        </div>
-        <i class="fa-solid fa-chevron-right"></i>
+      <a href="../products/index.html" class="nav-btn">
+        <i class="fa-solid fa-lightbulb"></i>
+        <span>Products</span>
       </a>
 
-      <a href="../wallet/transactions.html" class="menu-item">
-        <div>
-          <i class="fa-solid fa-file-invoice"></i>
-          Transaction History
-        </div>
-        <i class="fa-solid fa-chevron-right"></i>
+      <a href="../referrals/index.html" class="nav-btn">
+        <i class="fa-solid fa-gift"></i>
+        <span>Referrals</span>
       </a>
 
-      <a href="../gift/gift.html" class="menu-item">
-        <div>
-          <i class="fa-solid fa-gift"></i>
-          Redeem Gift Code
-        </div>
-        <i class="fa-solid fa-chevron-right"></i>
+      <a href="../profile/index.html" class="nav-btn active">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
       </a>
+    </nav>
 
-<a href="#" class="menu-item">
-        <div>
-          <i class="fa-solid fa-headset"></i>
-          Costumer Service
-        </div>
-        <i class="fa-solid fa-chevron-right"></i>
-      </a>
+    <!-- ==================== Shared JS ========================== -->
+    <script src="../shared/js/config.js"></script>
 
-    </div>
-
-  </section>
-
-  <!-- PREMIUM BOTTOM NAV -->
-<nav class="bottom-nav">
-
-  <a href="../home/index.html" class="nav-btn">
-    <i class="fa-solid fa-house"></i>
-    <span>Home</span>
-  </a>
-
-  <a href="../products/index.html" class="nav-btn">
-    <i class="fa-solid fa-lightbulb"></i>
-    <span>Products</span>
-  </a>
-
-  <a href="../referrals/index.html" class="nav-btn">
-    <i class="fa-solid fa-gift"></i>
-    <span>Referrals</span>
-  </a>
-
-  <a href="../profile/index.html" class="nav-btn active">
-    <i class="fa-solid fa-user"></i>
-    <span>Profile</span>
-  </a>
-
-</nav>
-
-  <!-- ==================== Shared JS ========================== -->
-<script src="../shared/js/config.js"></script>
-
-<!-- ===================== Main JS ========================== -->
-  <script src="../profile/script.js"></script>
-</body>
+    <!-- ===================== Main JS ========================== -->
+    <script src="../profile/script.js"></script>
+  </body>
 </html>

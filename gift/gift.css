@@ -44,21 +44,21 @@
   }
   
   /* Hover Effect */
-  .back-btn:hover {
+  /* .back-btn:hover {
     background: rgba(250, 204, 21, 0.15);
     border-color: #facc15;
     color: #facc15;
     transform: translateX(-3px);
-  }
+  } */
   
   /* Icon Animation */
   .back-btn i {
     transition: 0.3s;
   }
   
-  .back-btn:hover i {
+  /* .back-btn:hover i {
     transform: translateX(-4px);
-  }
+  } */
   
   /* ============================= */
   /* 🎁 3D Floating Images */

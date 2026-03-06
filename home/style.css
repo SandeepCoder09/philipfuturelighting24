@@ -322,7 +322,7 @@ h2 {
 }
 
 .segment-card:hover {
-  transform: translateY(-8px);
+  /* transform: translateY(-8px); */
   border: 1px solid #0072ff;
   box-shadow: 0 15px 40px rgba(0,114,255,0.2);
 }
@@ -399,7 +399,7 @@ h2 {
 }
 
 .investor-card:hover {
-  transform: translateY(-6px);
+  /* transform: translateY(-6px); */
   border: 1px solid #0072ff;
 }
 
@@ -434,7 +434,7 @@ h2 {
 }
 
 .investor-card:hover {
-  transform: translateY(-6px);
+  /* transform: translateY(-6px); */
   border: 1px solid #0072ff;
 }
 

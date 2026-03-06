@@ -1,92 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USDT Convert | Philips</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>USDT Convert | Philips</title>
 
-  <!-- Page CSS -->
-  <link rel="stylesheet" href="../usdt-covert/convert.css" />
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../usdt-covert/convert.css" />
 
-  <!----------- Shared CSS ----------------->
-  <link rel="stylesheet" href="../../shared/css/top-nav.css" />
-</head>
+    <!----------- Shared CSS ----------------->
+    <link rel="stylesheet" href="../../shared/css/top-nav.css" />
+  </head>
 
-<body>
-
+  <body>
     <div class="top-nav">
-
-        <button class="back-btn" onclick="history.back()">
-          <i class="fa-solid fa-arrow-left"></i>
-          Back
-        </button>
-      
-        <h2 class="page-title">USDT Convert</h2>
-      
-        <button class="nav-right-btn" onclick="window.location.href='convert-history.html'">
-          <i class="fa-solid fa-clock-rotate-left"></i>
-          History
-        </button>
-      
-      </div>
-
-  <div class="convert-wrapper">
-
-    <!-- Convert Card -->
-    <div class="convert-container">
-
-      <h2>USDT to INR Conversion</h2>
-
-      <!-- Balance Section -->
-      <div class="balance-box">
-        <p>
-          Available USDT:
-          <strong>
-            <span id="usdtBalance">0.00</span>
-          </strong>
-        </p>
-
-        <p>
-          Conversion Rate:
-          <strong>1 USDT = ₹80</strong>
-        </p>
-      </div>
-
-      <!-- Input Section -->
-      <div class="input-group">
-        <input
-          type="number"
-          id="usdtAmount"
-          placeholder="Enter USDT amount"
-          min="1"
-          step="0.01"
-        />
-      </div>
-
-      <!-- Conversion Preview -->
-      <div class="conversion-preview">
-        <p>
-          You will receive:
-          ₹<strong><span id="inrPreview">0</span></strong>
-        </p>
-      </div>
-
-      <!-- Convert Button -->
-      <button id="convertBtn" class="convert-btn">
-        Convert Now
+      <button class="back-btn" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back
       </button>
 
-      <!-- Message Area -->
-      <p id="convertMessage" class="convert-message"></p>
+      <h2 class="page-title">USDT Convert</h2>
 
+      <button
+        class="nav-right-btn"
+        onclick="window.location.href='convert-history.html'"
+      >
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        History
+      </button>
     </div>
-  </div>
 
-  <!-- Config (if you use API_BASE from config.js) -->
-  <script src="../../shared/js/config.js"></script>
+    <div class="convert-wrapper">
+      <!-- Convert Card -->
+      <div class="convert-container">
+        <h2>USDT to INR Conversion</h2>
 
-  <!-- Convert Script -->
-  <script src="../usdt-covert/convert.js"></script>
+        <!-- Balance Section -->
+        <div class="balance-box">
+          <p>
+            Available USDT:
+            <strong>
+              <span id="usdtBalance">0.00</span>
+            </strong>
+          </p>
 
-</body>
+          <p>
+            Conversion Rate:
+            <strong>1 USDT = ₹80</strong>
+          </p>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-group">
+          <input
+            type="number"
+            id="usdtAmount"
+            placeholder="Enter USDT amount"
+            min="1"
+            step="0.01"
+          />
+        </div>
+
+        <!-- Conversion Preview -->
+        <div class="conversion-preview">
+          <p>
+            You will receive: ₹<strong><span id="inrPreview">0</span></strong>
+          </p>
+        </div>
+
+        <!-- Convert Button -->
+        <button id="convertBtn" class="convert-btn">Convert Now</button>
+
+        <!-- Message Area -->
+        <p id="convertMessage" class="convert-message"></p>
+      </div>
+    </div>
+
+    <!-- Config (if you use API_BASE from config.js) -->
+    <script src="../../shared/js/config.js"></script>
+
+    <!-- Convert Script -->
+    <script src="../usdt-covert/convert.js"></script>
+  </body>
 </html>

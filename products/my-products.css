@@ -38,10 +38,10 @@ body {
   transition: 0.25s ease;
 }
 
-.card:hover {
+/* .card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(0, 255, 150, 0.25);
-}
+} */
 
 /* ================= IMAGE ================= */
 

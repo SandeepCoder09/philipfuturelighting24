@@ -195,10 +195,10 @@ body {
   backdrop-filter: blur(5px);
 }
 
-.refresh-btn:hover {
+/* .refresh-btn:hover {
   transform: rotate(180deg) scale(1.1);
   background: rgba(255,255,255,0.25);
-}
+} */
 
 /* ===== MENU CARD ===== */
 .profile-card {

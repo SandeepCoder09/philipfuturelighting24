@@ -73,10 +73,10 @@ body {
   transition: 0.25s ease;
 }
 
-.card:hover {
+/* .card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(0, 255, 150, 0.3);
-}
+} */
 
 /* ================= IMAGE ================= */
 
@@ -149,9 +149,9 @@ body {
   box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
 }
 
-.subscribe-btn:hover {
+/* .subscribe-btn:hover {
   transform: scale(1.05);
-}
+} */
 
 .subscribe-btn:disabled {
   background: #444;
@@ -291,10 +291,10 @@ body {
   box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
 }
 
-.my-products-btn:hover {
+/* .my-products-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 255, 150, 0.5);
-}
+} */
 
 /* ================= MODAL BUTTONS ================= */
 
@@ -321,9 +321,9 @@ body {
   color: #ffffff;
 }
 
-.modal-close:hover {
+/* .modal-close:hover {
   background: #34495e;
-}
+} */
 
 /* Buy Now / My Products button */
 .modal-buy {
@@ -331,10 +331,10 @@ body {
   color: #001f3f;
 }
 
-.modal-buy:hover {
+/* .modal-buy:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 255, 150, 0.4);
-}
+} */
 
 /* ================= MODAL IMAGE STYLE ================= */
 
