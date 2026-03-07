@@ -1,85 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="theme-color" content="#111827">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
-  
-  <title>Redeem Gift Code | Philips</title>
+    <meta name="theme-color" content="#111827" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Redeem Gift Code | Philips</title>
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="icon" href="/assets/favicon.png" />
 
-  <link rel="stylesheet" href="../gift/gift.css">
-</head>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-<body>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <!-- 🔙 Back Button -->
-<button class="back-btn" onclick="history.back()">
-  <i class="fa-solid fa-arrow-left"></i>
-  Back
-</button>
+    <link rel="stylesheet" href="../gift/gift.css" />
+  </head>
 
-  <!-- ============================= -->
-  <!-- 🎁 Gift Card -->
-  <!-- ============================= -->
-  <!-- 3D Floating Images -->
-<img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="floating-img top-img">
-<img src="https://cdn-icons-png.flaticon.com/512/869/869636.png" class="floating-img bottom-img">
-  
-  <div class="gift-container">
-
-    <div class="gift-header">
-      <i class="fa-solid fa-gift gift-icon"></i>
-      <h2>Redeem Gift Code</h2>
-    </div>
-
-    <div class="input-group">
-      <i class="fa-solid fa-ticket input-icon"></i>
-      <input 
-        type="text" 
-        id="giftCodeInput" 
-        placeholder="Enter Gift Code"
-        autocomplete="off"
-      >
-    </div>
-
-    <button id="redeemBtn">
-      <i class="fa-solid fa-check"></i>
-      Claim Reward
+  <body>
+    <!-- 🔙 Back Button -->
+    <button class="back-btn" onclick="history.back()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back
     </button>
 
-  </div>
+    <!-- ============================= -->
+    <!-- 🎁 Gift Card -->
+    <!-- ============================= -->
+    <!-- 3D Floating Images -->
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
+      class="floating-img top-img"
+    />
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/869/869636.png"
+      class="floating-img bottom-img"
+    />
 
-  <!-- ============================= -->
-  <!-- 🔥 Custom Popup Modal -->
-  <!-- ============================= -->
-  <div id="customPopup" class="popup-overlay">
-    <div class="popup-box">
-      <div class="popup-icon">
-        <i id="popupIcon" class="fa-solid fa-circle-info"></i>
+    <div class="gift-container">
+      <div class="gift-header">
+        <i class="fa-solid fa-gift gift-icon"></i>
+        <h2>Redeem Gift Code</h2>
       </div>
-      <h3 id="popupTitle"></h3>
-      <p id="popupMessage"></p>
-      <button id="popupOkBtn">
-        <i class="fa-solid fa-check"></i> OK
+
+      <div class="input-group">
+        <i class="fa-solid fa-ticket input-icon"></i>
+        <input
+          type="text"
+          id="giftCodeInput"
+          placeholder="Enter Gift Code"
+          autocomplete="off"
+        />
+      </div>
+
+      <button id="redeemBtn">
+        <i class="fa-solid fa-check"></i>
+        Claim Reward
       </button>
     </div>
-  </div>
 
-  <!-- ==================== Shared JS ========================== -->
-   <script src="../shared/js/config.js"></script>
+    <!-- ============================= -->
+    <!-- 🔥 Custom Popup Modal -->
+    <!-- ============================= -->
+    <div id="customPopup" class="popup-overlay">
+      <div class="popup-box">
+        <div class="popup-icon">
+          <i id="popupIcon" class="fa-solid fa-circle-info"></i>
+        </div>
+        <h3 id="popupTitle"></h3>
+        <p id="popupMessage"></p>
+        <button id="popupOkBtn"><i class="fa-solid fa-check"></i> OK</button>
+      </div>
+    </div>
 
-  <!-- ===================== Main JS ========================== -->
-  <script src="../gift/gift.js"></script>
+    <!-- ==================== Shared JS ========================== -->
+    <script src="../shared/js/config.js"></script>
 
-</body>
+    <!-- ===================== Main JS ========================== -->
+    <script src="../gift/gift.js"></script>
+  </body>
 </html>
