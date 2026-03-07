@@ -1,10 +1,32 @@
 {
     "cleanUrls": true,
+  
     "redirects": [
       {
         "source": "/(.*)/index.html",
         "destination": "/$1",
         "permanent": true
+      },
+      {
+        "source": "/index.html",
+        "destination": "/",
+        "permanent": true
+      },
+      {
+        "source": "https://www.bright24futurelighting.com/:path*",
+        "destination": "https://bright24futurelighting.com/:path*",
+        "permanent": true
+      }
+    ],
+  
+    "rewrites": [
+      {
+        "source": "/login",
+        "destination": "/auth/login.html"
+      },
+      {
+        "source": "/admin-login",
+        "destination": "/admin/login.html"
       }
     ]
   }
