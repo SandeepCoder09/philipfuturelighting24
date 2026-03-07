@@ -93,7 +93,7 @@ async function loadProducts() {
           <div class="card-action">
             <button 
   class="subscribe-btn ${isComingSoon ? "coming-soon-btn" : ""}"
-  ${isLimitReached || isComingSoon ? "disabled" : ""}
+  ${isLimitReached ? "disabled" : ""}
 >
   ${isComingSoon
           ? "Coming Soon"
