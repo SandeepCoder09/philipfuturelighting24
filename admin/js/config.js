@@ -21,7 +21,7 @@ async function authFetch(endpoint, options = {}) {
   const token = localStorage.getItem("adminToken");
 
   if (!token) {
-    window.location.href = "login.html";
+    window.location.href = "/admin/login.html";
     return;
   }
 
