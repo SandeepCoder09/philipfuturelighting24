@@ -23,7 +23,7 @@ async function authFetch(endpoint, options = {}) {
   const token = localStorage.getItem("adminToken");
 
   if (!token) {
-    window.location.href = "login.html";
+    window.location.href = "/admin/login.html";
     return;
   }
 
@@ -39,7 +39,7 @@ async function authFetch(endpoint, options = {}) {
 
   if (response.status === 401 || response.status === 403) {
     localStorage.removeItem("adminToken");
-    window.location.href = "login.html";
+    window.location.href = "/admin/login.html";
   }
 
   return response;
@@ -133,16 +133,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const token = localStorage.getItem("adminToken");
   const currentPath = window.location.pathname;
-  const isLoginPage = currentPath.includes("login.html");
+  const isLoginPage = currentPath.includes("/admin/login.html");
 
   // 🔐 Protect admin pages
   if (!token && !isLoginPage) {
-    window.location.href = "login.html";
+    window.location.href = "/admin/login.html";
     return;
   }
 
   if (token && isLoginPage) {
-    window.location.href = "index.html";
+    window.location.href = "/admin/index.html";
     return;
   }
 
