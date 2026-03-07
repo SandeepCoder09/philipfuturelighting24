@@ -68,6 +68,7 @@ async function loadProducts() {
 
 
       const isLimitReached = product.remaining <= 0;
+      const isComingSoon = product.code === "PH99999";
 
       card.innerHTML = `
         <div class="card-image">
@@ -91,21 +92,24 @@ async function loadProducts() {
 
           <div class="card-action">
             <button 
-              class="subscribe-btn"
-              ${isLimitReached ? "disabled" : ""}
-            >
-              ${isLimitReached
-          ? "Limit Reached"
-          : `<i class="fa-solid fa-cart-shopping"></i> Buy`
+  class="subscribe-btn ${isComingSoon ? "coming-soon-btn" : ""}"
+  ${isLimitReached || isComingSoon ? "disabled" : ""}
+>
+  ${isComingSoon
+          ? "Coming Soon"
+          : isLimitReached
+            ? "Limit Reached"
+            : `<i class="fa-solid fa-cart-shopping"></i> Buy`
         }
-            </button>
+</button>
           </div>
         </div>
       `;
 
+
       container.appendChild(card);
 
-      if (!isLimitReached) {
+      if (!isLimitReached && !isComingSoon) {
         const buyBtn = card.querySelector(".subscribe-btn");
         buyBtn.addEventListener("click", () => openBuyModal(product));
       }

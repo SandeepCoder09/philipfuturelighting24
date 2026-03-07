@@ -19,7 +19,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 12px;   /* small side padding */
+  padding: 10px 12px;
+  /* small side padding */
 }
 
 /* Make right section stick to extreme right */
@@ -359,4 +360,85 @@ body {
   border-radius: 50%;
   object-fit: cover;
   background: #001f3f;
+}
+
+.loading-screen {
+  display: none;
+}
+
+.subscribe-btn:disabled {
+  background: #777;
+}
+
+.coming-soon-btn {
+  position: relative;
+  background: #0b3d5c;
+  color: #00e0ff;
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: not-allowed;
+  border: none;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 224, 255, 0.4);
+}
+
+.coming-soon-btn::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(
+    90deg,
+    #00e0ff,
+    #00ffa3,
+    #00e0ff,
+    #00ffa3
+  );
+  background-size: 300% 300%;
+  animation: borderGlow 4s linear infinite;
+  z-index: -1;
+}
+
+@keyframes borderGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* .coming-soon-btn:hover {
+  opacity: 1;
+  box-shadow: 0 0 14px rgba(0, 255, 163, 0.9);
+} */
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 6px rgba(0, 200, 255, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 14px rgba(0, 200, 255, 0.8);
+  }
+
+  100% {
+    box-shadow: 0 0 6px rgba(0, 200, 255, 0.3);
+  }
+}
+
+.product-card.vip {
+  background: linear-gradient(135deg, #0f2a44, #0b3d5c);
+  border: 1px solid rgba(0, 200, 255, 0.4);
 }
