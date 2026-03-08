@@ -282,6 +282,34 @@ body {
 
 }
 
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 320px) {
+
+  .card {
+    min-height: 130px;
+  }
+
+  .card-image {
+    width: 110px;     /* smaller image for tiny screens */
+    min-width: 110px;
+    height: 130px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .subscribe-btn {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+}
+
 /* ================= NAV MY PRODUCTS BUTTON ================= */
 
 .my-products-btn {
