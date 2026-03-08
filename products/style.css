@@ -72,7 +72,7 @@ body {
 /* ================= IMAGE ================= */
 
 .card-image {
-  width: 140px;
+  width: 150px;
   min-width: 140px;
   height: auto;
   background: #012a4a;
@@ -84,7 +84,7 @@ body {
 
 .card-image img {
   width: 100%;
-  height: 100%;
+  height: 150px;
   object-fit: cover;
 }
 
@@ -253,20 +253,20 @@ body {
 
 /* ================= MOBILE ================= */
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
 
   .card {
     min-height: 120px;
   }
 
   .card-image {
-    width: 110px;
-    min-width: 110px;
+    width: 100%;
+    /* min-width: 110px; */
   }
 
   .card-image img {
     width: 100%;
-    height: 100%;
+    height: 180px;
   }
 
   .subscribe-btn {
