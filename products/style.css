@@ -99,6 +99,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 0;
 }
 
 .card-text {
@@ -256,16 +257,17 @@ body {
 
 /* ================= MOBILE ================= */
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
 
   .card {
     min-height: 130px;
-    /* keep same height */
   }
 
   .card-image {
-    width: 130px;
-    min-width: 130px;
+    width: 35%;
+    /* flexible instead of fixed px */
+    min-width: 100px;
+    /* prevents it from becoming too small */
     height: 130px;
   }
 
@@ -277,7 +279,7 @@ body {
 
   .subscribe-btn {
     font-size: 11px;
-    padding: 6px 12px;
+    padding: 6px 10px;
   }
 
 }
@@ -291,7 +293,8 @@ body {
   }
 
   .card-image {
-    width: 110px;     /* smaller image for tiny screens */
+    width: 110px;
+    /* smaller image for tiny screens */
     min-width: 110px;
     height: 130px;
   }
