@@ -13,7 +13,13 @@
         "permanent": true
       },
       {
-        "source": "https://www.bright24futurelighting.com/:path*",
+        "source": "/:path*",
+        "has": [
+          {
+            "type": "host",
+            "value": "www.bright24futurelighting.com"
+          }
+        ],
         "destination": "https://bright24futurelighting.com/:path*",
         "permanent": true
       }
