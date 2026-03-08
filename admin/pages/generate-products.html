@@ -3,53 +3,148 @@
   <head>
     <meta charset="UTF-8" />
     <title>Admin Product Manager</title>
-    <link rel="stylesheet" href="../css/generate-products.css" />
+
+    <link rel="icon" href="/assets/favicon.png" />
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- <link rel="stylesheet" href="/admin/css/generate-products.css" /> -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
 
   <body>
-    <div class="container">
-      <h1>Product Generator</h1>
 
-      <div class="card">
-        <form id="productForm">
-          <input type="text" name="code" placeholder="Product Code" required />
+    <div class="layout">
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar" id="sidebar">
+          <h2 class="logo">PHILIPS ADMIN</h2>
+  
+          <nav class="nav-menu">
+            <a href="/admin/index.html" class="active">
+              <i class="fa-solid fa-gauge"></i>
+              <span>Dashboard</span>
+            </a>
+  
+            <a href="/admin/pages/users.html">
+              <i class="fa-solid fa-users"></i>
+              <span>Users</span>
+            </a>
+  
+            <a href="/admin/pages/withdraws.html">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              <span>Withdraws</span>
+            </a>
+  
+            <a href="/admin/pages/transactions.html">
+              <i class="fa-solid fa-arrow-right-arrow-left"></i>
+              <span>Transactions</span>
+            </a>
+  
+            <a href="/admin/pages/inr-recharge.html">
+              <i class="fa-solid fa-indian-rupee-sign"></i>
+              <span>INR Recharges</span>
+            </a>
+            
+            <a href="/admin/pages/usdt-recharge.html">
+              <i class="fa-solid fa-coins"></i>
+              <span>USDT Recharges</span>
+            </a>
+  
+            <a href="/admin/pages/banks.html">
+              <i class="fa-solid fa-building-columns"></i>
+              <span>Banks</span>
+            </a>
+  
+            <!-- NEW GIFT MENU -->
+            <a href="/admin/pages/gift.html">
+              <i class="fa-solid fa-gift"></i>
+              <span>Gift Codes</span>
+            </a>
 
-          <input type="text" name="name" placeholder="Product Name" required />
+            <!----- Products Generater ------->
+            <a href="/admin/pages/generate-products.html">
+            <i class="fa-solid fa-box"></i>
+            <span>Generate Products</span>
+        </a>
+          </nav>
+        </aside>
+  
+        <!-- ================= MAIN ================= -->
+        <main class="main">
+          <!-- ========== TOPBAR ========== -->
+          <header class="topbar">
+            <div class="topbar-left">
+              <button class="menu-toggle" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+              </button>
+              <h1>Products Generater</h1>
+            </div>
+  
+            <div class="topbar-right">
+              <button class="logout-btn" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </header>
 
-          <input type="number" name="price" placeholder="Price" required />
+          <!-------------------------- MAIN SECTION ------------------------>
+          <div class="page-container">
 
-          <input type="number" name="dailyIncome" placeholder="Daily Income" />
-
-          <input
-            type="number"
-            name="validityDays"
-            placeholder="Validity Days"
-          />
-
-          <input
-            type="number"
-            name="maxPurchaseLimit"
-            placeholder="Max Purchase Limit"
-          />
-
-          <input type="file" name="image" accept="image/*" required />
-
-          <div class="preview">
-            <img id="imagePreview" />
+            <!-- <h1 class="page-title">
+              <i class="fa-solid fa-box"></i> Product Generator
+            </h1> -->
+          
+            <div class="card product-form-card">
+              <form id="productForm">
+          
+                <label><i class="fa-solid fa-barcode"></i> Product Code</label>
+                <input class="form-input" type="text" name="code" placeholder="Product Code" required />
+          
+                <label><i class="fa-solid fa-tag"></i> Product Name</label>
+                <input class="form-input" type="text" name="name" placeholder="Product Name" required />
+          
+                <label><i class="fa-solid fa-indian-rupee-sign"></i> Price</label>
+                <input class="form-input" type="number" name="price" placeholder="Price" required />
+          
+                <label><i class="fa-solid fa-coins"></i> Daily Income</label>
+                <input class="form-input" type="number" name="dailyIncome" placeholder="Daily Income" />
+          
+                <label><i class="fa-solid fa-calendar-days"></i> Validity Days</label>
+                <input class="form-input" type="number" name="validityDays" placeholder="Validity Days" />
+          
+                <label><i class="fa-solid fa-layer-group"></i> Max Purchase Limit</label>
+                <input class="form-input" type="number" name="maxPurchaseLimit" placeholder="Max Purchase Limit" />
+          
+                <label><i class="fa-solid fa-image"></i> Product Image</label>
+                <input class="form-input" type="file" name="image" accept="image/*" required />
+          
+                <div class="image-preview">
+                  <img id="imagePreview" />
+                </div>
+          
+                <div class="upload-progress">
+                  <div class="progress-bar" id="progressBar"></div>
+                </div>
+          
+                <button class="primary-btn" type="submit">
+                  <i class="fa-solid fa-plus"></i> Create Product
+                </button>
+          
+              </form>
+            </div>
+          
+            <h2 class="section-title">
+              <i class="fa-solid fa-box-open"></i> Existing Products
+            </h2>
+          
+            <div class="product-grid" id="productGrid"></div>
+          
           </div>
-
-          <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
-
-          <button type="submit">Create Product</button>
-        </form>
-      </div>
-
-      <h2>Existing Products</h2>
-
-      <div class="product-grid" id="productGrid"></div>
-    </div>
 
     <script src="http://10.194.154.223:5001/socket.io/socket.io.js"></script>
     <script src="../js/config.js"></script>
