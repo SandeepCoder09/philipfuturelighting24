@@ -83,7 +83,7 @@ async function loadProducts() {
           <div class="card-text">
             <h2>${product.name}</h2>
             <p class="price">Price: ₹${product.price}</p>
-            <p class="daily-earning">Daily Income: ₹${product.dailyIncome}</p>
+            <p class="daily-earning">Daily: ₹${product.dailyIncome}</p>
             <p class="validity">Validity: ${product.validityDays} Days</p>
             <p class="limit">
               Remaining: ${product.remaining} / ${product.maxPurchaseLimit}

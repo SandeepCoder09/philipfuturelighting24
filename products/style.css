@@ -13,17 +13,13 @@ body {
 
 /* ================= NAVBAR FIX ================= */
 
-/* ================= NAVBAR FIX ================= */
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  /* small side padding */
 }
 
-/* Make right section stick to extreme right */
 .nav-right {
   margin-left: auto;
   display: flex;
@@ -62,11 +58,10 @@ body {
 
 .card {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   background: linear-gradient(145deg, #002b5c, #003b7a);
   border-radius: 16px;
-  height: 130px;
-  /* smaller height */
+  min-height: 130px;
   width: 100%;
   border: 1px solid rgba(0, 170, 255, 0.25);
   overflow: hidden;
@@ -74,20 +69,17 @@ body {
   transition: 0.25s ease;
 }
 
-/* .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 255, 150, 0.3);
-} */
-
 /* ================= IMAGE ================= */
 
 .card-image {
-  width: 150px;
-  height: 100%;
+  width: 140px;
+  min-width: 140px;
+  height: auto;
   background: #012a4a;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .card-image img {
@@ -104,6 +96,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.card-text {
+  line-height: 1.4;
 }
 
 .card-text h2 {
@@ -130,12 +126,11 @@ body {
 /* ================= BUY BUTTON ================= */
 
 .card-action {
-  min-width: 110px;
+  min-width: 100px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
-
-/* ================= BUY BUTTON ================= */
 
 .subscribe-btn {
   padding: 6px 16px;
@@ -149,10 +144,6 @@ body {
   transition: 0.25s ease;
   box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
 }
-
-/* .subscribe-btn:hover {
-  transform: scale(1.05);
-} */
 
 .subscribe-btn:disabled {
   background: #444;
@@ -263,18 +254,26 @@ body {
 /* ================= MOBILE ================= */
 
 @media (max-width: 480px) {
+
   .card {
-    height: 125px;
+    min-height: 120px;
   }
 
   .card-image {
-    width: 130px;
+    width: 110px;
+    min-width: 110px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
   }
 
   .subscribe-btn {
-    font-size: 12px;
-    padding: 7px 14px;
+    font-size: 11px;
+    padding: 6px 12px;
   }
+
 }
 
 /* ================= NAV MY PRODUCTS BUTTON ================= */
@@ -291,11 +290,6 @@ body {
   transition: 0.25s ease;
   box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
 }
-
-/* .my-products-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 255, 150, 0.5);
-} */
 
 /* ================= MODAL BUTTONS ================= */
 
@@ -316,33 +310,17 @@ body {
   transition: 0.25s ease;
 }
 
-/* Close button */
 .modal-close {
   background: #2c3e50;
   color: #ffffff;
 }
 
-/* .modal-close:hover {
-  background: #34495e;
-} */
-
-/* Buy Now / My Products button */
 .modal-buy {
   background: linear-gradient(135deg, #00ff88, #00c6ff);
   color: #001f3f;
 }
 
-/* .modal-buy:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 255, 150, 0.4);
-} */
-
 /* ================= MODAL IMAGE STYLE ================= */
-
-.modal-header {
-  text-align: center;
-  margin-bottom: 15px;
-}
 
 .modal-image-wrapper {
   width: 90px;
@@ -362,13 +340,7 @@ body {
   background: #001f3f;
 }
 
-.loading-screen {
-  display: none;
-}
-
-.subscribe-btn:disabled {
-  background: #777;
-}
+/* ================= COMING SOON BUTTON ================= */
 
 .coming-soon-btn {
   position: relative;
@@ -389,13 +361,7 @@ body {
   position: absolute;
   inset: -2px;
   border-radius: 22px;
-  background: linear-gradient(
-    90deg,
-    #00e0ff,
-    #00ffa3,
-    #00e0ff,
-    #00ffa3
-  );
+  background: linear-gradient(90deg, #00e0ff, #00ffa3, #00e0ff, #00ffa3);
   background-size: 300% 300%;
   animation: borderGlow 4s linear infinite;
   z-index: -1;
@@ -405,24 +371,11 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   100% {
     background-position: 300% 50%;
   }
 }
-
-@keyframes borderGlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 300% 50%;
-  }
-}
-
-/* .coming-soon-btn:hover {
-  opacity: 1;
-  box-shadow: 0 0 14px rgba(0, 255, 163, 0.9);
-} */
 
 @keyframes pulseGlow {
   0% {
@@ -437,6 +390,8 @@ body {
     box-shadow: 0 0 6px rgba(0, 200, 255, 0.3);
   }
 }
+
+/* ================= VIP CARD ================= */
 
 .product-card.vip {
   background: linear-gradient(135deg, #0f2a44, #0b3d5c);
