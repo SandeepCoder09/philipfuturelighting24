@@ -77,7 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       try {
 
-        rechargeBtn.innerText = "Processing...";
+        rechargeBtn.innerHTML =
+          '<i class="fa fa-spinner fa-spin"></i> Processing...';
         rechargeBtn.disabled = true;
 
         const response = await authFetch("/wallet/create-order", {
@@ -271,7 +272,7 @@ async function loadUsdtBalance() {
       const balance = data.user.usdtBalance || 0;
 
       document.getElementById("usdtBalance").innerText = balance.toFixed(2);
-      document.getElementById("usdtInrValue").innerText = 
+      document.getElementById("usdtInrValue").innerText =
         (balance * FIXED_RATE).toFixed(2);
     }
 
@@ -296,4 +297,4 @@ document.getElementById("convertToInrBtn")
 
     // Redirect to convert page
     window.location.href = "../wallet/usdt-covert/usdt-convert.html";
-});
+  });

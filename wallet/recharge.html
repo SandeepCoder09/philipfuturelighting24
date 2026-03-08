@@ -13,6 +13,8 @@
 
     <title>Recharge | Philips</title>
 
+    <link rel="icon" href="/assets/favicon.png" />
+
     <!-- Shared CSS -->
     <link rel="stylesheet" href="../shared/css/top-nav.css" />
     <link rel="stylesheet" href="../shared/ui/popup.css" />
@@ -70,18 +72,24 @@
           />
 
           <div class="amount-options">
-            <button type="button" class="amount-btn" data-amount="1">₹1</button>
-            <button type="button" class="amount-btn" data-amount="99">
-              ₹99
+            <!-- <button type="button" class="amount-btn" data-amount="1">₹1</button> -->
+            <button type="button" class="amount-btn" data-amount="399">
+              ₹399
             </button>
-            <button type="button" class="amount-btn" data-amount="499">
-              ₹499
-            </button>
-            <button type="button" class="amount-btn" data-amount="999">
-              ₹999
+            <button type="button" class="amount-btn" data-amount="1499">
+              ₹1499
             </button>
             <button type="button" class="amount-btn" data-amount="4999">
               ₹4999
+            </button>
+            <button type="button" class="amount-btn" data-amount="9499">
+              ₹9499
+            </button>
+            <button type="button" class="amount-btn" data-amount="49999">
+              ₹49999
+            </button>
+            <button type="button" class="amount-btn" data-amount="99999">
+              ₹99999
             </button>
           </div>
 
@@ -94,25 +102,26 @@
 
       <!-- ================= USDT SECTION ================= -->
       <div class="usdt-section" style="display: none">
-
         <!-- ===== USDT BALANCE CARD ===== -->
-    <div class="wallet-card usdt-balance-card">
-      <div class="usdt-balance-header">
-        <i class="fa-solid fa-coins"></i>
-        <span>Available USDT Balance</span>
-      </div>
+        <div class="wallet-card usdt-balance-card">
+          <div class="usdt-balance-header">
+            <i class="fa-solid fa-coins"></i>
+            <span>Available USDT Balance</span>
+          </div>
 
-      <div class="usdt-balance-amount">
-        <span id="usdtBalance">0.00</span> USDT
-      </div>
+          <div class="usdt-balance-amount">
+            <span id="usdtBalance">0.00</span> USDT
+          </div>
 
-      <div class="usdt-balance-inr">≈ ₹<span id="usdtInrValue">0</span></div>
+          <div class="usdt-balance-inr">
+            ≈ ₹<span id="usdtInrValue">0</span>
+          </div>
 
-      <button id="convertToInrBtn" class="wallet-btn convert-style">
-        <i class="fa-solid fa-right-left"></i>
-        Convert to INR
-      </button>
-    </div>
+          <button id="convertToInrBtn" class="wallet-btn convert-style">
+            <i class="fa-solid fa-right-left"></i>
+            Convert to INR
+          </button>
+        </div>
 
         <div class="wallet-card">
           <label>Network</label>
