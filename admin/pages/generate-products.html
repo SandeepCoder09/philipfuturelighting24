@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Product Manager</title>
+    <link rel="stylesheet" href="../css/generate-products.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Product Generator</h1>
+
+      <div class="card">
+        <form id="productForm">
+          <input type="text" name="code" placeholder="Product Code" required />
+
+          <input type="text" name="name" placeholder="Product Name" required />
+
+          <input type="number" name="price" placeholder="Price" required />
+
+          <input type="number" name="dailyIncome" placeholder="Daily Income" />
+
+          <input
+            type="number"
+            name="validityDays"
+            placeholder="Validity Days"
+          />
+
+          <input
+            type="number"
+            name="maxPurchaseLimit"
+            placeholder="Max Purchase Limit"
+          />
+
+          <input type="file" name="image" accept="image/*" required />
+
+          <div class="preview">
+            <img id="imagePreview" />
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <button type="submit">Create Product</button>
+        </form>
+      </div>
+
+      <h2>Existing Products</h2>
+
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <script src="http://10.194.154.223:5001/socket.io/socket.io.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/generate-products.js"></script>
+  </body>
+</html>

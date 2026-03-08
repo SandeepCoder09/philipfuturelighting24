@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f172a">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
 
-  <title>Withdraw Records | Philips</title>
+    <title>Withdraw Records | Philips</title>
 
-  <link rel="icon" href="/assets/favicon.png" />
+    <link rel="icon" href="/assets/favicon.png" />
 
-  <!-- ==================== Shared CSS ========================== -->
-  <link rel="stylesheet" href="../../shared/css/top-nav.css">
-  <link rel="stylesheet" href="../../shared/ui/popup.css">
+    <!-- ==================== Shared CSS ========================== -->
+    <link rel="stylesheet" href="../../shared/css/top-nav.css" />
+    <link rel="stylesheet" href="../../shared/ui/popup.css" />
 
-<!-- ===================== Main CSS ========================== -->
-  <link rel="stylesheet" href="../records/records.css">
+    <!-- ===================== Main CSS ========================== -->
+    <link rel="stylesheet" href="../records/records.css" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
+    <!-- 🔷 Top Navbar -->
+    <div class="top-nav">
+      <button class="back-btn" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i> Back
+      </button>
+      <h2 class="page-title">Withdraw Records</h2>
+    </div>
 
-  <!-- 🔷 Top Navbar -->
-  <div class="top-nav">
-    <button class="back-btn" onclick="history.back()">
-      <i class="fa-solid fa-arrow-left"></i> Back
-    </button>
-    <h2 class="page-title">Withdraw Records</h2>
-  </div>
+    <!-- 📦 Content -->
+    <div class="page-content">
+      <div id="recordsContainer"></div>
+    </div>
 
-  <!-- 📦 Content -->
-  <div class="page-content">
-    <div id="recordsContainer"></div>
-  </div>
+    <script>
+      const RECORD_TYPE = "withdraw";
+    </script>
 
-  <script>
-    const RECORD_TYPE = "withdraw";
-  </script>
+    <!-- ==================== Shared JS ========================== -->
+    <script src="../../shared/js/config.js"></script>
+    <script src="../../shared/ui/popup.js"></script>
 
-  <!-- ==================== Shared JS ========================== -->
-<script src="../../shared/js/config.js"></script>
-<script src="../../shared/ui/popup.js"></script>
-
-<!-- ===================== Main JS ========================== -->
-  <script src="records.js"></script>
-
-</body>
+    <!-- ===================== Main JS ========================== -->
+    <script src="records.js"></script>
+  </body>
 </html>

@@ -1,17 +1,16 @@
-// 🌍 Auto API Switch (ADMIN SAFE)
+// 🌍 API BASE
 
 const host = window.location.hostname;
-
-let API_BASE;
+window.API_BASE = `http://${host}:5001/api`;
 
 if (host === "localhost" || host === "127.0.0.1") {
-  API_BASE = "http://localhost:5001/api";
+  window.API_BASE = "http://localhost:5001/api";
 }
 else if (host.startsWith("10.") || host.startsWith("192.168.")) {
-  API_BASE = `http://${host}:5001/api`;
+  window.API_BASE = `http://${host}:5001/api`;
 }
 else {
-  API_BASE = "https://philips-backend.onrender.com/api";
+  window.API_BASE = "https://philips-backend.onrender.com/api";
 }
 
 
@@ -37,7 +36,7 @@ async function authFetch(endpoint, options = {}) {
   // 🔴 Auto logout if unauthorized
   if (response.status === 401 || response.status === 403) {
     localStorage.removeItem("adminToken");
-    
+
     window.location.href = "login.html";
   }
 
