@@ -72,9 +72,9 @@ body {
 /* ================= IMAGE ================= */
 
 .card-image {
-  width: 150px;
-  min-width: 140px;
-  height: auto;
+  width: 130px;
+  min-width: 130px;
+  height: 130px;
   background: #012a4a;
   display: flex;
   align-items: center;
@@ -84,7 +84,7 @@ body {
 
 .card-image img {
   width: 100%;
-  height: 150px;
+  height: 130px;
   object-fit: cover;
 }
 
