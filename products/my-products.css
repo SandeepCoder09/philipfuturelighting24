@@ -13,7 +13,8 @@ body {
 /* ================= PAGE CONTENT ================= */
 
 .page-content {
-  margin-top: 70px; /* space for fixed top-nav */
+  margin-top: 70px;
+  /* space for fixed top-nav */
   padding: 20px 3% 120px;
 }
 
@@ -222,4 +223,25 @@ body {
     font-size: 11px;
     padding: 6px 14px;
   }
+}
+
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1b2430;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border-left: 4px solid #00f5a0;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }

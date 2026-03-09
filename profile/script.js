@@ -1,9 +1,33 @@
 /* =====================================
-   PHILIPS PROFILE SCRIPT (FIXED VERSION)
+PHILIPS PROFILE SCRIPT (TOAST VERSION)
 ===================================== */
 
+/* ===============================
+TOAST NOTIFICATION
+=============================== */
 
-// ========================= LOAD PROFILE ========================
+function showToast(message, duration = 2500) {
+
+  let toast = document.getElementById("toast");
+
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast";
+    document.body.appendChild(toast);
+  }
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, duration);
+}
+
+/* ===============================
+LOAD PROFILE
+=============================== */
 
 async function loadProfile() {
 
@@ -31,10 +55,13 @@ async function loadProfile() {
     // ===============================
     // DISPLAY USER INFO
     // ===============================
-    document.getElementById("mobile").innerText = user.mobile;
-    document.getElementById("uid").innerText = user.userId;
-    document.getElementById("username").innerText =
-      "User" + user.userId;
+    const mobileEl = document.getElementById("mobile");
+    const uidEl = document.getElementById("uid");
+    const usernameEl = document.getElementById("username");
+
+    if (mobileEl) mobileEl.innerText = user.mobile;
+    if (uidEl) uidEl.innerText = user.userId;
+    if (usernameEl) usernameEl.innerText = "User" + user.userId;
 
     // ===============================
     // LOAD WALLET BALANCE
@@ -42,19 +69,24 @@ async function loadProfile() {
     await refreshWalletBalance();
 
   } catch (error) {
+
+
     console.error("Profile Error:", error);
 
-    alert("Session expired or backend not responding. Please login again.");
+    showToast("Connection Lost. Please login again.");
 
     localStorage.removeItem("token");
-    window.location.href = "../auth/index.html";
+
+    setTimeout(() => {
+      window.location.href = "../auth/index.html";
+    }, 2000);
+
   }
 }
 
-
-// ===============================
-// REFRESH WALLET BALANCE
-// ===============================
+/* ===============================
+REFRESH WALLET BALANCE
+=============================== */
 async function refreshWalletBalance() {
 
   try {
@@ -67,23 +99,28 @@ async function refreshWalletBalance() {
 
     const balanceData = await balanceRes.json();
 
-    document.getElementById("walletBalance").innerText =
-      Number(balanceData.balance).toLocaleString("en-IN");
+    const walletEl = document.getElementById("walletBalance");
+
+    if (walletEl) {
+      walletEl.innerText =
+        Number(balanceData.balance).toLocaleString("en-IN");
+    }
 
   } catch (error) {
     console.error("Wallet refresh error:", error);
+    showToast("Failed to refresh wallet balance");
   }
 }
 
-
-// ===============================
-// REFRESH BUTTON HANDLER
-// ===============================
+/* ===============================
+REFRESH BUTTON HANDLER
+=============================== */
 document.addEventListener("DOMContentLoaded", () => {
 
   const refreshBtn = document.getElementById("refreshWalletBtn");
 
   if (refreshBtn) {
+
     refreshBtn.addEventListener("click", async () => {
 
       refreshBtn.innerHTML =
@@ -97,19 +134,27 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 600);
 
     });
+
   }
 
 });
 
-
-// ===============================
-// LOGOUT
-// ===============================
+/* ===============================
+LOGOUT
+=============================== */
 function logout() {
+
+  showToast("Logging out...");
+
   localStorage.removeItem("token");
-  window.location.href = "../auth/index.html";
+
+  setTimeout(() => {
+    window.location.href = "../auth/index.html";
+  }, 800);
+
 }
 
-
-// ===============================
+/* ===============================
+INIT
+=============================== */
 loadProfile();

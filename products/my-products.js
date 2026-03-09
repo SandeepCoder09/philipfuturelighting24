@@ -1,14 +1,36 @@
 /* ===============================
-   MY PRODUCTS PAGE (COLLECT + TIMER)
+MY PRODUCTS PAGE (COLLECT + TIMER)
+WITH CUSTOM TOAST
 =============================== */
 
 document.addEventListener("DOMContentLoaded", loadProducts);
-
-
 const BACKEND_BASE = API_BASE.replace("/api", "");
 
 /* ===============================
-   LOAD PRODUCTS
+TOAST NOTIFICATION
+=============================== */
+
+function showToast(message, duration = 2500) {
+
+  let toast = document.getElementById("toast");
+
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast";
+    document.body.appendChild(toast);
+  }
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, duration);
+}
+
+/* ===============================
+LOAD PRODUCTS
 =============================== */
 
 async function loadProducts() {
@@ -40,7 +62,7 @@ async function loadProducts() {
 
 
     if (!response.ok || !data.success) {
-      container.innerHTML = `<p>${data.message || "Failed to load products."}</p>`;
+      container.innerHTML = `< p > ${data.message || "Failed to load products."}</p > `;
       return;
     }
 
@@ -60,6 +82,7 @@ async function loadProducts() {
       const isExpired = now > endDate;
 
       /* ===== Remaining Days ===== */
+
       const totalDays = Math.ceil(
         (endDate - purchaseDate) / (1000 * 60 * 60 * 24)
       );
@@ -70,6 +93,7 @@ async function loadProducts() {
       );
 
       /* ===== 24H Collect Logic ===== */
+
       const lastEarning = product.lastEarningDate
         ? new Date(product.lastEarningDate)
         : purchaseDate;
@@ -82,87 +106,82 @@ async function loadProducts() {
 
 
       const imageSrc = product.image
-        ? `${BACKEND_BASE}/uploads/${product.image}`
-        : `${BACKEND_BASE}/uploads/default-product.png`;
+        ? `${BACKEND_BASE} /uploads/${product.image} `
+        : `${BACKEND_BASE} /uploads/default - product.png`;
 
       const card = document.createElement("div");
       card.className = "card";
 
       card.innerHTML = `
-        <div class="card-image">
-          <img src="${imageSrc}" alt="${product.name}" loading="lazy">
-        </div>
+      < div class="card-image" >
+      <img src="${imageSrc}" alt="${product.name}" loading="lazy">
+    </div>
 
-        <div class="card-content">
+    <div class="card-content">
 
-          <!-- LEFT SIDE -->
-          <div class="card-text">
-            <h2>${product.name}</h2>
+      <div class="card-text">
+        <h2>${product.name}</h2>
 
-            <p class="price">Price: ₹${product.price}</p>
+        <p class="price">Price: ₹${product.price}</p>
 
+        <p class="product-row">
+          Remaining:
+          <span class="highlight">
+            ${remainingDays}/${totalDays} Days
+          </span>
+        </p>
 
-            <p class="product-row">
-              Remaining:
-              <span class="highlight">
-                ${remainingDays}/${totalDays} Days
-              </span>
-            </p>
+        <p class="product-row">
+          Today Earn:
+          <span class="highlight">
+            ₹${canCollect ? product.dailyEarning : 0}
+          </span>
+        </p>
 
-            <p class="product-row">
-              Today Earn:
-              <span class="highlight">
-                ₹${canCollect ? product.dailyEarning : 0}
-              </span>
-            </p>
-
-            <p class="product-row total-earned">
-              Total Earned:
-              <span class="highlight">
-                ₹${product.totalEarned}
-              </span>
-            </p>
-          </div>
-
-          <!-- RIGHT SIDE -->
-          <div class="collect-section" id="collect-${product._id}">
-            ${
-              isExpired
-                ? `<span class="status-badge status-expired">Expired</span>`
-                : canCollect
-                  ? `<button class="collect-btn" data-id="${product._id}">
-                        Collect
-                     </button>`
-                  : `<div class="countdown"
-                        data-id="${product._id}"
-                        data-time="${nextCollectAt.toISOString()}">
-                        Loading...
-                     </div>`
-            }
-
-          </div>
-
-
-        </div>
-      `;
+        <p class="product-row total-earned">
+          Total Earned:
+          <span class="highlight">
+            ₹${product.totalEarned}
+          </span>
+        </p>
+      </div>
+      <div class="collect-section" id="collect-${product._id}">
+        ${isExpired
+          ? `<span class="status-badge status-expired">Expired</span>`
+          : canCollect
+            ? `<button class="collect-btn" data-id="${product._id}">
+                    Collect
+                 </button>`
+            : `<div class="countdown"
+                    data-id="${product._id}"
+                    data-time="${nextCollectAt.toISOString()}">
+                    Loading...
+                 </div>`
+        }
+      </div>
+    </div>
+    `;
 
       container.appendChild(card);
+
     });
 
     startCountdowns();
 
 
   } catch (error) {
+
     console.error("Product Load Error:", error);
     loading.style.display = "none";
     container.innerHTML =
       "<p>Something went wrong. Please try again later.</p>";
+
   }
 }
 
 
 /* ===============================
-   COUNTDOWN TIMER
+COUNTDOWN TIMER
 =============================== */
 
 function startCountdowns() {
@@ -180,16 +199,17 @@ function startCountdowns() {
       const diff = targetTime - now;
 
       if (diff <= 0) {
+
         clearInterval(interval);
 
-        const parent = document.getElementById(`collect-${productId}`);
+        const parent = document.getElementById(`collect - ${productId} `);
         if (!parent) return;
 
         parent.innerHTML = `
-          <button class="collect-btn" data-id="${productId}">
-            Collect
-          </button>
-        `;
+      < button class="collect-btn" data - id="${productId}" >
+        Collect
+      </button >
+      `;
 
 
         return;
@@ -199,15 +219,17 @@ function startCountdowns() {
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      el.innerText = `${hours}h ${minutes}m ${seconds}s`;
+      el.innerText = `${hours}h ${minutes}m ${seconds} s`;
 
     }, 1000);
+
   });
+
 }
 
 
 /* ===============================
-   COLLECT BUTTON
+COLLECT BUTTON
 =============================== */
 
 document.addEventListener("click", async function (e) {
@@ -222,28 +244,31 @@ document.addEventListener("click", async function (e) {
 
   try {
 
-    const res = await authFetch(`/products/collect/${id}`, {
+    const res = await authFetch(`/ products / collect / ${id} `, {
       method: "POST"
     });
 
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || "Failed to collect");
+      showToast(data.message || "Failed to collect");
       button.disabled = false;
       button.innerText = "Collect";
       return;
     }
 
-    alert(`₹${data.amount} credited successfully!`);
+    showToast(`₹${data.amount} credited successfully!`);
 
-    
     loadProducts();
 
   } catch (err) {
-    alert("Network error");
+
+    showToast("Network error");
+
     button.disabled = false;
     button.innerText = "Collect";
+
   }
+
 });
 
