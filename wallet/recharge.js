@@ -113,6 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
           redirectTarget: "_modal"
         });
 
+        // Redirect to success page after payment
+        window.location.href = "../wallet/success/recharge-success.html";
+
         rechargeBtn.innerText = "Recharge Now";
         rechargeBtn.disabled = false;
 
