@@ -1,31 +1,39 @@
 /* ============================= */
 /* GLOBAL BACKGROUND */
 /* ============================= */
-
 body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
   background: #0f172a;
   color: white;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Top Nav */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 /* ============================= */
 /* PROFILE CONTAINER */
 /* ============================= */
-
 .profile-container {
   min-height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 90px 20px 120px;
 }
 
 /* ============================= */
 /* PROFILE HEADER */
 /* ============================= */
-
 .profile-header {
   width: 100%;
   max-width: 380px;
@@ -35,7 +43,6 @@ body {
 /* ============================= */
 /* PROFILE TOP SECTION */
 /* ============================= */
-
 .profile-top {
   display: flex;
   align-items: center;
@@ -44,14 +51,12 @@ body {
 }
 
 /* PROFILE IMAGE */
-
 .profile-img.small {
   width: 85px;
   height: 85px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #00c3ff;
-
   box-shadow:
     0 0 10px #00c3ff,
     0 0 20px rgba(0, 195, 255, 0.5),
@@ -67,7 +72,6 @@ body {
 /* ============================= */
 /* USER DETAILS */
 /* ============================= */
-
 .user-details h2 {
   margin: 0;
   font-size: 20px;
@@ -95,51 +99,40 @@ body {
 /* ============================= */
 /* WALLET CARD */
 /* ============================= */
-
 .wallet-box {
-
   width: 100%;
   max-width: 380px;
   height: 115px;
   margin: 20px auto;
-
   border-radius: 22px;
-
   background: linear-gradient(135deg,
       #19d1ff 0%,
       #0aa2ff 45%,
       #1b75ff 100%);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   padding: 18px 20px;
   position: relative;
-
   box-shadow:
     0 10px 28px rgba(0, 115, 255, .35),
     0 0 22px rgba(0, 170, 255, .25);
 }
 
 /* GLOSS LAYER */
-
 .wallet-box::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 22px;
-
   background: linear-gradient(180deg,
       rgba(255, 255, 255, .25) 0%,
       rgba(255, 255, 255, .1) 35%,
       transparent 70%);
-
   pointer-events: none;
 }
 
 /* WALLET HEADER */
-
 .wallet-header {
   display: flex;
   justify-content: space-between;
@@ -162,7 +155,6 @@ body {
 }
 
 /* BALANCE */
-
 .wallet-box h3 {
   margin: 8px 0 0;
   font-size: 30px;
@@ -172,27 +164,20 @@ body {
 }
 
 /* REFRESH BUTTON */
-
 .refresh-btn {
-
   background: rgba(255, 255, 255, .15);
   border: none;
-
   width: 34px;
   height: 34px;
-
   border-radius: 50%;
-
   color: white;
   cursor: pointer;
-
   backdrop-filter: blur(5px);
 }
 
 /* ============================= */
 /* ACTION BUTTONS */
 /* ============================= */
-
 .action-buttons {
   display: flex;
   gap: 16px;
@@ -200,28 +185,21 @@ body {
 }
 
 .action-btn {
-
   flex: 1;
-
   padding: 14px;
-
   border-radius: 16px;
-
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
   color: white;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 6px;
 }
 
 /* 3D ICON */
-
 .icon3d {
   width: 44px;
   height: 44px;
@@ -229,7 +207,6 @@ body {
 }
 
 /* BUTTON COLORS */
-
 .recharge {
   background: linear-gradient(90deg, #00c3ff, #0099ff);
   box-shadow: 0 0 14px rgba(0, 195, 255, .5);
@@ -243,24 +220,16 @@ body {
 /* ============================= */
 /* MENU CARD */
 /* ============================= */
-
 .profile-card {
-
   width: 100%;
   max-width: 380px;
-
   border-radius: 18px;
-
   background: rgba(255, 255, 255, .06);
-
   backdrop-filter: blur(12px);
-
   box-shadow:
     0 0 20px rgba(0, 0, 0, .4),
     inset 0 0 10px rgba(255, 255, 255, .05);
-
   margin-bottom: 25px;
-
   overflow: hidden;
 }
 
@@ -281,7 +250,6 @@ body {
 }
 
 /* LEFT SIDE */
-
 .menu-left {
   display: flex;
   align-items: center;
@@ -289,7 +257,6 @@ body {
 }
 
 /* 3D MENU ICON */
-
 .menu-icon3d {
   width: 30px;
   height: 30px;
@@ -307,30 +274,25 @@ body {
   height: 22px;
 }
 
+.menu-icon3d i {
+  font-size: 16px;
+  color: #19d1ff;
+}
+
 /* ============================= */
 /* NAVBAR LOGOUT */
 /* ============================= */
-
 .nav-logout-btn {
-
   background: linear-gradient(90deg, #00c3ff, #007bff);
-
   border: none;
-
   padding: 8px 16px;
-
   border-radius: 20px;
-
   color: white;
   font-weight: 500;
   font-size: 13px;
-
   cursor: pointer;
-
   display: flex;
   align-items: center;
-
   gap: 6px;
-
   margin-left: auto;
 }
