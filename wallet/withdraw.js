@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  checkWithdrawPin();
+
   const withdrawBtn = document.getElementById("withdrawBtn");
   const modal = document.getElementById("withdrawModal");
   const modalDetails = document.getElementById("modalDetails");
@@ -14,6 +16,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let pendingAmount = 0;
   let selectedBankId = null;
+
+  /* ===========================
+     CHECK WITHDRAW PIN STATUS
+  =========================== */
+  async function checkWithdrawPin() {
+    try {
+
+      const res = await authFetch("/users/has-withdraw-pin");
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      // 🚨 If PIN not set → redirect to set PIN page
+      if (!data.hasPin) {
+
+        window.location.href = "withdraws-pin/set-withdraw-pin.html";
+
+      }
+
+    } catch (error) {
+
+      console.error("Withdraw PIN Check Error:", error);
+
+    }
+  }
 
   /* ===========================
      TOAST
@@ -299,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.classList.remove("active");
 
       if (!res.ok) {
-        showToast("Withdrawal failed.", "error");
+        showToast(data.message || "Withdrawal failed.", "error");
       } else {
         showToast("Withdrawal request submitted.", "success");
         amountInput.value = "";
