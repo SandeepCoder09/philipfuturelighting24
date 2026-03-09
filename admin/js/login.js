@@ -1,6 +1,11 @@
 /* ================= API CONFIG ================= */
 
-const API = "http://localhost:5001/api";   // change to production URL when deploying
+const hostname = window.location.hostname;
+
+const API =
+  hostname === "localhost" || hostname === "127.0.0.1"
+    ? "http://localhost:5001/api"
+    : "https://philips-backend.onrender.com/api";
 
 console.log("Using API:", API);
 
