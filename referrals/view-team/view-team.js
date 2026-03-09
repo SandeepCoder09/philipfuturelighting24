@@ -132,10 +132,49 @@ function handleQualification(isQualified) {
   if (!box) return;
 
   if (isQualified) {
-    box.innerHTML = "✅ Qualified for Commission";
+    box.innerHTML = `
+      <span style="display:flex;align-items:center;gap:8px;">
+      
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00ffa6"/>
+              <stop offset="100%" stop-color="#00c47a"/>
+            </linearGradient>
+          </defs>
+          
+          <circle cx="12" cy="12" r="10" fill="url(#grad1)" />
+          
+          <path d="M7 12l3 3 6-6" 
+                stroke="white" 
+                stroke-width="2.5" 
+                fill="none" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"/>
+        </svg>
+
+        Qualified for Commission
+      </span>
+    `;
+
     box.style.color = "#00ff9d";
+
   } else {
-    box.innerHTML = "❌ Not Qualified (Purchase ₹399 to unlock)";
+
+    box.innerHTML = `
+      <span style="display:flex;align-items:center;gap:8px;">
+
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" fill="#ff4d4d"/>
+          <line x1="8" y1="8" x2="16" y2="16" stroke="white" stroke-width="2"/>
+          <line x1="16" y1="8" x2="8" y2="16" stroke="white" stroke-width="2"/>
+        </svg>
+
+        Not Qualified (Purchase ₹399 to unlock)
+
+      </span>
+    `;
+
     box.style.color = "#ff4d4d";
   }
 }

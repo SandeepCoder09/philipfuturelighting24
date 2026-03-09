@@ -1,98 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="theme-color" content="#0f172a">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <title>Bind Bank Card | Philips</title>
-  <link rel="icon" href="/assets/favicon.png" />
+    <title>Bind Bank Card | Philips</title>
+    <link rel="icon" href="/assets/favicon.png" />
 
-  <!-- ==================== Shared CSS ========================== -->
-  <link rel="stylesheet" href="../shared/css/top-nav.css">
-  <link rel="stylesheet" href="../shared/ui/popup.css">
+    <link rel="stylesheet" href="../shared/css/top-nav.css" />
+    <link rel="stylesheet" href="../shared/ui/popup.css" />
 
-<!-- ===================== Main CSS ========================== -->
-  <link rel="stylesheet" href="bind-card.css">
+    <link rel="stylesheet" href="bind-card.css" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-<body>
-
-  <!-- 🔷 Fixed Navbar -->
-  <div class="top-nav">
-    <button class="back-btn" onclick="history.back()">
-      <i class="fa-solid fa-arrow-left"></i>
-      Back
-    </button>
-    <h2 class="page-title">Bind Bank Card</h2>
-  </div>
-
-  <!-- 📦 Page Content -->
-  <div class="page-content">
-
-    <!-- ===== Bind Form Card ===== -->
-    <div class="card">
-
-      <p class="subtitle">
-        Securely link your bank account for withdrawals
-      </p>
-
-      <div class="input-group">
-        <i class="fa-solid fa-credit-card"></i>
-        <input id="accountNumber" type="text" placeholder="Account Number">
-      </div>
-
-      <div class="input-group">
-        <i class="fa-solid fa-hashtag"></i>
-        <input id="ifsc" type="text" placeholder="IFSC Code">
-      </div>
-
-      <div class="input-group">
-        <i class="fa-solid fa-user"></i>
-        <input id="holderName" type="text" placeholder="Account Holder Name">
-      </div>
-
-      <div class="input-group">
-        <i class="fa-solid fa-building-columns"></i>
-        <input id="bankName" type="text" placeholder="Bank Name">
-      </div>
-
-      <button id="bindBtn" onclick="bindBank()">
-        <i class="fa-solid fa-link"></i>
-        <span id="btnText">Bind Bank Card</span>
-        <div class="loader hidden"></div>
+  <body>
+    <!-- NAVBAR -->
+    <div class="top-nav">
+      <button class="back-btn" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back
       </button>
 
-      <div id="messageBox" class="message hidden"></div>
-
+      <h2 class="page-title">Bind Bank Card</h2>
     </div>
 
-    <!-- ===== Linked Banks Card ===== -->
-    <div class="card bank-list-card">
+    <div class="page-content">
+      <!-- 3D ICON -->
+      <div class="bank-3d-icon">
+        <svg viewBox="0 0 200 200" width="90" height="90">
+          <defs>
+            <linearGradient id="bankGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#5b8cff" />
+              <stop offset="100%" stop-color="#1b75ff" />
+            </linearGradient>
 
-      <h3>
-        <i class="fa-solid fa-wallet"></i>
-        Your Linked Banks
-      </h3>
+            <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a8c5ff" />
+              <stop offset="100%" stop-color="#5b8cff" />
+            </linearGradient>
+          </defs>
 
-      <div id="bankContainer"></div>
+          <!-- roof -->
+          <polygon points="40,80 100,40 160,80" fill="url(#roofGrad)" />
 
+          <!-- pillars -->
+          <rect
+            x="55"
+            y="80"
+            width="18"
+            height="60"
+            rx="6"
+            fill="url(#bankGrad)"
+          />
+
+          <rect
+            x="91"
+            y="80"
+            width="18"
+            height="60"
+            rx="6"
+            fill="url(#bankGrad)"
+          />
+
+          <rect
+            x="127"
+            y="80"
+            width="18"
+            height="60"
+            rx="6"
+            fill="url(#bankGrad)"
+          />
+
+          <!-- base -->
+          <rect x="40" y="140" width="120" height="16" rx="6" fill="#1b75ff" />
+        </svg>
+      </div>
+
+      <!-- FORM CARD -->
+      <div class="card">
+        <p class="subtitle">Securely link your bank account for withdrawals</p>
+
+        <div class="input-group">
+          <i class="fa-solid fa-credit-card"></i>
+          <input id="accountNumber" type="text" placeholder="Account Number" />
+        </div>
+
+        <div class="input-group">
+          <i class="fa-solid fa-hashtag"></i>
+          <input id="ifsc" type="text" placeholder="IFSC Code" />
+        </div>
+
+        <div class="input-group">
+          <i class="fa-solid fa-user"></i>
+          <input
+            id="holderName"
+            type="text"
+            placeholder="Account Holder Name"
+          />
+        </div>
+
+        <div class="input-group">
+          <i class="fa-solid fa-building-columns"></i>
+          <input id="bankName" type="text" placeholder="Bank Name" />
+        </div>
+
+        <button id="bindBtn" onclick="bindBank()">
+          <i class="fa-solid fa-link"></i>
+
+          <span id="btnText"> Bind Bank Card </span>
+
+          <div class="loader hidden"></div>
+        </button>
+
+        <div id="messageBox" class="message hidden"></div>
+      </div>
+
+      <!-- BANK LIST -->
+      <div class="card bank-list-card">
+        <h3>
+          <i class="fa-solid fa-wallet"></i>
+          Your Linked Banks
+        </h3>
+
+        <div id="bankContainer"></div>
+      </div>
     </div>
 
-  </div>
+    <script src="../shared/js/config.js"></script>
+    <script src="../shared/ui/popup.js"></script>
 
-  <!-- ==================== Shared JS ========================== -->
-<script src="../shared/js/config.js"></script>
-<script src="../shared/ui/popup.js"></script>
-
-<!-- ===================== Main JS ========================== -->
-  <script src="../wallet/bind-card.js"></script>
-</body>
+    <script src="../wallet/bind-card.js"></script>
+  </body>
 </html>

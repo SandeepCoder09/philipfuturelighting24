@@ -1,0 +1,175 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0f172a;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* CONTAINER */
+.wallet-container {
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 90px 16px 40px;
+}
+
+/* TABS */
+.payment-tabs {
+    display: flex;
+    width: 100%;
+    border-radius: 40px;
+    background: #12284a;
+    padding: 6px;
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    background: transparent;
+    color: #cbd5e1;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #00ff88, #00c6ff);
+    color: #001f3f;
+    box-shadow: 0 0 18px rgba(0, 255, 150, 0.4);
+}
+
+/* CARD */
+.wallet-card {
+    width: 100%;
+    background: linear-gradient(145deg, #002b5c, #003b7a);
+    padding: 28px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+    margin-bottom: 22px;
+}
+
+/* INPUT */
+.wallet-card input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    background: #0f172a;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* AMOUNT BUTTONS */
+.amount-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.amount-btn {
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 200, 255, 0.4);
+    background: #0f2a4d;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.amount-btn.active {
+    background: linear-gradient(135deg, #00ff88, #00c6ff);
+    color: #001f3f;
+    box-shadow: 0 0 15px rgba(0, 255, 150, 0.4);
+}
+
+/* BUTTON */
+.wallet-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.recharge-style {
+    background: linear-gradient(135deg, #00ff88, #00c6ff);
+    color: #001f3f;
+}
+
+.convert-style {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* USDT */
+.usdt-address-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    margin-bottom: 20px;
+}
+
+.usdt-address {
+    flex: 1;
+    font-size: 13px;
+    word-break: break-all;
+}
+
+.copy-icon-btn {
+    border: none;
+    background: none;
+    color: #00c6ff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+.usdt-network-badge {
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: rgba(0, 200, 255, 0.1);
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* BALANCE */
+.usdt-balance-card {
+    text-align: center;
+}
+
+.usdt-balance-amount {
+    font-size: 26px;
+    color: #00ff88;
+    margin-top: 10px;
+}
+
+.usdt-balance-inr {
+    opacity: 0.7;
+    font-size: 13px;
+}
+
+
+/* MOBILE */
+@media(max-width:480px) {
+    .wallet-container {
+        padding: 85px 14px 40px;
+    }
+}

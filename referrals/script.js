@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", initReferralPage);
 
-
 async function initReferralPage() {
 
   const token = localStorage.getItem("token");
@@ -87,4 +86,3 @@ function redirectToLogin() {
   window.location.href = "../auth/index.html";
 }
 
-//Fix Push//

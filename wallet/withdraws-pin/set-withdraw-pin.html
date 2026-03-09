@@ -1,84 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Set Withdraw PIN | Philips</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Set Withdraw PIN | Philips</title>
 
-  <link rel="icon" href="/assets/favicon.png" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/favicon.png" />
 
-  <!-- ==================== Shared CSS ========================== -->
-  <link rel="stylesheet" href="../../shared/css/top-nav.css">
-  <link rel="stylesheet" href="../../shared/ui/popup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ===================== Main CSS ========================== -->
-  <link rel="stylesheet" href="../withdraws-pin/set-withdraw-pin.css">
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../../shared/css/top-nav.css" />
+    <link rel="stylesheet" href="../../shared/ui/popup.css" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../withdraws-pin/set-withdraw-pin.css" />
 
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-  <!-- 🔷 Fixed Navbar -->
-  <div class="top-nav">
-    <button class="back-btn" onclick="window.location.href='../withdraw.html'">
-      <i class="fa-solid fa-arrow-left"></i>
-      Back
-    </button>
-    <h2 class="page-title">Set Withdraw PIN</h2>
-  </div>
-
-  <!-- 📦 Page Content -->
-  <div class="page-content">
-
-    <div class="pin-card">
-
-      <!-- 🔐 Security Image -->
-      <img 
-        src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png"
-        alt="Secure Shield"
-        class="security-image"
+  <body>
+    <!-- NAVBAR -->
+    <div class="top-nav">
+      <button
+        class="back-btn"
+        onclick="window.location.href='../withdraw.html'"
       >
-
-      <p class="pin-subtitle">
-        Protect your wallet with a secure 4-digit PIN.
-      </p>
-
-      <!-- 🔐 PIN BOXES -->
-<div class="pin-wrapper">
-  <input type="password" maxlength="1" class="pin-box" />
-  <input type="password" maxlength="1" class="pin-box" />
-  <input type="password" maxlength="1" class="pin-box" />
-  <input type="password" maxlength="1" class="pin-box" />
-</div>
-
-<!-- 🔐 CONFIRM PIN BOXES -->
-<div class="pin-wrapper">
-  <input type="password" maxlength="1" class="confirm-box" />
-  <input type="password" maxlength="1" class="confirm-box" />
-  <input type="password" maxlength="1" class="confirm-box" />
-  <input type="password" maxlength="1" class="confirm-box" />
-</div>
-
-      <!-- Submit -->
-      <button id="setPinBtn" class="primary-btn">
-        <i class="fa-solid fa-shield-halved"></i>
-        Set Secure PIN
+        <i class="fa-solid fa-arrow-left"></i>
+        Back
       </button>
 
-      <div id="pinToast" class="pin-toast"></div>
-
+      <h2 class="page-title">Set Withdraw PIN</h2>
     </div>
 
-  </div>
+    <div class="page-content">
+      <div class="pin-card">
+        <!-- 3D LOCK ICON -->
+        <div class="security-3d">
+          <svg viewBox="0 0 200 200" width="90" height="90">
+            <defs>
+              <linearGradient id="lockBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5b8cff" />
+                <stop offset="100%" stop-color="#1b75ff" />
+              </linearGradient>
 
-  <!-- ==================== Shared JS ========================== -->
-<script src="../../shared/js/config.js"></script>
-<script src="../../shared/ui/popup.js"></script>
-<!-- ===================== Main JS ========================== -->
-  <script src="../withdraws-pin/set-withdraw-pin.js"></script>
-</body>
+              <linearGradient id="lockTop" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a8c5ff" />
+                <stop offset="100%" stop-color="#5b8cff" />
+              </linearGradient>
+            </defs>
+
+            <!-- LOCK SHACKLE -->
+            <path
+              d="M60 90 C60 50 140 50 140 90"
+              stroke="url(#lockTop)"
+              stroke-width="16"
+              fill="none"
+              stroke-linecap="round"
+            />
+
+            <!-- LOCK BODY -->
+            <rect
+              x="50"
+              y="90"
+              width="100"
+              height="80"
+              rx="20"
+              fill="url(#lockBody)"
+            />
+
+            <!-- KEYHOLE -->
+            <circle cx="100" cy="125" r="10" fill="#0f172a" />
+            <rect x="95" y="125" width="10" height="22" rx="5" fill="#0f172a" />
+          </svg>
+        </div>
+
+        <h3 class="pin-title">Secure Your Wallet</h3>
+
+        <p class="pin-subtitle">
+          Create a 4-digit withdraw PIN to protect your funds.
+        </p>
+
+        <!-- ENTER PIN -->
+        <div class="pin-section">
+          <label class="pin-label"> Enter PIN: </label>
+
+          <div class="pin-wrapper">
+            <input type="password" maxlength="1" class="pin-box" />
+            <input type="password" maxlength="1" class="pin-box" />
+            <input type="password" maxlength="1" class="pin-box" />
+            <input type="password" maxlength="1" class="pin-box" />
+          </div>
+        </div>
+
+        <!-- CONFIRM PIN -->
+        <div class="pin-section">
+          <label class="pin-label"> Confirm PIN: </label>
+
+          <div class="pin-wrapper">
+            <input type="password" maxlength="1" class="confirm-box" />
+            <input type="password" maxlength="1" class="confirm-box" />
+            <input type="password" maxlength="1" class="confirm-box" />
+            <input type="password" maxlength="1" class="confirm-box" />
+          </div>
+        </div>
+
+        <button id="setPinBtn" class="primary-btn">
+          <i class="fa-solid fa-shield-halved"></i>
+          Set Secure PIN
+        </button>
+
+        <div id="pinToast" class="pin-toast"></div>
+      </div>
+    </div>
+
+    <!-- Shared JS -->
+    <script src="../../shared/js/config.js"></script>
+    <script src="../../shared/ui/popup.js"></script>
+
+    <!-- Page JS -->
+    <script src="../withdraws-pin/set-withdraw-pin.js"></script>
+  </body>
 </html>

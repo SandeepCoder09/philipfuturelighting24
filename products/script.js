@@ -99,7 +99,27 @@ async function loadProducts() {
           ? "Coming Soon"
           : isLimitReached
             ? "Limit Reached"
-            : `<i class="fa-solid fa-cart-shopping"></i> Buy`
+            : `
+<svg class="buy-icon" viewBox="0 0 24 24">
+
+<defs>
+<linearGradient id="cartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="100%" stop-color="#bffaff"/>
+</linearGradient>
+</defs>
+
+<path fill="url(#cartGrad)" d="
+M7 18c-1.1 0-2 .9-2 2s.9 2 2 2
+2-.9 2-2-.9-2-2-2zm10 0
+c-1.1 0-2 .9-2 2s.9 2 2 2
+2-.9 2-2-.9-2-2-2zM7.2 14
+h9.6c.8 0 1.5-.5 1.7-1.2
+l2.1-6.3H6.2L5.5 4H2v2h2
+l3.6 7.6c.3.6.9 1 1.6 1z"/>
+</svg>
+Buy
+`
         }
 </button>
           </div>

@@ -1,122 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="theme-color" content="#0f172a">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <title>Withdraw | Philips</title>
+    <title>Withdraw | Philips</title>
 
-  <link rel="icon" href="/assets/favicon.png" />
+    <link rel="icon" href="/assets/favicon.png" />
 
-  <!-- ==================== Shared CSS ========================== -->
-  <link rel="stylesheet" href="../shared/css/top-nav.css">
+    <link rel="stylesheet" href="../shared/css/top-nav.css" />
+    <link rel="stylesheet" href="../wallet/withdraw.css" />
 
-<!-- ===================== Main CSS ========================== -->
-  <link rel="stylesheet" href="../wallet/wallet.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+  <body>
+    <!-- ================= TOP NAV ================= -->
 
-<body>
-  <!-- 🔷 Fixed Navbar -->
-  <div class="top-nav">
-
-  <button class="back-btn" onclick="history.back()">
-    <i class="fa-solid fa-arrow-left"></i>
-    Back
-  </button>
-
-  <h2 class="page-title">Withdraw Fund</h2>
-
-  <!-- New Records Button -->
-  <button class="nav-right-btn" onclick="window.location.href='../wallet/records/withdraw-records.html'">
-    <i class="fa-solid fa-clock-rotate-left"></i>
-    Records
-  </button>
-
-</div>
-
-<section class="wallet-container">
-
-  <!-- 🔷 BALANCE SUMMARY -->
-  <div class="withdraw-balance-card">
-    <p class="balance-label">Available Balance</p>
-    <h2 class="balance-amount">₹<span id="availableBalance">0.00</span></h2>
-  </div>
-
-  <!-- 🔶 WITHDRAW RULES -->
-  <div class="withdraw-info refined-info">
-    <p>Minimum Withdrawal: <strong>₹120</strong></p>
-    <p>Processing Fee: <strong>10%</strong></p>
-    <p>Working Hours: <strong>Mon – Sat (9 AM – 6 PM)</strong></p>
-    <p>Withdrawl Arrival:<strong> Amount will Credit in <strong style="color: red;">24-48 Hrs</strong></strong></p>
-  </div>
-
-  <!-- 🔵 WITHDRAW CARD -->
-  <div class="wallet-card withdraw-card">
-
-    <!-- Bank Section -->
-    <div id="bankSection"></div>
-
-    <!-- Amount -->
-    <label>
-      <i class='bx bx-rupee'></i>
-      Enter Amount
-    </label>
-
-    <input type="number" id="withdrawAmount" placeholder="Enter amount">
-
-    <!-- Fee Preview -->
-    <div class="withdraw-preview">
-      <p>Processing Fee: ₹<span id="feePreview">0</span></p>
-      <p>You Will Receive: ₹<span id="finalAmountPreview">0</span></p>
-    </div>
-
-    <button id="withdrawBtn" class="wallet-btn withdraw-style">
-      Withdraw Now
-    </button>
-
-  </div>
-
-</section>
-
-<!-- ===== CONFIRM MODAL ===== -->
-<div id="withdrawModal" class="custom-modal">
-  <div class="modal-content">
-    <h3><i class='bx bx-check-shield'></i> Confirm Withdrawal</h3>
-    <p id="modalDetails"></p>
-
-    <!-- 🔐 PIN BOXES -->
-<div class="modal-pin-wrapper">
-  <input type="password" maxlength="1" class="modal-pin-box">
-  <input type="password" maxlength="1" class="modal-pin-box">
-  <input type="password" maxlength="1" class="modal-pin-box">
-  <input type="password" maxlength="1" class="modal-pin-box">
-</div>
-
-    <div class="modal-actions">
-      <button id="cancelWithdraw" class="modal-btn cancel">
-        Cancel
+    <div class="top-nav">
+      <button class="back-btn" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left icon-3d"></i>
+        Back
       </button>
-      <button id="confirmWithdraw" class="modal-btn confirm">
-        Submit
+
+      <h2 class="page-title">Withdraw Fund</h2>
+
+      <button
+        class="nav-right-btn"
+        onclick="window.location.href='../wallet/records/withdraw-records.html'"
+      >
+        <i class="fa-solid fa-clock-rotate-left icon-3d"></i>
+        Records
       </button>
     </div>
-  </div>
-</div>
 
-<!-- ===== TOAST ===== -->
-<div id="customToast" class="custom-toast"></div>
+    <!-- ================= WALLET ================= -->
 
-<!-- ==================== Shared JS ========================== -->
-<script src="../shared/js/config.js"></script>
-<script src="../shared/ui/popup.js"></script>
-<!-- ===================== Main JS ========================== -->
-<script src="../wallet/withdraw.js"></script>
-</body>
+    <section class="wallet-container">
+      <!-- BALANCE CARD -->
+
+      <div class="withdraw-balance-card">
+        <p class="balance-label">Available Balance</p>
+
+        <h2 class="balance-amount">₹<span id="availableBalance">0.00</span></h2>
+      </div>
+
+      <!-- WITHDRAW INFO -->
+
+      <div class="withdraw-info refined-info">
+        <p>Minimum Withdrawal: <strong>₹120</strong></p>
+
+        <p>Processing Fee: <strong>10%</strong></p>
+
+        <p>Working Hours: <strong>Mon – Sat (9 AM – 6 PM)</strong></p>
+
+        <p>
+          Withdrawal Arrival:
+          <strong style="color: red">24-48 Hrs</strong>
+        </p>
+      </div>
+
+      <!-- WITHDRAW CARD -->
+
+      <div class="wallet-card withdraw-card">
+        <!-- BANK LIST -->
+
+        <div id="bankSection"></div>
+
+        <!-- AMOUNT INPUT -->
+
+        <label>
+          <i class="fa-solid fa-indian-rupee-sign icon-3d"></i>
+          Enter Amount
+        </label>
+
+        <input type="number" id="withdrawAmount" placeholder="Enter amount" />
+
+        <!-- FEE PREVIEW -->
+
+        <div class="withdraw-preview">
+          <p>Processing Fee: ₹<span id="feePreview">0</span></p>
+
+          <p>You Will Receive: ₹<span id="finalAmountPreview">0</span></p>
+        </div>
+
+        <!-- WITHDRAW BUTTON -->
+
+        <button id="withdrawBtn" class="wallet-btn withdraw-style">
+          Withdraw Now
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= WITHDRAW MODAL ================= -->
+
+    <div id="withdrawModal" class="withdraw-modal">
+      <div class="modal-content">
+        <h3>Confirm Withdrawal</h3>
+
+        <div id="modalDetails"></div>
+
+        <p style="margin-top: 15px">Enter Withdraw PIN</p>
+
+        <!-- PIN INPUT -->
+
+        <div class="pin-box-container">
+          <input
+            type="password"
+            maxlength="1"
+            inputmode="numeric"
+            class="modal-pin-box"
+          />
+          <input
+            type="password"
+            maxlength="1"
+            inputmode="numeric"
+            class="modal-pin-box"
+          />
+          <input
+            type="password"
+            maxlength="1"
+            inputmode="numeric"
+            class="modal-pin-box"
+          />
+          <input
+            type="password"
+            maxlength="1"
+            inputmode="numeric"
+            class="modal-pin-box"
+          />
+        </div>
+
+        <!-- MODAL BUTTONS -->
+
+        <div class="modal-actions">
+          <button id="cancelWithdraw" class="cancel-btn">Cancel</button>
+
+          <button id="confirmWithdraw" class="confirm-btn">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TOAST ================= -->
+
+    <div id="customToast" class="custom-toast"></div>
+
+    <!-- ================= SCRIPTS ================= -->
+
+    <script src="../shared/js/config.js"></script>
+
+    <script src="../shared/ui/popup.js"></script>
+
+    <script src="../wallet/withdraw.js"></script>
+  </body>
 </html>

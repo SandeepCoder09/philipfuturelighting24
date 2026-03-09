@@ -15,14 +15,10 @@
 
     <link rel="icon" href="/assets/favicon.png" />
 
-    <!-- Shared CSS -->
     <link rel="stylesheet" href="../shared/css/top-nav.css" />
     <link rel="stylesheet" href="../shared/ui/popup.css" />
+    <link rel="stylesheet" href="./recharge.css" />
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="../wallet/wallet.css" />
-
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -30,10 +26,9 @@
   </head>
 
   <body>
-    <!-- ================= TOP NAV ================= -->
     <div class="top-nav">
       <button class="back-btn" onclick="history.back()">
-        <i class="fa-solid fa-arrow-left"></i>
+        <i class="fa-solid fa-arrow-left icon-3d"></i>
         Back
       </button>
 
@@ -43,24 +38,26 @@
         class="nav-right-btn"
         onclick="window.location.href='../wallet/records/recharge-records.html'"
       >
-        <i class="fa-solid fa-clock-rotate-left"></i>
+        <i class="fa-solid fa-clock-rotate-left icon-3d"></i>
         Records
       </button>
     </div>
 
-    <!-- ================= PAGE CONTENT ================= -->
     <section class="wallet-container recharge-page">
-      <!-- ===== PAYMENT METHOD TABS ===== -->
+      <!-- TABS -->
+
       <div class="payment-tabs">
         <button class="tab-btn active" data-method="inr">INR</button>
+
         <button class="tab-btn" data-method="usdt">USDT</button>
       </div>
 
-      <!-- ================= INR SECTION ================= -->
+      <!-- INR SECTION -->
+
       <div class="inr-section">
         <div class="wallet-card">
           <label>
-            <i class="fa-solid fa-wallet"></i>
+            <i class="fa-solid fa-wallet icon-3d"></i>
             Selected Amount
           </label>
 
@@ -72,7 +69,7 @@
           />
 
           <div class="amount-options">
-            <!-- <button type="button" class="amount-btn" data-amount="1">₹1</button> -->
+            <button type="button" class="amount-btn" data-amount="1">₹1</button>
             <button type="button" class="amount-btn" data-amount="399">
               ₹399
             </button>
@@ -94,18 +91,18 @@
           </div>
 
           <button id="rechargeBtn" class="wallet-btn recharge-style">
-            <i class="fa-solid fa-bolt"></i>
+            <i class="fa-solid fa-bolt icon-3d"></i>
             Deposit Now
           </button>
         </div>
       </div>
 
-      <!-- ================= USDT SECTION ================= -->
+      <!-- USDT SECTION -->
+
       <div class="usdt-section" style="display: none">
-        <!-- ===== USDT BALANCE CARD ===== -->
         <div class="wallet-card usdt-balance-card">
           <div class="usdt-balance-header">
-            <i class="fa-solid fa-coins"></i>
+            <i class="fa-solid fa-coins icon-3d"></i>
             <span>Available USDT Balance</span>
           </div>
 
@@ -118,13 +115,14 @@
           </div>
 
           <button id="convertToInrBtn" class="wallet-btn convert-style">
-            <i class="fa-solid fa-right-left"></i>
+            <i class="fa-solid fa-right-left icon-3d"></i>
             Convert to INR
           </button>
         </div>
 
         <div class="wallet-card">
           <label>Network</label>
+
           <div class="usdt-network-badge">USDT (TRC20 - Tron)</div>
 
           <div class="usdt-address-wrapper">
@@ -133,11 +131,12 @@
             </div>
 
             <button id="copyAddressBtn" class="copy-icon-btn">
-              <i class="fa-solid fa-copy"></i>
+              <i class="fa-solid fa-copy icon-3d"></i>
             </button>
           </div>
 
           <label>Enter Amount (USDT)</label>
+
           <input
             type="number"
             id="usdtAmount"
@@ -145,6 +144,7 @@
           />
 
           <label>Transaction Hash</label>
+
           <input
             type="text"
             id="txnHash"
@@ -158,14 +158,11 @@
       </div>
     </section>
 
-    <!-- ================= CASHFREE SDK ================= -->
     <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 
-    <!-- Shared JS -->
     <script src="../shared/js/config.js"></script>
     <script src="../shared/ui/popup.js"></script>
 
-    <!-- Main JS -->
     <script src="../wallet/recharge.js"></script>
   </body>
 </html>

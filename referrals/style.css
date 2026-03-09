@@ -1,168 +1,25 @@
-/* =========================================
-   GLOBAL
-========================================= */
-body {
+/* ================= GLOBAL ================= */
+
+* {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #0f172a, #111827);
-  color: #ffffff;
-  padding-bottom: 90px;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.container {
-  padding: 20px;
+body {
+  background: #0c0f14;
+  color: #fff;
+  padding-bottom: 80px;
 }
 
-.page-title {
-  text-align: center;
-  margin-bottom: 25px;
-  font-weight: 600;
-  font-size: 20px;
-}
-
-/* =========================================
-   CARD BASE
-========================================= */
-.card {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 20px;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.card-title {
-  margin-bottom: 12px;
-  font-size: 14px;
-  opacity: 0.85;
-}
-
-/* =========================================
-   REFERRAL LINK
-========================================= */
-/* =========================================
-   REFERRAL LINK FIXED
-========================================= */
-
-.referral-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.referral-box input {
-  flex: 1;
-  border: none;
-  padding: 12px 14px;
-  background: rgba(0,0,0,0.35);
-  color: white;
-  border-radius: 12px;
-  font-size: 13px;
-  white-space: nowrap;
-  overflow-x: auto;
-}
-
-.referral-box button {
-  flex-shrink: 0;
-  border: none;
-  padding: 10px 14px;
-  background: linear-gradient(135deg,#00B4FF,#007BFF);
-  color: white;
-  border-radius: 12px;
-  cursor: pointer;
-  
-}
-
-/* .referral-box button:hover {
-  opacity: 0.85;
-} */
-
-/* =========================================
-   SECTION TITLES
-========================================= */
-.section-title {
-  margin: 25px 0 12px;
-  font-size: 15px;
-  opacity: 0.9;
-}
-
-/* =========================================
-   COMMISSION GRID
-========================================= */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-.stats-card {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  padding: 15px;
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 6%;
 }
 
-.stats-card strong {
-  color: #FFD700;
-  font-size: 14px;
-}
-
-/* Highlight total income */
-.stats-card.highlight {
-  background: linear-gradient(135deg, #00B4FF, #007BFF);
-  border: none;
-}
-
-.stats-card.highlight strong {
-  color: #ffffff;
-}
-
-/* =========================================
-   LEVEL INCOME
-========================================= */
-.level-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.level-card {
-  background: rgba(255, 255, 255, 0.06);
-  padding: 15px;
-  border-radius: 14px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.level-card strong {
-  color: #00ffcc;
-  display: block;
-  margin-top: 6px;
-  font-size: 14px;
-}
-
-/* =========================================
-   QUALIFICATION CARD
-========================================= */
-.qualification-card {
-  margin-top: 20px;
-  padding: 14px;
-  text-align: center;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-size: 14px;
-}
-
-/* =========================================
-   NAV RIGHT BUTTON
-========================================= */
 .nav-right {
   margin-left: auto;
   display: flex;
@@ -170,57 +27,146 @@ body {
 }
 
 .view-team-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 16px;
-  border-radius: 25px;
-  background: linear-gradient(135deg, #00ff64, #00aaff);
-  color: #000814;
-  font-size: 12px;
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #fff;
   text-decoration: none;
-  transition: all 0.3s ease;
-  white-space: nowrap;
+  transition: 0.3s;
 }
 
-/* .view-team-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(0, 255, 100, 0.4);
-} */
-
-.view-team-btn i {
-  font-size: 12px;
+.view-team-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
-@media (max-width: 768px) {
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .level-grid {
-    grid-template-columns: 1fr;
-  }
-
-
+.nav-icon {
+  width: 18px;
+  height: 18px;
 }
 
-/* =========================================
-   REWARD DETAILS
-========================================= */
+/* ================= PAGE ================= */
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* ================= CARD ================= */
+
+.card {
+  background: #141a22;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ================= REFERRAL LINK BOX ================= */
+
+.referral-box {
+  display: flex;
+  gap: 10px;
+}
+
+.referral-box input {
+  flex: 1;
+  background: #0c0f14;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.referral-box input::selection {
+  background: #00f5a0;
+  color: #000;
+}
+
+#copyBtn {
+  width: 44px;
+  border: none;
+  border-radius: 8px;
+  background: #0c0f14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#copyBtn:hover {
+  background: #151c24;
+  transform: scale(1.05);
+}
+
+.copy-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ================= REWARD INFO ================= */
 
 .reward-item {
-  margin-bottom: 15px;
-  font-size: 14px;
-  opacity: 0.9;
+  margin-bottom: 14px;
 }
 
 .reward-item strong {
   display: block;
-  margin-bottom: 6px;
-  color: #00ffcc;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #00f5a0;
+}
+
+.reward-item p {
+  font-size: 13px;
+  color: #cfd6df;
+  line-height: 1.5;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width:480px) {
+
+  .container {
+    padding: 15px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
 }

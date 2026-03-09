@@ -1,227 +1,227 @@
-/* =========================================
-   GLOBAL
-========================================= */
+/* ================= GLOBAL ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
 
 body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #0f172a, #111827);
-    color: #ffffff;
-  }
-  
-  .page-content {
-    padding-top: 90px;
-    padding-bottom: 50px;
-    width: 92%;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  /* =========================================
-     SUMMARY SECTION
-  ========================================= */
-  
-  .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 35px;
-  }
-  
-  .summary-card {
-    background: rgba(255, 255, 255, 0.06);
-    padding: 22px;
-    border-radius: 18px;
-    text-align: center;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: 0.3s ease;
-  }
-  
-  /* .summary-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-  } */
-  
-  .summary-card p {
-    opacity: 0.8;
-    font-size: 14px;
-  }
-  
-  .summary-card h3 {
-    margin-top: 10px;
-    color: #00ffcc;
-    font-size: 18px;
-  }
-  
-  /* =========================================
-     SECTION TITLES
-  ========================================= */
-  
-  .section-title {
-    margin: 30px 0 15px;
-    font-size: 16px;
-    opacity: 0.9;
-  }
-  
-  /* =========================================
-     COMMISSION GRID
-  ========================================= */
-  
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    margin-bottom: 35px;
-  }
-  
-  .stats-card {
-    background: rgba(255, 255, 255, 0.06);
-    padding: 18px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: 0.3s ease;
-  }
-  
-  /* .stats-card:hover {
-    transform: translateY(-3px);
-  } */
-  
-  .stats-card strong {
-    color: #FFD700;
-    font-size: 15px;
-  }
-  
-  /* Highlight Total Income */
-  .stats-card.highlight {
-    background: linear-gradient(135deg, #00B4FF, #007BFF);
-    border: none;
-  }
-  
-  .stats-card.highlight strong {
-    color: #ffffff;
-  }
-  
-  /* =========================================
-     LEVEL INCOME
-  ========================================= */
-  
-  .level-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 30px;
-  }
-  
-  .level-card {
-    background: rgba(255, 255, 255, 0.06);
-    padding: 18px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: 0.3s ease;
-  }
-  
-  /* .level-card:hover {
-    transform: translateY(-3px);
-  } */
-  
-  .level-card p {
-    opacity: 0.8;
-    font-size: 14px;
-  }
-  
-  .level-card strong {
-    display: block;
-    margin-top: 8px;
-    color: #00ffcc;
-    font-size: 16px;
-  }
-  
-  /* =========================================
-     QUALIFICATION
-  ========================================= */
-  
-  .qualification-card {
-    background: rgba(255,255,255,0.05);
-    padding: 16px;
-    text-align: center;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.08);
-    font-size: 14px;
-    margin-bottom: 35px;
-  }
-  
-  /* =========================================
-     TABLE SECTION
-  ========================================= */
-  
-  .table-section h3 {
-    margin-bottom: 15px;
-  }
-  
-  .table-wrapper {
-    background: rgba(255,255,255,0.06);
-    border-radius: 18px;
-    padding: 10px;
-    overflow-x: auto;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-  }
-  
-  th, td {
-    padding: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  
-  th {
-    text-align: left;
-    color: #FFD700;
-    font-weight: 600;
-  }
-  
-  td {
-    opacity: 0.9;
-  }
-  
-  /* tr:hover {
-    background: rgba(255,255,255,0.04);
-  } */
-  
-  .no-data {
-    text-align: center;
-    padding: 20px;
-    opacity: 0.6;
-  }
-  
-  /* =========================================
-     RESPONSIVE
-  ========================================= */
-  
-  @media (max-width: 768px) {
-  
-    .summary-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    .stats-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    .level-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    table {
-      font-size: 12px;
-    }
-  }
+  background: #0b0f15;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* ================= PAGE ================= */
+
+.page-content {
+  width: 95%;
+  /* max-width: 520px; */
+  margin: auto;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 22px;
+  color: #00c6ff;
+  font-weight: 600;
+}
+
+/* ================= SUMMARY GRID ================= */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.summary-card {
+  width: 100%;
+  background: #121923;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.summary-card .icon {
+  width: 32px;
+  height: 32px;
+  margin: auto;
+  margin-bottom: 8px;
+}
+
+.summary-card svg {
+  width: 100%;
+  height: 100%;
+}
+
+.summary-card p {
+  color: #9aa7b5;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.summary-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ================= SECTION TITLES ================= */
+
+.section-title {
+  margin: 22px 0 10px 0;
+  font-size: 16px;
+  color: #00f5a0;
+}
+
+/* ================= STATS GRID ================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.stats-card {
+  background: #121923;
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* center horizontally */
+  text-align: center;
+  /* center text */
+  gap: 4px;
+}
+
+.stats-card.highlight {
+  background: linear-gradient(135deg, #00f5a0, #00c6ff);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stats-card.highlight span {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.stats-card.highlight strong {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* ================= LEVEL GRID ================= */
+
+.level-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.level-card {
+  width: 100%;
+  background: #121923;
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.level-card p {
+  font-size: 13px;
+  color: #9aa7b5;
+  margin-bottom: 3px;
+}
+
+.level-card strong {
+  font-size: 16px;
+  color: #00f5a0;
+}
+
+/* ================= QUALIFICATION ================= */
+
+.qualification-card {
+  width: 100%;
+  background: #141c27;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 22px;
+  border-left: 3px solid #00f5a0;
+  font-size: 13px;
+  color: #cdd6e0;
+}
+
+/* ================= TABLE SECTION ================= */
+
+.table-section {
+  margin-top: 15px;
+}
+
+.table-section h3 {
+  margin-bottom: 10px;
+  color: #00c6ff;
+  font-size: 16px;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrapper {
+  overflow-x: auto;
+  background: #121923;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+thead {
+  background: #182231;
+}
+
+th {
+  padding: 10px;
+  font-size: 12px;
+  text-align: left;
+  color: #9fb2c9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+td {
+  padding: 10px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00c6ff;
+  border-radius: 4px;
+}
