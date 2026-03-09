@@ -1,24 +1,15 @@
-/* ================= API AUTO SWITCH ================= */
+/* ================= API CONFIG ================= */
 
-const hostname = window.location.hostname;
-
-const isLocal =
-  hostname === "localhost" ||
-  hostname === "127.0.0.1" ||
-  hostname.startsWith("10.") ||
-  hostname.startsWith("192.168.") ||
-  hostname.endsWith(".local");
-
-const API = isLocal
-  ? "http://localhost:5001/api"
-  : "https://philips-backend.onrender.com/api";
+const API = "http://localhost:5001/api";   // change to production URL when deploying
 
 console.log("Using API:", API);
 
 
 /* ================= AUTO REDIRECT IF LOGGED IN ================= */
 
-if (localStorage.getItem("adminToken")) {
+const token = localStorage.getItem("adminToken");
+
+if (token && token !== "undefined" && token !== "null") {
   window.location.href = "index.html";
 }
 
@@ -57,7 +48,6 @@ async function adminLogin(event) {
     return;
   }
 
-  // Prevent double submit
   submitBtn.disabled = true;
   submitBtn.innerText = "Logging in...";
 
@@ -71,13 +61,9 @@ async function adminLogin(event) {
       body: JSON.stringify({ email, password })
     });
 
-    let data = {};
+    const data = await response.json();
 
-    try {
-      data = await response.json();
-    } catch (jsonError) {
-      throw new Error("Invalid server response");
-    }
+    console.log("ADMIN LOGIN RESPONSE:", data);
 
     if (!response.ok) {
 
@@ -94,18 +80,42 @@ async function adminLogin(event) {
       return;
     }
 
-    // ✅ Save token
+
+    /* ================= SAVE TOKEN ================= */
+
     localStorage.setItem("adminToken", data.token);
 
-    // 🚀 Redirect
+
+    /* ================= SAVE ROLE ================= */
+
+    const role = data.role;
+
+    if (!role) {
+      console.error("Role missing from backend response");
+      errorBox.innerText = "Server configuration error.";
+      return;
+    }
+
+    localStorage.setItem("adminRole", role);
+
+
+    console.log("Saved Token:", localStorage.getItem("adminToken"));
+    console.log("Saved Role:", localStorage.getItem("adminRole"));
+
+
+    /* ================= REDIRECT ================= */
+
     window.location.href = "index.html";
+
 
   } catch (error) {
 
     console.error("Admin Login Error:", error);
+
     errorBox.innerText = "Network error. Please try again.";
 
     submitBtn.disabled = false;
     submitBtn.innerText = "Login";
+
   }
 }

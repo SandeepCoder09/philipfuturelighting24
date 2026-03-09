@@ -2,9 +2,11 @@
    LOAD WITHDRAWS (UI-BASED FILTERS)
 ============================== */
 async function loadWithdraws() {
+
   try {
 
-    // 🔥 Always read current UI filter values
+    const role = (localStorage.getItem("adminRole") || "").toLowerCase();
+
     const status = document.getElementById("statusFilter")?.value;
     const userId = document.getElementById("searchUserId")?.value;
     const startDate = document.getElementById("startDate")?.value;
@@ -21,12 +23,12 @@ async function loadWithdraws() {
 
     const response = await authFetch(`/admin/withdraws?${query}`);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch withdraws");
-    }
+    if (!response.ok) throw new Error("Failed to fetch withdraws");
 
     const withdraws = await response.json();
+
     const table = document.getElementById("withdrawTable");
+
     if (!table) return;
 
     table.innerHTML = "";
@@ -46,56 +48,99 @@ async function loadWithdraws() {
 
       let actionHTML = "";
 
+      /* ==============================
+         STATUS: PROCESSING
+      ============================== */
       if (w.status === "processing") {
-        actionHTML = `
-          <button class="action-btn btn-review"
-            onclick="handleAction('${w._id}', 'under review')">
-            Under Review
-          </button>
-          <button class="action-btn btn-reject"
-            onclick="handleAction('${w._id}', 'rejected')">
-            Reject
-          </button>
-        `;
+
+        if (role === "manager_admin" || role === "super_admin") {
+
+          actionHTML = `
+            <button class="action-btn btn-review"
+              onclick="handleAction('${w._id}','under review')">
+              Under Review
+            </button>
+
+            <button class="action-btn btn-reject"
+              onclick="handleAction('${w._id}','rejected')">
+              Reject
+            </button>
+          `;
+
+        } else {
+
+          actionHTML = `<span class="action-label">${w.status}</span>`;
+
+        }
+
       }
 
+      /* ==============================
+         STATUS: UNDER REVIEW
+      ============================== */
       else if (w.status === "under review") {
-        actionHTML = `
-          <button class="action-btn btn-approve"
-            onclick="handleAction('${w._id}', 'success')">
-            Approve
-          </button>
-          <button class="action-btn btn-reject"
-            onclick="handleAction('${w._id}', 'rejected')">
-            Reject
-          </button>
-        `;
+
+        if (role.includes("super")) {
+
+          actionHTML = `
+            <button class="action-btn btn-approve"
+              onclick="handleAction('${w._id}','success')">
+              Approve
+            </button>
+
+            <button class="action-btn btn-reject"
+              onclick="handleAction('${w._id}','rejected')">
+              Reject
+            </button>
+          `;
+
+        } else {
+
+          actionHTML = `
+            <span class="action-label">
+              Waiting for Super Admin
+            </span>
+          `;
+
+        }
+
       }
 
+      /* ==============================
+         FINAL STATES
+      ============================== */
       else {
-        actionHTML = `
-          <span class="action-label">${w.status}</span>
-        `;
+
+        actionHTML = `<span class="action-label">${w.status}</span>`;
+
       }
 
       table.innerHTML += `
         <tr>
+
           <td>
-            ${w.user?.name || "N/A"}
+            ${w.user?.name || "N/A"} <br>
             <small>${w.user?.userId || ""}</small>
           </td>
+
           <td>₹${formatMoney(w.amount)}</td>
+
           <td class="status-${(w.status || "").replace(/\s+/g, "-")}">
             ${w.status}
           </td>
+
           <td>${actionHTML}</td>
+
         </tr>
       `;
+
     });
 
   } catch (error) {
+
     console.error("Load Withdraw Error:", error);
     showToast("Failed to load withdraws", "error");
+
   }
 }
 
@@ -112,12 +157,14 @@ function applyFilters() {
    RESET FILTERS
 ============================== */
 function resetFilters() {
+
   document.getElementById("statusFilter").value = "processing";
   document.getElementById("searchUserId").value = "";
   document.getElementById("startDate").value = "";
   document.getElementById("endDate").value = "";
 
   loadWithdraws();
+
 }
 
 
@@ -125,6 +172,7 @@ function resetFilters() {
    HANDLE ACTION
 ============================== */
 async function handleAction(id, status) {
+
   try {
 
     const response = await authFetch(
@@ -135,22 +183,21 @@ async function handleAction(id, status) {
       }
     );
 
-    const data = await response.json();
+    if (!response.ok) return;
 
-    if (!response.ok) {
-      showToast(data.message || "Failed to update", "error");
-      return;
-    }
+    const data = await response.json();
 
     showToast(data.message || "Updated successfully", "success");
 
-    // 🔥 Always refresh with current UI filters
     loadWithdraws();
 
   } catch (error) {
+
     console.error("Withdraw Action Error:", error);
     showToast("Server error", "error");
+
   }
+
 }
 
 

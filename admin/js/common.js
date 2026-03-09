@@ -12,39 +12,73 @@ function toggleSidebar() {
 ===================================================== */
 function logout() {
   localStorage.removeItem("adminToken");
+  localStorage.removeItem("adminRole");
   window.location.href = "/admin/login.html";
 }
 
 /* =====================================================
-   ADMIN AUTH FETCH
+   ADMIN AUTH FETCH (FIXED)
 ===================================================== */
-// async function authFetch(endpoint, options = {}) {
+async function authFetch(endpoint, options = {}) {
 
-//   const token = localStorage.getItem("adminToken");
+  const token = localStorage.getItem("adminToken");
 
-//   if (!token) {
-//     window.location.href = "/admin/login.html";
-//     return;
-//   }
+  if (!token) {
+    window.location.href = "/admin/login.html";
+    return;
+  }
 
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${token}`
-//     },
-//     ...options
-//   };
+  const config = {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+      ...(options.headers || {})
+    }
+  };
 
-//   const response = await fetch(`${API_BASE}${endpoint}`, config);
+  const response = await fetch(`${API_BASE}${endpoint}`, config);
 
-//   if (response.status === 401 || response.status === 403) {
-//     localStorage.removeItem("adminToken");
-//     window.location.href = "/admin/login.html";
-//   }
+  // 🔒 Token expired → logout
+  if (response.status === 401) {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("adminRole");
+    window.location.href = "/admin/login.html";
+    return response;
+  }
 
-//   return response;
-// }
+  // 🚫 Permission denied → stay on page
+  if (response.status === 403) {
+    const data = await response.json().catch(() => ({}));
+    showToast(data.message || "Permission denied", "error");
+    return response;
+  }
 
+  return response;
+}
+
+// Show Role in Dashboard Header
+const role = getAdminRole();
+if (role) {
+  console.log("Logged in as:", role);
+}
+
+/* =====================================================
+   GET ADMIN ROLE FROM TOKEN
+===================================================== */
+function getAdminRole() {
+
+  const token = localStorage.getItem("adminToken");
+  if (!token) return null;
+
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.role;
+  } catch (err) {
+    console.error("Invalid token");
+    return null;
+  }
+}
 
 /* =====================================================
    TOAST SYSTEM
@@ -83,9 +117,9 @@ function initSocket() {
 
   const SOCKET_URL = API_BASE.replace("/api", "");
 
-socket = io(SOCKET_URL, {
-  transports: ["websocket", "polling"]
-});
+  socket = io(SOCKET_URL, {
+    transports: ["websocket", "polling"]
+  });
 
   socket.on("connect", () => {
     console.log("🟢 Real-time Connected:", socket.id);
@@ -135,6 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentPath = window.location.pathname;
   const isLoginPage = currentPath.includes("/admin/login.html");
 
+  const role = getAdminRole();
+
   // 🔐 Protect admin pages
   if (!token && !isLoginPage) {
     window.location.href = "/admin/login.html";
@@ -168,8 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
     initSocket();
   }
 
-  socket.onAny((event, ...args) => {
-    console.log("📡 Socket Event Received:", event, args);
-  });
+  if (socket) {
+    socket.onAny((event, ...args) => {
+      console.log("📡 Socket Event Received:", event, args);
+    });
+  }
 
 });
