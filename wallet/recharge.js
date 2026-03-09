@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Redirect to success page after payment
-        window.location.href = "../wallet/success/recharge-success.html";
+        window.location.href = "../wallet/recharge-success/index.html";
 
         rechargeBtn.innerText = "Recharge Now";
         rechargeBtn.disabled = false;
