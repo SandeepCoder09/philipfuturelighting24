@@ -106,14 +106,14 @@ async function loadProducts() {
 
 
       const imageSrc = product.image
-        ? `${BACKEND_BASE} /uploads/${product.image} `
+        ? `${BACKEND_BASE}/uploads/${product.image} `
         : `${BACKEND_BASE} /uploads/default - product.png`;
 
       const card = document.createElement("div");
       card.className = "card";
 
       card.innerHTML = `
-      < div class="card-image" >
+      <div class="card-image" >
       <img src="${imageSrc}" alt="${product.name}" loading="lazy">
     </div>
 
