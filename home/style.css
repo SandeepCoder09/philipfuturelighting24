@@ -570,9 +570,9 @@ h2 {
 
 /* ===== LIVE CARD (BIG VERSION) ===== */
 .live-card {
-  width: 100%;
-  margin: 15px auto;
-  background: #020617;
+  width: 98%;
+  margin: 5px auto;
+  background: #1e293b;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
@@ -588,7 +588,7 @@ h2 {
   font-size: 15px;
   font-weight: 500;
   color: #00c6ff;
-  background: rgba(0, 198, 255, 0.06);
+  background: #1e293b;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -611,15 +611,15 @@ h2 {
   z-index: 2;
 }
 
-.live-ticker::before {
+/* .live-ticker::before {
   top: 0;
   background: linear-gradient(#020617, transparent);
-}
+} */
 
-.live-ticker::after {
+/* .live-ticker::after {
   bottom: 0;
   background: linear-gradient(transparent, #020617);
-}
+} */
 
 .ticker-track {
   display: flex;
