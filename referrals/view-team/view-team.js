@@ -112,8 +112,8 @@ function renderTable(team) {
       <tr>
         <td>${member.userId}</td>
         <td>${member.level}</td>
-        <td>${member.totalRecharge || 0} INR</td>
-        <td>${member.totalCommission || 0} INR</td>
+        <td>${parseFloat(member.totalRecharge || 0).toFixed(2)} INR</td>
+<td>${parseFloat(member.totalCommission || 0).toFixed(2)} INR</td>
         <td>${joinDate}</td>
       </tr>
     `;
@@ -190,7 +190,7 @@ function setText(id, value) {
 
 function setMoney(id, value) {
   const el = document.getElementById(id);
-  if (el) el.innerText = (value ?? 0) + " INR";
+  if (el) el.innerText = parseFloat(value ?? 0).toFixed(2) + " INR";
 }
 
 

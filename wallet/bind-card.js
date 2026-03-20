@@ -92,6 +92,8 @@ async function loadBanks() {
 
   if (!ensureLoggedIn()) return;
 
+  const bindForm = document.getElementById("bindForm"); // add id="bindForm" to your form div in HTML
+
   try {
 
     const response = await authFetch("/wallet/banks");
@@ -108,8 +110,12 @@ async function loadBanks() {
     if (!banks.length) {
       bankContainer.innerHTML =
         `<div class="bank-empty">No bank linked yet</div>`;
+      if (bindForm) bindForm.style.display = "block"; // show form if no bank
       return;
     }
+
+    // ✅ Bank exists — hide the form
+    if (bindForm) bindForm.style.display = "none";
 
     banks.forEach(bank => {
       bankContainer.innerHTML += `

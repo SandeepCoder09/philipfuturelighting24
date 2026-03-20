@@ -200,7 +200,7 @@ document.getElementById("confirmBuyBtn").onclick = async () => {
         "Purchase Successful",
         "Your earning has started successfully.",
         "My Products",
-        () => window.location.href = "my-products.html"
+        () => window.location.href = "../products/my-products.html"
       );
 
       await loadProducts();

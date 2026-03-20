@@ -44,10 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function formatAmount(tx) {
 
     if (tx.type === "usdt_recharge") {
-      return `USDT ${tx.amount}`;
+      return `USDT ${parseFloat(tx.amount ?? 0).toFixed(2)}`;
     }
-
-    return `₹${tx.amount}`;
+    return `₹${parseFloat(tx.amount ?? 0).toFixed(2)}`;
   }
 
   // ==========================================
@@ -104,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="transaction-id">
               ${tx.type === "usdt_recharge"
-                ? `Hash: ${formatHash(tx.orderId)}`
-                : `ID: ${tx.orderId}`
-              }
+            ? `Hash: ${formatHash(tx.orderId)}`
+            : `ID: ${tx.orderId}`
+          }
             </div>
           </div>
 
