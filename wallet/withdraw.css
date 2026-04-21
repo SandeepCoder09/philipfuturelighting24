@@ -1,338 +1,571 @@
-/* =========================================
-GLOBAL
-========================================= */
-* {
-    box-sizing: border-box;
+/* ================================================================
+   WITHDRAW PAGE — wallet/withdraw.css
+   Philips Lighting Style
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+:root {
+    --blue: #0033a0;
+    --blue-dark: #001f6b;
+    --blue-darker: #00071a;
+    --yellow: #f5d800;
+    --yellow-glow: #ffe033;
+    --yellow-dark: #c4ac00;
+    --white: #ffffff;
+    --off: #f0f3fa;
+    --gray: #6b7280;
+    --gray-lt: #dde2ef;
+    --text: #0d1b3e;
+    --green: #16a34a;
+    --red: #dc2626;
+    --orange: #ea580c;
+    --shadow: 0 4px 24px rgba(0, 33, 160, 0.10);
+    --shadow-lg: 0 16px 48px rgba(0, 33, 160, 0.18);
+    --radius: 12px;
+    --top-h: 62px;
+}
+
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background: #0f172a;
-    font-family: Arial, sans-serif;
-    color: #ffffff;
+    font-family: 'Barlow', sans-serif;
+    background: var(--off);
+    color: var(--text);
+    min-height: 100vh;
 }
 
-/* =========================================
-    CONTAINER
-    ========================================= */
+.nav-right-btn {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 7px;
+    padding: 8px 13px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-right-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+}
+
+/* ── CONTAINER ────────────────────────────────────────────────── */
 .wallet-container {
-    width: 100%;
-    max-width: 420px;
-    margin: auto;
+    margin-top: var(--top-h);
+    padding: 20px 16px 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 90px 16px 40px;
+    gap: 16px;
 }
 
-/* =========================================
-    BALANCE CARD
-    ========================================= */
+/* ── BALANCE CARD ─────────────────────────────────────────────── */
 .withdraw-balance-card {
-    background: linear-gradient(145deg, #002b5c, #003b7a);
-    padding: 22px;
-    border-radius: 18px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    border: 1px solid rgba(245, 216, 0, 0.12);
+    box-shadow: var(--shadow-lg);
     text-align: center;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    position: relative;
+    overflow: hidden;
+}
+
+.withdraw-balance-card::before {
+    content: '₹';
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.05);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    line-height: 1;
 }
 
 .balance-label {
-    opacity: 0.8;
-    font-size: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
 .balance-amount {
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: 6px;
-    color: #00ff88;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2.4rem;
+    color: var(--white);
+    line-height: 1;
 }
 
-/* =========================================
-    WITHDRAW INFO
-    ========================================= */
+.balance-amount #availableBalance {
+    color: var(--yellow);
+}
+
+/* ── INFO BOX ─────────────────────────────────────────────────── */
 .withdraw-info {
-    background: rgba(255, 152, 0, 0.1);
-    border-left: 4px solid #ff9800;
-    padding: 16px 18px;
-    border-radius: 12px;
-    font-size: 14px;
-    line-height: 1.6;
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-lt);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.withdraw-info strong {
-    color: #ffffff;
+.refined-info p {
+    font-size: 0.84rem;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--off);
 }
 
-/* =========================================
-    WITHDRAW CARD
-    ========================================= */
-.wallet-card {
-    background: linear-gradient(145deg, #002b5c, #003b7a);
-    padding: 24px;
-    border-radius: 18px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+.refined-info p:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
-/* =========================================
-    INPUT
-    ========================================= */
-.wallet-card input {
+.refined-info p strong {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ── WITHDRAW CARD ────────────────────────────────────────────── */
+.withdraw-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-lt);
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.withdraw-card label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.withdraw-card label i {
+    color: var(--blue);
+    font-size: 0.82rem;
+}
+
+.withdraw-card input {
     width: 100%;
-    padding: 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(0, 200, 255, 0.3);
-    background: #0f172a;
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 18px;
+    padding: 13px 14px;
+    border: 1.5px solid var(--gray-lt);
+    border-radius: 8px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text);
+    background: var(--off);
     outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* =========================================
-    PREVIEW
-    ========================================= */
+.withdraw-card input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0, 33, 160, 0.08);
+    background: var(--white);
+}
+
+/* ── FEE PREVIEW ──────────────────────────────────────────────── */
 .withdraw-preview {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 12px 14px;
-    border-radius: 12px;
-    font-size: 14px;
-    margin-bottom: 18px;
-    line-height: 1.7;
+    background: var(--off);
+    border-radius: 8px;
+    border: 1px solid var(--gray-lt);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/* =========================================
-    BUTTON
-    ========================================= */
-.wallet-btn {
-    width: 100%;
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.withdraw-style {
-    background: linear-gradient(135deg, #ff9800, #ff5722);
-    color: #fff;
-}
-
-/* =========================================
-    BANK CARD
-    ========================================= */
-.bank-card {
+.withdraw-preview p {
+    font-size: 0.85rem;
+    color: var(--gray);
     display: flex;
     justify-content: space-between;
+}
+
+.withdraw-preview p span {
+    font-weight: 700;
+    color: var(--blue);
+}
+
+.withdraw-preview p #finalAmountPreview {
+    color: var(--green);
+}
+
+/* ── BANK CARDS ──────────────────────────────────────────────── */
+.bank-card {
+    border-radius: 9px;
+    border: 1.5px solid var(--gray-lt);
+    background: var(--off);
+    padding: 14px 16px;
+    display: flex;
     align-items: center;
-    background: #0f172a;
-    border: 1px solid rgba(0, 200, 255, 0.25);
-    padding: 14px;
-    border-radius: 14px;
-    margin-bottom: 12px;
+    justify-content: space-between;
+    gap: 12px;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .bank-card.active {
-    border-color: #00ff88;
-    box-shadow: 0 0 12px rgba(0, 255, 150, 0.3);
+    border-color: var(--blue);
+    background: rgba(0, 33, 160, 0.03);
+    box-shadow: 0 0 0 3px rgba(0, 33, 160, 0.08);
 }
 
 .bank-info {
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.bank-info strong {
+    font-weight: 700;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
 }
 
 .select-bank-btn {
-    padding: 8px 14px;
-    border-radius: 20px;
+    background: var(--blue);
+    color: var(--white);
     border: none;
-    font-size: 13px;
-    font-weight: 600;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     cursor: pointer;
-    background: linear-gradient(135deg, #00ff88, #00c6ff);
-    color: #001f3f;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
-/* =========================================
-    EMPTY BANK
-    ======================================== */
+.select-bank-btn:hover {
+    background: var(--blue-dark);
+}
+
 .bank-empty {
+    background: rgba(220, 38, 38, 0.06);
+    border: 1px solid rgba(220, 38, 38, 0.18);
+    border-radius: 9px;
+    padding: 16px;
     text-align: center;
-    padding: 20px;
-    background: #0f172a;
-    border-radius: 14px;
-    border: 1px dashed rgba(255, 255, 255, 0.2);
+    font-size: 0.88rem;
+    color: var(--red);
+    line-height: 1.7;
 }
 
 .bind-btn {
-    margin-top: 12px;
-    padding: 10px 16px;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 9px 18px;
+    border-radius: 7px;
+    background: var(--blue);
+    color: var(--white);
     border: none;
-    border-radius: 20px;
-    background: #00c6ff;
-    color: #001f3f;
     cursor: pointer;
-    font-weight: 600;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
 }
 
+.bind-btn:hover {
+    background: var(--blue-dark);
+}
 
-/* =========================================
-    MODAL
-    ========================================= */
+/* ── WITHDRAW BUTTON ──────────────────────────────────────────── */
+#withdrawBtn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: var(--yellow);
+    color: var(--blue-dark);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    min-height: 50px;
+    box-shadow: 0 4px 16px rgba(245, 216, 0, 0.4);
+}
+
+#withdrawBtn:hover:not(:disabled) {
+    background: var(--yellow-glow);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(245, 216, 0, 0.6);
+}
+
+#withdrawBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ── MODAL ────────────────────────────────────────────────────── */
 .withdraw-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    z-index: 900;
+    background: rgba(0, 7, 26, 0.75);
+    backdrop-filter: blur(8px);
     display: none;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 999;
 }
 
 .withdraw-modal.active {
     display: flex;
 }
 
-
-/* =========================================
-    MODAL CONTENT
-    ========================================= */
 .modal-content {
-    background: #1e293b;
-    padding: 26px;
-    border-radius: 18px;
-    width: 90%;
-    max-width: 320px;
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 480px;
+    padding: 28px 24px 40px;
+    box-shadow: 0 -8px 48px rgba(0, 7, 26, 0.4);
+    animation: slide-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-content::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--gray-lt);
+    margin: 0 auto 22px;
+}
+
+.modal-content h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    color: var(--text);
     text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
 }
 
+#modalDetails {
+    background: var(--off);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 18px;
+}
 
-/* =========================================
-    PIN BOX
-    ========================================= */
+#modalDetails strong {
+    font-weight: 700;
+}
+
+.modal-content>p {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+/* ── PIN BOXES ────────────────────────────────────────────────── */
 .pin-box-container {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin: 16px 0;
-}
-
-.pin-box-container {
-    display: flex;
     justify-content: center;
-    gap: 14px;
-    margin: 20px 0;
+    margin-bottom: 22px;
 }
 
 .modal-pin-box {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    background: #0f172a;
-    color: white;
-    font-size: 26px;
+    width: 52px;
+    height: 56px;
+    border-radius: 9px;
+    border: 1.5px solid var(--gray-lt);
+    background: var(--off);
     text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--blue-dark);
     outline: none;
-    transition: all .25s;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    caret-color: transparent;
 }
-
-/* Focus Glow */
 
 .modal-pin-box:focus {
-    border-color: #38bdf8;
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0, 33, 160, 0.1);
+    background: var(--white);
 }
 
-
-/* Filled PIN */
 .modal-pin-box.filled {
-    background-color: rgba(0, 255, 150, 0.6);
-    border-color: rgba(0, 255, 150, 0.6);
+    border-color: var(--blue);
+    background: rgba(0, 33, 160, 0.04);
 }
 
-
-/* =========================================
-    MODAL BUTTONS
-    ========================================= */
+/* ── MODAL BUTTONS ────────────────────────────────────────────── */
 .modal-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 14px;
+    gap: 12px;
 }
 
 .cancel-btn {
     flex: 1;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    background: #334155;
-    color: #fff;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-lt);
+    background: var(--white);
+    color: var(--gray);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue);
 }
 
 .confirm-btn {
     flex: 1;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 13px;
+    border-radius: 8px;
     border: none;
-    background: #00ff88;
-    color: #001f3f;
-    font-weight: 600;
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(0, 33, 160, 0.3);
 }
 
+.confirm-btn:hover:not(:disabled) {
+    background: var(--blue-dark);
+}
 
-/* =========================================
-    TOAST
-    ========================================= */
+.confirm-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* ── TOAST ────────────────────────────────────────────────────── */
 .custom-toast {
     position: fixed;
-    top: 90px;
-    right: 20px;
-    min-width: 240px;
-    padding: 14px 16px;
-    border-radius: 12px;
-    font-size: 14px;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: var(--white);
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: #22c55e;
-    color: #fff;
-    opacity: 0;
-    transform: translateX(120%);
-    transition: 0.3s;
+    gap: 9px;
+    white-space: nowrap;
     z-index: 9999;
+    max-width: calc(100vw - 32px);
 }
 
 .custom-toast.show {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(-50%) translateY(0);
+}
+
+.custom-toast.success {
+    border-left: 4px solid var(--green);
 }
 
 .custom-toast.error {
-    background: #ef4444;
+    border-left: 4px solid var(--red);
 }
 
 .custom-toast.warning {
-    background: #f59e0b;
+    border-left: 4px solid var(--yellow-dark);
 }
 
-/* =========================================
-    MOBILE
-    ========================================= */
-@media(max-width:480px) {
-    .wallet-container {
-        padding: 85px 14px 40px;
-    }
+.custom-toast i {
+    font-size: 1rem;
+}
 
-    .balance-amount {
-        font-size: 26px;
+@media (min-width: 640px) {
+    .wallet-container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+@media (min-width: 900px) {
+    .wallet-container {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

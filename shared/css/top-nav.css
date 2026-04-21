@@ -1,84 +1,86 @@
-/* ============================= */
-/* 🌌 GLOBAL PAGE BASE */
-/* ============================= */
+/* ================================================================
+   SHARED TOP NAV — shared/css/top-nav.css
+   Philips Lighting Style
+================================================================ */
 
-/* ============================= */
-/* 🔷 COMMON TOP NAVBAR */
-/* ============================= */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+:root {
+  --blue: #0033a0;
+  --blue-dark: #001f6b;
+  --blue-darker: #00071a;
+  --yellow: #f5d800;
+  --yellow-glow: #ffe033;
+  --white: #ffffff;
+  --off: #f0f3fa;
+  --gray: #6b7280;
+  --gray-lt: #dde2ef;
+  --text: #0d1b3e;
+  --shadow: 0 4px 24px rgba(0, 33, 160, 0.10);
+  --radius: 12px;
+  --top-h: 62px;
+}
+
 .top-nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 60px;
-  /* reduced */
-  background: #111827;
+  right: 0;
+  z-index: 500;
+  height: var(--top-h);
+  background: rgba(0, 7, 26, 0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(245, 216, 0, 0.15);
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 12px;
 }
 
-/* Page Title */
-.page-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #19d1ff;
-  margin: 0;
-}
-
-/* ============================= */
-/* 🔙 COMMON BACK BUTTON */
-/* ============================= */
 .back-btn {
-  position: absolute;
-  left: 15px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 20px;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  font-size: 13px;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
 }
 
-.back-btn i {
-  margin-right: 5px;
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* ============================= */
-/* 📦 PAGE CONTENT WRAPPER */
-/* ============================= */
-.page-content {
-  padding-top: 80px;
-  /* adjusted to match navbar */
-  width: 92%;
-  max-width: 650px;
-  margin: 0 auto 60px;
+.back-btn i,
+.back-btn .icon-3d {
+  font-size: 0.88rem;
 }
 
-/* ============================= */
-/* 📂 RIGHT NAV BUTTON */
-/* ============================= */
-.nav-right-btn {
-  position: absolute;
-  right: 15px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  font-size: 13px;
-  cursor: pointer;
+.top-nav .page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  margin: 0;
+  /* No left-border accent for top-nav title */
+  padding-left: 0;
 }
 
-.nav-right-btn i {
-  font-size: 12px;
+.top-nav .page-title::before {
+  display: none;
 }

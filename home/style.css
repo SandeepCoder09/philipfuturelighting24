@@ -1,155 +1,191 @@
-/* ===== RESET ===== */
-* {
+/* ================================================================
+   BRIGHT24 — PHILIPS LIGHTING STYLE
+   File: home/style.css
+   Matches: home/index.html exactly
+================================================================ */
+
+/* ── IMPORTS & RESET ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
-body,
+:root {
+  --blue: #0033a0;
+  --blue-dark: #001f6b;
+  --blue-darker: #00071a;
+  --blue-light: #1a56d6;
+  --yellow: #f5d800;
+  --yellow-glow: #ffe033;
+  --yellow-dark: #c4ac00;
+  --white: #ffffff;
+  --off: #f0f3fa;
+  --off2: #e4e9f5;
+  --gray: #6b7280;
+  --gray-lt: #dde2ef;
+  --text: #0d1b3e;
+  --green: #16a34a;
+  --shadow: 0 4px 24px rgba(0, 33, 160, 0.10);
+  --shadow-lg: 0 16px 48px rgba(0, 33, 160, 0.18);
+  --radius: 12px;
+  --nav-h: 64px;
+  --bottom-h: 72px;
+}
+
 html {
-  padding: 0;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  min-height: 100vh;
-  color: #ffffff;
-}
-
-/* ===== GLOBAL IMAGE SAFETY ===== */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ===== NAVBAR ===== */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 10px 6%;
-  background: #111827;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  height: 60px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* ===== LOGO WRAPPER ===== */
-.logo-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* FORCE LOGO SIZE */
-.logo-wrapper img {
-  height: 28px !important;
-  width: auto !important;
-  max-width: 110px !important;
-  object-fit: contain;
-}
-
-/* ===== LED DOTS ===== */
-.led-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.led-dots span {
-  width: 6px;
-  height: 6px;
-  background: #00c6ff;
-  border-radius: 50%;
-  opacity: 0.2;
-  animation: ledBlink 1.5s infinite;
-}
-
-.led-dots span:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.led-dots span:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.led-dots span:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-@keyframes ledBlink {
-  0% {
-    opacity: 0.2;
-    box-shadow: none;
-  }
-
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 6px #00c6ff,
-      0 0 12px #0072ff;
-  }
+  scroll-behavior: smooth;
 }
 
 body {
-  background: #0f172a;
-  color: #ffffff;
-  line-height: 1.6;
-  padding-bottom: 80px;
+  font-family: 'Barlow', sans-serif;
+  background: var(--off);
+  color: var(--text);
+  min-height: 100vh;
   overflow-x: hidden;
-  /* Prevent horizontal overflow */
+  padding-top: var(--nav-h);
+  padding-bottom: calc(var(--bottom-h) + 16px);
 }
 
-/* ===== GLOBAL IMAGE SAFETY ===== */
 img {
   max-width: 100%;
-  height: auto;
   display: block;
 }
 
-/* ===== NAVBAR ===== */
-.navbar {
+/* ================================================================
+   PAGE LOADER
+================================================================ */
+#pageLoader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--blue-darker);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 10px 6%;
-  background: #111827;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  height: 60px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* ===== LOGO WRAPPER ===== */
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loader-content p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.spinner {
+  width: 52px;
+  height: 52px;
+  border-radius: 50% 50% 44% 44%;
+  background: var(--yellow);
+  position: relative;
+  animation: spin-bulb 1.2s ease-in-out infinite,
+    spin-glow 1.2s ease-in-out infinite;
+}
+
+.spinner::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 12px;
+  background: rgba(245, 216, 0, 0.5);
+  border-radius: 0 0 8px 8px;
+}
+
+@keyframes spin-bulb {
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.12) rotate(10deg);
+  }
+}
+
+@keyframes spin-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 24px rgba(245, 216, 0, 0.7), 0 0 60px rgba(245, 216, 0, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 48px rgba(245, 216, 0, 1), 0 0 100px rgba(245, 216, 0, 0.6);
+  }
+}
+
+/* ================================================================
+   NAVBAR
+================================================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  height: var(--nav-h);
+  background: rgba(0, 7, 26, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(245, 216, 0, 0.15);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
 .logo-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 
-/* FORCE LOGO SIZE */
+.logo-wrapper a {
+  display: flex;
+  align-items: center;
+}
+
 .logo-wrapper img {
-  height: 28px !important;
-  width: auto !important;
-  max-width: 110px !important;
+  height: 36px;
+  width: auto;
   object-fit: contain;
+  /* Invert dark logos to white for the dark navbar */
+  filter: brightness(0) invert(1);
 }
 
-/* ===== LED DOTS ===== */
+/* LED dots — decorative animated trio */
 .led-dots {
   display: flex;
+  align-items: center;
   gap: 6px;
+  margin-left: 4px;
 }
 
 .led-dots span {
-  width: 6px;
-  height: 6px;
-  background: #00c6ff;
+  display: block;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  opacity: 0.2;
-  animation: ledBlink 1.5s infinite;
+  background: var(--yellow);
+  animation: led-blink 1.8s ease-in-out infinite;
 }
 
 .led-dots span:nth-child(1) {
@@ -158,497 +194,827 @@ img {
 
 .led-dots span:nth-child(2) {
   animation-delay: 0.3s;
+  background: rgba(245, 216, 0, 0.5);
 }
 
 .led-dots span:nth-child(3) {
   animation-delay: 0.6s;
+  background: rgba(245, 216, 0, 0.25);
 }
 
-@keyframes ledBlink {
-  0% {
-    opacity: 0.2;
+@keyframes led-blink {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.85);
     box-shadow: none;
   }
 
   50% {
     opacity: 1;
-    box-shadow: 0 0 6px #00c6ff,
-      0 0 12px #0072ff;
-  }
-
-  100% {
-    opacity: 0.2;
-    box-shadow: none;
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(245, 216, 0, 0.9);
   }
 }
 
-/* ===== HERO ===== */
-.hero {
-  height: 90vh;
-  background: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)),
-    url("../assets/philips-ind.jpg") center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-}
-
-.hero-overlay {
-  max-width: 800px;
-}
-
-.hero h1 {
-  font-size: 2.8rem;
-  margin-bottom: 20px;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-  color: #cbd5e1;
-  font-size: 1.1rem;
-}
-
-/* ===== SECTIONS ===== */
-section {
-  padding: 90px 8%;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 50px;
-  font-size: 2rem;
-  color: #00c6ff;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* ===== ABOUT ===== */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  align-items: center;
-}
-
-.about-grid img {
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 114, 255, 0.15);
-}
-
-/* ===== BUSINESS SEGMENTS ===== */
-.segment-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 35px;
-}
-
-/* ===== BUSINESS SEGMENT CARD FIX =====
-  100% { opacity: 0.2; box-shadow: none; }
-} */
-
-/* ===== HERO ===== */
-.hero {
-  height: 90vh;
-  background: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)),
-    url("../assets/philips-ind.jpg") center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-}
-
-.hero-overlay {
-  max-width: 800px;
-}
-
-.hero h1 {
-  font-size: 2.8rem;
-  margin-bottom: 20px;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-  color: #cbd5e1;
-  font-size: 1.1rem;
-}
-
-/* ===== SECTIONS ===== */
-section {
-  padding: 90px 8%;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 50px;
-  font-size: 2rem;
-  color: #00c6ff;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* ===== ABOUT ===== */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  align-items: center;
-}
-
-.about-grid img {
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 114, 255, 0.15);
-}
-
-/* ===== BUSINESS SEGMENTS ===== */
-.segment-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 35px;
-}
-
-/* ===== BUSINESS SEGMENT CARD FIX ===== */
-.segment-card {
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* Centers image + content */
-  gap: 15px;
-
-  transition: 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.segment-card img {
-  width: 200px;
-  /* Fixed width for consistency */
-  height: 200px;
-  object-fit: cover;
-  border-radius: 15px;
-  display: block;
-  margin: 0 auto;
-  /* Extra centering */
-}
-
-.segment-card h3 {
-  margin-bottom: 15px;
-  color: #00c6ff;
-}
-
-.segment-card p {
-  color: #94a3b8;
-}
-
-.segment-card:hover {
-  /* transform: translateY(-8px); */
-  border: 1px solid #0072ff;
-  box-shadow: 0 15px 40px rgba(0, 114, 255, 0.2);
-}
-
-/* ===== INDIA SECTION ===== */
-.india ul {
-  margin-top: 20px;
-  color: #94a3b8;
-  line-height: 1.8;
-}
-
-.india-img {
-  margin-top: 40px;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 114, 255, 0.15);
-}
-
-/* ===== LEADERSHIP ===== */
-.leader-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 60px;
-  /* More spacing */
-  background: #1e293b;
-  padding: 50px;
-  border-radius: 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-/* ===== BIGGER CEO IMAGE ===== */
-.leader-card img {
-  height: 150px;
-  width: 300px;
-  /* Bigger image */
-  max-width: 100%;
-  border-radius: 20px;
-  object-fit: cover;
-  box-shadow: 0 20px 50px rgba(0, 114, 255, 0.25);
-}
-
-.leader-card h3 {
-  color: #00c6ff;
-  margin-bottom: 8px;
-}
-
-.leader-card p {
-  color: #94a3b8;
-}
-
-/* ===== INVESTORS ===== */
-.investor-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.investor-card {
-  background: #1e293b;
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
-  transition: 0.3s;
-}
-
-.investor-card img {
-  height: 45px;
-  object-fit: contain;
-  margin-bottom: 15px;
-}
-
-.investor-card p {
-  color: #94a3b8;
-  font-size: 0.9rem;
-}
-
-.investor-card:hover {
-  /* transform: translateY(-6px); */
-  border: 1px solid #0072ff;
-}
-
-/* ===== INVESTOR CARD FIX ===== */
-.investor-card {
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* Centers horizontally */
-  justify-content: center;
-  /* Centers vertically */
-  gap: 15px;
-
-  transition: 0.3s ease;
-}
-
-.investor-card img {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-  /* Extra centering safety */
-}
-
-.investor-card p {
-  color: #94a3b8;
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.investor-card:hover {
-  /* transform: translateY(-6px); */
-  border: 1px solid #0072ff;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 992px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .leader-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .leader-card img {
-    width: 220px;
-  }
-
-  @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 2.2rem;
-    }
-
-    h2 {
-      font-size: 1.6rem;
-    }
-
-    section {
-      padding: 60px 6%;
-    }
-
-    .logo-wrapper img {
-      height: 22px !important;
-      max-width: 90px !important;
-    }
-  }
-
-}
-
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-  section {
-    padding: 60px 6%;
-  }
-
-  .logo-wrapper img {
-    height: 22px !important;
-    max-width: 90px !important;
-  }
-}
-
-/* ============================= */
-/* 🔄 Full Page Loader */
-/* ============================= */
-
-#pageLoader {
-  position: fixed;
-  inset: 0;
-  background: #0f172a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.loader-content {
-  text-align: center;
-  color: #19d1ff;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(25, 209, 255, 0.2);
-  border-top: 4px solid #19d1ff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: auto;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ===== LIVE CARD (BIG VERSION) ===== */
+/* ================================================================
+   LIVE TRANSACTIONS CARD
+================================================================ */
 .live-card {
-  width: 98%;
-  margin: 5px auto;
-  background: #1e293b;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  margin: 16px 16px 0;
+  border-radius: var(--radius);
+  background: var(--blue-darker);
+  border: 1px solid rgba(245, 216, 0, 0.18);
   overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
-/* Header */
 .live-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 16px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #00c6ff;
-  background: #1e293b;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 18px;
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  border-bottom: 1px solid rgba(245, 216, 0, 0.15);
 }
 
-/* BIG TICKER AREA */
+.live-header i {
+  color: var(--yellow);
+  font-size: 0.9rem;
+  animation: shake 2s ease-in-out infinite;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(-12deg);
+  }
+
+  40% {
+    transform: rotate(12deg);
+  }
+
+  60% {
+    transform: rotate(-8deg);
+  }
+
+  80% {
+    transform: rotate(8deg);
+  }
+}
+
+.live-header span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+
+/* Ticker scroll container */
 .live-ticker {
-  height: 120px;
-  /* increased height */
+  height: 110px;
+  overflow: hidden;
+  padding: 8px 0;
+  position: relative;
+}
+
+.live-ticker::before,
+.live-ticker::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 24px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.live-ticker::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--blue-darker), transparent);
+}
+
+.live-ticker::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--blue-darker), transparent);
+}
+
+/* Ticker track — scrolled by JS */
+#tickerTrack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  will-change: transform;
+}
+
+/* Each transaction row */
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ticker-item .withdraw {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(220, 38, 38, 0.18);
+  color: #f87171;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.06em;
+}
+
+.ticker-item .recharge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(22, 163, 74, 0.18);
+  color: #4ade80;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.06em;
+}
+
+.ticker-item .success {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.06em;
+}
+
+/* ================================================================
+   HERO
+================================================================ */
+.hero {
+  margin: 16px 16px 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 240px;
+  background:
+    linear-gradient(160deg, rgba(0, 7, 26, 0.85) 0%, rgba(0, 33, 160, 0.7) 100%),
+    /* fallback gradient when image isn't loaded */
+    radial-gradient(ellipse at 70% 40%, rgba(245, 216, 0, 0.18) 0%, transparent 60%),
+    linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: var(--shadow-lg);
+  /* Animated glow border */
+  border: 1px solid rgba(245, 216, 0, 0.12);
+}
+
+/* Decorative bulb glow in the hero */
+.hero::before {
+  content: '💡';
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 3.5rem;
+  opacity: 0.22;
+  filter: drop-shadow(0 0 20px rgba(245, 216, 0, 0.9));
+  animation: hero-bulb-float 4s ease-in-out infinite;
+}
+
+@keyframes hero-bulb-float {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.22;
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.08);
+    opacity: 0.35;
+  }
+}
+
+/* Light ray lines overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-55deg,
+      transparent,
+      transparent 40px,
+      rgba(245, 216, 0, 0.025) 40px,
+      rgba(245, 216, 0, 0.025) 41px);
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  padding: 32px 24px;
+  width: 100%;
+}
+
+.hero-overlay h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 12px;
+  /* Yellow highlight on key word */
+  background: linear-gradient(135deg, #fff 60%, var(--yellow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-overlay p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 340px;
+}
+
+/* ================================================================
+   SECTION COMMON STYLES
+================================================================ */
+section {
+  margin: 20px 16px 0;
+}
+
+section h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 18px;
+  position: relative;
+  padding-left: 14px;
+}
+
+section h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: var(--yellow);
+  border-radius: 2px;
+}
+
+.container {
+  /* sections already have 16px margin, container just groups content */
+}
+
+/* ================================================================
+   ABOUT
+================================================================ */
+.about {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-lt);
+}
+
+.about h2 {
+  color: var(--blue-dark);
+}
+
+.about-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.about-grid p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--gray);
+  margin-bottom: 10px;
+}
+
+.about-grid p:last-child {
+  margin-bottom: 0;
+}
+
+.about-grid img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  max-height: 180px;
+  border: 2px solid var(--off2);
+}
+
+/* ================================================================
+   BUSINESS SEGMENTS
+================================================================ */
+.business-segments {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-lt);
+}
+
+.business-segments h2 {
+  color: var(--blue-dark);
+}
+
+.segment-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.segment-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--gray-lt);
+  background: var(--off);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.segment-card:hover,
+.segment-card:active {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue);
+}
+
+/* Glowing indicator on left */
+.segment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--yellow);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.segment-card:hover::before {
+  opacity: 1;
+}
+
+.segment-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.segment-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  padding: 14px 16px 4px;
+}
+
+.segment-card p {
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.6;
+  padding: 0 16px 16px;
+}
+
+/* ================================================================
+   INDIA SECTION
+================================================================ */
+.india {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
   position: relative;
 }
 
-/* Fade effect */
-.live-ticker::before,
-.live-ticker::after {
-  content: "";
+/* Decorative light burst */
+.india::before {
+  content: '';
   position: absolute;
-  left: 0;
-  width: 100%;
-  height: 20px;
-  z-index: 2;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 216, 0, 0.15) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-/* .live-ticker::before {
-  top: 0;
-  background: linear-gradient(#020617, transparent);
-} */
+.india h2 {
+  color: var(--white);
+  padding-left: 14px;
+}
 
-/* .live-ticker::after {
-  bottom: 0;
-  background: linear-gradient(transparent, #020617);
-} */
+.india h2::before {
+  background: var(--yellow);
+}
 
-.ticker-track {
+.india .container>p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.india ul {
+  list-style: none;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
-/* BIGGER ITEMS */
-.ticker-item {
-  height: 40px;
+.india ul li {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  padding-left: 24px;
+  position: relative;
+}
+
+.india ul li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--yellow);
+  font-size: 0.65rem;
+  top: 3px;
+}
+
+.india-img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  max-height: 180px;
+  border: 2px solid rgba(245, 216, 0, 0.25);
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================================================
+   LEADERSHIP
+================================================================ */
+.leadership {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-lt);
+}
+
+.leadership h2 {
+  color: var(--blue-dark);
+}
+
+.leader-card {
   display: flex;
   align-items: center;
-  padding: 0 18px;
-  font-size: 14px;
-  color: #cbd5e1;
+  gap: 18px;
+  background: var(--off);
+  border-radius: 10px;
+  padding: 18px;
+  border: 1px solid var(--gray-lt);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* COLORS */
-.ticker-item .success {
-  color: #22c55e;
-  margin-left: 8px;
-  font-weight: 600;
+.leader-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 4px 20px rgba(0, 33, 160, 0.1);
 }
 
-.ticker-item .withdraw {
-  color: #f87171;
-  margin: 0 6px;
+.leader-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 3px solid var(--yellow);
+  flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(245, 216, 0, 0.4);
 }
 
-.ticker-item .recharge {
-  color: #38bdf8;
-  margin: 0 6px;
+.leader-card>div h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.leader-card>div p:first-of-type {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.leader-card>div p:last-of-type {
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* ================================================================
+   INVESTORS
+================================================================ */
+.investors {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-lt);
+  margin-bottom: 8px;
+}
+
+.investors h2 {
+  color: var(--blue-dark);
+}
+
+.investor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.investor-card {
+  border-radius: 10px;
+  background: var(--off);
+  border: 1px solid var(--gray-lt);
+  padding: 18px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+
+.investor-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 33, 160, 0.1);
+}
+
+.investor-card img {
+  width: 100%;
+  max-width: 90px;
+  height: 42px;
+  object-fit: contain;
+  filter: grayscale(0.2);
+  transition: filter 0.2s;
+}
+
+.investor-card:hover img {
+  filter: grayscale(0);
+}
+
+.investor-card p {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gray);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+/* ================================================================
+   BOTTOM NAV
+   (also covers shared/css/bottom-nav.css)
+================================================================ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  height: var(--bottom-h);
+  background: rgba(0, 7, 26, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(245, 216, 0, 0.15);
+  display: flex;
+  align-items: stretch;
+  padding: 0 8px;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 10px;
+  margin: 8px 4px;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.nav-btn i {
+  font-size: 1.25rem;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.nav-btn:hover,
+.nav-btn:active {
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ACTIVE STATE */
+.nav-btn.active {
+  color: var(--yellow);
+  background: rgba(245, 216, 0, 0.08);
+}
+
+.nav-btn.active i {
+  color: var(--yellow);
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px rgba(245, 216, 0, 0.7));
+}
+
+/* Yellow dot indicator */
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--yellow);
+  box-shadow: 0 0 8px rgba(245, 216, 0, 0.8);
+}
+
+/* ================================================================
+   UTILITY & GLOBAL
+================================================================ */
+
+/* Subtle background texture on body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(0, 33, 160, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 100%, rgba(245, 216, 0, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Smooth section entrance (no JS needed) */
+section {
+  animation: fade-up 0.5s ease both;
+}
+
+section:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+section:nth-child(2) {
+  animation-delay: 0.10s;
+}
+
+section:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+section:nth-child(4) {
+  animation-delay: 0.20s;
+}
+
+section:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+section:nth-child(6) {
+  animation-delay: 0.30s;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Live card entrance */
+.live-card {
+  animation: fade-up 0.4s ease both;
+}
+
+/* Hero entrance */
+.hero {
+  animation: fade-up 0.4s 0.05s ease both;
+}
+
+/* ================================================================
+   RESPONSIVE — TABLET & ABOVE
+================================================================ */
+@media (min-width: 640px) {
+  body {
+    padding-top: calc(var(--nav-h) + 8px);
+  }
+
+  .live-card,
+  .hero,
+  section {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .hero {
+    min-height: 300px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2.4rem;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .segment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .investor-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+
+  .live-card,
+  .hero,
+  section {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+  }
+
+  .hero {
+    min-height: 340px;
+  }
+
+  .segment-card img {
+    height: 180px;
+  }
+
+  .leader-card img {
+    width: 90px;
+    height: 90px;
+  }
 }

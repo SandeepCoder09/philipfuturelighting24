@@ -3,25 +3,453 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <meta name="theme-color" content="#111827" />
+    <meta name="theme-color" content="#00071a" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
     <meta name="mobile-web-app-capable" content="yes" />
-
+    <title>Philips India Lighting</title>
     <link rel="icon" href="/assets/favicon.png" />
-
-    <meta http-equiv="refresh" content="0; url=home/index.html" />
-  </head>
-  <body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700;900&family=Barlow+Condensed:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --blue: #0033a0;
+        --blue-dark: #001f6b;
+        --blue-mid: #00071a;
+        --yellow: #f5d800;
+        --white: #ffffff;
+      }
+
+      html,
       body {
-        background: #0f172a;
-        color: white;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: "Barlow", sans-serif;
+        background: var(--blue-mid);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* ── BACKGROUND EFFECTS ──────────────────────────────── */
+      .bg-glow-1 {
+        position: fixed;
+        top: -100px;
+        left: -100px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 33, 160, 0.3) 0%,
+          transparent 70%
+        );
+        animation: drift1 8s ease-in-out infinite;
+        pointer-events: none;
+      }
+      .bg-glow-2 {
+        position: fixed;
+        bottom: -80px;
+        right: -80px;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(245, 216, 0, 0.08) 0%,
+          transparent 70%
+        );
+        animation: drift2 10s ease-in-out infinite;
+        pointer-events: none;
+      }
+      .bg-rays {
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          -55deg,
+          transparent,
+          transparent 48px,
+          rgba(245, 216, 0, 0.018) 48px,
+          rgba(245, 216, 0, 0.018) 49px
+        );
+        pointer-events: none;
+      }
+
+      @keyframes drift1 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(40px, 30px) scale(1.15);
+        }
+      }
+      @keyframes drift2 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(-30px, -20px) scale(1.1);
+        }
+      }
+
+      /* ── LOGO WRAPPER ────────────────────────────────────── */
+      .logo-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        position: relative;
+        z-index: 2;
+        animation: logo-rise 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+
+      @keyframes logo-rise {
+        from {
+          opacity: 0;
+          transform: translateY(32px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* ── BIG BULB ────────────────────────────────────────── */
+      .big-bulb {
+        position: relative;
+        width: 100px;
+        height: 130px;
+        margin-bottom: 28px;
+        animation: bulb-float 4s ease-in-out infinite;
+      }
+
+      @keyframes bulb-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+
+      .bulb-glass {
+        width: 80px;
+        height: 88px;
+        border-radius: 50% 50% 30% 30%;
+        background: radial-gradient(
+          ellipse at 38% 28%,
+          rgba(255, 255, 220, 0.98) 0%,
+          rgba(245, 216, 0, 0.85) 38%,
+          rgba(220, 160, 0, 0.55) 70%,
+          rgba(180, 110, 0, 0.25) 100%
+        );
+        margin: 0 auto;
+        position: relative;
+        animation: bulb-glow 2.2s ease-in-out infinite;
+      }
+
+      @keyframes bulb-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 36px rgba(245, 216, 0, 0.85),
+            0 0 80px rgba(245, 216, 0, 0.45), 0 0 140px rgba(245, 216, 0, 0.22);
+        }
+        50% {
+          box-shadow: 0 0 60px rgba(245, 216, 0, 1),
+            0 0 130px rgba(245, 216, 0, 0.65), 0 0 220px rgba(245, 216, 0, 0.35);
+        }
+      }
+
+      /* Filament ring */
+      .bulb-glass::after {
+        content: "";
+        position: absolute;
+        top: 34px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 36px;
+        height: 36px;
+        border: 2px solid rgba(255, 210, 0, 0.55);
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 210, 0, 0.4);
+      }
+
+      .bulb-neck {
+        width: 52px;
+        height: 18px;
+        background: linear-gradient(
+          to bottom,
+          rgba(245, 216, 0, 0.55),
+          rgba(180, 140, 0, 0.75)
+        );
+        margin: 0 auto;
+        border-radius: 0 0 7px 7px;
+      }
+
+      .bulb-base {
+        width: 42px;
+        height: 28px;
+        background: linear-gradient(to bottom, #b8860b, #6b4f10);
+        margin: 0 auto;
+        border-radius: 3px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bulb-base::before,
+      .bulb-base::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: rgba(0, 0, 0, 0.18);
+      }
+      .bulb-base::before {
+        top: 8px;
+      }
+      .bulb-base::after {
+        top: 18px;
+      }
+
+      /* Light beams */
+      .bulb-beams {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+        width: 200px;
+        height: 200px;
+        pointer-events: none;
+      }
+
+      .beam {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2px;
+        height: 70px;
+        transform-origin: top center;
+        background: linear-gradient(
+          to bottom,
+          rgba(245, 216, 0, 0.6),
+          transparent
+        );
+        animation: beam-pulse 2.2s ease-in-out infinite;
+      }
+
+      .beam:nth-child(1) {
+        transform: rotate(-50deg) translateX(-50%);
+        animation-delay: 0s;
+      }
+      .beam:nth-child(2) {
+        transform: rotate(-30deg) translateX(-50%);
+        animation-delay: 0.15s;
+      }
+      .beam:nth-child(3) {
+        transform: rotate(-10deg) translateX(-50%);
+        animation-delay: 0.3s;
+      }
+      .beam:nth-child(4) {
+        transform: rotate(10deg) translateX(-50%);
+        animation-delay: 0.3s;
+      }
+      .beam:nth-child(5) {
+        transform: rotate(30deg) translateX(-50%);
+        animation-delay: 0.15s;
+      }
+      .beam:nth-child(6) {
+        transform: rotate(50deg) translateX(-50%);
+        animation-delay: 0s;
+      }
+
+      @keyframes beam-pulse {
+        0%,
+        100% {
+          opacity: 0.35;
+        }
+        50% {
+          opacity: 0.85;
+        }
+      }
+
+      /* ── BRAND NAME ──────────────────────────────────────── */
+      .brand-name {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 900;
+        font-size: 2.4rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--white);
+        line-height: 1;
+        text-align: center;
+      }
+
+      .brand-sub {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--yellow);
+        text-align: center;
+        margin-top: 6px;
+      }
+
+      /* ── PROGRESS BAR ────────────────────────────────────── */
+      .progress-wrap {
+        margin-top: 40px;
+        width: 180px;
+        position: relative;
+        z-index: 2;
+        animation: logo-rise 0.9s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+
+      .progress-track {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--blue), var(--yellow));
+        animation: progress-go 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        width: 0;
+        box-shadow: 0 0 8px rgba(245, 216, 0, 0.6);
+      }
+
+      @keyframes progress-go {
+        0% {
+          width: 0%;
+        }
+        60% {
+          width: 75%;
+        }
+        85% {
+          width: 92%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      .loading-text {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* LED dot animation in loading text */
+      .loading-text::after {
+        content: "";
+        display: inline-block;
+        animation: dots 1.5s steps(4, end) infinite;
+      }
+
+      @keyframes dots {
+        0% {
+          content: "";
+        }
+        25% {
+          content: ".";
+        }
+        50% {
+          content: "..";
+        }
+        75% {
+          content: "...";
+        }
+        100% {
+          content: "";
+        }
+      }
+
+      /* ── BOTTOM COPYRIGHT ────────────────────────────────── */
+      .copyright {
+        position: fixed;
+        bottom: 20px;
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.2);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        z-index: 2;
+        text-align: center;
       }
     </style>
-    Loading Please Wait...
+  </head>
+  <body>
+    <!-- Background effects -->
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+    <div class="bg-rays"></div>
+
+    <!-- Main logo + bulb -->
+    <div class="logo-wrap">
+      <!-- Animated big bulb -->
+      <div class="big-bulb">
+        <div class="bulb-beams">
+          <div class="beam"></div>
+          <div class="beam"></div>
+          <div class="beam"></div>
+          <div class="beam"></div>
+          <div class="beam"></div>
+          <div class="beam"></div>
+        </div>
+        <div class="bulb-glass"></div>
+        <div class="bulb-neck"></div>
+        <div class="bulb-base"></div>
+      </div>
+
+      <div class="brand-name">PHILIPS</div>
+      <div class="brand-sub">Future Lighting</div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="loading-text">Loading</div>
+    </div>
+
+    <p class="copyright">
+      © 2025 Philips Future Lighting · All Rights Reserved
+    </p>
+
+    <script>
+      // Redirect after the progress bar completes (~2.4s)
+      setTimeout(function () {
+        window.location.replace("home/index.html");
+      }, 2500);
+    </script>
   </body>
 </html>

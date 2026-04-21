@@ -1,461 +1,589 @@
-/* ==================================================
-   PRODUCTS PAGE STYLE
-   Used only for: products/index.html
-================================================== */
+/* ================================================================
+   PRODUCTS PAGE — products/style.css
+   Philips Lighting Style
+   Covers: pricing-header, pricing-container, card, modals,
+           loading-screen, .nav-right, .my-products-btn
+================================================================ */
 
-/* ================= GLOBAL ================= */
-
-body {
-  background: #0f172a;
-  color: #ffffff;
-  font-family: "Poppins", sans-serif;
-}
-
-/* ================= NAVBAR FIX ================= */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 6%;
-}
-
+/* ── NAV RIGHT (My Products button) ──────────────────────────── */
 .nav-right {
   margin-left: auto;
   display: flex;
   align-items: center;
+  padding-right: 4px;
 }
 
-/* ================= HEADER ================= */
+.my-products-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+  border: none;
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 14px rgba(245, 216, 0, 0.35);
+}
 
+.my-products-btn:hover,
+.my-products-btn:active {
+  background: var(--yellow-glow);
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(245, 216, 0, 0.6);
+}
+
+.my-products-btn i {
+  font-size: 0.88rem;
+}
+
+/* ── PRICING HEADER ──────────────────────────────────────────── */
 .pricing-header {
+  margin: 20px 16px 0;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+  padding: 28px 22px;
   text-align: center;
-  padding: 25px 10px 15px;
-  background: radial-gradient(circle at center, #001d3d, #000814);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(245, 216, 0, 0.12);
+}
+
+/* Decorative glow blob */
+.pricing-header::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 216, 0, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Light ray lines */
+.pricing-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-50deg,
+      transparent,
+      transparent 30px,
+      rgba(245, 216, 0, 0.03) 30px,
+      rgba(245, 216, 0, 0.03) 31px);
+  pointer-events: none;
 }
 
 .pricing-header h1 {
-  font-size: 20px;
-  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #fff 60%, var(--yellow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .pricing-header p {
-  font-size: 13px;
-  color: #9fb3c8;
-  margin-top: 4px;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.65);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.04em;
 }
 
-/* ================= PRODUCT LIST ================= */
-
+/* ── PRODUCTS CONTAINER ──────────────────────────────────────── */
 .pricing-container {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 20px 3% 120px;
+  gap: 16px;
+  margin: 16px 16px 0;
+  padding-bottom: 8px;
 }
 
-/* ================= PRODUCT CARD ================= */
-
-.card {
-  display: flex;
-  align-items: stretch;
-  background: linear-gradient(145deg, #002b5c, #003b7a);
-  border-radius: 16px;
-  min-height: 130px;
-  width: 100%;
-  border: 1px solid rgba(0, 170, 255, 0.25);
+/* ── PRODUCT CARD ─────────────────────────────────────────────── */
+.pricing-container .card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-lt);
   overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-  transition: 0.25s ease;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: row;
+  height: 140px;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
-/* ================= IMAGE ================= */
+.pricing-container .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue);
+}
 
+/* Left glow accent on hover */
+.pricing-container .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--yellow);
+  opacity: 0;
+  transition: opacity 0.25s;
+  border-radius: 3px 0 0 3px;
+}
+
+.pricing-container .card {
+  position: relative;
+}
+
+.pricing-container .card:hover::before {
+  opacity: 1;
+}
+
+/* Card Image */
 .card-image {
-  width: 150px;
-  /* little bigger image card */
-  min-width: 150px;
-  height: 130px;
-  /* fixed height */
-  background: #012a4a;
+  width: 130px;
+  height: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--blue-darker), var(--blue-dark));
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* fill card perfectly */
+  display: block;
+  transition: transform 0.35s ease;
 }
 
-/* ================= CONTENT ================= */
+.pricing-container .card:hover .card-image img {
+  transform: scale(1.06);
+}
 
+/* Card Content */
 .card-content {
   flex: 1;
-  padding: 12px 14px;
+  padding: 14px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   min-width: 0;
 }
 
+/* Card Text */
 .card-text {
-  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
 }
 
 .card-text h2 {
-  font-size: 16px;
-  color: #33d6ff;
-  margin-bottom: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  letter-spacing: 0.04em;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.price {
-  font-size: 13px;
-  margin-top: 2px;
+.card-text .price {
+  font-size: 0.84rem;
   font-weight: 700;
-  color: #00ff88;
+  color: var(--blue);
+  margin: 0;
 }
 
-.daily-earning,
-.validity,
-.limit {
-  font-size: 12px;
+.card-text .daily-earning {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--green);
+  margin: 0;
+}
+
+.card-text .validity {
+  font-size: 0.78rem;
+  color: var(--gray);
+  font-weight: 400;
+  margin: 0;
+}
+
+.card-text .limit {
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin: 0;
   margin-top: 2px;
-  color: #dbeafe;
 }
 
-/* ================= BUY BUTTON ================= */
+/* Card Action */
 .card-action {
-  min-width: 100px;
+  flex-shrink: 0;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  align-items: center;
 }
 
+/* Buy Button */
 .subscribe-btn {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #00f5a0, #00c6ff);
-  color: #002a3a;
-  font-weight: 600;
-  font-size: 13px;
+  gap: 6px;
+  background: var(--blue);
+  color: var(--white);
   border: none;
+  border-radius: 7px;
+  padding: 10px 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow:
-    0 10px 25px rgba(0, 200, 255, 0.35),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4);
-  transition: 0.2s;
+  transition: all 0.25s;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 33, 160, 0.25);
 }
 
-.subscribe-btn:active {
-  transform: scale(0.95);
+.subscribe-btn:hover:not(:disabled) {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 33, 160, 0.4);
 }
 
 .subscribe-btn:disabled {
-  background: #444;
-  color: #999;
+  background: var(--gray-lt);
+  color: var(--gray);
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* ================= MODAL ================= */
-
-.buy-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s;
-  z-index: 9999;
+.subscribe-btn .buy-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
-.buy-modal.active {
-  opacity: 1;
-  pointer-events: all;
+/* Coming Soon variant */
+.subscribe-btn.coming-soon-btn {
+  background: linear-gradient(135deg, var(--yellow-dark), var(--yellow));
+  color: var(--blue-dark);
+  cursor: default;
+  box-shadow: 0 4px 12px rgba(245, 216, 0, 0.3);
 }
 
-.buy-modal-content {
-  background: #001d3d;
-  padding: 24px;
-  border-radius: 18px;
-  width: 92%;
-  max-width: 360px;
-  animation: popupScale 0.25s ease;
-}
-
-.modal-header {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.modal-header img {
-  width: 90px;
-  margin-bottom: 8px;
-}
-
-.modal-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 13px;
-}
-
-.modal-row strong {
-  color: #00ff88;
-}
-
-/* ================= LOADING SCREEN ================= */
-
+/* ── LOADING SCREEN ──────────────────────────────────────────── */
 .loading-screen {
   position: fixed;
   inset: 0;
-  background: #000814;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 1000;
+  background: rgba(0, 7, 26, 0.92);
+  backdrop-filter: blur(8px);
+  display: none;
   flex-direction: column;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s;
-  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 .loading-screen.active {
-  opacity: 1;
-  pointer-events: all;
+  display: flex;
 }
 
 .loader-circle {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(0, 170, 255, 0.2);
-  border-top: 4px solid #00aaff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50% 50% 44% 44%;
+  background: var(--yellow);
+  box-shadow: 0 0 32px rgba(245, 216, 0, 0.8), 0 0 80px rgba(245, 216, 0, 0.4);
+  animation: spin-bulb 1.2s ease-in-out infinite,
+    spin-glow 1.2s ease-in-out infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.loading-screen p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
 }
 
-@keyframes popupScale {
+/* ── MODALS ──────────────────────────────────────────────────── */
+.buy-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(0, 7, 26, 0.75);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 0 0;
+  animation: modal-bg-in 0.2s ease;
+}
+
+.buy-modal.active {
+  display: flex;
+}
+
+@keyframes modal-bg-in {
   from {
-    transform: scale(0.85);
     opacity: 0;
   }
 
   to {
-    transform: scale(1);
     opacity: 1;
   }
 }
 
-/* ================= MOBILE ================= */
-
-@media (max-width: 420px) {
-
-  .card {
-    min-height: 130px;
-  }
-
-  .card-image {
-    width: 35%;
-    /* flexible instead of fixed px */
-    min-width: 100px;
-    /* prevents it from becoming too small */
-    height: 130px;
-  }
-
-  .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .subscribe-btn {
-    font-size: 11px;
-    padding: 6px 10px;
-  }
-
+.buy-modal-content {
+  background: var(--white);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 24px 36px;
+  box-shadow: 0 -8px 48px rgba(0, 7, 26, 0.4);
+  animation: modal-slide-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ================= SMALL MOBILE ================= */
-
-@media (max-width: 320px) {
-
-  .card {
-    min-height: 130px;
+@keyframes modal-slide-up {
+  from {
+    transform: translateY(100%);
   }
 
-  .card-image {
-    width: 110px;
-    /* smaller image for tiny screens */
-    min-width: 110px;
-    height: 130px;
+  to {
+    transform: translateY(0);
   }
-
-  .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .subscribe-btn {
-    font-size: 10px;
-    padding: 5px 10px;
-  }
-
 }
 
-/* ================= NAV MY PRODUCTS BUTTON ================= */
-
-.my-products-btn {
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #00ff88, #00c6ff);
-  color: #001f3f;
-  font-size: 12px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: 0.25s ease;
-  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+/* Modal drag handle */
+.buy-modal-content::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--gray-lt);
+  margin: 0 auto 20px;
 }
 
-/* ================= MODAL BUTTONS ================= */
-
-.modal-buttons {
+/* Modal Header */
+.modal-header {
   display: flex;
-  gap: 12px;
-  margin-top: 18px;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--gray-lt);
 }
-
-.modal-buttons button {
-  flex: 1;
-  padding: 8px 0;
-  border-radius: 22px;
-  border: none;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.25s ease;
-}
-
-.modal-close {
-  background: #2c3e50;
-  color: #ffffff;
-}
-
-.modal-buy {
-  background: linear-gradient(135deg, #00ff88, #00c6ff);
-  color: #001f3f;
-}
-
-/* ================= MODAL IMAGE STYLE ================= */
 
 .modal-image-wrapper {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 10px;
-  border-radius: 50%;
-  padding: 6px;
-  background: linear-gradient(135deg, #00ff88, #00c6ff);
-  box-shadow: 0 6px 18px rgba(0, 255, 150, 0.4);
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--blue-darker), var(--blue-dark));
+  flex-shrink: 0;
 }
 
 .modal-image-wrapper img {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   object-fit: cover;
-  background: #001f3f;
 }
 
-/* ================= COMING SOON BUTTON ================= */
+.buy-modal-content h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
 
-.coming-soon-btn {
-  position: relative;
-  background: #0b3d5c;
-  color: black;
-  border-radius: 20px;
-  padding: 8px 18px;
-  font-weight: 600;
-  cursor: not-allowed;
-  border: none;
-  z-index: 1;
+/* Modal Body Rows */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+  background: var(--off);
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 12px rgba(0, 224, 255, 0.4);
+  border: 1px solid var(--gray-lt);
 }
 
-.coming-soon-btn::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 22px;
-  background: linear-gradient(90deg, #00e0ff, #00ffa3, #00e0ff, #00ffa3);
-  background-size: 300% 300%;
-  animation: borderGlow 4s linear infinite;
-  z-index: -1;
+.modal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--gray-lt);
+  font-size: 0.88rem;
 }
 
-@keyframes borderGlow {
-  0% {
-    background-position: 0% 50%;
+.modal-row:last-child {
+  border-bottom: none;
+}
+
+.modal-row span {
+  color: var(--gray);
+  font-weight: 400;
+}
+
+.modal-row strong {
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+}
+
+/* Action-only modal title (no header) */
+#actionModal .buy-modal-content>h2 {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  margin-bottom: 6px;
+}
+
+#actionModal #actionMessage {
+  color: var(--gray);
+  font-size: 0.88rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.modal-close {
+  flex: 1;
+  padding: 13px;
+  border-radius: 8px;
+  border: 1.5px solid var(--gray-lt);
+  background: var(--white);
+  color: var(--gray);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.modal-close:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.modal-buy {
+  flex: 1;
+  padding: 13px;
+  border-radius: 8px;
+  border: none;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 33, 160, 0.3);
+}
+
+.modal-buy:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 33, 160, 0.45);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (min-width: 640px) {
+
+  .pricing-header,
+  .pricing-container {
+    margin-left: 24px;
+    margin-right: 24px;
   }
 
-  100% {
-    background-position: 300% 50%;
+  .pricing-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .pricing-container .card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 160px;
+  }
+
+  .card-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .card-action {
+    width: 100%;
+  }
+
+  .subscribe-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 6px rgba(0, 200, 255, 0.3);
+@media (min-width: 900px) {
+
+  .pricing-header,
+  .pricing-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
   }
 
-  50% {
-    box-shadow: 0 0 14px rgba(0, 200, 255, 0.8);
+  .pricing-container {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  100% {
-    box-shadow: 0 0 6px rgba(0, 200, 255, 0.3);
-  }
-}
-
-/* ================= VIP CARD ================= */
-.product-card.vip {
-  background: linear-gradient(135deg, #0f2a44, #0b3d5c);
-  border: 1px solid rgba(0, 200, 255, 0.4);
-}
-
-.buy-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
-  vertical-align: middle;
-  filter:
-    drop-shadow(0 3px 3px rgba(0, 0, 0, 0.35));
-}
-
-.buy-icon {
-  width: 22px;
-  height: 22px;
-  margin-bottom: 4px;
-  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35));
 }

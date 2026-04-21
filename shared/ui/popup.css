@@ -1,115 +1,209 @@
-/* ==========================================
-   PHILIPS GLASS POPUP THEME
-========================================== */
+/* ================================================================
+   SHARED POPUP — shared/ui/popup.css
+   Philips Lighting Style
+================================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@700;900&family=Barlow+Condensed:wght@700;900&display=swap');
+
+/* Overlay */
 .philips-popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.25s ease;
+    background: rgba(0, 7, 26, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: popup-bg-in 0.2s ease;
 }
 
-.philips-popup-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ===============================
-     POPUP CARD
-  ================================ */
-
-.philips-popup {
-    width: 90%;
-    max-width: 360px;
-    padding: 28px 24px;
-    border-radius: 18px;
-    text-align: center;
-
-    background: rgba(30, 41, 59, 0.85);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-
-    animation: popupScale 0.25s ease;
-}
-
-/* ===============================
-     TITLE
-  ================================ */
-
-.philips-popup h3 {
-    margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-/* ===============================
-     MESSAGE
-  ================================ */
-
-.philips-popup p {
-    margin-bottom: 22px;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.4;
-}
-
-/* ===============================
-     BUTTON
-  ================================ */
-
-.philips-popup button {
-    padding: 10px 22px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: 0.2s ease;
-    color: white;
-}
-
-/* Default (info) */
-.philips-popup.info button {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-}
-
-/* Success */
-.philips-popup.success button {
-    background: linear-gradient(135deg, #00c896, #00a87e);
-}
-
-/* Error */
-.philips-popup.error button {
-    background: linear-gradient(135deg, #ff4d4d, #e11d48);
-}
-
-/* Hover effect */
-.philips-popup button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* ===============================
-     ANIMATION
-  ================================ */
-
-@keyframes popupScale {
+@keyframes popup-bg-in {
     from {
-        transform: scale(0.85);
         opacity: 0;
     }
 
     to {
-        transform: scale(1);
         opacity: 1;
     }
+}
+
+/* Box */
+.philips-popup-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 32px 28px;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    animation: popup-rise 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popup-rise {
+    from {
+        transform: scale(0.85) translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Icon */
+.philips-popup-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.6rem;
+}
+
+.philips-popup-icon.success {
+    background: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+}
+
+.philips-popup-icon.error {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+}
+
+.philips-popup-icon.warning {
+    background: rgba(245, 216, 0, 0.18);
+    color: #c4ac00;
+}
+
+.philips-popup-icon.info {
+    background: rgba(0, 33, 160, 0.1);
+    color: #0033a0;
+}
+
+/* Title */
+.philips-popup-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: #0d1b3e;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+/* Message */
+.philips-popup-message {
+    font-size: 0.88rem;
+    color: #6b7280;
+    line-height: 1.65;
+    margin-bottom: 22px;
+}
+
+/* OK Button */
+.philips-popup-btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 9px;
+    background: #0033a0;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(0, 33, 160, 0.3);
+}
+
+.philips-popup-btn:hover {
+    background: #001f6b;
+    transform: translateY(-1px);
+}
+
+/* Gift page custom popup (uses .popup-overlay/.popup-box/.popup-icon) */
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 7, 26, 0.75);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.popup-overlay[style*="flex"] {
+    display: flex;
+}
+
+.popup-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 32px 28px;
+    max-width: 320px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    animation: popup-rise 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.popup-box .popup-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(0, 33, 160, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.5rem;
+}
+
+.popup-box h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    color: #0d1b3e;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.popup-box p {
+    font-size: 0.88rem;
+    color: #6b7280;
+    line-height: 1.65;
+    margin-bottom: 20px;
+}
+
+#popupOkBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #0033a0;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: all 0.2s;
+}
+
+#popupOkBtn:hover {
+    background: #001f6b;
 }

@@ -73,7 +73,7 @@ async function loadProfile() {
 
     console.error("Profile Error:", error);
 
-    showToast("Connection Lost. Please login again.");
+    showToast("Server Error. Please Login Again.");
 
     localStorage.removeItem("token");
 

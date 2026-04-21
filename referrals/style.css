@@ -1,182 +1,248 @@
-/* ================= GLOBAL ================= */
+/* ================================================================
+   REFERRALS PAGE — referrals/style.css
+   Philips Lighting Style
+   Covers: .container, .page-title, .card, .card-header,
+           .card-icon, .referral-box, #referralLink, #copyBtn,
+           .copy-icon, .reward-item, .view-team-btn, .nav-icon
+================================================================ */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  background: #0f172a;
-  color: white;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #111827;
-  padding: 10px 6%;
-}
-
+/* ── NAV RIGHT — View Team button ───────────────────────────── */
 .nav-right {
   margin-left: auto;
   display: flex;
   align-items: center;
+  padding-right: 4px;
 }
 
 .view-team-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #fff;
+  gap: 7px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+  border-radius: 6px;
+  padding: 9px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: 0.3s;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 14px rgba(245, 216, 0, 0.35);
 }
 
 .view-team-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--yellow-glow);
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(245, 216, 0, 0.6);
 }
 
 .nav-icon {
   width: 18px;
   height: 18px;
+  flex-shrink: 0;
 }
 
-/* ================= PAGE ================= */
-
+/* ── CONTAINER ───────────────────────────────────────────────── */
 .container {
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
+  padding: 16px 16px calc(var(--bottom-h, 72px) + 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
+/* ── PAGE TITLE ──────────────────────────────────────────────── */
 .page-title {
-  font-size: 22px;
-  margin-bottom: 20px;
-  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  position: relative;
+  padding-left: 14px;
 }
 
-/* ================= CARD ================= */
-
-.card {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 14px;
-  padding: 16px 12px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.35),
-    inset 0 0 12px rgba(255, 255, 255, 0.05);
+.page-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: var(--yellow);
+  border-radius: 2px;
 }
 
+/* ── REFERRAL CARDS ──────────────────────────────────────────── */
+.container .card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-lt);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.container .card:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── CARD HEADER ─────────────────────────────────────────────── */
 .card-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 15px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  border-bottom: 1px solid rgba(245, 216, 0, 0.12);
 }
 
 .card-icon {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
 }
 
-/* ================= REFERRAL LINK BOX ================= */
+.card-header span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
 
+/* ── REFERRAL BOX ────────────────────────────────────────────── */
 .referral-box {
   display: flex;
+  align-items: center;
   gap: 10px;
+  padding: 18px;
 }
 
-.referral-box input {
+#referralLink {
   flex: 1;
-  background: #0c0f14;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 14px;
+  background: var(--off);
+  border: 1.5px solid var(--gray-lt);
+  border-radius: 7px;
+  padding: 11px 14px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  color: var(--blue);
   outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: border-color 0.2s;
+  cursor: default;
 }
 
-.referral-box input::selection {
-  background: #00f5a0;
-  color: #000;
+#referralLink:focus {
+  border-color: var(--blue);
 }
 
 #copyBtn {
-  width: 44px;
-  border: none;
+  width: 42px;
+  height: 42px;
   border-radius: 8px;
-  background: #0c0f14;
+  background: var(--yellow);
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  transition: all 0.2s;
+  box-shadow: 0 3px 10px rgba(245, 216, 0, 0.4);
 }
 
 #copyBtn:hover {
-  background: #151c24;
-  transform: scale(1.05);
+  background: var(--yellow-glow);
+  transform: scale(1.08);
+  box-shadow: 0 5px 18px rgba(245, 216, 0, 0.6);
+}
+
+#copyBtn:active {
+  transform: scale(0.96);
 }
 
 .copy-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
-/* ================= REWARD INFO ================= */
-
+/* ── REWARD ITEMS ────────────────────────────────────────────── */
 .reward-item {
-  margin-bottom: 14px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--off);
+}
+
+.reward-item:last-child {
+  border-bottom: none;
 }
 
 .reward-item strong {
   display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-  color: #00f5a0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 7px;
 }
 
 .reward-item p {
-  font-size: 13px;
-  color: #cfd6df;
-  line-height: 1.5;
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.65;
+  margin-bottom: 4px;
 }
 
-/* ================= MOBILE ================= */
+.reward-item p:last-child {
+  margin-bottom: 0;
+}
 
-@media (max-width:480px) {
+/* Level % highlight */
+.reward-item p:has(strong),
+.reward-item p b {
+  color: var(--blue);
+  font-weight: 700;
+}
 
+/* Level rows — small pill style */
+.reward-item:last-child p {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  background: var(--off);
+  border-radius: 5px;
+  padding: 5px 12px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--blue);
+  border: 1px solid var(--gray-lt);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (min-width: 640px) {
   .container {
-    padding: 15px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
+}
 
-  .page-title {
-    font-size: 20px;
+@media (min-width: 900px) {
+  .container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  .card {
-    padding: 16px;
-  }
-
 }

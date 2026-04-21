@@ -1,175 +1,370 @@
-* {
-    box-sizing: border-box;
+/* ================================================================
+   WALLET SHARED BASE — used by recharge.css & withdraw.css
+   Philips Lighting Style
+   File: wallet/recharge.css  (also import into withdraw.css)
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+:root {
+    --blue: #0033a0;
+    --blue-dark: #001f6b;
+    --blue-darker: #00071a;
+    --blue-light: #1a56d6;
+    --yellow: #f5d800;
+    --yellow-glow: #ffe033;
+    --yellow-dark: #c4ac00;
+    --white: #ffffff;
+    --off: #f0f3fa;
+    --off2: #e4e9f5;
+    --gray: #6b7280;
+    --gray-lt: #dde2ef;
+    --text: #0d1b3e;
+    --green: #16a34a;
+    --red: #dc2626;
+    --orange: #ea580c;
+    --shadow: 0 4px 24px rgba(0, 33, 160, 0.10);
+    --shadow-lg: 0 16px 48px rgba(0, 33, 160, 0.18);
+    --radius: 12px;
+    --top-h: 62px;
+}
+
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background: #0f172a;
-    font-family: Arial, sans-serif;
-    color: white;
+    font-family: 'Barlow', sans-serif;
+    background: var(--off);
+    color: var(--text);
+    min-height: 100vh;
 }
 
-/* CONTAINER */
+/* ── WALLET CONTAINER ─────────────────────────────────────────── */
 .wallet-container {
-    width: 100%;
-    max-width: 420px;
-    margin: auto;
+    margin-top: var(--top-h);
+    padding: 20px 16px 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 90px 16px 40px;
+    gap: 16px;
 }
 
-/* TABS */
+/* ── NAV RIGHT BUTTON (Records link in top-nav) ──────────────── */
+.nav-right-btn {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 7px;
+    padding: 8px 13px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-right-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+}
+
+/* ── TABS (INR / USDT) ───────────────────────────────────────── */
 .payment-tabs {
     display: flex;
-    width: 100%;
-    border-radius: 40px;
-    background: #12284a;
-    padding: 6px;
-    margin-bottom: 25px;
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-lt);
+    padding: 5px;
+    gap: 4px;
+    box-shadow: var(--shadow);
 }
 
 .tab-btn {
     flex: 1;
-    padding: 12px;
-    border-radius: 30px;
+    padding: 11px;
     border: none;
-    font-weight: 600;
+    border-radius: 8px;
     background: transparent;
-    color: #cbd5e1;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
     cursor: pointer;
+    transition: all 0.25s;
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, #00ff88, #00c6ff);
-    color: #001f3f;
-    box-shadow: 0 0 18px rgba(0, 255, 150, 0.4);
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: 0 3px 12px rgba(0, 33, 160, 0.25);
 }
 
-/* CARD */
+/* ── WALLET CARD ─────────────────────────────────────────────── */
 .wallet-card {
-    width: 100%;
-    background: linear-gradient(145deg, #002b5c, #003b7a);
-    padding: 28px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
-    margin-bottom: 22px;
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-lt);
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-/* INPUT */
-.wallet-card input {
-    width: 100%;
-    padding: 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(0, 200, 255, 0.3);
-    background: #0f172a;
-    color: white;
-    margin-top: 10px;
-    margin-bottom: 20px;
+.wallet-card label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 7px;
 }
 
-/* AMOUNT BUTTONS */
+.wallet-card label i {
+    color: var(--blue);
+    font-size: 0.82rem;
+}
+
+.wallet-card input,
+.wallet-card select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--gray-lt);
+    border-radius: 8px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text);
+    background: var(--off);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.wallet-card input:focus,
+.wallet-card select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0, 33, 160, 0.08);
+    background: var(--white);
+}
+
+.wallet-card input[readonly] {
+    cursor: default;
+    color: var(--blue);
+    font-weight: 600;
+}
+
+/* ── AMOUNT OPTION BUTTONS ───────────────────────────────────── */
 .amount-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
 
 .amount-btn {
-    padding: 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(0, 200, 255, 0.4);
-    background: #0f2a4d;
-    color: white;
-    font-weight: 600;
+    padding: 12px 8px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-lt);
+    background: var(--off);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text);
     cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.amount-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: rgba(0, 33, 160, 0.04);
 }
 
 .amount-btn.active {
-    background: linear-gradient(135deg, #00ff88, #00c6ff);
-    color: #001f3f;
-    box-shadow: 0 0 15px rgba(0, 255, 150, 0.4);
+    border-color: var(--blue);
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: 0 3px 12px rgba(0, 33, 160, 0.25);
 }
 
-/* BUTTON */
+/* ── WALLET BUTTONS ──────────────────────────────────────────── */
 .wallet-btn {
     width: 100%;
     padding: 14px;
-    border-radius: 30px;
     border: none;
-    font-weight: 600;
-    font-size: 15px;
+    border-radius: 9px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s;
+    min-height: 50px;
+}
+
+.wallet-btn i {
+    font-size: 0.9rem;
 }
 
 .recharge-style {
-    background: linear-gradient(135deg, #00ff88, #00c6ff);
-    color: #001f3f;
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(0, 33, 160, 0.3);
+}
+
+.recharge-style:hover:not(:disabled) {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(0, 33, 160, 0.45);
+}
+
+.recharge-style:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
 }
 
 .convert-style {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
+    background: var(--yellow);
+    color: var(--blue-dark);
+    box-shadow: 0 4px 14px rgba(245, 216, 0, 0.4);
 }
 
-/* USDT */
+.convert-style:hover {
+    background: var(--yellow-glow);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(245, 216, 0, 0.6);
+}
+
+/* ── USDT SECTION ────────────────────────────────────────────── */
+.usdt-balance-card {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    border: 1px solid rgba(245, 216, 0, 0.15);
+}
+
+.usdt-balance-card label,
+.usdt-balance-card .usdt-balance-header span {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.usdt-balance-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.usdt-balance-header i {
+    color: var(--yellow);
+}
+
+.usdt-balance-amount {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+
+.usdt-balance-amount #usdtBalance {
+    color: var(--yellow);
+}
+
+.usdt-balance-inr {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: -4px;
+}
+
+.usdt-network-badge {
+    background: rgba(245, 216, 0, 0.12);
+    border: 1px solid rgba(245, 216, 0, 0.25);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--yellow-dark);
+    letter-spacing: 0.06em;
+}
+
 .usdt-address-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #0f172a;
-    border-radius: 12px;
-    padding: 12px;
-    border: 1px solid rgba(0, 200, 255, 0.3);
-    margin-bottom: 20px;
+    background: var(--off);
+    border: 1.5px solid var(--gray-lt);
+    border-radius: 8px;
+    padding: 10px 14px;
 }
 
 .usdt-address {
     flex: 1;
-    font-size: 13px;
+    font-size: 0.78rem;
+    color: var(--blue);
+    font-weight: 600;
     word-break: break-all;
+    line-height: 1.5;
 }
 
 .copy-icon-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+    background: var(--yellow);
     border: none;
-    background: none;
-    color: #00c6ff;
-    font-size: 18px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
 }
 
-
-.usdt-network-badge {
-    padding: 8px 14px;
-    border-radius: 20px;
-    background: rgba(0, 200, 255, 0.1);
-    border: 1px solid rgba(0, 200, 255, 0.3);
-    margin-bottom: 15px;
-    font-size: 13px;
+.copy-icon-btn:hover {
+    background: var(--yellow-glow);
+    transform: scale(1.08);
 }
 
-/* BALANCE */
-.usdt-balance-card {
-    text-align: center;
+.copy-icon-btn i {
+    color: var(--blue-dark);
+    font-size: 0.82rem;
 }
 
-.usdt-balance-amount {
-    font-size: 26px;
-    color: #00ff88;
-    margin-top: 10px;
-}
-
-.usdt-balance-inr {
-    opacity: 0.7;
-    font-size: 13px;
-}
-
-
-/* MOBILE */
-@media(max-width:480px) {
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (min-width: 640px) {
     .wallet-container {
-        padding: 85px 14px 40px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+@media (min-width: 900px) {
+    .wallet-container {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

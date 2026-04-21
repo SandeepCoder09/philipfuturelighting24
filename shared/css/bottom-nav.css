@@ -1,73 +1,84 @@
-/* ============================= */
-/*   UNIVERSAL PHILIPS NAV CSS  */
-/* ============================= */
+/* ================================================================
+   SHARED — BOTTOM NAV CSS
+   File: shared/css/bottom-nav.css
+   Philips Lighting Style
+================================================================ */
 
-/* Bottom Navigation Container */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@700&display=swap');
+
+:root {
+  --bottom-h: 72px;
+  --yellow: #f5d800;
+  --blue-darker: #00071a;
+}
+
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: linear-gradient(135deg, #071a2f, #0f172a);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 1px solid rgba(0, 198, 255, 0.15);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.6);
-    z-index: 9999;
-  }
-  
-  /* Nav Buttons */
-  .nav-btn {
-    flex: 1;
-    height: 100%;
-    text-decoration: none;
-    color: #94a3b8;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    transition: all 0.3s ease;
-  }
-  
-  /* Icons */
-  .nav-btn i {
-    font-size: 18px;
-    transition: all 0.3s ease;
-  }
-  
-  /* Hover */
-  .nav-btn:hover {
-    color: #ffffff;
-  }
-  
-  .nav-btn:hover i {
-    transform: translateY(-3px);
-  }
-  
-  /* Active State */
-  .nav-btn.active {
-    background: linear-gradient(135deg, #00B4FF, #007BFF);
-    color: #ffffff;
-    box-shadow: 0 0 18px rgba(0, 180, 255, 0.6);
-  }
-  
-  .nav-btn.active i {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Prevent content hiding */
-  body {
-    padding-bottom: 80px;
-  }
-  
-  /* ===== ACTIVE NAV ===== */
-  .nav-btn.active {
-    background: linear-gradient(90deg, #00c3ff, #007bff);
-    color: white !important;
-    border-radius: 20px;
-  }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  height: var(--bottom-h);
+  background: rgba(0, 7, 26, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(245, 216, 0, 0.15);
+  display: flex;
+  align-items: stretch;
+  padding: 0 8px;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 10px;
+  margin: 8px 4px;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.nav-btn i {
+  font-size: 1.25rem;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.nav-btn:hover,
+.nav-btn:active {
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-btn.active {
+  color: var(--yellow);
+  background: rgba(245, 216, 0, 0.08);
+}
+
+.nav-btn.active i {
+  color: var(--yellow);
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px rgba(245, 216, 0, 0.7));
+}
+
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--yellow);
+  box-shadow: 0 0 8px rgba(245, 216, 0, 0.8);
+}

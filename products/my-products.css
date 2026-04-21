@@ -1,55 +1,111 @@
-/* ==================================================
-   MY PRODUCTS PAGE
-   Matches products/index card style
-================================================== */
+/* ================================================================
+   MY PRODUCTS PAGE — products/my-products.css
+   Philips Lighting Style
+   Covers: .page-content, .products-list, .card, .card-image,
+           .card-content, .card-text, .collect-section,
+           .countdown, .collect-btn, .status-badge, .toast,
+           .empty-state, .loading-text
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+:root {
+  --blue: #0033a0;
+  --blue-dark: #001f6b;
+  --blue-darker: #00071a;
+  --blue-light: #1a56d6;
+  --yellow: #f5d800;
+  --yellow-glow: #ffe033;
+  --yellow-dark: #c4ac00;
+  --white: #ffffff;
+  --off: #f0f3fa;
+  --off2: #e4e9f5;
+  --gray: #6b7280;
+  --gray-lt: #dde2ef;
+  --text: #0d1b3e;
+  --green: #16a34a;
+  --red: #dc2626;
+  --shadow: 0 4px 24px rgba(0, 33, 160, 0.10);
+  --shadow-lg: 0 16px 48px rgba(0, 33, 160, 0.18);
+  --radius: 12px;
+  --top-h: 62px;
+  --bottom-h: 72px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  background: #0f172a;
-  color: #ffffff;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Barlow', sans-serif;
+  background: var(--off);
+  color: var(--text);
+  min-height: 100vh;
 }
 
-/* ================= PAGE CONTENT ================= */
-
+/* ── PAGE CONTENT ─────────────────────────────────────────────── */
 .page-content {
-  margin-top: 70px;
-  /* space for fixed top-nav */
-  padding: 20px 3% 120px;
+  margin-top: var(--top-h);
+  padding: 20px 16px calc(var(--bottom-h) + 20px);
 }
 
+/* ── PRODUCTS LIST ───────────────────────────────────────────── */
 .products-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
-/* ================= CARD ================= */
-
+/* ── CARD ────────────────────────────────────────────────────── */
 .card {
   display: flex;
-  align-items: center;
-  background: linear-gradient(145deg, #002b5c, #003b7a);
-  border-radius: 16px;
+  align-items: stretch;
+  background: var(--white);
+  border-radius: var(--radius);
   height: 130px;
   width: 100%;
-  border: 1px solid rgba(0, 170, 255, 0.25);
+  border: 1px solid var(--gray-lt);
   overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-  transition: 0.25s ease;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  position: relative;
 }
 
-/* .card:hover {
+.card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 255, 150, 0.25);
-} */
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue);
+}
 
-/* ================= IMAGE ================= */
-
-.card-image {
-  width: 150px;
+/* Yellow left accent */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
   height: 100%;
-  background: #012a4a;
+  background: var(--yellow);
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index: 1;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* ── CARD IMAGE ──────────────────────────────────────────────── */
+.card-image {
+  width: 130px;
+  height: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--blue-darker), var(--blue-dark));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,189 +115,280 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
 }
 
-/* ================= CONTENT ================= */
+.card:hover .card-image img {
+  transform: scale(1.06);
+}
 
+/* ── CARD CONTENT ────────────────────────────────────────────── */
 .card-content {
   flex: 1;
-  padding: 12px 14px;
+  padding: 13px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  min-width: 0;
 }
 
-/* LEFT SIDE TEXT */
-
+/* ── CARD TEXT ───────────────────────────────────────────────── */
 .card-text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
 }
 
 .card-text h2 {
-  font-size: 16px;
-  color: #33d6ff;
-  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 0.98rem;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  letter-spacing: 0.04em;
+  margin: 0 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.price {
-  font-size: 13px;
+.card-text .price {
+  font-size: 0.82rem;
   font-weight: 700;
-  color: #00ff88;
+  color: var(--blue);
   margin: 0;
 }
 
-.product-row {
-  font-size: 12px;
-  color: #dbeafe;
+.card-text .product-row {
+  font-size: 0.78rem;
+  color: var(--gray);
+  font-weight: 400;
   margin: 0;
+  line-height: 1.5;
 }
 
-.highlight {
-  color: #00ff88;
+.card-text .total-earned {
+  margin-top: 2px;
+}
+
+.card-text .highlight {
+  color: var(--green);
   font-weight: 700;
 }
 
-/* ================= RIGHT SIDE (COLLECT/TIMER) ================= */
-
+/* ── COLLECT SECTION ─────────────────────────────────────────── */
 .collect-section {
-  min-width: 110px;
+  flex-shrink: 0;
+  min-width: 100px;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-end;
 }
 
-/* Countdown Badge */
-
+/* ── COUNTDOWN ───────────────────────────────────────────────── */
 .countdown {
-  font-size: 12px;
-  font-weight: 600;
-  color: #ffffff;
-  background: rgba(0, 200, 255, 0.25);
-  padding: 6px 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(0, 200, 255, 0.4);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--blue);
+  background: rgba(0, 33, 160, 0.07);
+  padding: 7px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 33, 160, 0.18);
   text-align: center;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
-/* Collect Button */
-
+/* ── COLLECT BUTTON ──────────────────────────────────────────── */
 .collect-btn {
-  padding: 6px 16px;
-  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
   border-radius: 20px;
-  background: linear-gradient(135deg, #00ff88, #00c6ff);
-  color: #001f3f;
+  background: var(--yellow);
+  color: var(--blue-dark);
   border: none;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.25s ease;
-  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.3);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(245, 216, 0, 0.4);
 }
 
-.collect-btn:hover {
+.collect-btn:hover:not(:disabled) {
+  background: var(--yellow-glow);
   transform: scale(1.05);
+  box-shadow: 0 5px 18px rgba(245, 216, 0, 0.6);
+}
+
+.collect-btn:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .collect-btn:disabled {
-  background: #444;
-  color: #999;
+  background: var(--gray-lt);
+  color: var(--gray);
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* Expired Badge */
-
+/* ── STATUS BADGES ───────────────────────────────────────────── */
 .status-badge {
+  display: inline-flex;
+  align-items: center;
   padding: 6px 12px;
-  border-radius: 18px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .status-expired {
-  background: rgba(255, 77, 77, 0.15);
-  color: #ff4d4d;
-  border: 1px solid rgba(255, 77, 77, 0.4);
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--red);
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
-/* ================= LOADING / EMPTY ================= */
-
+/* ── LOADING TEXT ────────────────────────────────────────────── */
 .loading-text {
   text-align: center;
-  font-size: 14px;
-  opacity: 0.8;
+  padding: 48px 16px;
+  color: var(--gray);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
+.loading-text i {
+  color: var(--blue);
+  font-size: 1.2rem;
+}
+
+/* ── EMPTY STATE ─────────────────────────────────────────────── */
 .empty-state {
   text-align: center;
-  margin-top: 60px;
-  opacity: 0.8;
+  padding: 60px 24px;
 }
 
 .empty-state i {
-  font-size: 42px;
+  font-size: 3rem;
+  color: var(--blue-light);
   margin-bottom: 14px;
-  color: #00aaff;
+  display: block;
+  opacity: 0.6;
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .browse-btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 8px 18px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #00ff88, #00c6ff);
-  color: #001f3f;
+  display: inline-flex;
+  align-items: center;
+  padding: 11px 24px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: var(--white);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 33, 160, 0.25);
 }
 
-/* ================= MOBILE ================= */
-
-@media (max-width: 480px) {
-
-  .card {
-    height: 125px;
-  }
-
-  .card-image {
-    width: 130px;
-  }
-
-  .collect-section {
-    min-width: 95px;
-  }
-
-  .countdown {
-    font-size: 11px;
-    padding: 5px 10px;
-  }
-
-  .collect-btn {
-    font-size: 11px;
-    padding: 6px 14px;
-  }
+.browse-btn:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
 }
 
+/* ── TOAST ───────────────────────────────────────────────────── */
 .toast {
   position: fixed;
-  bottom: 90px;
+  bottom: calc(var(--bottom-h) + 12px);
   left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: #1b2430;
-  color: #fff;
-  padding: 12px 18px;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--text);
+  color: var(--white);
+  padding: 12px 22px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
   opacity: 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  border-left: 4px solid #00f5a0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  border-left: 4px solid var(--yellow);
+  white-space: nowrap;
+  z-index: 9999;
 }
 
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .page-content {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 900px) {
+  .page-content {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .products-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    height: 118px;
+  }
+
+  .card-image {
+    width: 110px;
+  }
+
+  .collect-section {
+    min-width: 88px;
+  }
+
+  .collect-btn {
+    font-size: 0.78rem;
+    padding: 7px 12px;
+  }
+
+  .countdown {
+    font-size: 0.75rem;
+    padding: 6px 9px;
+  }
 }

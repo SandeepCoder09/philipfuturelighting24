@@ -1,153 +1,382 @@
-/* ============================= */
-/* 🌌 GLOBAL */
-/* ============================= */
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #ffffff;
-    min-height: 100vh;
+/* ================================================================
+   TRANSACTION HISTORY — wallet/transactions.css
+   Philips Lighting Style
+   Covers: .filter-wrapper, .filter-container, select,
+           .transactions-wrapper, .transaction-item,
+           .transaction-left, .transaction-type, .transaction-date,
+           .transaction-id, .transaction-amount, status classes
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+:root {
+  --blue: #0033a0;
+  --blue-dark: #001f6b;
+  --blue-darker: #00071a;
+  --blue-light: #1a56d6;
+  --yellow: #f5d800;
+  --yellow-dark: #c4ac00;
+  --white: #ffffff;
+  --off: #f0f3fa;
+  --off2: #e4e9f5;
+  --gray: #6b7280;
+  --gray-lt: #dde2ef;
+  --text: #0d1b3e;
+  --green: #16a34a;
+  --red: #dc2626;
+  --orange: #ea580c;
+  --purple: #7c3aed;
+  --shadow: 0 4px 24px rgba(0, 33, 160, 0.10);
+  --shadow-lg: 0 16px 48px rgba(0, 33, 160, 0.18);
+  --radius: 12px;
+  --top-h: 62px;
+  --filter-h: 60px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--off);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── FILTER BAR ──────────────────────────────────────────────── */
+.filter-wrapper {
+  position: fixed;
+  top: var(--top-h);
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-lt);
+  height: var(--filter-h);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 2px 12px rgba(0, 33, 160, 0.06);
+}
+
+.filter-container {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* Custom arrow */
+.filter-container::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--blue);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+#transactionFilter {
+  width: 100%;
+  padding: 10px 38px 10px 14px;
+  border: 1.5px solid var(--gray-lt);
+  border-radius: 8px;
+  background: var(--off);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#transactionFilter:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(0, 33, 160, 0.08);
+  background: var(--white);
+}
+
+/* ── TRANSACTIONS WRAPPER ────────────────────────────────────── */
+.transactions-wrapper {
+  margin-top: calc(var(--top-h) + var(--filter-h));
+  padding: 16px 16px 40px;
+}
+
+#transactionList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Loading / Error text */
+#transactionList>p {
+  text-align: center;
+  padding: 48px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray) !important;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-lt);
+  box-shadow: var(--shadow);
+}
+
+/* ── TRANSACTION ITEM ────────────────────────────────────────── */
+.transaction-item {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-lt);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  animation: item-in 0.35s ease both;
+}
+
+@keyframes item-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  
-  /* ============================= */
-  /* 🔽 FIXED FILTER */
-  /* ============================= */
-  .filter-wrapper {
-    position: fixed;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    background: #0f172a;
-    padding: 15px 0;
-    z-index: 900;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .filter-container {
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-  
-  #transactionFilter {
-    width: 90%;
-    max-width: 400px;
-    padding: 12px 40px 12px 18px;
-    border-radius: 25px;
-    border: 1px solid rgba(0, 207, 255, 0.4);
-    font-size: 14px;
-    font-weight: 600;
-    background: rgba(0, 207, 255, 0.15);
-    color: #00cfff;
-    backdrop-filter: blur(10px);
-    cursor: pointer;
-    outline: none;
-    appearance: none;
-    box-shadow: 0 0 12px rgba(0, 207, 255, 0.3);
-  }
-  
-  /* Custom Arrow */
-  .filter-container::after {
-    content: "\f078";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    right: 7%;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #00cfff;
-    pointer-events: none;
-    font-size: 12px;
-  }
-  
-  /* ============================= */
-  /* 📦 TRANSACTIONS WRAPPER */
-  /* ============================= */
+}
+
+.transaction-item:hover {
+  transform: translateX(4px);
+  border-color: var(--blue);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Left color stripe by transaction type */
+.transaction-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+
+.transaction-item.type-recharge::before,
+.transaction-item.type-usdt_recharge::before {
+  background: var(--green);
+}
+
+.transaction-item.type-withdraw::before {
+  background: var(--red);
+}
+
+.transaction-item.type-purchase::before {
+  background: var(--blue);
+}
+
+.transaction-item.type-earning::before {
+  background: var(--yellow-dark);
+}
+
+.transaction-item.type-commission::before {
+  background: var(--orange);
+}
+
+.transaction-item.type-other::before {
+  background: var(--gray);
+}
+
+/* ── LEFT SECTION ────────────────────────────────────────────── */
+.transaction-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Type + Status pill */
+.transaction-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  align-self: flex-start;
+}
+
+/* Status-based colors for the type pill */
+.transaction-type.status-success,
+.transaction-type.status-completed,
+.transaction-type.status-approved {
+  background: rgba(22, 163, 74, 0.10);
+  color: var(--green);
+}
+
+.transaction-type.status-pending,
+.transaction-type.status-processing {
+  background: rgba(245, 216, 0, 0.14);
+  color: var(--yellow-dark);
+}
+
+.transaction-type.status-failed,
+.transaction-type.status-rejected,
+.transaction-type.status-cancelled {
+  background: rgba(220, 38, 38, 0.10);
+  color: var(--red);
+}
+
+/* Default / fallback */
+.transaction-type:not([class*="status-"]) {
+  background: rgba(0, 33, 160, 0.08);
+  color: var(--blue);
+}
+
+/* Date */
+.transaction-date {
+  font-size: 0.78rem;
+  color: var(--gray);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Order ID / Hash */
+.transaction-id {
+  font-size: 0.73rem;
+  color: var(--gray);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* ── AMOUNT ───────────────────────────────────────────────────── */
+.transaction-amount {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Color amount by type */
+.transaction-item.type-recharge .transaction-amount,
+.transaction-item.type-earning .transaction-amount,
+.transaction-item.type-commission .transaction-amount,
+.transaction-item.type-usdt_recharge .transaction-amount {
+  color: var(--green);
+}
+
+.transaction-item.type-withdraw .transaction-amount {
+  color: var(--red);
+}
+
+.transaction-item.type-purchase .transaction-amount {
+  color: var(--blue);
+}
+
+.transaction-item.type-other .transaction-amount {
+  color: var(--gray);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (min-width: 640px) {
+
+  .filter-wrapper,
   .transactions-wrapper {
-    width: 92%;
-    max-width: 620px;
-    margin: 140px auto 60px;  /* space for fixed nav + filter */
+    padding-left: 24px;
+    padding-right: 24px;
   }
-  
-  /* ============================= */
-  /* 💳 TRANSACTION CARD */
-  /* ============================= */
-  .transaction-item {
-    background: linear-gradient(145deg, #0a3d73, #0d4b8f);
-    border-radius: 20px;
-    padding: 14px 18px;      /* reduced padding */
-    margin-bottom: 12px;     /* reduced gap */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 900px) {
+  .filter-wrapper {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 900px;
+    border-radius: 0 0 12px 12px;
+    padding: 0 0;
   }
-  
-  /* LEFT SIDE */
-  .transaction-left {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+
+  .filter-container {
+    padding: 0;
   }
-  
-  .transaction-type {
-    font-weight: 600;
-    font-size: 14px;
+
+  .transactions-wrapper {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
   }
-  
-  .transaction-date {
-    font-size: 11px;
-    opacity: 0.7;
-  }
-  
-  .transaction-status {
-    font-size: 11px;
-    margin-top: 2px;
-  }
-  
-  /* RIGHT SIDE */
-  .transaction-amount {
-    font-size: 17px;
-    font-weight: bold;
-  }
-  
-  /* ============================= */
-  /* 🎨 TYPE BORDER COLORS */
-  /* ============================= */
-  .type-recharge { border-left: 5px solid #00ff88; }
-  .type-withdraw { border-left: 5px solid #ff4d4d; }
-  .type-purchase { border-left: 5px solid #ffaa00; }
-  .type-earning  { border-left: 5px solid #00cfff; }
-  
-  /* STATUS COLORS */
-  .status-success {
-    color: #00ff88;
-  }
-  
-  .status-pending,
-  .status-processing,
-  .status-under-review {
-    color: #ffd000;
-  }
-  
-  .status-failed,
-  .status-rejected {
-    color: #ff4d4d;
-  }
-  
-  /* TYPE COLORS */
-  .type-recharge {
-    border-left: 5px solid #00ff88;
-  }
-  
-  .type-withdraw {
-    border-left: 5px solid #ff4d4d;
-  }
-  
-  .type-purchase {
-    border-left: 5px solid #ffaa00;
-  }
-  
-  .type-earning {
-    border-left: 5px solid #19d1ff;
-  }
+}
+
+/* Stagger animation delay for items */
+.transaction-item:nth-child(1) {
+  animation-delay: 0.03s;
+}
+
+.transaction-item:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.transaction-item:nth-child(3) {
+  animation-delay: 0.09s;
+}
+
+.transaction-item:nth-child(4) {
+  animation-delay: 0.12s;
+}
+
+.transaction-item:nth-child(5) {
+  animation-delay: 0.15s;
+}
+
+.transaction-item:nth-child(6) {
+  animation-delay: 0.18s;
+}
+
+.transaction-item:nth-child(7) {
+  animation-delay: 0.21s;
+}
+
+.transaction-item:nth-child(8) {
+  animation-delay: 0.24s;
+}
+
+.transaction-item:nth-child(9) {
+  animation-delay: 0.27s;
+}
+
+.transaction-item:nth-child(10) {
+  animation-delay: 0.30s;
+}

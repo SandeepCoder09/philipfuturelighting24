@@ -1,211 +1,199 @@
-/* ==================================================
-   GLOBAL
-================================================== */
+/* ================================================================
+   USDT CONVERT — wallet/usdt-covert/convert.css
+================================================================ */
 
-body {
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+:root {
+  --blue: #0033a0;
+  --blue-dark: #001f6b;
+  --blue-darker: #00071a;
+  --yellow: #f5d800;
+  --yellow-glow: #ffe033;
+  --yellow-dark: #c4ac00;
+  --white: #ffffff;
+  --off: #f0f3fa;
+  --gray: #6b7280;
+  --gray-lt: #dde2ef;
+  --text: #0d1b3e;
+  --green: #16a34a;
+  --red: #dc2626;
+  --shadow: 0 4px 24px rgba(0, 33, 160, 0.10);
+  --shadow-lg: 0 16px 48px rgba(0, 33, 160, 0.18);
+  --radius: 12px;
+  --top-h: 62px;
+}
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #ffffff;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--off);
+  color: var(--text);
   min-height: 100vh;
 }
-
-.back-btn i {
-  margin-right: 5px;
-}
-
-.back-btn {
-  position: absolute;
-  left: 15px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.05);
-  color: #ffffff;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-/* ==================================================
-   WRAPPER
-================================================== */
 
 .convert-wrapper {
-  min-height: 100vh;
+  margin-top: var(--top-h);
+  padding: 20px 16px 40px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 90px 20px 40px; /* space for fixed top-nav */
+  justify-content: center;
 }
-
-/* ==================================================
-   CONVERT CARD
-================================================== */
 
 .convert-container {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-lt);
+  padding: 28px 22px;
+  box-shadow: var(--shadow-lg);
   width: 100%;
-  max-width: 340px;
-  background: linear-gradient(145deg, #002b5c, #003b7a);
-  border-radius: 22px;
-  padding: 28px;
-  border: 1px solid rgba(0, 170, 255, 0.25);
-  box-shadow: 0 15px 40px rgba(0, 114, 255, 0.25);
-  position: relative;
-  overflow: hidden;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  transition: 0.3s ease;
+  gap: 18px;
 }
-
-/* .convert-container:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 50px rgba(0, 255, 150, 0.25);
-} */
-
-/* Soft glow effect */
-.convert-container::before {
-  content: "";
-  position: absolute;
-  top: -40%;
-  right: -40%;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(0,255,150,0.15), transparent);
-  filter: blur(50px);
-}
-
-/* ==================================================
-   TITLE
-================================================== */
 
 .convert-container h2 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  letter-spacing: 0.05em;
+  position: relative;
+  padding-left: 14px;
 }
 
-/* ==================================================
-   BALANCE BOX
-================================================== */
+.convert-container h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: var(--yellow);
+  border-radius: 2px;
+}
 
 .balance-box {
-  background: rgba(0, 200, 255, 0.08);
-  border: 1px solid rgba(0, 200, 255, 0.25);
-  border-radius: 16px;
-  padding: 16px;
-  font-size: 14px;
-  line-height: 1.6;
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  border-radius: 10px;
+  padding: 18px 16px;
+  border: 1px solid rgba(245, 216, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .balance-box p {
-  margin: 6px 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.balance-box strong {
-  color: #00ff88;
+.balance-box p strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  color: var(--yellow);
 }
 
-/* ==================================================
-   INPUT
-================================================== */
+.input-group {
+  display: flex;
+  align-items: center;
+  background: var(--off);
+  border: 1.5px solid var(--gray-lt);
+  border-radius: 8px;
+  padding: 0 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group:focus-within {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(0, 33, 160, 0.08);
+  background: var(--white);
+}
 
 .input-group input {
-  width: 90%;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid rgba(0, 200, 255, 0.3);
-  background: #0f172a;
-  color: white;
-  font-size: 15px;
+  flex: 1;
+  border: none;
   outline: none;
-  transition: 0.25s ease;
+  background: transparent;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 13px 0;
 }
 
 .input-group input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--gray);
 }
-
-.input-group input:focus {
-  border-color: #00ff88;
-  box-shadow: 0 0 14px rgba(0, 255, 150, 0.4);
-}
-
-/* ==================================================
-   PREVIEW
-================================================== */
 
 .conversion-preview {
-  background: rgba(0, 255, 150, 0.08);
-  border: 1px solid rgba(0, 255, 150, 0.25);
-  border-radius: 14px;
-  padding: 14px;
-  font-size: 14px;
-  text-align: center;
+  background: rgba(22, 163, 74, 0.07);
+  border: 1px solid rgba(22, 163, 74, 0.18);
+  border-radius: 8px;
+  padding: 13px 16px;
 }
 
-.conversion-preview strong {
-  color: #00ff88;
-  font-size: 16px;
+.conversion-preview p {
+  font-size: 0.9rem;
+  color: var(--text);
 }
 
-/* ==================================================
-   BUTTON
-================================================== */
+.conversion-preview p strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  color: var(--green);
+}
 
 .convert-btn {
+  width: 100%;
   padding: 14px;
-  border-radius: 30px;
   border: none;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: white;
-  font-weight: 600;
-  font-size: 15px;
+  border-radius: 9px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+  transition: all 0.25s;
+  min-height: 50px;
+  box-shadow: 0 4px 14px rgba(245, 216, 0, 0.4);
 }
 
-/* .convert-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(34, 197, 94, 0.6);
-} */
+.convert-btn:hover:not(:disabled) {
+  background: var(--yellow-glow);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(245, 216, 0, 0.6);
+}
 
 .convert-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
-/* ==================================================
-   MESSAGE
-================================================== */
-
 .convert-message {
   text-align: center;
-  font-size: 14px;
-  min-height: 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-height: 20px;
 }
 
-/* ==================================================
-   MOBILE OPTIMIZATION
-================================================== */
-
-@media (max-width: 480px) {
-
-  .convert-container {
-    max-width: 320px;
-    padding: 22px;
+@media (min-width: 640px) {
+  .convert-wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
   }
-
-  .convert-container h2 {
-    font-size: 18px;
-  }
-
 }
