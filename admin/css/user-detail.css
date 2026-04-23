@@ -1,208 +1,324 @@
-/* ==========================================
-   PHILIPS USER DETAIL THEME
-========================================== */
+/* ================================================================
+   USER DETAIL / RISK PANEL — admin/css/user-detail.css
+   Philips Lighting Style
+   Covers: .risk-container, .card, .grid-4, .stat-box,
+           #deviceTable, #activityTimeline, .timeline-item
+================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #0033a0;
+  --blue-dark: #001f6b;
+  --blue-darker: #00071a;
+  --blue-light: #1a56d6;
+  --yellow: #f5d800;
+  --yellow-dark: #c4ac00;
+  --white: #ffffff;
+  --bg: #f0f3fa;
+  --bg2: #e8ecf7;
+  --gray: #6b7280;
+  --gray-lt: #dde2ef;
+  --text: #0d1b3e;
+  --green: #16a34a;
+  --red: #dc2626;
+  --orange: #ea580c;
+  --purple: #7c3aed;
+  --shadow: 0 4px 20px rgba(0, 33, 160, 0.10);
+  --shadow-lg: 0 12px 40px rgba(0, 33, 160, 0.16);
+  --radius: 10px;
+}
 
 body {
-    margin: 0;
-    padding: 30px;
-    font-family: "Segoe UI", Roboto, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: #e2e8f0;
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 24px 20px 40px;
+}
+
+/* ── RISK CONTAINER ──────────────────────────────────────────── */
+.risk-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: opacity 0.3s ease;
+}
+
+/* ── SECTION CARD ────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-lt);
+  padding: 24px 22px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  letter-spacing: 0.05em;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--bg2);
+  position: relative;
+  padding-left: 14px;
+}
+
+.card h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: var(--yellow);
+  border-radius: 2px;
+}
+
+/* ── PROFILE DATA ────────────────────────────────────────────── */
+#profileData {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#profileData p {
+  font-size: 0.9rem;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-radius: 7px;
+  border: 1px solid var(--gray-lt);
+}
+
+#profileData p strong {
+  font-weight: 700;
+  color: var(--text);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+/* ── GRID-4 (Financial) ──────────────────────────────────────── */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+/* ── STAT BOX ────────────────────────────────────────────────── */
+.stat-box {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+  border-radius: 9px;
+  padding: 18px 16px;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 33, 160, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+  line-height: 1.35;
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 33, 160, 0.35);
+}
+
+/* Color variants per position */
+#totalRecharge {
+  background: linear-gradient(135deg, #065f46, var(--green));
+}
+
+#totalWithdraw {
+  background: linear-gradient(135deg, #991b1b, var(--red));
+}
+
+#netResult {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+}
+
+#riskScore {
+  background: linear-gradient(135deg, #7c2d12, var(--orange));
+}
+
+/* ── REFERRAL TREE ───────────────────────────────────────────── */
+#referralTree {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#referralTree>div {
+  font-size: 0.88rem;
+  color: var(--text);
+  padding: 9px 14px;
+  background: var(--bg);
+  border-radius: 7px;
+  border-left: 3px solid var(--blue);
+  transition: background 0.15s;
+}
+
+#referralTree>div:hover {
+  background: var(--bg2);
+}
+
+/* ── DEVICE TABLE ────────────────────────────────────────────── */
+#deviceTable {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+#deviceTable thead tr {
+  background: var(--bg);
+  border-bottom: 2px solid var(--gray-lt);
+}
+
+#deviceTable th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+#deviceTable td {
+  padding: 12px 14px;
+  font-size: 0.84rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--bg);
+  word-break: break-all;
+  max-width: 180px;
+}
+
+#deviceTable tr:last-child td {
+  border-bottom: none;
+}
+
+#deviceTable tr:hover td {
+  background: rgba(0, 33, 160, 0.025);
+}
+
+/* ── ACTIVITY TIMELINE ───────────────────────────────────────── */
+#activityTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+#activityTimeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 18px;
+  width: 2px;
+  background: var(--gray-lt);
+  border-radius: 1px;
+}
+
+.timeline-item {
+  padding: 14px 14px 14px 52px;
+  position: relative;
+  border-bottom: 1px solid var(--bg);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--blue);
+  z-index: 1;
+}
+
+.timeline-item:hover {
+  background: rgba(0, 33, 160, 0.025);
+}
+
+.timeline-item>div:first-child {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.timeline-item>div:nth-child(2) {
+  font-size: 0.78rem;
+  color: var(--blue);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.timeline-item>div:nth-child(3) {
+  font-size: 0.75rem;
+  color: var(--gray);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  body {
+    padding: 16px 12px 32px;
   }
-  
-  .risk-container {
-    max-width: 1200px;
-    margin: auto;
-  }
-  
-  
-  /* ==========================================
-     CARD STYLE (Glass Effect)
-  ========================================== */
-  
-  .card {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    border-radius: 14px;
-    padding: 22px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-    transition: 0.25s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-4px);
-  }
-  
-  .card h2 {
-    margin: 0 0 18px 0;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: #38bdf8;
-  }
-  
-  
-  /* ==========================================
-     PROFILE SECTION
-  ========================================== */
-  
-  #profileData p {
-    margin: 8px 0;
-    font-size: 14px;
-    color: #cbd5e1;
-  }
-  
-  #profileData strong {
-    color: #ffffff;
-  }
-  
-  
-  /* ==========================================
-     FINANCIAL GRID
-  ========================================== */
-  
+
   .grid-4 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
+    grid-template-columns: 1fr 1fr;
   }
-  
-  .stat-box {
-    padding: 22px;
-    border-radius: 14px;
-    font-size: 15px;
-    font-weight: 500;
-    text-align: center;
-    color: #fff;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    box-shadow: 0 10px 25px rgba(37,99,235,0.4);
-    transition: 0.25s ease;
+}
+
+@media (max-width: 480px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
   }
-  
-  .stat-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 14px 35px rgba(37,99,235,0.6);
+
+  .card h2 {
+    font-size: 1rem;
   }
-  
-  
-  /* ==========================================
-     REFERRAL TREE
-  ========================================== */
-  
-  #referralTree {
-    font-size: 14px;
-    color: #cbd5e1;
-  }
-  
-  #referralTree div {
-    padding: 8px 0;
-    border-bottom: 1px dashed rgba(255,255,255,0.1);
-  }
-  
-  
-  /* ==========================================
-     DEVICE TABLE
-  ========================================== */
-  
+
   #deviceTable {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    color: #e2e8f0;
+    font-size: 0.78rem;
   }
-  
-  #deviceTable thead {
-    background: rgba(255,255,255,0.05);
-  }
-  
-  #deviceTable th,
-  #deviceTable td {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  
-  #deviceTable th {
-    font-weight: 600;
-    color: #38bdf8;
-  }
-  
-  #deviceTable tbody tr:hover {
-    background: rgba(255,255,255,0.04);
-  }
-  
-  
-  /* ==========================================
-     ACTIVITY TIMELINE (Modern Vertical)
-  ========================================== */
-  
-  #activityTimeline {
-    position: relative;
-    padding-left: 20px;
-  }
-  
-  #activityTimeline::before {
-    content: "";
-    position: absolute;
-    left: 6px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #2563eb;
-  }
-  
-  .timeline-item {
-    position: relative;
-    padding: 12px 15px;
-    margin-bottom: 14px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    transition: 0.25s ease;
-  }
-  
-  .timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -16px;
-    top: 16px;
-    width: 10px;
-    height: 10px;
-    background: #3b82f6;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #3b82f6;
-  }
-  
-  .timeline-item:hover {
-    background: rgba(255,255,255,0.08);
-  }
-  
-  .timeline-item strong {
-    display: block;
-    color: #ffffff;
-    margin-bottom: 4px;
-  }
-  
-  .timeline-item span {
-    font-size: 12px;
-    color: #94a3b8;
-  }
-  
-  
-  /* ==========================================
-     RESPONSIVE
-  ========================================== */
-  
-  @media (max-width: 768px) {
-    body {
-      padding: 15px;
-    }
-  
-    .card {
-      padding: 16px;
-    }
-  
-    .stat-box {
-      font-size: 14px;
-    }
-  }
+}
